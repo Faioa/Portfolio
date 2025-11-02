@@ -45,3 +45,4 @@ You can preview the production build with `npm run preview`.
 - shadcn-svelte
 - Resend
 - TailwindCSS
+- dev : Vitest
