@@ -7,7 +7,6 @@
 	import { ModeWatcher } from "mode-watcher";
 
 	let { children } = $props();
-
 </script>
 
 <svelte:head>
@@ -16,9 +15,14 @@
 
 <ModeWatcher />
 
-<div class="flex flex-col gap-10 items-center w-full min-h-screen">
+<GoTop />
+
+<div class="flex flex-col items-center w-full min-h-screen">
 	<Header />
-	{@render children()}
-	<GoTop />
+
+	<main class="flex flex-col grow gap-10 items-center w-full">
+		{@render children()}
+	</main>
+
 	<Footer />
 </div>

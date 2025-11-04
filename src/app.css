@@ -172,3 +172,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+.link:hover {
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+}

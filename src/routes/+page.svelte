@@ -1,10 +1,11 @@
 <script>
-import Guitar from '$lib/components/Guitar.svelte';
+	import Guitar from '$lib/components/Guitar.svelte';
+	import WorkInProgress from '$lib/components/WorkInProgress.svelte';
 </script>
 
-<h1>Welcome !</h1>
-
 <Guitar />
+
+<WorkInProgress />
 
 <style>
 
