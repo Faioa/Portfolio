@@ -42,7 +42,7 @@ You can preview the production build with `npm run preview`.
 - dev : Paraglide
 - dev : Storybook
 - (Marked)
-- shadcn-svelte
+- shadcn-svelte -> (tweakcn theme *Vintage Paper*)
 - Resend
 - TailwindCSS
 - dev : Vitest
