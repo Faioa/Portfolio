@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Guitar from "$lib/components/Guitar.svelte";
-	import ModeToogle from "$lib/components/ModeToggle.svelte";
-	import ListMusic from "@lucide/svelte/icons/list-music";
 	import ModeToggle from '$lib/components/ModeToggle.svelte';
+	import Guitar from "$lib/components/Guitar.svelte";
+	import NavMenu from "$lib/components/NavMenu.svelte";
 
 	const height = 75;
 </script>
@@ -16,9 +15,14 @@
 			<h1>Dartois</h1>
 		</div>
 	</a>
+
+	<noscript>
+		<span class="text-center text-destructive">Please activate Javascript to use the website as it depends heavily on animations and events.</span>
+	</noscript>
+
 	<div class="flex gap-3 h-full items-center">
+		<NavMenu />
 		<ModeToggle />
-		<ListMusic size={height} class="p-5" />
 	</div>
 </header>
 
