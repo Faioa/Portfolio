@@ -173,6 +173,12 @@
   }
 }
 
+
+/* Custom Properties */
+html {
+    scroll-behavior: smooth;
+}
+
 .link:hover {
     opacity: 80%;
     cursor: pointer;

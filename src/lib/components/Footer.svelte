@@ -7,12 +7,12 @@
 	const height = 100;
 </script>
 
-<footer style="--height: {height}px;">
+<footer id="footer" style="--height: {height}px;">
 	<div class="grid grid-cols-2 gap-x-5 gap-y-2 text-base">
 		<a href="https://www.linkedin.com/in/matthieu-dartois/" target="_blank" class="contact link"><Linkedin class="icon" />LinkedIn</a>
 		<a href="https://github.com/Faioa" target="_blank" class="contact link"><Github class="icon" />GitHub</a>
 		<a href="/contact" class="contact link col-span-2"><Mail class="icon" />Contact Me</a>
-		<a href="/legal-notices" class="contact link col-span-2 text-sm underline"><Scale class="icon" />Legal Notices<Scale class="icon" /></a>
+		<a href="/legal-notices" class="contact link col-span-2 text-sm underline underline-offset-5"><Scale class="icon" />Legal Notices<Scale class="icon" /></a>
 	</div>
 </footer>
 
