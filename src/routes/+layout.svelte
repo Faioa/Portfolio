@@ -17,7 +17,7 @@
 
 <GoTop />
 
-<div class="flex flex-col items-center w-full min-h-screen">
+<div class="flex flex-col items-center w-full min-h-screen overflow-hidden">
 	<Header />
 
 	<main class="flex flex-col grow gap-10 items-center w-full">
