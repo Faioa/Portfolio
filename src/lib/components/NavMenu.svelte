@@ -11,7 +11,7 @@
 </script>
 
 <nav class="inline-block relative h-full z-10" onmouseenter={() => visible = true} onmouseleave={() => visible = false}>
-	<ListMusic size={height} class="p-5" />
+	<ListMusic size={height} class="p-4" />
 
 	{#if visible}
 		<div class="content" transition:slide={{duration: 250}}>

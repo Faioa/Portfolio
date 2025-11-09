@@ -177,6 +177,8 @@
 /* Custom Properties */
 html {
     scroll-behavior: smooth;
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
 }
 
 .link:hover {
@@ -187,4 +189,29 @@ html {
 .icon {
     width: 1em;
     height: 1em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--spacing) * 5);
+    width: auto;
+    max-width: 70%;
+    text-align: justify;
+    margin: calc(var(--spacing) * 10);
+}
+
+.title {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+}
+
+.subtitle {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
 }

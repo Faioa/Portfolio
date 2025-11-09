@@ -33,13 +33,13 @@
 	<h2 class="title w-full text-center">Featured Projects</h2>
 	<div class="grid grid-cols-2 gap-10 my-10">
 		<div class="card">
-			<h2 class="text-lg font-bold">Flux Studio</h2>
+			<h2 class="subtitle">Flux Studio</h2>
 			<p>Flux studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span> using <span class="font-bold italic">Rust</span>. My aim is to create a top-notch DAW that can be used for playing and learning music. My goals are ambitious, but I will do my best to see this project through nonetheless.</p>
 			<a href="/projects/flux-studio" class="link text-sm self-end absolute bottom-5">Read More</a>
 		</div>
 
 		<div class="card flex flex-col gap-2">
-			<h2 class="text-lg font-bold">This Website</h2>
+			<h2 class="subtitle">This Website</h2>
 			<p>This website is both a portfolio and a blog developed with <span class="font-bold italic">Svelte</span> and <span class="font-bold italic">SvelteKit</span>. I will post updates on my projects and experiences, as well as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for me to experiment with web development.</p>
 			<a href="/projects/website" class="link text-sm self-end absolute bottom-5">Read More</a>
 		</div>
@@ -53,13 +53,6 @@
 
 
 <style>
-	.container {
-      width: auto;
-      max-width: 90%;
-      text-align: justify;
-      margin: calc(var(--spacing) * 10);
-	}
-
 	.card {
 			display: flex;
 			flex-direction: column;
@@ -70,13 +63,6 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
       padding: calc(var(--spacing) * 5);
       padding-bottom: calc(var(--spacing) * 10);
-	}
-
-	.title {
-      --tw-font-weight: var(--font-weight-bold);
-      font-weight: var(--font-weight-bold);
-      font-size: var(--text-2xl);
-      line-height: var(--tw-leading, var(--text-2xl--line-height));
 	}
 
 	.welcome {
