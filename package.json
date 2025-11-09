@@ -29,7 +29,7 @@
 		"@storybook/addon-vitest": "^10.0.2",
 		"@storybook/sveltekit": "^10.0.2",
 		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/kit": "^2.47.1",
+		"@sveltejs/kit": "^2.48.4",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.19",
@@ -63,6 +63,10 @@
 		"vitest-browser-svelte": "^1.1.0"
 	},
 	"dependencies": {
-		"mode-watcher": "^1.1.0"
-	}
+		"mode-watcher": "^1.1.0",
+		"resend": "^6.4.2"
+	},
+    "overrides": {
+      "cookie": "^0.7.0"
+    }
 }
