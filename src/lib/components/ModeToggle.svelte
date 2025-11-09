@@ -1,11 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { mode, setMode } from "mode-watcher";
 	import SunIcon from "@lucide/svelte/icons/sun";
 	import MoonIcon from "@lucide/svelte/icons/moon";
 	import { Button } from '$lib/components/ui/button';
 
 	let { height = "100%" } = $props();
-
 
 	async function toggleMode(event: MouseEvent) {
 		const newMode = mode.current === 'light' ? 'dark' : 'light';
@@ -27,6 +27,10 @@
 			setMode(newMode);
 		}).updateCallbackDone.catch(() => {});
 	}
+
+	onMount(() => {
+		setMode(mode.current ? mode.current : "system");
+	});
 </script>
 
 <Button onclick={toggleMode} variant="ghost" size="icon" class="rounded-full">
