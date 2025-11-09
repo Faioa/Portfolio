@@ -53,22 +53,34 @@
 
 
 <style>
-	@reference "../app.css";
-
 	.container {
-			@apply max-w-[90%] w-auto text-justify m-10;
+      width: auto;
+      max-width: 90%;
+      text-align: justify;
+      margin: calc(var(--spacing) * 10);
 	}
 
 	.card {
-			@apply flex flex-col gap-2 relative rounded-lg shadow-md p-5 pb-10;
+			display: flex;
+			flex-direction: column;
+      gap: calc(var(--spacing) * 2);
+      position: relative;
+      border-radius: var(--radius);
+      --tw-shadow: var(--shadow-md);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      padding: calc(var(--spacing) * 5);
+      padding-bottom: calc(var(--spacing) * 10);
 	}
 
 	.title {
-			@apply font-bold text-2xl;
+      --tw-font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
 	}
 
 	.welcome {
-			@apply text-center;
+      text-align: center;
 	}
 
   .moveUpDown {
