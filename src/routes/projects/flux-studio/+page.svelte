@@ -13,9 +13,8 @@
 	</p>
 	<p>
 		This is also an opportunity for me to learn Rust, which seems like a really promising
-		programming language. You can find out more at <a
-			href="https://rust-lang.org/"
-			class="link">their website</a
+		programming language. You can find out more at <a href="https://rust-lang.org/" class="link"
+			>their website</a
 		> directly for more details, but it might just become my go-to language for almost every use cases.
 		Despite the fact that the Rust community is relatively new, the Rustaceans (the name of the Rust
 		developers' community) are very active, and the available resources are constantly growing. There
@@ -73,8 +72,8 @@
 		margin-top: 30px;
 	}
 
-  .link {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-  }
+	.link {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
 </style>

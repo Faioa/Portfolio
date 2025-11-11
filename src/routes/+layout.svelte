@@ -13,6 +13,7 @@
 
 	let { children } = $props();
 
+	/* Position in pages during navigation */
 	export const snapshot: Snapshot<number> = {
 		capture: () => window.scrollY,
 		restore: (previousScrollY) => {
