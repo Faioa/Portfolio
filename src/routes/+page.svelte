@@ -87,20 +87,6 @@
 </div>
 
 <style>
-	.card {
-		display: flex;
-		flex-direction: column;
-		gap: calc(var(--spacing) * 2);
-		position: relative;
-		border-radius: var(--radius);
-		--tw-shadow: var(--shadow-md);
-		box-shadow:
-			var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow),
-			var(--tw-ring-shadow), var(--tw-shadow);
-		padding: calc(var(--spacing) * 5);
-		padding-bottom: calc(var(--spacing) * 10);
-	}
-
 	.welcome {
 		text-align: center;
 	}
