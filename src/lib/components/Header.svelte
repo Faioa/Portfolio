@@ -1,13 +1,15 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
+	import Guitar from '$lib/components/Guitar.svelte';
 	import ModeToggle from '$lib/components/ModeToggle.svelte';
-	import Guitar from "$lib/components/Guitar.svelte";
-	import NavMenu from "$lib/components/NavMenu.svelte";
+	import NavMenu from '$lib/components/NavMenu.svelte';
 
 	const height = 75;
 </script>
 
 <header style="--height: {height}px;">
-	<a href="/" class="flex gap-5 h-full">
+	<a href={resolve('/')} class="flex h-full gap-5">
 		<Guitar size="{height}px" animate={false} classes="rotate-25" />
 
 		<div class="flex flex-col justify-center text-2xl font-bold">
@@ -17,10 +19,12 @@
 	</a>
 
 	<noscript>
-		<span class="text-center text-destructive">Please activate Javascript to use the website as it depends heavily on animations and events.</span>
+		<span class="text-center text-destructive"
+			>Please activate Javascript to use the website as it depends heavily on animations and events.</span
+		>
 	</noscript>
 
-	<div class="flex gap-3 h-full items-center">
+	<div class="flex h-full items-center gap-3">
 		<NavMenu />
 		<ModeToggle />
 	</div>
@@ -28,14 +32,14 @@
 
 <style>
 	header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			line-height: 1;
-			height: var(--height);
-			width: 100%;
-			z-index: 10;
-			padding-left: calc(var(--spacing) * 5);
-			padding-right: calc(var(--spacing) * 5);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		line-height: 1;
+		height: var(--height);
+		width: 100%;
+		z-index: 10;
+		padding-left: calc(var(--spacing) * 5);
+		padding-right: calc(var(--spacing) * 5);
 	}
 </style>
