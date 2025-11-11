@@ -25,6 +25,8 @@
 		<div class="content" transition:slide={{ duration: 250 }}>
 			<ChevronUp class="icon relative left-[50%] translate-x-[-50%]" />
 			<div class="flex flex-col gap-2 text-center">
+				<Button href={resolve('/')} variant="ghost">Home</Button>
+				<hr />
 				<Button href={resolve('/about')} variant="ghost">About</Button>
 				<hr />
 				<Button href={resolve('/articles')} variant="ghost">Articles</Button>
@@ -42,6 +44,8 @@
 			<div class="content">
 				<ChevronUp class="icon relative left-[50%] translate-x-[-50%]" />
 				<div class="flex flex-col gap-2 text-center">
+					<Button href={resolve('/')} variant="ghost">Home</Button>
+					<hr />
 					<Button href={resolve('/about')} variant="ghost">About</Button>
 					<hr />
 					<Button href={resolve('/articles')} variant="ghost">Articles</Button>
