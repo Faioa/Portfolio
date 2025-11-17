@@ -14,11 +14,11 @@ export const load: PageLoad = () => {
 		}
 	});
 
-	const metadata = articles.map((article) => {
+	const metadata = articles['ids'].map((article) => {
 		const metadata = getMetadata(article, { excerpt: true });
 		if (!metadata) throw error(404);
 		return metadata;
 	});
 
-	return { articles, metadata };
+	return { articles: articles['ids'], metadata };
 };

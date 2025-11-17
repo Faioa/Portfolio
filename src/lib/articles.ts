@@ -80,11 +80,12 @@ export function getMetadata(
  * @returns an object containing the corresponding ids, and the total amount of ids that matched it.
  */
 export function getIds(
-	options: { filter?: MetadataFilter; sort?: MetadataSort; start: number; limit?: number } = {
-		start: 0
-	}
+	options: { filter?: MetadataFilter; sort?: MetadataSort; start?: number; limit?: number } = {}
 ): { total: number; ids: string[] } {
-	const { filter, sort, start, limit } = options;
+	const filter = options.filter;
+	const sort = options.sort;
+	const start = options.start ? (options.start > 0 ? options.start : 0) : 0;
+	const limit = options.limit;
 
 	// Extracting ids
 	let ids = Object.keys(articleModules).map(

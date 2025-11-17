@@ -16,14 +16,14 @@ excerpt: This is the first article posted on this website !
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate vestibulum lacinia. Ut eu ligula molestie, hendrerit dolor id, consequat augue. Nullam a lobortis massa, in semper enim. Donec ut eros orci. Phasellus eget neque eu turpis tristique eleifend. Pellentesque viverra tortor sapien, eget elementum ipsum vestibulum vel. Integer metus ipsum, efficitur vitae tempus id, suscipit eget velit. Vestibulum quis elementum elit. Nunc a erat semper, venenatis nibh in, placerat nunc.
 
-```ts filename="test.ts"
+```ts filename="test.ts" showLinesNumber
 export function hello(name: string): string {
     const Test = {
       test: 5,
     }
     const str: int = 5;
     return 'Hello world!'; //test de commentaire // [!code --]
-    return `Hello ${name}!`;//test de commentaire  // [!code ++]
-    return `Hello ${name}!`;//test de commentaire 
+    return `Hello ${name}!`; //test de commentaire  // [!code ++]
+    return `Hello ${name}!`; //test de commentaire 
 }
 ```
