@@ -1,17 +1,47 @@
+import { transformerNotationDiff } from '@shikijs/transformers';
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { escapeSvelte, mdsvex } from 'mdsvex';
+
+import { highlighter, theme } from './src/lib/server/shiki-theme.ts';
+
+/** @type {import('mdsvex').MdsvexOptions} */
+const mdsvexOptions = {
+	highlight: {
+		highlighter: async (code, lang = 'text', meta) => {
+			const html = escapeSvelte(
+				highlighter.codeToHtml(code, {
+					lang,
+					theme,
+					transformers: [
+						transformerNotationDiff({
+							matchAlgorithm: 'v3'
+						})
+					]
+				})
+			);
+
+			const filename = meta?.match(/filename="([^"]+)"/)?.[1];
+
+			const showLinesNumber = meta?.includes('showLinesNumber');
+
+			const codeCopy = escapeSvelte(code);
+
+			return `<CodeBlock code={\`${html}\`} codeCopy={\`${codeCopy}\`} lang="${lang}" ${filename ? `filename="${filename}"` : ''} ${showLinesNumber ? `showLinesNumber=true` : ''} />`;
+		},
+		alias: { js: 'javascript', ts: 'typescript' }
+	},
+	extensions: ['.svx']
+};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://svelte.dev/docs/kit/integrations
-	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
 	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
-	}
+		adapter: adapter(),
+		prerender: { entries: ['/src/routes/articles/*'] }
+	},
+	extensions: ['.svelte', '.svx']
 };
 
 export default config;

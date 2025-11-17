@@ -1,10 +1,17 @@
-<script>
+<script lang="ts">
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+	import Search from '@lucide/svelte/icons/search';
 
 	import { resolve } from '$app/paths';
 
 	import Guitar from '$lib/components/Guitar.svelte';
-	import WorkInProgress from '$lib/components/WorkInProgress.svelte';
+
+	import type { PageProps } from './$types';
+
+	const { data }: PageProps = $props();
+
+	const articles = data.articles;
+	const metadata = data.metadata;
 </script>
 
 <div class="relative flex items-start gap-5">
@@ -37,7 +44,7 @@
 	</p>
 	<p>
 		To learn more about me, you can check <a
-			href={resolve('/about')}
+			href={resolve('/about', {})}
 			class="link underline underline-offset-3">this page</a
 		>, and at the
 		<a href="#footer" class="link underline underline-offset-3">bottom of the page</a>, you can find
@@ -59,8 +66,9 @@
 				can be used for playing and learning music. My goals are ambitious, but I will do my best to
 				see this project through nonetheless.
 			</p>
-			<a href={resolve('/projects/flux-studio')} class="link absolute bottom-5 self-end text-sm"
-				>Read More</a
+			<a
+				href={resolve('/projects/flux-studio', {})}
+				class="link mt-1 self-end justify-self-end text-sm">Read More</a
 			>
 		</div>
 
@@ -74,21 +82,62 @@
 				experiences, as well as anything else I find interesting. It is also a way for you to
 				contact me. This project is an opportunity for me to experiment with web development.
 			</p>
-			<a href={resolve('/projects/website')} class="link absolute bottom-5 self-end text-sm"
-				>Read More</a
-			>
+			<a href={resolve('/projects/website', {})} class="link mt-1 self-end justify-self-end text-sm"
+				>Read More
+			</a>
 		</div>
 	</div>
 </div>
 
 <div class="container">
-	<h2 class="title w-full text-center">Recent Articles</h2>
-	<WorkInProgress />
+	<h2 class="title">Recent Articles</h2>
+	<div class="articles">
+		{#each articles as article, i (i)}
+			<div class="card">
+				<div class="flex items-center justify-between gap-5">
+					<h3 class="text-lg font-bold">{metadata[i].title}</h3>
+					<p class="text-xs italic">
+						Written on {new Date(metadata[i].created).toLocaleDateString()}
+					</p>
+				</div>
+				<p>{metadata[i].excerpt}</p>
+				<a
+					href={resolve('/articles/[article]', { article })}
+					class="link mt-1 self-end justify-self-end text-sm">Read More</a
+				>
+			</div>
+		{:else}
+			<p>
+				I'm sorry, but there's no available article yet. Please wait a few days for some content to
+				be published!
+			</p>
+		{/each}
+	</div>
+	{#if articles.length > 0}
+		<a
+			href={resolve('/articles', {})}
+			class="link mt-1 flex items-center gap-2 self-center text-sm font-bold"
+			><Search class="icon" />Browse More Articles</a
+		>
+	{/if}
 </div>
 
 <style>
 	.welcome {
 		text-align: center;
+	}
+
+	.articles {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		gap: calc(var(--spacing) * 5);
+	}
+
+	.articles .card {
+		max-width: calc(33.333% - var(--spacing) * 5);
 	}
 
 	.moveUpDown {

@@ -41,7 +41,7 @@ You can preview the production build with `npm run preview`.
 - Lucide Svelte
 - dev : Paraglide
 - dev : Storybook
-- (Marked)
+- Mdsvex + Shiki
 - shadcn-svelte -> (tweakcn theme *Vintage Paper*)
 - Resend
 - TailwindCSS

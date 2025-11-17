@@ -1,5 +1,9 @@
 <script lang="ts">
-	import WorkInProgress from '$lib/components/WorkInProgress.svelte';
+	const { data } = $props();
+
+	const { id, content: Content, metadata } = data.article;
 </script>
 
-<WorkInProgress />
+<div class="container">
+	<Content/>
+</div>
