@@ -22,7 +22,7 @@
 				can be used for playing and learning music. My goals are ambitious, but I will do my best to
 				see this project through nonetheless.
 			</p>
-			<a href={resolve('/projects/flux-studio')} class="link absolute bottom-5 self-end text-sm"
+			<a href={resolve('/projects/flux-studio')} class="link mt-3 self-end justify-self-end text-sm"
 				>Read More</a
 			>
 		</div>
@@ -37,7 +37,7 @@
 				experiences, as well as anything else I find interesting. It is also a way for you to
 				contact me. This project is an opportunity for me to experiment with web development.
 			</p>
-			<a href={resolve('/projects/website')} class="link absolute bottom-5 self-end text-sm"
+			<a href={resolve('/projects/website')} class="link mt-3 self-end justify-self-end text-sm"
 				>Read More</a
 			>
 		</div>
