@@ -4,6 +4,7 @@
 
 	import { resolve } from '$app/paths';
 
+	import ArticlesList from '$lib/components/ArticlesList.svelte';
 	import Guitar from '$lib/components/Guitar.svelte';
 
 	import type { PageProps } from './$types';
@@ -33,7 +34,7 @@
 </div>
 
 <div class="welcome container">
-	<p class="title my-10 w-full">Welcome!</p>
+	<p class="title">Welcome!</p>
 	<p>
 		This platform is a mean for you to get information about my projects or myself, and a mean for
 		me to keep a trace of my activities.
@@ -54,8 +55,8 @@
 </div>
 
 <div class="container">
-	<h2 class="title w-full text-center">Featured Projects</h2>
-	<div class="my-10 grid grid-cols-2 gap-10">
+	<h2 class="title">Featured Projects</h2>
+	<div class="grid grid-cols-2 gap-10">
 		<div class="card">
 			<h2 class="subtitle">Flux Studio</h2>
 			<p>
@@ -91,28 +92,7 @@
 
 <div class="container">
 	<h2 class="title">Recent Articles</h2>
-	<div class="articles">
-		{#each articles as article, i (i)}
-			<div class="card">
-				<div class="flex items-center justify-between gap-5">
-					<h3 class="text-lg font-bold">{metadata[i].title}</h3>
-					<p class="text-xs italic">
-						Written on {new Date(metadata[i].created).toLocaleDateString()}
-					</p>
-				</div>
-				<p>{metadata[i].excerpt}</p>
-				<a
-					href={resolve('/articles/[article]', { article })}
-					class="link mt-1 self-end justify-self-end text-sm">Read More</a
-				>
-			</div>
-		{:else}
-			<p>
-				I'm sorry, but there's no available article yet. Please wait a few days for some content to
-				be published!
-			</p>
-		{/each}
-	</div>
+	<ArticlesList {articles} {metadata} />
 	{#if articles.length > 0}
 		<a
 			href={resolve('/articles', {})}
@@ -125,19 +105,6 @@
 <style>
 	.welcome {
 		text-align: center;
-	}
-
-	.articles {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		gap: calc(var(--spacing) * 5);
-	}
-
-	.articles .card {
-		max-width: calc(33.333% - var(--spacing) * 5);
 	}
 
 	.moveUpDown {

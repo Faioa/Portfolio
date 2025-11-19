@@ -6,7 +6,6 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = () => {
 	const articles = getIds({
-		limit: 6,
 		sort: (a, b) => {
 			return new Date(b.created).valueOf() - new Date(a.created).valueOf();
 		}
