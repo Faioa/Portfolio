@@ -17,6 +17,13 @@
 			"options": {
 				"parser": "svelte"
 			}
+		},
+		{
+			"files": "*.svx",
+			"options": {
+				"parser": "markdown",
+                "proseWrap": "always"
+			}
 		}
 	],
 	"tailwindStylesheet": "./src/app.css"

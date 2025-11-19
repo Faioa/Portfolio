@@ -37,6 +37,7 @@
 		width: 100%;
 		padding-left: calc(var(--spacing) * 5);
 		padding-right: calc(var(--spacing) * 5);
+		margin-top: calc(var(--spacing) * 10);
 	}
 
 	.contact {

@@ -61,7 +61,7 @@
     --shiki-added: oklch(0.582 0.054 146.566);
     --shiki-removed: oklch(0.553 0.141 33.027);
     --shiki-comment: oklch(0.441 0.007 170.152 / 0.82);
-    --shiki-keyword: oklch(0.375 0.138 26.706);
+    --shiki-keyword: oklch(0.478 0.17 25.558);
     --shiki-string: oklch(0.775 0.088 83.214);
     --shiki-constant: oklch(0.493 0.149 313.004);
     --shiki-function: oklch(0.676 0.096 350.214);
@@ -212,7 +212,6 @@ html {
 	width: 100%;
 	max-width: 70%;
 	text-align: justify;
-	margin: calc(var(--spacing) * 10);
 }
 
 .card {

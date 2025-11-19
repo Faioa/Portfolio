@@ -41,5 +41,6 @@
 		z-index: 10;
 		padding-left: calc(var(--spacing) * 5);
 		padding-right: calc(var(--spacing) * 5);
+		margin-bottom: calc(var(--spacing) * 10);
 	}
 </style>
