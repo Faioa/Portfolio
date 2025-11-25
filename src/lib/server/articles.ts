@@ -1,15 +1,6 @@
-import type { SvelteComponent } from 'svelte';
+import { z } from 'zod';
 
-/* Created and modified properties follow the javascript string datetime format */
-export interface Metadata {
-	title: string;
-	created: string;
-	modified: string;
-	tags?: string[];
-	categories?: string[];
-	featured: boolean;
-	excerpt?: string;
-}
+import type { Article, ArticleModule, Category, Metadata } from '$lib/articles-types';
 
 /* Type for the filter's function */
 export type MetadataFilter = (metadata: Metadata) => boolean;
@@ -17,13 +8,19 @@ export type MetadataFilter = (metadata: Metadata) => boolean;
 /* Type for the sort's function */
 export type MetadataSort = (a: Metadata, b: Metadata) => number;
 
-/* Types for the mdsvex components */
-export type Article = typeof SvelteComponent;
+/* Type for the filters' form values */
 
-interface ArticleModule {
-	default: Article;
-	metadata: Metadata;
-}
+/* Schema for the filters' form */
+export const filtersSchema = z.object({
+	sortBy: z.literal(['created+', 'created-', 'modified+', 'modified-']),
+	featured: z.nullish(z.boolean().optional()),
+	fromDate: z.nullish(z.iso.date().optional()),
+	toDate: z.nullish(z.iso.date().optional()),
+	categories: z.nullish(z.array(z.string<Category>()).min(1).optional()),
+	research: z.nullish(z.array(z.string().min(1)).min(1).optional())
+});
+
+export type FiltersSchema = typeof filtersSchema;
 
 /* Importing the articles */
 const articleModules = import.meta.glob('/src/lib/articles/*.svx', {
@@ -94,13 +91,16 @@ export function getIds(
 
 	if (filter)
 		ids = ids.filter((id) => {
-			return filter(getMetadata(id) as Metadata);
+			const meta = articleModules[`/src/lib/articles/${id}.svx`]?.metadata;
+			// Excluding unknown ids
+			if (!meta) return false;
+			return filter(meta);
 		});
 
 	if (sort) {
 		ids = ids.sort((a: string, b: string) => {
-			const metaA = getMetadata(a) as Metadata;
-			const metaB = getMetadata(b) as Metadata;
+			const metaA = articleModules[`/src/lib/articles/${a}.svx`]?.metadata;
+			const metaB = articleModules[`/src/lib/articles/${b}.svx`]?.metadata;
 			if (!metaA || !metaB) return 0;
 			return sort(metaA, metaB);
 		});

@@ -25,7 +25,6 @@
 	let timeout: NodeJS.Timeout | null = null;
 	async function copy() {
 		if (!browser) return;
-
 		if (timeout) {
 			clearTimeout(timeout);
 			timeout = null;

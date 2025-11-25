@@ -1,11 +1,12 @@
 <script lang="ts">
-import { resolve } from '$app/paths';
-import type { Metadata } from '$lib/articles';
+	import { resolve } from '$app/paths';
 
-const data = $props();
+	import type { Metadata } from '$lib/server/articles';
 
-const article: string = data.article;
-const metadata: Metadata = data.metadata;
+	const data = $props();
+
+	const article: string = data.article;
+	const metadata: Metadata = data.metadata;
 </script>
 
 <div class="card {data.class ? data.class : ''}">
@@ -23,5 +24,4 @@ const metadata: Metadata = data.metadata;
 </div>
 
 <style>
-
 </style>

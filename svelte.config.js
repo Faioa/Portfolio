@@ -38,8 +38,7 @@ const mdsvexOptions = {
 const config = {
 	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
 	kit: {
-		adapter: adapter(),
-		prerender: { entries: ['/src/routes/articles/*'] }
+		adapter: adapter()
 	},
 	extensions: ['.svelte', '.svx']
 };

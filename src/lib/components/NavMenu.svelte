@@ -7,7 +7,7 @@
 	import { browser } from '$app/environment';
 	import { resolve } from '$app/paths';
 
-	import { Button } from '$lib/components/ui/button/index.js';
+	import { Button } from '$lib/components/ui/button/index';
 
 	const { height = '100%' } = $props();
 

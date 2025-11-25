@@ -11,7 +11,7 @@
 
 	const { data }: PageProps = $props();
 
-	const articles = data.articles;
+	const articles = data.articles.ids;
 	const metadata = data.metadata;
 </script>
 
