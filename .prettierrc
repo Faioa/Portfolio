@@ -22,7 +22,7 @@
 			"files": "*.svx",
 			"options": {
 				"parser": "markdown",
-                "proseWrap": "always"
+				"proseWrap": "always"
 			}
 		}
 	],

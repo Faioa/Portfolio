@@ -38,11 +38,12 @@ You can preview the production build with `npm run preview`.
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
 
 # Additional dependencies
+
 - Lucide Svelte
 - dev : Paraglide
 - dev : Storybook
 - Mdsvex + Shiki
-- shadcn-svelte -> (tweakcn theme *Vintage Paper*)
+- shadcn-svelte -> (tweakcn theme _Vintage Paper_)
 - Resend
 - TailwindCSS
 - dev : Vitest

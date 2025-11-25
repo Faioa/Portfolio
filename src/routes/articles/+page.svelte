@@ -33,7 +33,9 @@
 			</InputGroup.Addon>
 
 			<InputGroup.Addon align="inline-end">
-				<InputGroup.Button variant="ghost" class="rounded-2xl" type="submit">Search</InputGroup.Button>
+				<InputGroup.Button variant="ghost" class="rounded-2xl" type="submit"
+					>Search</InputGroup.Button
+				>
 			</InputGroup.Addon>
 		</InputGroup.Root>
 

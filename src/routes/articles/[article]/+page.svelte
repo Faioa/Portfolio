@@ -1,9 +1,11 @@
 <script lang="ts">
 	import ClockPlus from '@lucide/svelte/icons/clock-plus';
 	import FileClock from '@lucide/svelte/icons/file-clock';
-	import { Separator } from "$lib/components/ui/separator/index.js";
+
 	import { onMount } from 'svelte';
+
 	import type { ArticleModule } from '$lib/articles-types';
+	import { Separator } from '$lib/components/ui/separator/index.js';
 
 	const { data } = $props();
 
@@ -13,7 +15,7 @@
 
 	onMount(async () => {
 		module = await import(`$lib/articles/${id}.svx`);
-	})
+	});
 </script>
 
 <div class="container">
@@ -24,13 +26,15 @@
 			{#if module?.metadata?.created}
 				<div class="flex flex-col items-end justify-center text-sm italic">
 					<p class="flex items-center gap-2">
-						<ClockPlus class="icon" />Written on {new Date(module?.metadata.created).toLocaleDateString()}
+						<ClockPlus class="icon" />Written on {new Date(
+							module?.metadata.created
+						).toLocaleDateString()}
 					</p>
 
 					{#if module?.metadata?.modified && module?.metadata.modified !== module?.metadata.created}
 						<p class="flex items-center gap-2">
 							<FileClock class="icon" />Modified on {new Date(
-							module?.metadata.modified
+								module?.metadata.modified
 							).toLocaleDateString()}
 						</p>
 					{/if}

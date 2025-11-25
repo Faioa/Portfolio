@@ -85,9 +85,7 @@
 
 	<section>
 		<h2 class="subtitle">Curriculum Vitæ</h2>
-		<Button variant="secondary" href={cv} target="_blank" class="cursor-pointer">
-			Open my CV
-		</Button>
+		<Button variant="secondary" href={cv} target="_blank" class="cursor-pointer">Open my CV</Button>
 	</section>
 </article>
 

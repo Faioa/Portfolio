@@ -57,19 +57,19 @@
 	--tracking-normal: 0em;
 	--spacing: 0.25rem;
 
-    /* Custom variables for my custom Shiki Theme*/
-    --shiki-added: oklch(0.582 0.054 146.566);
-    --shiki-removed: oklch(0.553 0.141 33.027);
-    --shiki-comment: oklch(0.441 0.007 170.152 / 0.82);
-    --shiki-keyword: oklch(0.478 0.17 25.558);
-    --shiki-string: oklch(0.775 0.088 83.214);
-    --shiki-constant: oklch(0.493 0.149 313.004);
-    --shiki-function: oklch(0.676 0.096 350.214);
-    --shiki-type: oklch(0.749 0.058 187.521);
-    --shiki-attribute: oklch(0.676 0.096 350.214);
-    --shiki-base-code: var(--foreground);
-    --shiki-background: oklch(0 0 0 / 0%);
-    --shiki-foreground: var(--foreground);
+	/* Custom variables for my custom Shiki Theme*/
+	--shiki-added: oklch(0.582 0.054 146.566);
+	--shiki-removed: oklch(0.553 0.141 33.027);
+	--shiki-comment: oklch(0.441 0.007 170.152 / 0.82);
+	--shiki-keyword: oklch(0.478 0.17 25.558);
+	--shiki-string: oklch(0.775 0.088 83.214);
+	--shiki-constant: oklch(0.493 0.149 313.004);
+	--shiki-function: oklch(0.676 0.096 350.214);
+	--shiki-type: oklch(0.749 0.058 187.521);
+	--shiki-attribute: oklch(0.676 0.096 350.214);
+	--shiki-base-code: var(--foreground);
+	--shiki-background: oklch(0 0 0 / 0%);
+	--shiki-foreground: var(--foreground);
 }
 
 .dark {
