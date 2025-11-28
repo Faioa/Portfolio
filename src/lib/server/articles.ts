@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { Article, ArticleModule, Category, Metadata } from '$lib/articles-types';
+import type { ArticleModule, Category, Metadata } from '$lib/articles-types';
 
 /* Type for the filter's function */
 export type MetadataFilter = (metadata: Metadata) => boolean;
@@ -22,28 +22,40 @@ export const filtersSchema = z.object({
 
 export type FiltersSchema = typeof filtersSchema;
 
-/* Importing the articles */
-const articleModules = import.meta.glob('/src/lib/articles/*.svx', {
-	eager: true
-}) as Record<string, ArticleModule>;
-const number = Object.keys(articleModules).length;
-
-/**
- * Takes the id of the wanted article and returns it.
- * @param id string representing the id of the article (equals the name of the article in the filesystem, without the .svx extension).
- * @returns the wanted article, or undefined if it doesn't exist.
- */
-export function getComponent(id: string): Article | undefined {
-	return articleModules[`/src/lib/articles/${id}.svx`]?.default;
-}
+/* Importing the articles' metadata and formatting the ids in a map */
+const metadata: Map<string, Metadata> = new Map(
+	Object.entries(
+		import.meta.glob('/src/lib/articles/*.svx', { eager: true }) as Record<string, ArticleModule>
+	).map((value) => {
+		return [value[0].split('/').pop()?.replace('.svx', '') || '', value[1].metadata];
+	})
+);
 
 /**
  * Takes the id of the wanted article and returns its excerpt.
  * @param id string representing the id of the article (equals the name of the article in the filesystem, without the .svx extension).
- * @returns the wanted excerpt, or undefined if it doesn't exist.
+ * @returns the associated excerpt, or undefined if it doesn't exist.
  */
 export function getExcerpt(id: string): string | undefined {
-	return articleModules[`/src/lib/articles/${id}.svx`]?.metadata.excerpt;
+	return metadata.get(id)?.excerpt;
+}
+
+/**
+ * Takes the id of the wanted article and returns its categories.
+ * @param id string representing the id of the article (equals the name of the article in the filesystem, without the .svx extension).
+ * @returns the associated categories, or undefined if it doesn't exist.
+ */
+export function getCategories(id: string): string[] | undefined {
+	return metadata.get(id)?.categories;
+}
+
+/**
+ * Takes the id of the wanted article and returns its tags.
+ * @param id string representing the id of the article (equals the name of the article in the filesystem, without the .svx extension).
+ * @returns the associated tags, or undefined if it doesn't exist.
+ */
+export function getTags(id: string): string[] | undefined {
+	return metadata.get(id)?.tags;
 }
 
 /**
@@ -60,15 +72,15 @@ export function getMetadata(
 		excerpt: false
 	}
 ): Metadata | undefined {
-	const metadata = articleModules[`/src/lib/articles/${id}.svx`]?.metadata;
+	const article = metadata.get(id);
 
-	if (!metadata) return undefined;
+	if (!article) return undefined;
 
-	if (!options.tags) delete metadata.tags;
-	if (!options.categories) delete metadata.categories;
-	if (!options.excerpt) delete metadata.excerpt;
+	if (!options.tags) delete article.tags;
+	if (!options.categories) delete article.categories;
+	if (!options.excerpt) delete article.excerpt;
 
-	return metadata as Metadata;
+	return article;
 }
 
 /**
@@ -84,14 +96,12 @@ export function getIds(
 	const start = options.start ? (options.start > 0 ? options.start : 0) : 0;
 	const limit = options.limit;
 
-	// Extracting ids
-	let ids = Object.keys(articleModules).map(
-		(path) => path.split('/').pop()?.replace('.svx', '') || ''
-	);
+	// Getting all the ids
+	let ids = Object.values(metadata.keys().toArray());
 
 	if (filter)
 		ids = ids.filter((id) => {
-			const meta = articleModules[`/src/lib/articles/${id}.svx`]?.metadata;
+			const meta = metadata.get(id);
 			// Excluding unknown ids
 			if (!meta) return false;
 			return filter(meta);
@@ -99,8 +109,8 @@ export function getIds(
 
 	if (sort) {
 		ids = ids.sort((a: string, b: string) => {
-			const metaA = articleModules[`/src/lib/articles/${a}.svx`]?.metadata;
-			const metaB = articleModules[`/src/lib/articles/${b}.svx`]?.metadata;
+			const metaA = metadata.get(a);
+			const metaB = metadata.get(b);
 			if (!metaA || !metaB) return 0;
 			return sort(metaA, metaB);
 		});
@@ -121,5 +131,5 @@ export function getIds(
  * @returns the number of articles available.
  */
 export function getNumber(): number {
-	return number;
+	return metadata.size;
 }

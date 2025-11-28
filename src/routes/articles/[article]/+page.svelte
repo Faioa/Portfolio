@@ -8,8 +8,7 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 
 	const { data } = $props();
-
-	const { id } = data.article;
+	const id = data.id;
 
 	let module: ArticleModule | null = $state(null);
 
