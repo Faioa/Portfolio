@@ -4,8 +4,9 @@
 
 	import { onMount } from 'svelte';
 
-	import type { ArticleModule } from '$lib/articles-types';
-	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { type ArticleModule, categories } from '$lib/articles-types';
+	import { Separator } from '$lib/components/ui/separator/index';
+	import { Badge } from '$lib/components/ui/badge';
 
 	const { data } = $props();
 	const id = data.id;
@@ -18,7 +19,7 @@
 </script>
 
 <div class="container">
-	<div class="flex w-full flex-col justify-center gap-5 text-justify">
+	<div class="flex w-full flex-col justify-center gap-3 text-justify">
 		<div class="flex w-full justify-between">
 			<h1 class="title">{module?.metadata?.title}</h1>
 
@@ -44,6 +45,13 @@
 		<p>
 			{module?.metadata?.excerpt}
 		</p>
+		{#if module?.metadata?.categories}
+			<div class="flex flex-wrap items-center gap-2">
+				{#each module?.metadata?.categories as category, i (i)}
+					<Badge variant="secondary">{categories[category]}</Badge>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
 

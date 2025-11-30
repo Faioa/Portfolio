@@ -1,26 +1,10 @@
-import { z } from 'zod';
-
-import type { ArticleModule, Category, Metadata } from '$lib/articles-types';
+import { type ArticleModule, type Metadata } from '$lib/articles-types';
 
 /* Type for the filter's function */
 export type MetadataFilter = (metadata: Metadata) => boolean;
 
 /* Type for the sort's function */
 export type MetadataSort = (a: Metadata, b: Metadata) => number;
-
-/* Type for the filters' form values */
-
-/* Schema for the filters' form */
-export const filtersSchema = z.object({
-	sortBy: z.literal(['created+', 'created-', 'modified+', 'modified-']),
-	featured: z.nullish(z.boolean().optional()),
-	fromDate: z.nullish(z.iso.date().optional()),
-	toDate: z.nullish(z.iso.date().optional()),
-	categories: z.nullish(z.array(z.string<Category>()).min(1).optional()),
-	research: z.nullish(z.array(z.string().min(1)).min(1).optional())
-});
-
-export type FiltersSchema = typeof filtersSchema;
 
 /* Importing the articles' metadata and formatting the ids in a map */
 const metadata: Map<string, Metadata> = new Map(
