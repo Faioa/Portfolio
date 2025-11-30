@@ -28,7 +28,8 @@
 
 	import type { PageProps } from './$types';
 
-	const { data }: PageProps = $props();
+	const { data, form: formAction }: PageProps = $props();
+
 	const form = superForm(data.form, {
 		validators: zod4Client(filtersSchema),
 		SPA: true,
@@ -37,8 +38,8 @@
 	});
 	const { form: formData, enhance } = form;
 
-	const articles = data.articles;
-	const metadata = data.metadata;
+	const articles = formAction?.articles ? formAction.articles : data.articles;
+	const metadata = formAction?.metadata ? formAction.metadata : data.metadata;
 
 	let sheetCloseRef: HTMLButtonElement = $state(null!);
 	let formRef: HTMLFormElement = $state(null!);
