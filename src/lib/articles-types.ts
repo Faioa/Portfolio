@@ -1,3 +1,4 @@
+import { parseDate } from '@internationalized/date';
 import { z } from 'zod';
 
 import type { Snippet } from 'svelte';
@@ -22,14 +23,31 @@ export const sortBy = {
 export const defaultSortBy = 'created-';
 
 /* Schema for the filters' form */
-export const filtersSchema = z.object({
-	sortBy: z.literal(Object.keys(sortBy)).default(defaultSortBy),
-	featured: z.boolean().default(false),
-	fromDate: z.nullish(z.iso.date()),
-	toDate: z.nullish(z.iso.date()),
-	categories: z.array(z.literal(Object.keys(categories))),
-	research: z.nullish(z.string().min(1))
-});
+export const filtersSchema = z
+	.object({
+		sortBy: z.literal(Object.keys(sortBy)).default(defaultSortBy),
+		featured: z.boolean().default(false),
+		fromDate: z.nullish(z.iso.date()),
+		toDate: z.nullish(z.iso.date()),
+		categories: z.array(z.literal(Object.keys(categories))),
+		research: z.nullish(z.string().min(1).trim()),
+		page: z.int().min(1).default(1)
+	})
+	.superRefine((data, ctx) => {
+		if (
+			z.iso.date().safeParse(data.fromDate).success &&
+			z.iso.date().safeParse(data.toDate).success
+		) {
+			if (parseDate(data.fromDate!).compare(parseDate(data.toDate!)) > 0)
+				ctx.addIssue({
+					code: 'invalid_value',
+					origin: 'date',
+					message: 'Incorrect range for the selected dates.',
+					path: ['fromDate', 'toDate'],
+					values: [data.fromDate, data.toDate]
+				});
+		}
+	});
 
 /* Created and modified properties follow the javascript string datetime format */
 export interface Metadata {
@@ -49,3 +67,5 @@ export interface ArticleModule {
 	default: Article;
 	metadata: Metadata;
 }
+
+export const numberPerPage = 3;

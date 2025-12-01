@@ -77,7 +77,7 @@ export function getIds(
 ): { total: number; ids: string[] } {
 	const filter = options.filter;
 	const sort = options.sort;
-	const start = options.start ? (options.start > 0 ? options.start : 0) : 0;
+	let start = options.start ? (options.start > 0 ? options.start : 0) : 0;
 	const limit = options.limit;
 
 	// Getting all the ids
@@ -102,7 +102,10 @@ export function getIds(
 
 	const total = ids.length;
 
-	if (limit && limit >= 0) ids = ids.slice(start, start + limit);
+	if (limit) {
+		if (start >= total) start = total - limit >= 0 ? total - limit : 0;
+		ids = ids.slice(start, start + limit);
+	}
 
 	return {
 		total,

@@ -1,14 +1,12 @@
 <script lang="ts">
 	import ArticleTile from '$lib/components/ArticleTile.svelte';
+	import type { Metadata } from '$lib/articles-types';
 
-	const data = $props();
-
-	const articles = data.articles;
-	const metadata = data.metadata;
+	const {articles = $bindable(), metadata = $bindable()} = $props<{ articles: string[], metadata: Metadata[]}>();
 </script>
 
 <div class="articles">
-	{#each articles as article, i (i)}
+	{#each articles as article, i (article)}
 		<ArticleTile {article} metadata={metadata[i]} class="article" />
 	{:else}
 		<p>

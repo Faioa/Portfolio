@@ -1,11 +1,15 @@
 ---
-title: My First Article !
+title: 'My First Article !'
 created: 2025-11-06T21:55
 modified: 2025-11-06T21:55
-tags: [svelte, sveltekit, mdsvex]
-categories: [miscellaneous]
+tags:
+  - svelte
+  - sveltekit
+  - mdsvex
+categories:
+  - miscellaneous
 featured: false
-excerpt: This is the first article posted on this website !
+excerpt: 'This is the first article posted on this website !'
 ---
 
 <script>

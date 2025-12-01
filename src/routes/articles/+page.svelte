@@ -7,12 +7,22 @@
 		today
 	} from '@internationalized/date';
 	import CalendarIcon from '@lucide/svelte/icons/calendar';
+	import ChevronLeftIcon from '@lucide/svelte/icons/chevron-left';
+	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 	import SearchIcon from '@lucide/svelte/icons/search';
+	import { z } from 'zod';
 
+	import { onMount } from 'svelte';
+	import { SvelteURLSearchParams } from 'svelte/reactivity';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 
-	import { categories, filtersSchema, sortBy } from '$lib/articles-types';
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
+
+	import { categories, filtersSchema, numberPerPage, sortBy } from '$lib/articles-types';
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
 	import { Badge } from '$lib/components/ui/badge/index';
 	import { buttonVariants } from '$lib/components/ui/button/button.svelte';
@@ -20,6 +30,7 @@
 	import { Calendar } from '$lib/components/ui/calendar/index';
 	import * as Form from '$lib/components/ui/form/index';
 	import * as InputGroup from '$lib/components/ui/input-group/index';
+	import * as Pagination from '$lib/components/ui/pagination/index';
 	import * as Popover from '$lib/components/ui/popover/index';
 	import * as Select from '$lib/components/ui/select/index';
 	import { Separator } from '$lib/components/ui/separator/index';
@@ -28,7 +39,44 @@
 
 	import type { PageProps } from './$types';
 
-	const { data, form: formAction }: PageProps = $props();
+	let filters = new SvelteURLSearchParams(page.url.searchParams);
+
+	function get_filter(param: string) {
+		return filters.get(param) ?? undefined;
+	}
+
+	function update_filter(param: string, value: string | boolean | number | CalendarDate) {
+		if (value && value !== '') filters.set(param, value.toString());
+		else filters.delete(param);
+	}
+
+	function update_filter_array(param: string, value: string[]) {
+		if (value.length > 0) {
+			filters.delete(param);
+			value.forEach((value) => filters.append(param, value));
+		} else filters.delete(param);
+	}
+
+	async function apply_filters() {
+		update_filter('research', research);
+		if (filters.size === 0)
+			await goto(resolve('/articles', {}), { keepFocus: true, invalidateAll: true });
+		else
+			await goto(resolve('/articles?[filters]', { filters: filters.toString() }), {
+				keepFocus: true,
+				invalidateAll: true
+			});
+	}
+
+	function clear_filters(params: string[]) {
+		params.forEach((param: string) => filters.delete(param));
+	}
+
+	function isFiltered(params: string[]) {
+		return params.length > 0 && params.some((param: string) => filters.has(param));
+	}
+
+	const { data }: PageProps = $props();
 
 	const form = superForm(data.form, {
 		validators: zod4Client(filtersSchema),
@@ -38,11 +86,11 @@
 	});
 	const { form: formData, enhance } = form;
 
-	const articles = formAction?.articles ? formAction.articles : data.articles;
-	const metadata = formAction?.metadata ? formAction.metadata : data.metadata;
+	let totalArticles = $derived(data.articles.total);
+	let articles = $derived(data.articles.ids);
+	let metadata = $derived(data.metadata);
 
 	let sheetCloseRef: HTMLButtonElement = $state(null!);
-	let formRef: HTMLFormElement = $state(null!);
 
 	const dateFormatter = new DateFormatter('en-US', {
 		dateStyle: 'long'
@@ -51,21 +99,33 @@
 	const localTimeZone = getLocalTimeZone();
 	const todayDate = today(localTimeZone);
 
-	let fromDateValue = $derived($formData.fromDate ? parseDate($formData.fromDate) : undefined);
-	let toDateValue = $derived($formData.toDate ? parseDate($formData.toDate) : undefined);
+	const date = z.iso.date();
+	let fromDateValue = $derived(
+		$formData.fromDate && date.safeParse($formData.fromDate).success
+			? parseDate($formData.fromDate)
+			: undefined
+	);
+	let toDateValue = $derived(
+		$formData.toDate && date.safeParse($formData.toDate).success
+			? parseDate($formData.toDate)
+			: undefined
+	);
+
+	let currentPage = $state(get_filter('page') ? parseInt(get_filter('page')!) : 1);
+	let research = $state(get_filter('research') ?? '');
 </script>
 
 <div class="container">
 	<h1 class="title">Articles</h1>
 
 	<!-- Form for the filters and research bar -->
-	<form bind:this={formRef} class="flex w-full gap-5" method="POST" use:enhance>
+	<form class="flex w-full gap-5" method="GET" use:enhance>
 		<!-- Input for the research bar -->
-		<Form.Field {form} name="research" class="grow">
+		<Form.Field {form} name="sortBy" class="grow">
 			<Form.Control>
 				{#snippet children({ props })}
-					<InputGroup.Root {...props} class="rounded-2xl">
-						<InputGroup.Input name="research" placeholder="Search..." />
+					<InputGroup.Root class="rounded-2xl">
+						<InputGroup.Input {...props} placeholder="Search..." bind:value={research} />
 						<InputGroup.Addon>
 							<SearchIcon />
 						</InputGroup.Addon>
@@ -74,7 +134,7 @@
 								variant="ghost"
 								class="rounded-2xl"
 								type="submit"
-								onclick={() => formRef.submit()}
+								onclick={() => apply_filters()}
 							>
 								Search
 							</InputGroup.Button>
@@ -82,17 +142,7 @@
 					</InputGroup.Root>
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors />
 		</Form.Field>
-
-		<!-- Hidden inputs for the filters' submitted values -->
-		<input hidden value={$formData.sortBy} name="sortBy" />
-		<input hidden value={$formData.featured} name="featured" />
-		<input hidden value={$formData.fromDate} name="fromDate" />
-		<input hidden value={$formData.toDate} name="toDate" />
-		{#each $formData.categories as category, i (i)}
-			<input hidden name="categories" value={category} />
-		{/each}
 
 		<!-- Filters' sheet -->
 		<Sheet.Root>
@@ -120,7 +170,15 @@
 					<Form.Control>
 						{#snippet children({ props })}
 							<Form.Label>Sort By</Form.Label>
-							<Select.Root type="single" name="sortBy" bind:value={$formData.sortBy}>
+							<Select.Root
+								type="single"
+								name="sortBy"
+								bind:value={$formData.sortBy}
+								onValueChange={(value) => {
+									if (!value) clear_filters(['sortBy']);
+									else update_filter('sortBy', value);
+								}}
+							>
 								<Select.Trigger {...props} class="rounded-2xl">
 									{$formData.sortBy ? sortBy[$formData.sortBy] : 'Select a sorting order'}
 								</Select.Trigger>
@@ -143,7 +201,11 @@
 					<Form.Control>
 						{#snippet children({ props })}
 							<Form.Label>Featured</Form.Label>
-							<Switch {...props} bind:checked={$formData.featured} />
+							<Switch
+								{...props}
+								bind:checked={$formData.featured}
+								onCheckedChange={(checked) => update_filter('featured', checked)}
+							/>
 						{/snippet}
 					</Form.Control>
 					<Form.Description
@@ -180,8 +242,10 @@
 										onValueChange={(v) => {
 											if (v) {
 												$formData.fromDate = v.toString();
+												update_filter('fromDate', v.toString());
 											} else {
 												$formData.fromDate = null;
+												clear_filters(['fromDate']);
 											}
 										}}
 									/>
@@ -221,8 +285,10 @@
 										onValueChange={(v) => {
 											if (v) {
 												$formData.toDate = v.toString();
+												update_filter('toDate', v.toString());
 											} else {
 												$formData.toDate = null;
+												clear_filters(['toDate']);
 											}
 										}}
 									/>
@@ -239,7 +305,12 @@
 					<Form.Control>
 						{#snippet children({ props })}
 							<Form.Label>Categories</Form.Label>
-							<Select.Root type="multiple" {...props} bind:value={$formData.categories}>
+							<Select.Root
+								type="multiple"
+								{...props}
+								bind:value={$formData.categories}
+								onValueChange={(value) => update_filter_array('categories', value)}
+							>
 								<Select.Trigger class="rounded-2xl">Select the tags</Select.Trigger>
 								<Select.Content>
 									{#each Object.entries(categories) as [value, label], i (i)}
@@ -269,8 +340,8 @@
 						variant="outline"
 						class="rounded-2xl"
 						onclick={() => {
-							formRef.submit();
 							sheetCloseRef?.click();
+							apply_filters();
 						}}>Apply</Button
 					>
 				</Sheet.Footer>
@@ -282,8 +353,84 @@
 <Separator class="container" />
 
 <div class="container">
-	<ArticlesList articles={articles.ids} {metadata} />
+	<ArticlesList {articles} {metadata} />
 </div>
+
+{#if totalArticles > 0}
+	<Pagination.Root
+		count={totalArticles}
+		perPage={numberPerPage}
+		bind:page={currentPage}
+		onPageChange={() => {
+			update_filter('page', currentPage.toString());
+			apply_filters();
+		}}
+	>
+		{#snippet children({ pages, currentPage })}
+			<Pagination.Content>
+				<Pagination.Item>
+					<Pagination.PrevButton id="prevButton">
+						{#if !browser}
+							<a
+								href={resolve('/articles?page=[page]', { page: (currentPage - 1).toString() })}
+								aria-labelledby="prevButton"
+								class="flex items-center gap-1"
+							>
+								<ChevronLeftIcon class="icon" />
+								<span>Previous</span>
+							</a>
+						{:else}
+							<div class="flex items-center gap-1">
+								<ChevronLeftIcon class="icon" />
+								<span>Previous</span>
+							</div>
+						{/if}
+					</Pagination.PrevButton>
+				</Pagination.Item>
+				{#each pages as page (page.key)}
+					{#if page.type === 'ellipsis'}
+						<Pagination.Item>
+							<Pagination.Ellipsis />
+						</Pagination.Item>
+					{:else if !browser}
+						<a href={resolve('/articles?page=[page]', { page: page.value.toString() })}>
+							<Pagination.Item>
+								<Pagination.Link {page} isActive={currentPage === page.value}>
+									{page.value}
+								</Pagination.Link>
+							</Pagination.Item>
+						</a>
+					{:else}
+						<Pagination.Item>
+							<Pagination.Link {page} isActive={currentPage === page.value}>
+								{page.value}
+							</Pagination.Link>
+						</Pagination.Item>
+					{/if}
+				{/each}
+				<Pagination.Item>
+					<Pagination.NextButton>
+						{#if !browser}
+							<a
+								href={resolve('/articles?page=[page]', { page: (currentPage + 1).toString() })}
+								aria-labelledby="prevButton"
+								class="flex items-center gap-1"
+							>
+								<span>Next</span>
+								<ChevronRightIcon class="icon" />
+							</a>
+						{:else}
+							<div class="flex items-center gap-1">
+								<span>Next</span>
+								<ChevronRightIcon class="icon" />
+							</div>
+						{/if}
+					</Pagination.NextButton>
+				</Pagination.Item>
+			</Pagination.Content>
+		{/snippet}
+	</Pagination.Root>
+{/if}
 
 <style>
 </style>
