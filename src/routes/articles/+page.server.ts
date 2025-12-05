@@ -19,7 +19,6 @@ export const load: PageServerLoad = async ({ url }) => {
 	let metadata: Metadata[] = [];
 
 	if (!form.valid) {
-		// ToDo erreurs sur les champs pas corrects
 		return { form, articles, metadata };
 	}
 
@@ -40,13 +39,13 @@ export const load: PageServerLoad = async ({ url }) => {
 
 			if (
 				form.data.fromDate &&
-				new Date(form.data.fromDate).getDate() - new Date(metadata.created).getDate() > 0
+				new Date(form.data.fromDate).valueOf() - new Date(metadata.created).valueOf() > 0
 			)
 				return false;
 
 			if (
 				form.data.toDate &&
-				new Date(form.data.toDate).getDate() - new Date(metadata.created).getDate() < 0
+				new Date(form.data.toDate).valueOf() - new Date(metadata.created).valueOf() < 0
 			)
 				return false;
 
@@ -80,5 +79,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		return metadata;
 	});
 
+	const maxPages = Math.ceil(articles.total / numberPerPage);
+	if (maxPages < form.data.page) form.data.page = maxPages;
 	return { form, articles, metadata };
 };

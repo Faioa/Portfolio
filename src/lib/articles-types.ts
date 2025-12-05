@@ -1,4 +1,3 @@
-import { parseDate } from '@internationalized/date';
 import { z } from 'zod';
 
 import type { Snippet } from 'svelte';
@@ -34,18 +33,21 @@ export const filtersSchema = z
 		page: z.int().min(1).default(1)
 	})
 	.superRefine((data, ctx) => {
-		if (
-			z.iso.date().safeParse(data.fromDate).success &&
-			z.iso.date().safeParse(data.toDate).success
-		) {
-			if (parseDate(data.fromDate!).compare(parseDate(data.toDate!)) > 0)
-				ctx.addIssue({
-					code: 'invalid_value',
-					origin: 'date',
-					message: 'Incorrect range for the selected dates.',
-					path: ['fromDate', 'toDate'],
-					values: [data.fromDate, data.toDate]
-				});
+		if (data.fromDate && data.toDate) {
+			try {
+				const fromDate = new Date(data.fromDate);
+				const toDate = new Date(data.toDate);
+				if (fromDate > toDate)
+					ctx.addIssue({
+						code: 'invalid_value',
+						origin: 'date',
+						message: 'Incorrect range with the selected dates. Check their order and retry.',
+						path: ['fromDate'],
+						values: [data.fromDate, data.toDate]
+					});
+			} catch {
+				/* fallback to individual validation */
+			}
 		}
 	});
 

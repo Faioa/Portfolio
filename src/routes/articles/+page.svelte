@@ -12,7 +12,6 @@
 	import SearchIcon from '@lucide/svelte/icons/search';
 	import { z } from 'zod';
 
-	import { onMount } from 'svelte';
 	import { SvelteURLSearchParams } from 'svelte/reactivity';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
@@ -39,10 +38,16 @@
 
 	import type { PageProps } from './$types';
 
-	let filters = new SvelteURLSearchParams(page.url.searchParams);
+	let filters = $derived(new SvelteURLSearchParams(page.url.searchParams));
 
 	function get_filter(param: string) {
 		return filters.get(param) ?? undefined;
+	}
+
+	function get_filters_without(params: string[]) {
+		let filtered_filters = new SvelteURLSearchParams(filters);
+		params.forEach((param) => filtered_filters.delete(param));
+		return filtered_filters;
 	}
 
 	function update_filter(param: string, value: string | boolean | number | CalendarDate) {
@@ -111,8 +116,8 @@
 			: undefined
 	);
 
-	let currentPage = $state(get_filter('page') ? parseInt(get_filter('page')!) : 1);
-	let research = $state(get_filter('research') ?? '');
+	let currentPage = $derived($formData.page ?? 1);
+	let research = $derived($formData.research ?? '');
 </script>
 
 <div class="container">
@@ -372,7 +377,13 @@
 					<Pagination.PrevButton id="prevButton">
 						{#if !browser}
 							<a
-								href={resolve('/articles?page=[page]', { page: (currentPage - 1).toString() })}
+								href={resolve(
+									filters.size > 0 ? '/articles?page=[page]&[[filters]]' : '/articles?page=[page]',
+									{
+										page: (currentPage - 1).toString(),
+										filters: get_filters_without(['page']).toString()
+									}
+								)}
 								aria-labelledby="prevButton"
 								class="flex items-center gap-1"
 							>
@@ -393,7 +404,12 @@
 							<Pagination.Ellipsis />
 						</Pagination.Item>
 					{:else if !browser}
-						<a href={resolve('/articles?page=[page]', { page: page.value.toString() })}>
+						<a
+							href={resolve(
+								filters.size > 0 ? '/articles?page=[page]&[[filters]]' : '/articles?page=[page]',
+								{ page: page.value.toString(), filters: get_filters_without(['page']).toString() }
+							)}
+						>
 							<Pagination.Item>
 								<Pagination.Link {page} isActive={currentPage === page.value}>
 									{page.value}
@@ -412,7 +428,13 @@
 					<Pagination.NextButton>
 						{#if !browser}
 							<a
-								href={resolve('/articles?page=[page]', { page: (currentPage + 1).toString() })}
+								href={resolve(
+									filters.size > 0 ? '/articles?page=[page]&[[filters]]' : '/articles?page=[page]',
+									{
+										page: (currentPage + 1).toString(),
+										filters: get_filters_without(['page']).toString()
+									}
+								)}
 								aria-labelledby="prevButton"
 								class="flex items-center gap-1"
 							>
