@@ -7,17 +7,11 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 
 import { categories, contactSchema, subjects } from '$lib/contact';
 
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 
 export const prerender = false;
 
 const resend = new Resend(RESEND_API_KEY);
-
-export const load: PageServerLoad = async () => {
-	const form = await superValidate(zod4(contactSchema));
-
-	return { form };
-};
 
 export const actions = {
 	default: async (event) => {
@@ -37,7 +31,7 @@ export const actions = {
 			.join('');
 		const relatedSubjects = subjects.get(form.data.category)!;
 
-		const { data, error } = await resend.emails.send({
+		const { error } = await resend.emails.send({
 			from: EMAIL,
 			to: [EMAIL],
 			subject: `${form.data.firstName} ${form.data.lastName} : ${categories[form.data.category]} - ${relatedSubjects[form.data.subject] ?? form.data.subject}`,

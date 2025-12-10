@@ -4,7 +4,7 @@ export const categories = {
 	'flux-studio': 'Flux Studio',
 	job: 'Job Opportunities',
 	website: 'Website',
-	other: 'Other (please specify)'
+	other: 'Other'
 } as Record<string, string>;
 
 export const subjects = new Map<string, Record<string, string>>([
