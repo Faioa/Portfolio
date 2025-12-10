@@ -1,27 +1,25 @@
 <script lang="ts">
 	import InfoIcon from '@lucide/svelte/icons/info';
 	import SendIcon from '@lucide/svelte/icons/send';
+	import XIcon from '@lucide/svelte/icons/x';
 
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
+	import { superForm } from 'sveltekit-superforms';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 
 	import { browser } from '$app/environment';
 
-	import { sortBy } from '$lib/articles-types';
 	import { Button } from '$lib/components/ui/button/index';
 	import * as Form from '$lib/components/ui/form/index';
 	import * as InputGroup from '$lib/components/ui/input-group/index';
 	import { Input } from '$lib/components/ui/input/index';
 	import * as Select from '$lib/components/ui/select/index';
+	import { Textarea } from '$lib/components/ui/textarea/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index';
-	import { categories, contactSchema, subjects } from '$lib/contact';
+	import { categories, contactSchema, maxContent, minContent, subjects } from '$lib/contact';
 
 	const { data } = $props();
 
-	const form = superForm(data.form, {
-		validators: zod4Client(contactSchema),
-		SPA: true
-	});
+	const form = superForm(data.form, { validators: zod4Client(contactSchema) });
 
 	const { form: formData, enhance } = form;
 
@@ -31,33 +29,32 @@
 			: ({} as Record<string, string>)
 	);
 
-	function handleCategoryChange(value: string) {
-		if (value === 'other') {
-			formData.set({
-				...$formData,
-				subject: ''
-			});
-		}
+	let otherSubject: boolean = $state(!browser);
+
+	function resetSubject() {
+		if (!($formData.subject in relatedSubjects)) $formData.subject = '';
+		if ($formData.category !== 'other') otherSubject = false;
 	}
 </script>
 
 <div class="container">
 	<h1 class="title">Contact Form</h1>
-	<p>
+	<p class="text-center">
 		In addition to the social media links at the bottom of every page, you can use this contact form
-		if you would like to communicate with me directly. Please feel free to use it if you have any
-		questions or if anything is unclear. Thank you!
+		to get in touch with me directly. Please feel free to use it if you have any questions or if
+		anything is unclear.
+		<br />Thank you!
 	</p>
 </div>
 
-<div class="container grid grid-cols-2">
-	<form method="POST" use:enhance>
+<div class="container grid grid-cols-2 gap-y-4">
+	<form method="POST" use:enhance class="w-150">
 		<!-- Fields for firstName and lastName -->
 		<div class="col-span-2 grid grid-cols-2 gap-5">
 			<Form.Field {form} name="firstName">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label>First Name</Form.Label>
+						<Form.Label class="fieldName">First Name</Form.Label>
 						<Input
 							class="rounded-2xl"
 							{...props}
@@ -72,7 +69,7 @@
 			<Form.Field {form} name="lastName">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label>Last Name</Form.Label>
+						<Form.Label class="fieldName">Last Name</Form.Label>
 						<Input
 							class="rounded-2xl"
 							{...props}
@@ -89,12 +86,12 @@
 		<Form.Field {form} name="email" class="col-span-2">
 			<Form.Control>
 				{#snippet children({ props })}
-					<Form.Label>Email</Form.Label>
+					<Form.Label class="fieldName">Email</Form.Label>
 					<InputGroup.Root class="rounded-2xl">
 						<InputGroup.Input
 							{...props}
 							bind:value={$formData.email}
-							placeholder="example@mail.com"
+							placeholder="example@email.com"
 						/>
 						<InputGroup.Addon align="inline-end">
 							<Tooltip.Provider delayDuration={200}>
@@ -124,17 +121,23 @@
 			<Form.Field {form} name="category">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label>Sort By</Form.Label>
+						<Form.Label class="fieldName">Category</Form.Label>
 						<Select.Root
 							type="single"
 							name="category"
 							bind:value={$formData.category}
 							onValueChange={(value) => {
-								handleCategoryChange(value);
+								if (value === 'other') {
+									$formData.subject = '';
+									otherSubject = true;
+								} else {
+									$formData.subject = '';
+									otherSubject = false;
+								}
 							}}
 						>
 							<Select.Trigger {...props} class="w-full rounded-2xl">
-								{$formData.category ? categories[$formData.category] : 'Select a sorting order'}
+								{$formData.category ? categories[$formData.category] : 'Select a category'}
 							</Select.Trigger>
 							<Select.Content>
 								{#each Object.entries(categories) as [value, label], i (i)}
@@ -150,19 +153,36 @@
 			<Form.Field {form} name="subject">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label>Subject</Form.Label>
-						{#if !browser || $formData.category === 'other' || $formData.subject === 'other'}
-							<Input
-								class="rounded-2xl"
-								{...props}
-								bind:value={$formData.subject}
-								placeholder="Bug Report"
-							/>
+						<Form.Label class="fieldName">Subject</Form.Label>
+						{#if otherSubject}
+							<InputGroup.Root class="rounded-2xl">
+								<InputGroup.Input
+									{...props}
+									bind:value={$formData.subject}
+									placeholder="Bug Report"
+								/>
+								<InputGroup.Addon align="inline-end">
+									<InputGroup.Button
+										aria-label="Undo"
+										title="Undo"
+										size="icon-xs"
+										class="rounded-full"
+										onclick={resetSubject}
+										><XIcon class="icon" />
+									</InputGroup.Button>
+								</InputGroup.Addon>
+							</InputGroup.Root>
 						{:else}
 							<Select.Root
 								type="single"
 								name="subject"
-								onValueChange={(value) => ($formData.subject = value)}
+								bind:value={$formData.subject}
+								onValueChange={(value) => {
+									if (value === 'other') {
+										$formData.subject = '';
+										otherSubject = true;
+									}
+								}}
 							>
 								<Select.Trigger {...props} class="w-full rounded-2xl">
 									{$formData.subject ? relatedSubjects[$formData.subject] : 'Select a subject'}
@@ -181,9 +201,39 @@
 		</div>
 
 		<!-- Content -->
+		<Form.Field {form} name="content" class="col-span-2">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label class="fieldName">Content</Form.Label>
+					<div class="flex flex-col gap-1">
+						<Textarea
+							class="h-40 resize-none rounded-2xl"
+							{...props}
+							bind:value={$formData.content}
+							placeholder="Type your message here"
+						/>
+					</div>
+				{/snippet}
+			</Form.Control>
+			<div class="mr-2 flex items-center justify-between self-end">
+				<Form.FieldErrors />
+				<p class="text-sm">
+					<span
+						class={$formData.content.length >= minContent && $formData.content.length <= maxContent
+							? ''
+							: 'text-destructive'}>{$formData.content.length}</span
+					>
+					/ {maxContent}
+				</p>
+			</div>
+		</Form.Field>
 
 		<Button type="submit">Submit<SendIcon class="icon" /></Button>
 	</form>
-
-	<SuperDebug data={form} />
 </div>
+
+<style>
+	form :global(.fieldName) {
+		font-weight: bold;
+	}
+</style>

@@ -33,17 +33,21 @@ export const subjects = new Map<string, Record<string, string>>([
 			feedback: 'Feedback',
 			other: 'Other'
 		}
-	]
+	],
+	['other', {}]
 ]);
 
+export const minContent = 50;
+export const maxContent = 3000;
+
 export const contactSchema = z.object({
-	firstName: z.string().trim().min(2),
-	lastName: z.string().trim().min(2),
-	email: z.email().trim(),
+	firstName: z.string().trim().min(2).max(50),
+	lastName: z.string().trim().min(2).max(50),
+	email: z.email().trim().max(254),
 	category: z
 		.string()
 		.trim()
 		.refine((val) => val in categories, 'Please select a valid category.'),
-	subject: z.string().trim().min(5),
-	content: z.string().trim().min(50)
+	subject: z.string().trim().min(5).max(100),
+	content: z.string().trim().min(minContent).max(maxContent)
 });

@@ -1,13 +1,17 @@
-import { error, fail } from '@sveltejs/kit';
+import { EMAIL, RESEND_API_KEY } from '$env/static/private';
+import { fail } from '@sveltejs/kit';
+import { Resend } from 'resend';
 
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 
-import { contactSchema } from '$lib/contact';
+import { categories, contactSchema, subjects } from '$lib/contact';
 
 import type { Actions, PageServerLoad } from './$types';
 
 export const prerender = false;
+
+const resend = new Resend(RESEND_API_KEY);
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod4(contactSchema));
@@ -21,7 +25,37 @@ export const actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		// Post mail via resend
+		if (!EMAIL || !RESEND_API_KEY)
+			return fail(501, {
+				form,
+				message: 'This service was not configured correctly. Please wait try again later.'
+			});
+
+		const htmlContent = form.data.content
+			.split('\n\n')
+			.map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
+			.join('');
+		const relatedSubjects = subjects.get(form.data.category)!;
+
+		const { data, error } = await resend.emails.send({
+			from: EMAIL,
+			to: [EMAIL],
+			subject: `${form.data.firstName} ${form.data.lastName} : ${categories[form.data.category]} - ${relatedSubjects[form.data.subject] ?? form.data.subject}`,
+			html: `
+			<p><strong>Sender</strong> : ${form.data.firstName} - ${form.data.lastName}</p>
+			<p><strong>Email</strong> : ${form.data.email}</p>
+			<hr/>
+			${htmlContent}`
+		});
+
+		if (error) {
+			console.error(error.statusCode, error.name, error.message);
+			return fail(500, {
+				form,
+				message:
+					'An error occurred on the server while trying to send your message. Please wait try again later.'
+			});
+		}
 
 		return message(form, 'Your message was posted successfully!');
 	}
