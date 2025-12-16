@@ -40,8 +40,7 @@ You can preview the production build with `npm run preview`.
 # Additional dependencies
 
 - Lucide Svelte
-- dev : Paraglide
-- dev : Storybook
+- dev : Wuchale
 - Mdsvex + Shiki
 - shadcn-svelte -> (tweakcn theme _Vintage Paper_)
 - Resend

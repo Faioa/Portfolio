@@ -6,13 +6,14 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 import type { Metadata } from '$lib/articles-types';
 import { filtersSchema } from '$lib/articles-types';
 import { numberPerPage } from '$lib/articles-types';
+import { defaultLocale } from '$lib/lang';
 import { getIds, getMetadata } from '$lib/server/articles';
 
 import type { PageServerLoad } from './$types';
 
 export const prerender = false;
 
-export const load: PageServerLoad = async ({ url }) => {
+export const load: PageServerLoad = async ({ url, params }) => {
 	const form = await superValidate(url, zod4(filtersSchema), { errors: true });
 
 	let articles: { total: number; ids: string[] } = { total: 0, ids: [] };
@@ -22,9 +23,11 @@ export const load: PageServerLoad = async ({ url }) => {
 		return { form, articles, metadata };
 	}
 
+	const lang = params.locale ?? defaultLocale;
 	const page = url.searchParams?.get('page') ? parseInt(url.searchParams.get('page')!) : 1;
 
 	articles = getIds({
+		lang,
 		sort: (a, b) => {
 			if (form.data.sortBy === 'created-')
 				return new Date(b.created).valueOf() - new Date(a.created).valueOf();

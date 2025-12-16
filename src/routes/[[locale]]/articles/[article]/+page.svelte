@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 
 	import { type ArticleModule, categories } from '$lib/articles-types';
-	import { Separator } from '$lib/components/ui/separator/index';
+	import { Separator } from '$lib/components/ui/separator';
 	import { Badge } from '$lib/components/ui/badge';
 
 	const { data } = $props();

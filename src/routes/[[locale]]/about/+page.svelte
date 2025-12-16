@@ -9,16 +9,16 @@
 <article class="container text-justify">
 	<h1 class="title">About</h1>
 	<p>
-		First of all, who am I? My name is Matthieu Dartois and I am a {age}-year-old French student,
-		but there is a fairly good chance that you already knew that before coming here. The purpose of
-		this page is to provide you with some additional information about me. I'm not quite sure what
-		information should be included on this page or how it should be presented, but I'll do my best.
+		First of all, my name is Matthieu Dartois and I am a {age}-year-old French student in
+		Paris. The purpose of this page is to provide you with some additional information about me. I'm
+		not quite sure what information should be included on this page or how it should be presented,
+		but I'll do my best. Don't hesitate to contact me if you have any question.
 	</p>
 
 	<section>
 		<h2 class="subtitle">Me, Myself, and I</h2>
 		<p>
-			I suppose I should talk about myself a bit, since that's kind of the point of this page.
+			I suppose I should talk about myself a bit, since that's kind of the goal of this page.
 			However, I don't want to seem pretentious, and I'm not comfortable with exposing too much of
 			myself. So, I'll be brief and get straight to the point. I am passionate about music and
 			computer science, but a lack of free time during my Master's degree meant that I couldn't play

@@ -8,14 +8,17 @@
 
 	import { browser } from '$app/environment';
 
-	import { Button } from '$lib/components/ui/button/index';
-	import * as Form from '$lib/components/ui/form/index';
-	import * as InputGroup from '$lib/components/ui/input-group/index';
-	import { Input } from '$lib/components/ui/input/index';
-	import * as Select from '$lib/components/ui/select/index';
-	import { Textarea } from '$lib/components/ui/textarea/index.js';
-	import * as Tooltip from '$lib/components/ui/tooltip/index';
-	import { categories, contactSchema, maxContent, minContent, subjects } from '$lib/contact';
+	import { Button } from '$lib/components/ui/button';
+	import * as Form from '$lib/components/ui/form';
+	import * as InputGroup from '$lib/components/ui/input-group';
+	import { Input } from '$lib/components/ui/input';
+	import * as Select from '$lib/components/ui/select';
+	import { Textarea } from '$lib/components/ui/textarea';
+	import * as Tooltip from '$lib/components/ui/tooltip';
+	import {
+		getCategoryLabel, type Category, contactSchema, maxContent, minContent, getSubjectLabel, categoriesSubjects,
+		categoriesValues
+	} from '$lib/contact';
 
 	const { data } = $props();
 
@@ -24,9 +27,9 @@
 	const { form: formData, enhance } = form;
 
 	let relatedSubjects = $derived(
-		$formData.category in categories
-			? (subjects.get($formData.category) as Record<string, string>)
-			: ({} as Record<string, string>)
+		$formData.category in categoriesSubjects
+			? categoriesSubjects[$formData.category]
+			: []
 	);
 
 	let otherSubject: boolean = $state(!browser);
@@ -137,11 +140,11 @@
 							}}
 						>
 							<Select.Trigger {...props} class="w-full rounded-2xl">
-								{$formData.category ? categories[$formData.category] : 'Select a category'}
+								{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
 							</Select.Trigger>
 							<Select.Content>
-								{#each Object.entries(categories) as [value, label], i (i)}
-									<Select.Item {value}>{label}</Select.Item>
+								{#each categoriesValues as value, i (i)}
+									<Select.Item {value}>{getCategoryLabel(value)}</Select.Item>
 								{/each}
 							</Select.Content>
 						</Select.Root>
@@ -185,7 +188,7 @@
 								}}
 							>
 								<Select.Trigger {...props} class="w-full rounded-2xl">
-									{$formData.subject ? relatedSubjects[$formData.subject] : 'Select a subject'}
+									{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
 								</Select.Trigger>
 								<Select.Content>
 									{#each Object.entries(relatedSubjects) as [value, label], i (i)}

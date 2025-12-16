@@ -9,7 +9,7 @@
 	import GoTop from '$lib/components/GoTop.svelte';
 	import Header from '$lib/components/Header.svelte';
 
-	import '../app.css';
+	import '../../app.css';
 
 	let { children } = $props();
 
@@ -38,7 +38,7 @@
 	<Header />
 
 	<main class="flex w-full grow flex-col items-center justify-center gap-10">
-		{@render children()}
+		{@render children?.()}
 	</main>
 
 	<Footer />

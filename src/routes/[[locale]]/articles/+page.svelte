@@ -21,20 +21,20 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 
-	import { categories, filtersSchema, numberPerPage, sortBy } from '$lib/articles-types';
+	import { categoriesValues, getCategoryLabel, filtersSchema, numberPerPage, sortByValues, getSortByLabel } from '$lib/articles-types';
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
-	import { Badge } from '$lib/components/ui/badge/index';
+	import { Badge } from '$lib/components/ui/badge';
 	import { buttonVariants } from '$lib/components/ui/button/button.svelte';
-	import { Button } from '$lib/components/ui/button/index';
-	import { Calendar } from '$lib/components/ui/calendar/index';
-	import * as Form from '$lib/components/ui/form/index';
-	import * as InputGroup from '$lib/components/ui/input-group/index';
-	import * as Pagination from '$lib/components/ui/pagination/index';
-	import * as Popover from '$lib/components/ui/popover/index';
-	import * as Select from '$lib/components/ui/select/index';
-	import { Separator } from '$lib/components/ui/separator/index';
-	import * as Sheet from '$lib/components/ui/sheet/index';
-	import { Switch } from '$lib/components/ui/switch/index';
+	import { Button } from '$lib/components/ui/button';
+	import { Calendar } from '$lib/components/ui/calendar';
+	import * as Form from '$lib/components/ui/form';
+	import * as InputGroup from '$lib/components/ui/input-group';
+	import * as Pagination from '$lib/components/ui/pagination';
+	import * as Popover from '$lib/components/ui/popover';
+	import * as Select from '$lib/components/ui/select';
+	import { Separator } from '$lib/components/ui/separator';
+	import * as Sheet from '$lib/components/ui/sheet';
+	import { Switch } from '$lib/components/ui/switch';
 
 	import type { PageProps } from './$types';
 
@@ -185,11 +185,11 @@
 								}}
 							>
 								<Select.Trigger {...props} class="rounded-2xl">
-									{$formData.sortBy ? sortBy[$formData.sortBy] : 'Select a sorting order'}
+									{$formData.sortBy ? getSortByLabel($formData.sortBy) : 'Select a sorting order'}
 								</Select.Trigger>
-								<Select.Content>
-									{#each Object.entries(sortBy) as [value, label], i (i)}
-										<Select.Item {value}>{label}</Select.Item>
+								<Select.Content >
+									{#each sortByValues.toSorted((a, b) => getSortByLabel(a).localeCompare(getSortByLabel(b))) as value (value)}
+										<Select.Item {value}>{getSortByLabel(value)}</Select.Item>
 									{/each}
 								</Select.Content>
 							</Select.Root>
@@ -318,15 +318,15 @@
 							>
 								<Select.Trigger class="rounded-2xl">Select the tags</Select.Trigger>
 								<Select.Content>
-									{#each Object.entries(categories) as [value, label], i (i)}
-										<Select.Item {value}>{label}</Select.Item>
+									{#each categoriesValues.toSorted((a, b) => getCategoryLabel(a).localeCompare(getCategoryLabel(b))) as value (value)}
+										<Select.Item {value}>{getCategoryLabel(value)}</Select.Item>
 									{/each}
 								</Select.Content>
 							</Select.Root>
 							{#if $formData.categories && $formData.categories.length > 0}
 								<div class="flex flex-wrap items-center gap-2">
 									{#each $formData.categories as category, i (i)}
-										<Badge variant="secondary">{categories[category]}</Badge>
+										<Badge variant="secondary">{getCategoryLabel(category)}</Badge>
 									{/each}
 								</div>
 							{/if}

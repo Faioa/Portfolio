@@ -2,33 +2,48 @@ import { z } from 'zod';
 
 import type { Snippet } from 'svelte';
 
-export const categories = {
-	miscellaneous: 'Miscellaneous',
-	music: 'Music',
-	'lute-making': 'Lute Making',
-	programming: 'Programming',
-	networks: 'Networks',
-	'flux-studio': 'Flux Studio',
-	website: 'Website'
-} as Record<string, string>;
+export const categoriesValues = [
+	'miscellaneous',
+	'music',
+	'lute-making',
+	'programming',
+	'networks',
+	'flux-studio',
+	'website'
+] as const;
+export type Category = (typeof categoriesValues)[number];
 
-export const sortBy = {
-	'created+': 'Least Recently Created',
-	'created-': 'Most Recently Created',
-	'modified+': 'Least Recently Modified',
-	'modified-': 'Most Recently Modified'
-} as Record<string, string>;
+// Utility function to include labels' translation with Wuchale
+export function getCategoryLabel(value: Category) {
+	if (value === 'miscellaneous') return 'Miscellaneous';
+	if (value === 'music') return 'Music';
+	if (value === 'lute-making') return 'Lute Making';
+	if (value === 'programming') return 'Programming';
+	if (value === 'networks') return 'Networks';
+	if (value === 'flux-studio') return 'Flux Studio';
+	else return 'Website';
+}
 
-export const defaultSortBy = 'created-';
+export const sortByValues = ['created+', 'created-', 'modified+', 'modified-'] as const;
+export type SortBy = (typeof sortByValues)[number];
+export const defaultSortBy: SortBy = 'created-';
+
+// Utility function to include labels' translation with Wuchale
+export function getSortByLabel(value: SortBy): string {
+	if (value === 'created+') return 'Least Recently Created';
+	if (value === 'created-') return 'Most Recently Created';
+	if (value === 'modified+') return 'Least Recently Modified';
+	else return 'Most Recently Modified';
+}
 
 /* Schema for the filters' form */
 export const filtersSchema = z
 	.object({
-		sortBy: z.literal(Object.keys(sortBy)).default(defaultSortBy),
+		sortBy: z.enum(sortByValues).default(defaultSortBy),
 		featured: z.boolean().default(false),
 		fromDate: z.nullish(z.iso.date()),
 		toDate: z.nullish(z.iso.date()),
-		categories: z.array(z.literal(Object.keys(categories))),
+		categories: z.array(z.enum(categoriesValues)).default([]),
 		research: z.nullish(z.string().min(1).trim()),
 		page: z.int().min(1).default(1)
 	})

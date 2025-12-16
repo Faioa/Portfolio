@@ -1,3 +1,4 @@
+// @ts-ignore
 import { EMAIL, RESEND_API_KEY } from '$env/static/private';
 import { fail } from '@sveltejs/kit';
 import { Resend } from 'resend';
@@ -5,7 +6,7 @@ import { Resend } from 'resend';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 
-import { categories, contactSchema, subjects } from '$lib/contact';
+import { contactSchema, getCategoryLabel, getSubjectLabel } from '$lib/contact';
 
 import type { Actions } from './$types';
 
@@ -29,12 +30,11 @@ export const actions = {
 			.split('\n\n')
 			.map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
 			.join('');
-		const relatedSubjects = subjects.get(form.data.category)!;
 
 		const { error } = await resend.emails.send({
 			from: EMAIL,
 			to: [EMAIL],
-			subject: `${form.data.firstName} ${form.data.lastName} : ${categories[form.data.category]} - ${relatedSubjects[form.data.subject] ?? form.data.subject}`,
+			subject: `${form.data.firstName} ${form.data.lastName} : ${getCategoryLabel(form.data.category)} - ${getSubjectLabel(form.data.subject)}`,
 			html: `
 			<p><strong>Sender</strong> : ${form.data.firstName} - ${form.data.lastName}</p>
 			<p><strong>Email</strong> : ${form.data.email}</p>
