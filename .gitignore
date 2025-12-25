@@ -39,6 +39,5 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Storybook
-*storybook.log
-storybook-static
+# Wuchale
+src/locales/.wuchale
