@@ -5,7 +5,7 @@
 <article class="container text-justify">
 	<h1 class="title">Flux Studio</h1>
 	<p>
-		Flux studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span>
+		Flux Studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span>
 		using <span class="font-bold italic">Rust</span>. My goal is to develop a first-class DAW for playing and learning
 		music. My goals are ambitious, but I will do my best to see this project through. As you may have guessed, music is
 		my passion, and I want it to be a central element of my life, whether through playing music or developing this
