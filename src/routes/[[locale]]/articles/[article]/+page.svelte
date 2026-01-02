@@ -2,19 +2,30 @@
 	import ClockPlus from '@lucide/svelte/icons/clock-plus';
 	import FileClock from '@lucide/svelte/icons/file-clock';
 
-	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 
-	import { type ArticleModule, categories } from '$lib/articles-types';
-	import { Separator } from '$lib/components/ui/separator';
+	import { type ArticleModule, getCategoryLabel } from '$lib/articles-types';
 	import { Badge } from '$lib/components/ui/badge';
+	import { Separator } from '$lib/components/ui/separator';
+	import { defaultLocale } from '$lib/lang';
 
+	const lang = $derived(page.params.locale ?? defaultLocale);
 	const { data } = $props();
-	const id = data.id;
-
+	const id = $derived(data.id);
 	let module: ArticleModule | null = $state(null);
 
-	onMount(async () => {
-		module = await import(`$lib/articles/${id}.svx`);
+	async function updateModule() {
+		try {
+			module = await import(`$lib/articles/${lang}/${id}.svx`);
+		} catch (err) {
+			console.error(`Failed to load article ${id} for locale ${lang}:`, err);
+			module = null;
+		}
+	}
+
+	$effect.pre(() => {
+		if (!id) return;
+		updateModule();
 	});
 </script>
 
@@ -26,16 +37,12 @@
 			{#if module?.metadata?.created}
 				<div class="flex flex-col items-end justify-center text-sm italic">
 					<p class="flex items-center gap-2">
-						<ClockPlus class="icon" />Written on {new Date(
-							module?.metadata.created
-						).toLocaleDateString()}
+						<ClockPlus class="icon" />Written on {new Date(module?.metadata.created).toLocaleDateString()}
 					</p>
 
 					{#if module?.metadata?.modified && module?.metadata.modified !== module?.metadata.created}
 						<p class="flex items-center gap-2">
-							<FileClock class="icon" />Modified on {new Date(
-								module?.metadata.modified
-							).toLocaleDateString()}
+							<FileClock class="icon" />Modified on {new Date(module?.metadata.modified).toLocaleDateString()}
 						</p>
 					{/if}
 				</div>
@@ -47,8 +54,8 @@
 		</p>
 		{#if module?.metadata?.categories}
 			<div class="flex flex-wrap items-center gap-2">
-				{#each module?.metadata?.categories as category, i (i)}
-					<Badge variant="secondary">{categories[category]}</Badge>
+				{#each module?.metadata?.categories as category ([category, lang])}
+					<Badge variant="secondary">{getCategoryLabel(category)}</Badge>
 				{/each}
 			</div>
 		{/if}

@@ -2,17 +2,16 @@
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import Search from '@lucide/svelte/icons/search';
 
-	import { resolve } from '$app/paths';
-
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
 	import Guitar from '$lib/components/Guitar.svelte';
+	import Link from '$lib/components/Link.svelte';
 
 	import type { PageProps } from './$types';
 
 	const { data }: PageProps = $props();
 
-	const articles = data.articles.ids;
-	const metadata = data.metadata;
+	const articles = $derived(data.articles.ids);
+	const metadata = $derived(data.metadata);
 </script>
 
 <div class="relative flex items-start gap-5">
@@ -36,20 +35,19 @@
 <div class="welcome container">
 	<p class="title">Welcome!</p>
 	<p>
-		This platform is a mean for you to get information about my projects or myself, and a mean for
-		me to keep a trace of my activities.
+		This platform is a mean for you to get information about my projects or myself, and a mean for me to keep a trace of
+		my activities.
 	</p>
 	<p>
-		I will not put to much information on this landing page to keep it minimalistic and clean. The
-		different sections below will serve as an introduction to all the content available here.
+		I will not put to much information on this landing page to keep it minimalistic and clean. The different sections
+		below will serve as an introduction to all the content available here.
 	</p>
 	<p>
-		To learn more about me, you can check <a
-			href={resolve('/about', {})}
-			class="link underline underline-offset-3">this page</a
-		>, and at the
-		<a href="#footer" class="link underline underline-offset-3">bottom of the page</a>, you can find
-		my social media, as well as a contact form, if you want to inquire me about something.
+		To learn more about me, you can check
+		<Link href="/about" class="underline underline-offset-3">this page</Link>. You can also find my social media, as
+		well as a contact form at the
+		<Link href="#footer" class="underline underline-offset-3">bottom of each page</Link>, if you want to inquire me
+		about something.
 	</p>
 	<p>I hope you enjoy visiting my website!</p>
 </div>
@@ -60,32 +58,23 @@
 		<div class="card">
 			<h2 class="subtitle">Flux Studio</h2>
 			<p>
-				Flux studio is a soon-to-be developed <span class="font-bold"
-					>Digital Audio Workstation</span
-				>
-				using <span class="font-bold italic">Rust</span>. My aim is to create a top-notch DAW that
-				can be used for playing and learning music. My goals are ambitious, but I will do my best to
-				see this project through nonetheless.
+				Flux studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span>
+				using <span class="font-bold italic">Rust</span>. My aim is to create a top-notch DAW that can be used for
+				playing and learning music. My goals are ambitious, but I will do my best to see this project through
+				nonetheless.
 			</p>
-			<a
-				href={resolve('/projects/flux-studio', {})}
-				class="link mt-1 self-end justify-self-end text-sm">Read More</a
-			>
+			<Link href="/projects/flux-studio" class="mt-1 self-end justify-self-end text-sm">Read More</Link>
 		</div>
 
 		<div class="card flex flex-col gap-2">
 			<h2 class="subtitle">This Website</h2>
 			<p>
-				This website is both a portfolio and a blog developed with <span class="font-bold italic"
-					>Svelte</span
-				>
-				and <span class="font-bold italic">SvelteKit</span>. I will post updates on my projects and
-				experiences, as well as anything else I find interesting. It is also a way for you to
-				contact me. This project is an opportunity for me to experiment with web development.
+				This website is both a portfolio and a blog developed with <span class="font-bold italic">Svelte</span>
+				and <span class="font-bold italic">SvelteKit</span>. I will post updates on my projects and experiences, as well
+				as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for
+				me to experiment with web development.
 			</p>
-			<a href={resolve('/projects/website', {})} class="link mt-1 self-end justify-self-end text-sm"
-				>Read More
-			</a>
+			<Link href="/projects/website" class="mt-1 self-end justify-self-end text-sm">Read More</Link>
 		</div>
 	</div>
 </div>
@@ -94,11 +83,9 @@
 	<h2 class="title">Recent Articles</h2>
 	<ArticlesList {articles} {metadata} />
 	{#if articles.length > 0}
-		<a
-			href={resolve('/articles', {})}
-			class="link mt-1 flex items-center gap-2 self-center text-sm font-bold"
-			><Search class="icon" />Browse More Articles</a
-		>
+		<Link href="/articles" class="mt-1 flex items-center gap-2 self-center text-sm font-bold">
+			<Search class="icon" />Browse More Articles
+		</Link>
 	{/if}
 </div>
 

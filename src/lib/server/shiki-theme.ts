@@ -22,12 +22,7 @@ export const theme: ThemeRegistration = {
 			}
 		},
 		{
-			scope: [
-				'string',
-				'constant.other.symbol',
-				'constant.character',
-				'punctuation.definition.string'
-			],
+			scope: ['string', 'constant.other.symbol', 'constant.character', 'punctuation.definition.string'],
 			settings: {
 				foreground: 'var(--shiki-string)',
 				fontStyle: 'italic'

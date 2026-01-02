@@ -13,8 +13,7 @@
 		name,
 		children: childrenProp,
 		...restProps
-	}: FormPrimitive.FieldProps<T, U> &
-		WithoutChildren<WithElementRef<HTMLAttributes<HTMLDivElement>>> = $props();
+	}: FormPrimitive.FieldProps<T, U> & WithoutChildren<WithElementRef<HTMLAttributes<HTMLDivElement>>> = $props();
 </script>
 
 <FormPrimitive.Field {form} {name}>

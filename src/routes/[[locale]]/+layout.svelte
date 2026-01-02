@@ -10,17 +10,20 @@
 	import Header from '$lib/components/Header.svelte';
 
 	import '../../app.css';
+	import { tick } from 'svelte';
 
 	let { children } = $props();
 
-	/* Position in pages during navigation */
+	/* Scroll position in pages during navigation */
 	export const snapshot: Snapshot<number> = {
 		capture: () => window.scrollY,
-		restore: (previousScrollY) => {
+		restore: async (previousScrollY) => {
+			await tick();
 			window.scrollTo({ top: previousScrollY, left: 0, behavior: 'instant' });
 		}
 	};
 
+	/* Necessary to start navigating to a new page at its top instead of the position in the previous page due to SvelteKit behavior */
 	afterNavigate(({ type }) => {
 		if (type !== 'popstate') window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 	});

@@ -1,6 +1,7 @@
 import { transformerNotationDiff } from '@shikijs/transformers';
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { wuchale } from '@wuchale/vite-plugin';
 import { escapeSvelte, mdsvex } from 'mdsvex';
 
 import { highlighter, theme } from './src/lib/server/shiki-theme.ts';
@@ -38,9 +39,11 @@ const mdsvexOptions = {
 const config = {
 	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		prerender: { entries: ['*'] }
 	},
-	extensions: ['.svelte', '.svx']
+	extensions: ['.svelte', '.svx'],
+	plugins: [wuchale()]
 };
 
 export default config;

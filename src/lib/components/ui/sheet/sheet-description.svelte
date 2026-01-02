@@ -3,11 +3,7 @@
 
 	import { cn } from '$lib/utils.js';
 
-	let {
-		ref = $bindable(null),
-		class: className,
-		...restProps
-	}: SheetPrimitive.DescriptionProps = $props();
+	let { ref = $bindable(null), class: className, ...restProps }: SheetPrimitive.DescriptionProps = $props();
 </script>
 
 <SheetPrimitive.Description

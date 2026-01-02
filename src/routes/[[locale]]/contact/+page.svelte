@@ -10,14 +10,20 @@
 
 	import { Button } from '$lib/components/ui/button';
 	import * as Form from '$lib/components/ui/form';
-	import * as InputGroup from '$lib/components/ui/input-group';
 	import { Input } from '$lib/components/ui/input';
+	import * as InputGroup from '$lib/components/ui/input-group';
 	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import {
-		getCategoryLabel, type Category, contactSchema, maxContent, minContent, getSubjectLabel, categoriesSubjects,
-		categoriesValues
+		type Category,
+		categoriesSubjects,
+		categoriesValues,
+		contactSchema,
+		getCategoryLabel,
+		getSubjectLabel,
+		maxContent,
+		minContent
 	} from '$lib/contact';
 
 	const { data } = $props();
@@ -27,9 +33,7 @@
 	const { form: formData, enhance } = form;
 
 	let relatedSubjects = $derived(
-		$formData.category in categoriesSubjects
-			? categoriesSubjects[$formData.category]
-			: []
+		$formData.category in categoriesSubjects ? categoriesSubjects[$formData.category] : []
 	);
 
 	let otherSubject: boolean = $state(!browser);
@@ -43,9 +47,8 @@
 <div class="container">
 	<h1 class="title">Contact Form</h1>
 	<p class="text-center">
-		In addition to the social media links at the bottom of every page, you can use this contact form
-		to get in touch with me directly. Please feel free to use it if you have any questions or if
-		anything is unclear.
+		In addition to the social media links at the bottom of every page, you can use this contact form to get in touch
+		with me directly. Please feel free to use it if you have any questions or if anything is unclear.
 		<br />Thank you!
 	</p>
 </div>
@@ -58,12 +61,7 @@
 				<Form.Control>
 					{#snippet children({ props })}
 						<Form.Label class="fieldName">First Name</Form.Label>
-						<Input
-							class="rounded-2xl"
-							{...props}
-							bind:value={$formData.firstName}
-							placeholder="John"
-						/>
+						<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
 					{/snippet}
 				</Form.Control>
 				<Form.FieldErrors />
@@ -73,12 +71,7 @@
 				<Form.Control>
 					{#snippet children({ props })}
 						<Form.Label class="fieldName">Last Name</Form.Label>
-						<Input
-							class="rounded-2xl"
-							{...props}
-							bind:value={$formData.lastName}
-							placeholder="Doe"
-						/>
+						<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
 					{/snippet}
 				</Form.Control>
 				<Form.FieldErrors />
@@ -91,11 +84,7 @@
 				{#snippet children({ props })}
 					<Form.Label class="fieldName">Email</Form.Label>
 					<InputGroup.Root class="rounded-2xl">
-						<InputGroup.Input
-							{...props}
-							bind:value={$formData.email}
-							placeholder="example@email.com"
-						/>
+						<InputGroup.Input {...props} bind:value={$formData.email} placeholder="example@email.com" />
 						<InputGroup.Addon align="inline-end">
 							<Tooltip.Provider delayDuration={200}>
 								<Tooltip.Root>
@@ -107,8 +96,7 @@
 										{/snippet}
 									</Tooltip.Trigger>
 									<Tooltip.Content class="w-50 rounded-2xl text-center"
-										>This email address will only be used to reply to your message and will not be
-										shared in any way.</Tooltip.Content
+										>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
 									>
 								</Tooltip.Root>
 							</Tooltip.Provider>
@@ -159,11 +147,7 @@
 						<Form.Label class="fieldName">Subject</Form.Label>
 						{#if otherSubject}
 							<InputGroup.Root class="rounded-2xl">
-								<InputGroup.Input
-									{...props}
-									bind:value={$formData.subject}
-									placeholder="Bug Report"
-								/>
+								<InputGroup.Input {...props} bind:value={$formData.subject} placeholder="Bug Report" />
 								<InputGroup.Addon align="inline-end">
 									<InputGroup.Button
 										aria-label="Undo"

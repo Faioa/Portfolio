@@ -5,8 +5,8 @@
 	import { slide } from 'svelte/transition';
 
 	import { browser } from '$app/environment';
-	import { resolve } from '$app/paths';
 
+	import Link from '$lib/components/Link.svelte';
 	import { Button } from '$lib/components/ui/button/index';
 
 	const { height = '100%' } = $props();
@@ -25,15 +25,25 @@
 		<div class="content" transition:slide={{ duration: 250 }}>
 			<ChevronUp class="icon relative left-[50%] translate-x-[-50%]" />
 			<div class="flex flex-col gap-2 text-center">
-				<Button href={resolve('/')} variant="ghost">Home</Button>
+				<Link href="/">
+					<Button variant="ghost">Home</Button>
+				</Link>
 				<hr />
-				<Button href={resolve('/about')} variant="ghost">About</Button>
+				<Link href="/about">
+					<Button variant="ghost">About</Button>
+				</Link>
 				<hr />
-				<Button href={resolve('/articles')} variant="ghost">Articles</Button>
+				<Link href="/articles">
+					<Button variant="ghost">Articles</Button>
+				</Link>
 				<hr />
-				<Button href={resolve('/contact')} variant="ghost">Contact</Button>
+				<Link href="/projects">
+					<Button variant="ghost">Projects</Button>
+				</Link>
 				<hr />
-				<Button href={resolve('/projects')} variant="ghost">Projects</Button>
+				<Link href="/contact">
+					<Button variant="ghost">Contact</Button>
+				</Link>
 			</div>
 		</div>
 	{/if}
@@ -44,15 +54,25 @@
 			<div class="content">
 				<ChevronUp class="icon relative left-[50%] translate-x-[-50%]" />
 				<div class="flex flex-col gap-2 text-center">
-					<Button href={resolve('/')} variant="ghost">Home</Button>
+					<Link href="/">
+						<Button variant="ghost">Home</Button>
+					</Link>
 					<hr />
-					<Button href={resolve('/about')} variant="ghost">About</Button>
+					<Link href="/about">
+						<Button variant="ghost">About</Button>
+					</Link>
 					<hr />
-					<Button href={resolve('/articles')} variant="ghost">Articles</Button>
+					<Link href="/articles">
+						<Button variant="ghost">Articles</Button>
+					</Link>
 					<hr />
-					<Button href={resolve('/contact')} variant="ghost">Contact</Button>
+					<Link href="/projects">
+						<Button variant="ghost">Projects</Button>
+					</Link>
 					<hr />
-					<Button href={resolve('/projects')} variant="ghost">Projects</Button>
+					<Link href="/contact">
+						<Button variant="ghost">Contact</Button>
+					</Link>
 				</div>
 			</div>
 		</noscript>

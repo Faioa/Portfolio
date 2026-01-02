@@ -46,8 +46,7 @@ export const actions = {
 			console.error(error.statusCode, error.name, error.message);
 			return fail(500, {
 				form,
-				message:
-					'An error occurred on the server while trying to send your message. Please wait try again later.'
+				message: 'An error occurred on the server while trying to send your message. Please wait try again later.'
 			});
 		}
 

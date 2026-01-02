@@ -6,7 +6,7 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 import type { Metadata } from '$lib/articles-types';
 import { filtersSchema } from '$lib/articles-types';
 import { numberPerPage } from '$lib/articles-types';
-import { defaultLocale } from '$lib/lang';
+import { type Locale, defaultLocale } from '$lib/lang';
 import { getIds, getMetadata } from '$lib/server/articles';
 
 import type { PageServerLoad } from './$types';
@@ -23,33 +23,24 @@ export const load: PageServerLoad = async ({ url, params }) => {
 		return { form, articles, metadata };
 	}
 
-	const lang = params.locale ?? defaultLocale;
+	const lang = (params.locale as Locale) ?? defaultLocale;
 	const page = url.searchParams?.get('page') ? parseInt(url.searchParams.get('page')!) : 1;
 
 	articles = getIds({
 		lang,
 		sort: (a, b) => {
-			if (form.data.sortBy === 'created-')
-				return new Date(b.created).valueOf() - new Date(a.created).valueOf();
-			else if (form.data.sortBy === 'created+')
-				return new Date(a.created).valueOf() - new Date(b.created).valueOf();
-			else if (form.data.sortBy === 'modified-')
-				return new Date(b.modified).valueOf() - new Date(a.modified).valueOf();
+			if (form.data.sortBy === 'created-') return new Date(b.created).valueOf() - new Date(a.created).valueOf();
+			else if (form.data.sortBy === 'created+') return new Date(a.created).valueOf() - new Date(b.created).valueOf();
+			else if (form.data.sortBy === 'modified-') return new Date(b.modified).valueOf() - new Date(a.modified).valueOf();
 			else return new Date(a.modified).valueOf() - new Date(b.modified).valueOf();
 		},
 		filter: (metadata: Metadata) => {
 			if (form.data.featured && !metadata.featured) return false;
 
-			if (
-				form.data.fromDate &&
-				new Date(form.data.fromDate).valueOf() - new Date(metadata.created).valueOf() > 0
-			)
+			if (form.data.fromDate && new Date(form.data.fromDate).valueOf() - new Date(metadata.created).valueOf() > 0)
 				return false;
 
-			if (
-				form.data.toDate &&
-				new Date(form.data.toDate).valueOf() - new Date(metadata.created).valueOf() < 0
-			)
+			if (form.data.toDate && new Date(form.data.toDate).valueOf() - new Date(metadata.created).valueOf() < 0)
 				return false;
 
 			if (
@@ -76,7 +67,7 @@ export const load: PageServerLoad = async ({ url, params }) => {
 	});
 
 	metadata = articles['ids'].map((article) => {
-		const metadata = getMetadata(article, { categories: true, excerpt: true, tags: true });
+		const metadata = getMetadata(article, { lang, categories: true, excerpt: true, tags: true });
 		if (!metadata) throw error(404);
 
 		return metadata;

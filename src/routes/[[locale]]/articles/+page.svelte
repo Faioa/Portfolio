@@ -1,11 +1,5 @@
 <script lang="ts">
-	import {
-		CalendarDate,
-		DateFormatter,
-		getLocalTimeZone,
-		parseDate,
-		today
-	} from '@internationalized/date';
+	import { CalendarDate, DateFormatter, getLocalTimeZone, parseDate, today } from '@internationalized/date';
 	import CalendarIcon from '@lucide/svelte/icons/calendar';
 	import ChevronLeftIcon from '@lucide/svelte/icons/chevron-left';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
@@ -21,11 +15,19 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 
-	import { categoriesValues, getCategoryLabel, filtersSchema, numberPerPage, sortByValues, getSortByLabel } from '$lib/articles-types';
+	import {
+		categoriesValues,
+		filtersSchema,
+		getCategoryLabel,
+		getSortByLabel,
+		numberPerPage,
+		sortByValues
+	} from '$lib/articles-types';
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
+	import Link from '$lib/components/Link.svelte';
 	import { Badge } from '$lib/components/ui/badge';
-	import { buttonVariants } from '$lib/components/ui/button/button.svelte';
 	import { Button } from '$lib/components/ui/button';
+	import { buttonVariants } from '$lib/components/ui/button/button.svelte';
 	import { Calendar } from '$lib/components/ui/calendar';
 	import * as Form from '$lib/components/ui/form';
 	import * as InputGroup from '$lib/components/ui/input-group';
@@ -35,6 +37,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { Switch } from '$lib/components/ui/switch';
+	import { getUrl } from '$lib/lang';
 
 	import type { PageProps } from './$types';
 
@@ -65,12 +68,20 @@
 	async function apply_filters() {
 		update_filter('research', research);
 		if (filters.size === 0)
-			await goto(resolve('/articles', {}), { keepFocus: true, invalidateAll: true });
-		else
-			await goto(resolve('/articles?[filters]', { filters: filters.toString() }), {
+			await goto(getUrl('/articles', false, page.route.id!, page.params.locale), {
 				keepFocus: true,
 				invalidateAll: true
 			});
+		else
+			await goto(
+				resolve(getUrl('/articles?[filters]', false, page.route.id!, page.params.locale), {
+					filters: filters.toString()
+				}),
+				{
+					keepFocus: true,
+					invalidateAll: true
+				}
+			);
 	}
 
 	function clear_filters(params: string[]) {
@@ -106,18 +117,15 @@
 
 	const date = z.iso.date();
 	let fromDateValue = $derived(
-		$formData.fromDate && date.safeParse($formData.fromDate).success
-			? parseDate($formData.fromDate)
-			: undefined
+		$formData.fromDate && date.safeParse($formData.fromDate).success ? parseDate($formData.fromDate) : undefined
 	);
 	let toDateValue = $derived(
-		$formData.toDate && date.safeParse($formData.toDate).success
-			? parseDate($formData.toDate)
-			: undefined
+		$formData.toDate && date.safeParse($formData.toDate).success ? parseDate($formData.toDate) : undefined
 	);
 
 	let currentPage = $derived($formData.page ?? 1);
 	let research = $derived($formData.research ?? '');
+	$inspect(page.url.pathname)
 </script>
 
 <div class="container">
@@ -126,7 +134,7 @@
 	<!-- Form for the filters and research bar -->
 	<form class="flex w-full gap-5" method="GET" use:enhance>
 		<!-- Input for the research bar -->
-		<Form.Field {form} name="sortBy" class="grow">
+		<Form.Field {form} name="research" class="grow">
 			<Form.Control>
 				{#snippet children({ props })}
 					<InputGroup.Root class="rounded-2xl">
@@ -135,12 +143,7 @@
 							<SearchIcon />
 						</InputGroup.Addon>
 						<InputGroup.Addon align="inline-end">
-							<InputGroup.Button
-								variant="ghost"
-								class="rounded-2xl"
-								type="submit"
-								onclick={() => apply_filters()}
-							>
+							<InputGroup.Button variant="ghost" class="rounded-2xl" type="submit" onclick={() => apply_filters()}>
 								Search
 							</InputGroup.Button>
 						</InputGroup.Addon>
@@ -152,6 +155,7 @@
 		<!-- Filters' sheet -->
 		<Sheet.Root>
 			<Sheet.Trigger
+				disabled={!browser}
 				class="flex items-center rounded-2xl
 								{buttonVariants.variants.variant.outline}
 								{buttonVariants.variants.size.default}"
@@ -187,17 +191,15 @@
 								<Select.Trigger {...props} class="rounded-2xl">
 									{$formData.sortBy ? getSortByLabel($formData.sortBy) : 'Select a sorting order'}
 								</Select.Trigger>
-								<Select.Content >
-									{#each sortByValues.toSorted((a, b) => getSortByLabel(a).localeCompare(getSortByLabel(b))) as value (value)}
+								<Select.Content>
+									{#each sortByValues.toSorted( (a, b) => getSortByLabel(a).localeCompare(getSortByLabel(b)) ) as value (value)}
 										<Select.Item {value}>{getSortByLabel(value)}</Select.Item>
 									{/each}
 								</Select.Content>
 							</Select.Root>
 						{/snippet}
 					</Form.Control>
-					<Form.Description
-						>You can choose how the results are sorted with this filter.</Form.Description
-					>
+					<Form.Description>You can choose how the results are sorted with this filter.</Form.Description>
 					<Form.FieldErrors />
 				</Form.Field>
 
@@ -213,9 +215,7 @@
 							/>
 						{/snippet}
 					</Form.Control>
-					<Form.Description
-						>You can choose if you want to search for featured articles or not.</Form.Description
-					>
+					<Form.Description>You can choose if you want to search for featured articles or not.</Form.Description>
 					<Form.FieldErrors />
 				</Form.Field>
 
@@ -232,9 +232,7 @@
 										: ''}"
 								>
 									<CalendarIcon class="icon opacity-50" />
-									{fromDateValue
-										? dateFormatter.format(fromDateValue.toDate(localTimeZone))
-										: 'Pick a date'}
+									{fromDateValue ? dateFormatter.format(fromDateValue.toDate(localTimeZone)) : 'Pick a date'}
 								</Popover.Trigger>
 								<Popover.Content class="w-auto p-0" side="top">
 									<Calendar
@@ -275,9 +273,7 @@
 										: ''}"
 								>
 									<CalendarIcon class="icon opacity-50" />
-									{toDateValue
-										? dateFormatter.format(toDateValue.toDate(localTimeZone))
-										: 'Pick a date'}
+									{toDateValue ? dateFormatter.format(toDateValue.toDate(localTimeZone)) : 'Pick a date'}
 								</Popover.Trigger>
 								<Popover.Content class="w-auto p-0" side="top">
 									<Calendar
@@ -318,7 +314,7 @@
 							>
 								<Select.Trigger class="rounded-2xl">Select the tags</Select.Trigger>
 								<Select.Content>
-									{#each categoriesValues.toSorted((a, b) => getCategoryLabel(a).localeCompare(getCategoryLabel(b))) as value (value)}
+									{#each categoriesValues.toSorted( (a, b) => getCategoryLabel(a).localeCompare(getCategoryLabel(b)) ) as value (value)}
 										<Select.Item {value}>{getCategoryLabel(value)}</Select.Item>
 									{/each}
 								</Select.Content>
@@ -333,8 +329,7 @@
 						{/snippet}
 					</Form.Control>
 					<Form.Description
-						>You can filter the resulting articles based on their tags (the articles will match all
-						tags).</Form.Description
+						>You can filter the resulting articles based on their tags (the articles will match all tags).</Form.Description
 					>
 					<Form.FieldErrors />
 				</Form.Field>
@@ -374,80 +369,69 @@
 		{#snippet children({ pages, currentPage })}
 			<Pagination.Content>
 				<Pagination.Item>
-					<Pagination.PrevButton id="prevButton">
-						{#if !browser}
-							<a
-								href={resolve(
-									filters.size > 0 ? '/articles?page=[page]&[[filters]]' : '/articles?page=[page]',
-									{
-										page: (currentPage - 1).toString(),
-										filters: get_filters_without(['page']).toString()
-									}
-								)}
-								aria-labelledby="prevButton"
-								class="flex items-center gap-1"
-							>
+					{#if !browser}
+						<Link
+							href={filters.size > 1 || !filters.has('page')
+								? '/articles?page=[page]&[[filters]]'
+								: '/articles?page=[page]'}
+							args={{
+								page: (currentPage - 1).toString(),
+								filters: get_filters_without(['page']).toString()
+							}}
+						>
+							<Pagination.PrevButton>
 								<ChevronLeftIcon class="icon" />
-								<span>Previous</span>
-							</a>
-						{:else}
-							<div class="flex items-center gap-1">
-								<ChevronLeftIcon class="icon" />
-								<span>Previous</span>
-							</div>
-						{/if}
-					</Pagination.PrevButton>
+							</Pagination.PrevButton>
+						</Link>
+					{:else}
+						<Pagination.PrevButton>
+							<ChevronLeftIcon class="icon" />
+						</Pagination.PrevButton>
+					{/if}
 				</Pagination.Item>
 				{#each pages as page (page.key)}
 					{#if page.type === 'ellipsis'}
 						<Pagination.Item>
 							<Pagination.Ellipsis />
 						</Pagination.Item>
-					{:else if !browser}
-						<a
-							href={resolve(
-								filters.size > 0 ? '/articles?page=[page]&[[filters]]' : '/articles?page=[page]',
-								{ page: page.value.toString(), filters: get_filters_without(['page']).toString() }
-							)}
+					{:else}
+						<Link
+							href={filters.size > 1 || !filters.has('page')
+								? '/articles?page=[page]&[[filters]]'
+								: '/articles?page=[page]'}
+							args={{
+								page: page.value.toString(),
+								filters: get_filters_without(['page']).toString()
+							}}
 						>
 							<Pagination.Item>
 								<Pagination.Link {page} isActive={currentPage === page.value}>
 									{page.value}
 								</Pagination.Link>
 							</Pagination.Item>
-						</a>
-					{:else}
-						<Pagination.Item>
-							<Pagination.Link {page} isActive={currentPage === page.value}>
-								{page.value}
-							</Pagination.Link>
-						</Pagination.Item>
+						</Link>
 					{/if}
 				{/each}
 				<Pagination.Item>
-					<Pagination.NextButton>
-						{#if !browser}
-							<a
-								href={resolve(
-									filters.size > 0 ? '/articles?page=[page]&[[filters]]' : '/articles?page=[page]',
-									{
-										page: (currentPage + 1).toString(),
-										filters: get_filters_without(['page']).toString()
-									}
-								)}
-								aria-labelledby="prevButton"
-								class="flex items-center gap-1"
-							>
-								<span>Next</span>
+					{#if !browser}
+						<Link
+							href={filters.size > 1 || !filters.has('page')
+								? '/articles?page=[page]&[[filters]]'
+								: '/articles?page=[page]'}
+							args={{
+								page: (currentPage + 1).toString(),
+								filters: get_filters_without(['page']).toString()
+							}}
+						>
+							<Pagination.NextButton>
 								<ChevronRightIcon class="icon" />
-							</a>
-						{:else}
-							<div class="flex items-center gap-1">
-								<span>Next</span>
-								<ChevronRightIcon class="icon" />
-							</div>
-						{/if}
-					</Pagination.NextButton>
+							</Pagination.NextButton>
+						</Link>
+					{:else}
+						<Pagination.NextButton>
+							<ChevronRightIcon class="icon" />
+						</Pagination.NextButton>
+					{/if}
 				</Pagination.Item>
 			</Pagination.Content>
 		{/snippet}

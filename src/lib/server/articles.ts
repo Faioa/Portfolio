@@ -1,5 +1,5 @@
 import { type ArticleModule, type Metadata } from '$lib/articles-types';
-import { defaultLocale } from '$lib/lang';
+import { type Locale, defaultLocale } from '$lib/lang';
 
 /* Type for the filter's function */
 export type MetadataFilter = (metadata: Metadata) => boolean;
@@ -13,6 +13,10 @@ Object.entries(
 	import.meta.glob('/src/lib/articles/**/*.svx', { eager: true }) as Record<string, ArticleModule>
 ).forEach(([key, module]) => {
 	const article = key.split('/').slice(-2);
+
+	// Removing '.svx' extension
+	article[1] = article[1].replace('.svx', '');
+
 	// Verifying language of article based on its directory
 	if (!metadata.has(article[0])) metadata.set(article[0], new Map<string, Metadata>());
 	metadata.get(article[0])!.set(article[1], module.metadata);
@@ -24,7 +28,7 @@ Object.entries(
  * @param lang language id of the article (ex: en, fr, es, ...)
  * @returns the associated excerpt, or undefined if it doesn't exist.
  */
-export function getExcerpt(id: string, lang: string = defaultLocale): string | undefined {
+export function getExcerpt(id: string, lang: Locale = defaultLocale): string | undefined {
 	return metadata.get(lang)?.get(id)?.excerpt;
 }
 
@@ -34,7 +38,7 @@ export function getExcerpt(id: string, lang: string = defaultLocale): string | u
  * @param lang language id of the article (ex: en, fr, es, ...)
  * @returns the associated categories, or undefined if it doesn't exist.
  */
-export function getCategories(id: string, lang: string = defaultLocale): string[] | undefined {
+export function getCategories(id: string, lang: Locale = defaultLocale): string[] | undefined {
 	return metadata.get(lang)?.get(id)?.categories;
 }
 
@@ -44,7 +48,7 @@ export function getCategories(id: string, lang: string = defaultLocale): string[
  * @param lang language id of the article (ex: en, fr, es, ...)
  * @returns the associated tags, or undefined if it doesn't exist.
  */
-export function getTags(id: string, lang: string = defaultLocale): string[] | undefined {
+export function getTags(id: string, lang: Locale = defaultLocale): string[] | undefined {
 	return metadata.get(lang)?.get(id)?.tags;
 }
 
@@ -56,7 +60,7 @@ export function getTags(id: string, lang: string = defaultLocale): string[] | un
  */
 export function getMetadata(
 	id: string,
-	options: { lang?: string; tags?: boolean; categories?: boolean; excerpt?: boolean } = {
+	options: { lang?: Locale; tags?: boolean; categories?: boolean; excerpt?: boolean } = {
 		tags: false,
 		categories: false,
 		excerpt: false
@@ -82,18 +86,18 @@ export function getMetadata(
  * starting index of the sliced results and 'limit' is the maximum number of results.
  * @returns an object containing the corresponding ids, and the total amount of ids that matched it.
  */
-export function getIds(options: {
-	lang?: string;
+export function getIds(options?: {
+	lang?: Locale;
 	filter?: MetadataFilter;
 	sort?: MetadataSort;
 	start?: number;
 	limit?: number;
 }): { total: number; ids: string[] } {
-	const lang = options.lang ?? defaultLocale;
-	const filter = options.filter;
-	const sort = options.sort;
-	let start = options.start ? (options.start > 0 ? options.start : 0) : 0;
-	const limit = options.limit;
+	const lang = options?.lang ?? defaultLocale;
+	const filter = options?.filter;
+	const sort = options?.sort;
+	let start = options?.start ? (options?.start > 0 ? options?.start : 0) : 0;
+	const limit = options?.limit;
 
 	// Getting all the ids
 	const metaLang = metadata.get(lang);
@@ -135,6 +139,16 @@ export function getIds(options: {
  * @param lang language id of the article (ex: en, fr, es, ...)
  * @returns the number of articles available.
  */
-export function getNumber(lang: string = defaultLocale): number {
+export function getNumber(lang: Locale = defaultLocale): number {
 	return metadata.get(lang)?.size ?? 0;
+}
+
+/**
+ * This function returns true if the given id is part of the known articles
+ * @param id id of the wanted article
+ * @param lang language id of the article (ex: en, fr, es, ...)
+ * @returns true if the article exists. Else, it returns false.
+ */
+export function exists(id: string, lang: Locale = defaultLocale): boolean {
+	return metadata.get(lang) ? metadata.get(lang)!.has(id) : false;
 }

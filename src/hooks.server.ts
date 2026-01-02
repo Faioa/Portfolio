@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import { loadLocales, runWithLocale } from 'wuchale/load-utils/server';
 
 import { defaultLocale } from '$lib/lang';
@@ -12,5 +13,6 @@ loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ event, resolve }) => {
 	const locale = event.params.locale ?? defaultLocale;
+	if (!locales.includes(locale)) return error(404, `Unknown content`);
 	return await runWithLocale(locale, () => resolve(event));
 };

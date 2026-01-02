@@ -72,7 +72,7 @@ export interface Metadata {
 	created: string;
 	modified: string;
 	tags?: string[];
-	categories?: string[];
+	categories?: Category[];
 	featured: boolean;
 	excerpt?: string;
 }

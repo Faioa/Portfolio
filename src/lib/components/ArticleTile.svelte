@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-
-	import type { Metadata } from '$lib/server/articles';
+	import type { Metadata } from '$lib/articles-types';
+	import Link from '$lib/components/Link.svelte';
 
 	const data = $props();
 
@@ -17,10 +16,9 @@
 		</p>
 	</div>
 	<p>{metadata.excerpt}</p>
-	<a
-		href={resolve('/articles/[article]', { article })}
-		class="link mt-1 self-end justify-self-end text-sm">Read More</a
-	>
+	<Link href="/articles/[article]" args={ {article} } class="mt-1 self-end justify-self-end text-sm">
+		Read more
+	</Link>
 </div>
 
 <style>

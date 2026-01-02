@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-
 	import Guitar from '$lib/components/Guitar.svelte';
+	import LangChanger from '$lib/components/LangChanger.svelte';
+	import Link from '$lib/components/Link.svelte';
 	import ModeToggle from '$lib/components/ModeToggle.svelte';
 	import NavMenu from '$lib/components/NavMenu.svelte';
 
@@ -9,23 +9,24 @@
 </script>
 
 <header style="--height: {height}px;">
-	<a href={resolve('/')} class="flex h-full gap-5">
+	<Link href="/" class="flex h-full gap-5">
 		<Guitar size="{height}px" animate={false} classes="rotate-25" />
 
 		<div class="flex flex-col justify-center text-2xl font-bold">
 			<h1>Matthieu</h1>
 			<h1>Dartois</h1>
 		</div>
-	</a>
+	</Link>
 
 	<noscript>
-		<span class="text-center text-destructive"
-			>Please activate Javascript to use the website as it depends heavily on animations and events.</span
-		>
+		<span class="text-center text-destructive">
+			Please activate Javascript to use the website as it depends heavily on animations and events.
+		</span>
 	</noscript>
 
 	<div class="flex h-full items-center gap-3">
 		<NavMenu />
+		<LangChanger />
 		<ModeToggle />
 	</div>
 </header>

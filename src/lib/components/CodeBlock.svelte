@@ -66,11 +66,7 @@
 	<hr class="text-muted-foreground" />
 
 	<span class="language i pl-2 text-sm text-muted-foreground italic">{lang}</span>
-	<div
-		class="code-content grid max-h-100 overflow-scroll text-sm {showLinesNumber
-			? 'showLinesNumber'
-			: ''}"
-	>
+	<div class="code-content grid max-h-100 overflow-scroll text-sm {showLinesNumber ? 'showLinesNumber' : ''}">
 		{@html code}
 	</div>
 </div>
