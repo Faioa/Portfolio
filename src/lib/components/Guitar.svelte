@@ -1,7 +1,7 @@
 <script lang="ts">
 	let {
-		width = '88mm',
-		height = '239mm',
+		width: widthProp = '88mm',
+		height: heightProp = '239mm',
 		size = undefined,
 		classes = '',
 		animate = true
@@ -13,10 +13,18 @@
 		animate?: boolean;
 	}>();
 
-	if (size) {
-		width = size;
-		height = size;
-	}
+	let width: string = $derived.by(() => {
+		if (size) {
+			return size;
+		}
+		return widthProp;
+	})
+	let height: string = $derived.by(() => {
+		if (size) {
+			return size;
+		}
+		return heightProp;
+	})
 
 	let strings = $state({
 		e2: 0,
