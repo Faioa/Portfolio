@@ -125,7 +125,6 @@
 
 	let currentPage = $derived($formData.page ?? 1);
 	let research = $derived($formData.research ?? '');
-	$inspect(page.url.pathname)
 </script>
 
 <div class="container">
