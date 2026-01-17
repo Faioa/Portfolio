@@ -2,6 +2,8 @@
 	import Copy from '@lucide/svelte/icons/copy';
 	import CopyCheck from '@lucide/svelte/icons/copy-check';
 
+	import { type Snippet, onMount } from 'svelte';
+
 	import { browser } from '$app/environment';
 
 	import { Button } from '$lib/components/ui/button';
@@ -9,43 +11,47 @@
 	const {
 		filename,
 		lang,
-		code,
-		codeCopy,
+		children,
 		showLinesNumber = false
 	}: {
 		filename?: string;
 		lang: string;
-		code: string;
-		codeCopy: string;
+		children?: Snippet;
 		showLinesNumber?: boolean;
 	} = $props();
 
 	let copied = $state.raw(false);
 
+	let codeContentEl: HTMLElement | null = $state(null);
+	let codeContent: string | null = $state(null);
+
 	let timeout: NodeJS.Timeout | null = null;
 	async function copy() {
-		if (!browser) return;
+		if (!browser || !codeContent) return;
+
 		if (timeout) {
 			clearTimeout(timeout);
 			timeout = null;
 		}
 
-		// Copy with replace of special characters
-		await navigator.clipboard.writeText(
-			codeCopy
+		await navigator.clipboard.writeText(codeContent);
+		copied = true;
+		timeout = setTimeout(() => {
+			copied = false;
+		}, 1000);
+	}
+
+	onMount(() => {
+		codeContent =
+			codeContentEl?.textContent
 				.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
 				.replace(/&#x([0-9A-Fa-f]+);/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
 				.replace(/&quot;/g, '"')
 				.replace(/&apos;/g, "'")
 				.replace(/&amp;/g, '&')
 				.replace(/&lt;/g, '<')
-				.replace(/&gt;/g, '>')
-		);
-		copied = true;
-		timeout = setTimeout(() => {
-			copied = false;
-		}, 1000);
-	}
+				.replace(/&gt;/g, '>') ?? null;
+	});
 </script>
 
 <div class="code-block flex max-w-full flex-col gap-2 rounded-2xl bg-muted px-5 pt-2 pb-5">
@@ -58,7 +64,7 @@
 			{/if}
 		</Button>
 
-		{#if filename}
+		{#if filename && filename.length > 0}
 			<div class="filename text-sm text-muted-foreground">{filename}</div>
 		{/if}
 	</div>
@@ -66,8 +72,11 @@
 	<hr class="text-muted-foreground" />
 
 	<span class="language i pl-2 text-sm text-muted-foreground italic">{lang}</span>
-	<div class="code-content grid max-h-100 overflow-scroll text-sm {showLinesNumber ? 'showLinesNumber' : ''}">
-		{@html code}
+	<div
+		bind:this={codeContentEl}
+		class="code-content grid max-h-100 overflow-scroll text-sm {showLinesNumber ? 'showLinesNumber' : ''}"
+	>
+		{@render children?.()}
 	</div>
 </div>
 

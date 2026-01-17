@@ -15,15 +15,15 @@ excerpt:
   later date.'
 ---
 
-<script>
-    import CodeBlock from "$lib/components/CodeBlock.svelte";
-</script>
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate vestibulum lacinia. Ut eu ligula molestie,
 hendrerit dolor id, consequat augue. Nullam a lobortis massa, in semper enim. Donec ut eros orci. Phasellus eget neque
 eu turpis tristique eleifend. Pellentesque viverra tortor sapien, eget elementum ipsum vestibulum vel. Integer metus
 ipsum, efficitur vitae tempus id, suscipit eget velit. Vestibulum quis elementum elit. Nunc a erat semper, venenatis
 nibh in, placerat nunc.
+
+[External Link Test](https://duckduckgo.com)
+
+[Internal Link Test](/)
 
 ```ts filename="test.ts" showLinesNumber
 export function test(name: string): string {
