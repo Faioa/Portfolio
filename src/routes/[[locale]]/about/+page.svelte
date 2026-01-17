@@ -1,6 +1,9 @@
 <script lang="ts">
-	import cv from '$lib/assets/cv-fr.pdf';
 	import { Button } from '$lib/components/ui/button';
+
+	const { data } = $props<{cv: string | null}>();
+
+	let cv = $derived(data.cv);
 
 	/* year(now_milli - birth_milli) - epoch_year = age */
 	const age = new Date(Date.now() - Date.parse('2003-02-07').valueOf()).getFullYear() - 1970;
@@ -75,10 +78,12 @@
 		</p>
 	</section>
 
-	<section>
-		<h2 class="subtitle">Curriculum Vitæ</h2>
-		<Button variant="secondary" href={cv} target="_blank" class="cursor-pointer">Open my CV</Button>
-	</section>
+	{#if cv !== null}
+		<section>
+			<h2 class="subtitle">Curriculum Vitæ</h2>
+			<Button variant="secondary" href={cv} target="_blank" class="cursor-pointer">Open my CV</Button>
+		</section>
+	{/if}
 </article>
 
 <style>
