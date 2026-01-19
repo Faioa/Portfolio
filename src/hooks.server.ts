@@ -17,21 +17,26 @@ export const handle = async ({ event, resolve }) => {
 	const routeLocale = event.params.locale ?? defaultLocale;
 	let locale: string | null | undefined = event.cookies.get('locale');
 
-	// First visit
-	if (!locale) {
+	// First visit && locale not specified
+	if (!locale && !event.params.locale) {
 		locale = parser.pick(locales, event.request.headers.get('accept-language') ?? '');
 		if (!locale) locale = defaultLocale;
 		event.cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
-		// throw redirect
+
+		const newRoute = event.url.pathname.replace(`/\/${routeLocale}\/?/`, '/') + event.url.search + event.url.hash;
+
+		if (routeLocale !== locale) {
+			if (locale === defaultLocale) throw redirect(307, `${newRoute}`);
+			else throw redirect(307, `/${locale}${newRoute}`);
+		}
 	}
 
 	// Not first visit + locale change
-	if (routeLocale !== locale) {
+	else if (routeLocale !== locale) {
 		locale = routeLocale;
 		event.cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
-	}
+	} else if (!locales.includes(locale)) return error(404, `Page Not Found with locale : ${locale}`);
 
-	if (!locales.includes(locale)) return error(404, `Unknown content`);
 	return await runWithLocale(locale, () =>
 		resolve(event, {
 			transformPageChunk: ({ html }) => html.replace('%lang%', locale)
