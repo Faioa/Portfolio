@@ -11,14 +11,13 @@
 	import { defaultLocale } from '$lib/lang.js';
 
 	let currentLocale = $derived(page.params.locale ?? defaultLocale);
-	let nextLocale = $derived(currentLocale === 'en' ? 'fr' : '');
-	let args = $derived({ ...page.params, locale: nextLocale });
+	let args = $derived({ ...page.params, locale: currentLocale === 'en' ? 'fr' : 'en' });
 </script>
 
 <Tooltip.Provider delayDuration={200}>
 	<Tooltip.Root>
 		<Tooltip.Trigger>
-			<Link href={page.url.search} preloadData="tap" bind:args>
+			<Link preloadData="tap" {args}>
 				{#if currentLocale === 'en'}
 					<Gb />
 				{:else}

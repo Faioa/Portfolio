@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+
 	import { getUrl, urlIsExternal } from '$lib/lang';
 
 	interface LinkProps {
@@ -19,8 +19,8 @@
 	}
 
 	const {
-		href = $bindable(''),
-		args = $bindable({}),
+		href = '',
+		args = {},
 		class: className = '',
 		preloadData = 'hover',
 		preloadCode = 'hover',
@@ -58,17 +58,15 @@
 
 	let isExternal = $derived(urlIsExternal(href, page.url.origin));
 
-	// If component is rendered, this route exists, so id cannot be null in this context
-	// page.route.id is used instead of page.url.pathname because it leaves the possibility to override the params with args
-	let url = $derived(getUrl(href, isExternal, page.route.id!, page.params.locale));
+	let params = $derived({ ...page.params, ...args });
+
+	// page.route.id is used instead of page.url.pathname because it leaves the possibility to override the route params
+	let url = $derived(
+		getUrl(href, isExternal, { id: page.route.id, params, search: page.url.search, hash: page.url.hash })
+	);
 </script>
 
-<a
-	{...dataAttributes}
-	class="link {className}"
-	target={isExternal ? '_blank' : '_self'}
-	href={isExternal ? href : resolve(url, { ...page.params, ...args })}
->
+<a {...dataAttributes} class="link {className}" target={isExternal ? '_blank' : '_self'} href={url}>
 	{@render children?.()}
 </a>
 
