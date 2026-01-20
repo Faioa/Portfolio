@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 
 	import { getUrl, urlIsExternal } from '$lib/lang';
@@ -60,10 +61,11 @@
 
 	let params = $derived({ ...page.params, ...args });
 
+	let search = $derived(href.length !== 0 ? (args.search ?? '') : browser ? page.url.search : '');
+	let hash = $derived(href.length !== 0 ? (args.hash ?? '') : browser ? page.url.hash : '');
+
 	// page.route.id is used instead of page.url.pathname because it leaves the possibility to override the route params
-	let url = $derived(
-		getUrl(href, isExternal, { id: page.route.id, params, search: page.url.search, hash: page.url.hash })
-	);
+	let url = $derived(getUrl(href, isExternal, { id: page.route.id, params, search, hash }));
 </script>
 
 <a {...dataAttributes} class="link {className}" target={isExternal ? '_blank' : '_self'} href={url}>

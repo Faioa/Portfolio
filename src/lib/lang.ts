@@ -49,17 +49,17 @@ export function getUrl(
 	// If link is external, nothing to do
 	if (isExternal) return href;
 
-	let id = opts.id || '';
-	const search = opts.search || '';
-	const hash = opts.hash || '';
-	const params = opts.params || {};
+	let id = opts.id ?? '';
+	const search = opts.search ?? '';
+	const hash = opts.hash ?? '';
+	const params = opts.params ?? {};
 	let fullURL = '';
 
 	// href is absolute
 	if (href.startsWith('/')) {
 		// Default locale is used if not specified
 		const baseURL = params.locale && params.locale !== defaultLocale ? `/${params.locale}` : '';
-		fullURL = baseURL.concat(href);
+		fullURL = resolve(baseURL.concat(href), params);
 	} else {
 		// If id is not valid, returns empty string
 		if (id.length === 0) return '';
@@ -74,7 +74,7 @@ export function getUrl(
 		try {
 			fullURL = resolve(id + search + hash, params);
 		} catch (err) {
-			console.error('An issue occured when computing an URL :\r\n' + err);
+			console.error('An issue occurred when computing an URL :\r\n' + err);
 			return '';
 		}
 	}

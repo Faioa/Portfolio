@@ -86,7 +86,20 @@ const config = {
 	preprocess: [mdsvex(mdsvexOptions), vitePreprocess()],
 	kit: {
 		adapter: adapter(),
-		prerender: { entries: ['*'] }
+		prerender: {
+			entries: ['*'],
+			handleHttpError: ({ status, path }) => {
+				/*
+				 * Ignoring HTTP 404 errors for the /about CVs as they are not pages to pre-render.
+				 * They are considered a route, because they are accessible through a <a> tag, thus triggering the pre-rendering.
+				 */
+				if (status === 404 && path.includes('/src/lib/assets') && path.includes('.pdf')) {
+					console.warn(`Ignoring ${path}...`);
+					return;
+				}
+				throw new Error(`${status} ${path}`);
+			}
+		}
 	},
 	extensions: ['.svelte', '.svx'],
 	plugins: [wuchale()]
