@@ -28,9 +28,9 @@
 
 	const { data } = $props();
 
-	const form = superForm(data.form, { validators: zod4Client(contactSchema) });
+	let form = $derived(superForm(data.form, { validators: zod4Client(contactSchema) }));
 
-	const { form: formData, enhance } = form;
+	let { form: formData, enhance } = $derived(form);
 
 	let relatedSubjects = $derived(
 		$formData.category in categoriesSubjects ? categoriesSubjects[$formData.category] : []

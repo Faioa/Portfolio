@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 
-	const { data } = $props<{cv: string | null}>();
+	const { data } = $props<{ cv: string | null }>();
 
 	let cv = $derived(data.cv);
 

@@ -16,9 +16,7 @@
 		</p>
 	</div>
 	<p>{metadata.excerpt}</p>
-	<Link href="/articles/[article]" args={ {article} } class="mt-1 self-end justify-self-end text-sm">
-		Read More
-	</Link>
+	<Link href="/articles/[article]" args={{ article }} class="mt-1 self-end justify-self-end text-sm">Read More</Link>
 </div>
 
 <style>

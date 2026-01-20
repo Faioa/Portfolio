@@ -2,6 +2,8 @@
 	import type { Snapshot } from '@sveltejs/kit';
 	import { ModeWatcher } from 'mode-watcher';
 
+	import { tick } from 'svelte';
+
 	import { afterNavigate } from '$app/navigation';
 
 	import favicon from '$lib/assets/favicon.svg';
@@ -10,7 +12,6 @@
 	import Header from '$lib/components/Header.svelte';
 
 	import '../../app.css';
-	import { tick } from 'svelte';
 
 	let { children } = $props();
 

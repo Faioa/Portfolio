@@ -68,13 +68,13 @@
 	async function apply_filters() {
 		update_filter('research', research);
 		if (filters.size === 0)
-			await goto(getUrl('/articles', false, page.route.id!, page.params.locale), {
+			await goto(getUrl('/articles', false, { id: page.route.id!, params: { locale: page.params.locale } }), {
 				keepFocus: true,
 				invalidateAll: true
 			});
 		else
 			await goto(
-				resolve(getUrl('/articles?[filters]', false, page.route.id!, page.params.locale), {
+				resolve(getUrl('/articles?[filters]', false, { id: page.route.id!, params: { locale: page.params.locale } }), {
 					filters: filters.toString()
 				}),
 				{
@@ -94,13 +94,15 @@
 
 	const { data }: PageProps = $props();
 
-	const form = superForm(data.form, {
-		validators: zod4Client(filtersSchema),
-		SPA: true,
-		invalidateAll: false,
-		resetForm: false
-	});
-	const { form: formData, enhance } = form;
+	let form = $derived(
+		superForm(data.form, {
+			validators: zod4Client(filtersSchema),
+			SPA: true,
+			invalidateAll: false,
+			resetForm: false
+		})
+	);
+	let { form: formData, enhance } = $derived(form);
 
 	let totalArticles = $derived(data.articles.total);
 	let articles = $derived(data.articles.ids);

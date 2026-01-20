@@ -102,7 +102,7 @@ export function getIds(options?: {
 	// Getting all the ids
 	const metaLang = metadata.get(lang);
 	if (!metaLang) return { total: 0, ids: [] };
-	let ids = Object.values(metaLang.keys().toArray());
+	let ids = Array.from(metaLang.keys());
 
 	if (filter)
 		ids = ids.filter((id) => {

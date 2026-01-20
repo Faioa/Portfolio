@@ -1,7 +1,5 @@
 import { error } from '@sveltejs/kit';
 
-import { page } from '$app/state';
-
 import { type Locale, defaultLocale, locales } from '$lib/lang';
 import { getIds, getMetadata } from '$lib/server/articles';
 

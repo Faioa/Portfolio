@@ -6,8 +6,10 @@ import { exists, getIds } from '$lib/server/articles';
 import type { EntryGenerator } from './$types';
 import type { PageServerLoad } from './$types';
 
+export const prerender = true;
+
 export const entries: EntryGenerator = () => {
-	const articles: Array<{ locale: Locale; article: string }> = [];
+	const articles: Array<{ locale: Locale | undefined; article: string }> = [];
 
 	for (const locale of locales) {
 		const ids = getIds({ lang: locale }).ids;

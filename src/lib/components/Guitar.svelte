@@ -18,13 +18,13 @@
 			return size;
 		}
 		return widthProp;
-	})
+	});
 	let height: string = $derived.by(() => {
 		if (size) {
 			return size;
 		}
 		return heightProp;
-	})
+	});
 
 	let strings = $state({
 		e2: 0,

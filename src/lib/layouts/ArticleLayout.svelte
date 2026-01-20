@@ -7,6 +7,7 @@
 
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+
 	import type { Metadata } from '$lib/articles-types';
 
 	interface LayoutProps {
