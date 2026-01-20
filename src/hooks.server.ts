@@ -37,7 +37,7 @@ export const handle = async ({ event, resolve }) => {
 	else if (routeLocale !== locale || building) {
 		locale = routeLocale;
 		event.cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
-	} else if (!locales.includes(locale)) return error(404, `Page Not Found with locale : ${locale}`);
+	} else if (!locales.includes(locale)) throw error(404, `Page Not Found with locale : ${locale}`);
 
 	return await runWithLocale(locale, () =>
 		resolve(event, {
