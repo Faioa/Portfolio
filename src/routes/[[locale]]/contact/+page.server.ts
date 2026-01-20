@@ -1,4 +1,5 @@
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { EMAIL, RESEND_API_KEY } from '$env/static/private';
 import { fail } from '@sveltejs/kit';
 import { Resend } from 'resend';

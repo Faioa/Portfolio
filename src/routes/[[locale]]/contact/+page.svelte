@@ -16,7 +16,6 @@
 	import { Textarea } from '$lib/components/ui/textarea';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import {
-		type Category,
 		categoriesSubjects,
 		categoriesValues,
 		contactSchema,

@@ -34,7 +34,6 @@ export function getSubjectLabel(value: Subject | string): string {
 
 export const minContent = 50;
 export const maxContent = 3000;
-const test = z.enum(Object.keys(categoriesSubjects) as [Category]);
 export const contactSchema = z.object({
 	firstName: z.string().trim().min(2).max(50),
 	lastName: z.string().trim().min(2).max(50),
