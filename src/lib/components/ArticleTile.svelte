@@ -4,8 +4,8 @@
 
 	const data = $props();
 
-	const article: string = data.article;
-	const metadata: Metadata = data.metadata;
+	const article: string = $derived(data.article);
+	const metadata: Metadata = $derived(data.metadata);
 </script>
 
 <div class="card {data.class ? data.class : ''}">
