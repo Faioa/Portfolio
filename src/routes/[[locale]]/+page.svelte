@@ -5,7 +5,6 @@
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
 	import Guitar from '$lib/components/Guitar.svelte';
 	import Link from '$lib/components/Link.svelte';
-	import RoadMap from '$lib/components/RoadMap.svelte';
 
 	import type { PageProps } from './$types';
 
@@ -14,8 +13,6 @@
 	const articles = $derived(data.articles.ids);
 	const metadata = $derived(data.metadata);
 </script>
-
-<RoadMap />
 
 <div class="relative flex items-start gap-5">
 	<div class="moveUpDown absolute top-[40%] left-[-75%] flex items-center gap-2 whitespace-nowrap">
