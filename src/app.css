@@ -242,3 +242,11 @@ html {
 	font-size: var(--text-2xl);
 	line-height: var(--tw-leading, var(--text-2xl--line-height));
 }
+
+.no-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

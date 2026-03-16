@@ -744,3 +744,140 @@ msgstr ""
 "Flux studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My aim is to create a top-notch DAW that can be used for\n"
 "playing and learning music. My goals are ambitious, but I will do my best to see this project through\n"
 "nonetheless."
+
+#~ msgid "test"
+#~ msgstr "test"
+
+#~ msgid "prop"
+#~ msgstr "prop"
+
+#~ msgid "<0/> test"
+#~ msgstr "<0/> test"
+
+#~ msgid "Initialisation"
+#~ msgstr "Initialisation"
+
+#~ msgid "Jan 2026"
+#~ msgstr "Jan 2026"
+
+#~ msgid "Setup du projet"
+#~ msgstr "Setup du projet"
+
+#~ msgid "Alpha"
+#~ msgstr "Alpha"
+
+#~ msgid "Fév 2026"
+#~ msgstr "Fév 2026"
+
+#~ msgid "Premiers retours"
+#~ msgstr "Premiers retours"
+
+#~ msgid "Bêta"
+#~ msgstr "Bêta"
+
+#~ msgid "Mar 2026"
+#~ msgstr "Mar 2026"
+
+#~ msgid "Tests de charge"
+#~ msgstr "Tests de charge"
+
+#~ msgid "Avril 2026"
+#~ msgstr "Avril 2026"
+
+#~ msgid "Lancement public"
+#~ msgstr "Lancement public"
+
+#~ msgid "Futur"
+#~ msgstr "Futur"
+
+#~ msgid "Expansion internationale"
+#~ msgstr "Expansion internationale"
+
+#~ msgid "Expansion internationale aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+#~ msgstr "Expansion internationale aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+#~ msgid "Flowbite Library v1.0.0"
+#~ msgstr "Flowbite Library v1.0.0"
+
+#~ msgid "Released on December 2nd, 2021"
+#~ msgstr "Released on December 2nd, 2021"
+
+#~ msgid "Get started with dozens of web components and interactive elements."
+#~ msgstr "Get started with dozens of web components and interactive elements."
+
+#~ msgid "Flowbite Library v1.2.0"
+#~ msgstr "Flowbite Library v1.2.0"
+
+#~ msgid "Released on December 23th, 2021"
+#~ msgstr "Released on December 23th, 2021"
+
+#~ msgid "Flowbite Library v1.3.0"
+#~ msgstr "Flowbite Library v1.3.0"
+
+#~ msgid "Released on January 5th, 2021"
+#~ msgstr "Released on January 5th, 2021"
+
+#: src/lib/components/ui/carousel/carousel-next.svelte
+msgid "Next slide"
+msgstr "Next slide"
+
+#: src/lib/components/ui/carousel/carousel.svelte
+msgid "ArrowLeft"
+msgstr "ArrowLeft"
+
+#: src/lib/components/ui/carousel/carousel.svelte
+msgid "ArrowRight"
+msgstr "ArrowRight"
+
+#: src/lib/components/ui/carousel/carousel-previous.svelte
+msgid "Previous slide"
+msgstr "Previous slide"
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid "item.name"
+#~ msgstr "item.name"
+
+#~ msgid "ToDo : indicateurs pour du contenu non visible"
+#~ msgstr "ToDo : indicateurs pour du contenu non visible"
+
+#~ msgid "Hover"
+#~ msgstr "Hover"
+
+#~ msgid "Add to library"
+#~ msgstr "Add to library"
+
+#~ msgid "Alpha 2"
+#~ msgstr "Alpha 2"
+
+#~ msgid "Fév 2027"
+#~ msgstr "Fév 2027"
+
+#~ msgid "Premiers retours v2"
+#~ msgstr "Premiers retours v2"
+
+#~ msgid "Bêta 2"
+#~ msgstr "Bêta 2"
+
+#~ msgid "Mar 2027"
+#~ msgstr "Mar 2027"
+
+#~ msgid "Tests de charge v2"
+#~ msgstr "Tests de charge v2"
+
+#~ msgid "Avril 2027"
+#~ msgstr "Avril 2027"
+
+#~ msgid "Lancement public v2"
+#~ msgstr "Lancement public v2"
+
+#~ msgid "Futur 2"
+#~ msgstr "Futur 2"
+
+#~ msgid "Expansion mondiale"
+#~ msgstr "Expansion mondiale"
+
+#: src/lib/components/RoadMap.svelte
+msgid "Nothing to display yet."
+msgstr "Nothing to display yet."
