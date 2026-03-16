@@ -61,34 +61,34 @@
 			skipSnaps: true
 		}}
 	>
-		<Carousel.Content class="ms-0 mt-0 h-96 w-full md:h-auto md:max-w-full">
+		<Carousel.Content class="-ms-0 -mt-0 h-96 md:h-auto">
 			{#if items.length === 0}
-				<Carousel.Item class="">
+				<Carousel.Item>
 					<span class="text-destructive">Nothing to display yet.</span>
 				</Carousel.Item>
 			{/if}
 
 			{#each items as item, i (i)}
-				<Carousel.Item class="flex w-full basis-1/5 ps-0 pt-0 md:basis-1/4">
+				<Carousel.Item class="basis-1/5 ps-0 pt-0 md:basis-1/4 flex">
 					<div
-						class="relative grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-4 md:mx-auto md:grid-cols-1 md:grid-rows-[1fr_auto_1fr] md:gap-x-0 md:gap-y-4"
+						class="w-full grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid-cols-1 md:grid-rows-[1fr_auto_1fr]"
 					>
 						<!-- Top/Left: Name/Date -->
-						<div class="no-select text-right md:flex md:justify-center md:text-center">
+						<div class="no-select text-right md:text-center">
 							{#if i % 2 === 0}
 								<span class="text-xl font-semibold">{item.name}</span>
 							{:else}
-								<span class="text-md text-muted-foreground">{item.date}</span>
+								<span class="text-muted-foreground">{item.date}</span>
 							{/if}
 						</div>
 
 						<!-- Center: Lines + Dot -->
-						<div class="relative flex h-full flex-col items-center justify-center md:h-auto md:w-full md:flex-row">
+						<div class="flex h-full flex-col items-center md:flex-row">
 							<!-- Top/Left half-line (connects to previous item) -->
-							<div class="flex h-full w-full flex-1 flex-col items-center justify-center md:flex-row">
+							<div class="flex flex-1 items-center justify-center">
 								{#if i !== 0}
 									<div
-										class="h-full w-0.5 transition-colors duration-500 md:h-0.5 md:w-full {item.status === COMPLETED
+										class="h-full w-0.5 transition-colors md:h-0.5 md:w-full {item.status === COMPLETED
 											? 'bg-muted-foreground'
 											: item.status === ONGOING
 												? 'bg-muted-foreground/40'
@@ -102,7 +102,7 @@
 								<Tooltip.Root>
 									<Tooltip.Trigger class="carousel-content-trigger">
 										<div
-											class="relative z-20 size-5 shrink-0 rounded-full border-2 shadow transition-all duration-500 {item.status ===
+											class="size-5 shrink-0 rounded-full border-2 shadow transition-all {item.status ===
 											COMPLETED
 												? 'border-muted-foreground bg-muted-foreground/30'
 												: item.status === ONGOING
@@ -129,10 +129,10 @@
 							</Tooltip.Provider>
 
 							<!-- Bottom/Right half-line (connects to next item) -->
-							<div class="flex h-full w-full flex-1 flex-col items-center justify-center md:flex-row">
+							<div class="flex flex-1 items-center justify-center">
 								{#if i !== items.length - 1}
 									<div
-										class="h-full w-0.5 transition-colors duration-500 md:h-0.5 md:w-full {items[i + 1].status ===
+										class="h-full w-0.5 transition-colors md:h-0.5 md:w-full {items[i + 1].status ===
 										COMPLETED
 											? 'bg-muted-foreground'
 											: items[i + 1]?.status === ONGOING
@@ -144,11 +144,11 @@
 						</div>
 
 						<!-- Bottom/Right: Date/Name -->
-						<div class="no-select text-left md:flex md:justify-center md:text-center">
+						<div class="no-select text-left md:text-center">
 							{#if i % 2 === 1}
 								<span class="text-xl font-semibold">{item.name}</span>
 							{:else}
-								<span class="text-md text-muted-foreground">{item.date}</span>
+								<span class="text-muted-foreground">{item.date}</span>
 							{/if}
 						</div>
 					</div>
