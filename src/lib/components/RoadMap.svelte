@@ -26,6 +26,8 @@
 
 	import * as Carousel from '$lib/components/ui/carousel/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
+	import * as Popover from "$lib/components/ui/popover/index.js";
+	import { buttonVariants } from "$lib/components/ui/button/index.js";
 
 	interface Props {
 		items?: RoadmapItem[];
@@ -54,7 +56,7 @@
 	{#key isMd}
 		<Carousel.Root
 			orientation={isMd ? 'horizontal' : 'vertical'}
-			class="carousel my-10"
+			class="carousel my-10 md:my-0"
 			opts={{
 				align: 'start',
 				slidesToScroll: 2,
@@ -107,34 +109,33 @@
 								</div>
 
 								<!-- Dot -->
-								<Tooltip.Provider delayDuration={500}>
-									<Tooltip.Root>
-										<Tooltip.Trigger class="carousel-content-trigger">
-											<div
-												class="size-5 shrink-0 rounded-full border-2 shadow transition-all {item.status === COMPLETED
+								<Popover.Root>
+									<Popover.Trigger
+										class="{buttonVariants({ variant: 'outline', size: 'icon' })} carousel-content-trigger border-2 rounded-full size-5 {item.status === COMPLETED
 													? 'border-muted-foreground bg-muted-foreground/30'
 													: item.status === ONGOING
 														? 'border-muted-foreground/40 bg-muted'
 														: 'border-destructive bg-destructive/30'}"
-											>
-												{#if item.status === COMPLETED}
-													<CheckCheckIcon class="size-full p-0.5" />
-												{:else if item.status === ONGOING}
-													{#if isMd}
-														<EllipsisIcon class="size-full p-0.5" />
-													{:else}
-														<EllipsisVerticalIcon class="size-full p-0.5" />
-													{/if}
-												{:else}
-													<XIcon class="size-full p-0.5" />
-												{/if}
-											</div>
-										</Tooltip.Trigger>
-										<Tooltip.Content side={isMd ? (i % 2 === 0 ? 'bottom' : 'top') : i % 2 === 0 ? 'right' : 'left'}>
-											<p>{item.description}</p>
-										</Tooltip.Content>
-									</Tooltip.Root>
-								</Tooltip.Provider>
+										openOnHover={true}
+										openDelay={500}
+									>
+										{#if item.status === COMPLETED}
+											<CheckCheckIcon class="size-full p-0.5" />
+										{:else if item.status === ONGOING}
+											{#if isMd}
+												<EllipsisIcon class="size-full p-0.5" />
+											{:else}
+												<EllipsisVerticalIcon class="size-full p-0.5" />
+											{/if}
+										{:else}
+											<XIcon class="size-full p-0.5" />
+										{/if}
+									</Popover.Trigger>
+
+									<Popover.Content class="max-w-100 max-h-25 overflow-auto text-center text-sm" side={isMd ? (i % 2 === 0 ? 'bottom' : 'top') : i % 2 === 0 ? 'right' : 'left'}>
+										<p>{item.description}</p>
+									</Popover.Content>
+								</Popover.Root>
 
 								<!-- Bottom/Right half-line (connects to next item) -->
 								<div class="flex flex-1 items-center justify-center">
