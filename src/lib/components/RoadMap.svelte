@@ -24,16 +24,17 @@
 
 	import { browser } from '$app/environment';
 
+	import { buttonVariants } from '$lib/components/ui/button/index.js';
 	import * as Carousel from '$lib/components/ui/carousel/index.js';
-	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
-	import * as Popover from "$lib/components/ui/popover/index.js";
-	import { buttonVariants } from "$lib/components/ui/button/index.js";
+	import * as Popover from '$lib/components/ui/popover/index.js';
 
 	interface Props {
 		items?: RoadmapItem[];
 	}
 
 	let { items = [] }: Props = $props();
+
+	let itemsRef: HTMLElement[] = $state(Array.from({ length: items.length }, () => null!));
 
 	// Imported from Tailwind config for consistency
 	const md = defaultTheme.screens.md;
@@ -72,7 +73,8 @@
 
 				{#each items as item, i (i)}
 					<Carousel.Item
-						class="flex h-full w-full items-center justify-center ps-0 pt-0"
+						bind:ref={itemsRef[i]}
+						class="relative flex h-full w-full items-center justify-center ps-0 pt-0"
 						style="flex-basis: {isMd
 							? items.length < 5
 								? 100 / items.length
@@ -85,7 +87,7 @@
 							class="grid h-full w-full grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid-cols-1 md:grid-rows-[1fr_auto_1fr]"
 						>
 							<!-- Top/Left: Name/Date -->
-							<div class="no-select text-right md:text-center">
+							<div class="no-select truncate text-right md:text-center">
 								{#if i % 2 === 0}
 									<span class="text-xl font-semibold">{item.name}</span>
 								{:else}
@@ -111,11 +113,14 @@
 								<!-- Dot -->
 								<Popover.Root>
 									<Popover.Trigger
-										class="{buttonVariants({ variant: 'outline', size: 'icon' })} carousel-content-trigger border-2 rounded-full size-5 {item.status === COMPLETED
-													? 'border-muted-foreground bg-muted-foreground/30'
-													: item.status === ONGOING
-														? 'border-muted-foreground/40 bg-muted'
-														: 'border-destructive bg-destructive/30'}"
+										class="{buttonVariants({
+											variant: 'outline',
+											size: 'icon'
+										})} carousel-content-trigger size-5 rounded-full border-2 {item.status === COMPLETED
+											? 'border-muted-foreground bg-muted-foreground/30'
+											: item.status === ONGOING
+												? 'border-muted-foreground/40 bg-muted'
+												: 'border-destructive bg-destructive/30'}"
 										openOnHover={true}
 										openDelay={500}
 									>
@@ -132,7 +137,12 @@
 										{/if}
 									</Popover.Trigger>
 
-									<Popover.Content class="max-w-100 max-h-25 overflow-auto text-center text-sm" side={isMd ? (i % 2 === 0 ? 'bottom' : 'top') : i % 2 === 0 ? 'right' : 'left'}>
+									<Popover.Content
+										class="max-h-25 max-w-100 overflow-auto text-center text-sm {isMd ? '' : 'translate-y-[100%]'}"
+										customAnchor={isMd ? null : itemsRef[i]}
+										side={isMd ? (i % 2 === 0 ? 'bottom' : 'top') : 'top'}
+										align="center"
+									>
 										<p>{item.description}</p>
 									</Popover.Content>
 								</Popover.Root>
@@ -152,7 +162,7 @@
 							</div>
 
 							<!-- Bottom/Right: Date/Name -->
-							<div class="no-select text-left md:text-center">
+							<div class="no-select truncate text-left md:text-center">
 								{#if i % 2 === 1}
 									<span class="text-xl font-semibold">{item.name}</span>
 								{:else}
