@@ -4,21 +4,21 @@
 	const items: RoadmapItem[] = [
 		{
 			name: "Project's Start",
-			date: '01/04/2025',
+			date: 'Apr 2026',
 			status: ONGOING,
 			description:
 				'The official start of the project is to learn Rust again and experiment with audio processing libraries.'
 		},
 		{
 			name: 'Architecture',
-			date: '01/05/2026',
+			date: 'May 2026',
 			status: ONGOING,
 			description:
 				'After a month of testing, I should have designed a suitable architecture for the project. It will certainly change, but this should provide a solid foundation.'
 		},
 		{
 			name: 'GUI',
-			date: '15/05/2026',
+			date: 'Mid-May 2026',
 			status: ONGOING,
 			description:
 				'Once the architecture and main objectives have been defined, I should be able to start working on the GUI. Which library should I use? What default styling should I apply?'

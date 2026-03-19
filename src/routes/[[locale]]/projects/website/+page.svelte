@@ -6,27 +6,27 @@
 	const items: RoadmapItem[] = [
 		{
 			name: "Project's Start",
-			date: '18/10/2025',
+			date: 'Oct 2025',
 			status: COMPLETED,
 			description:
 				'This is the first commit of the project. This lays the groundwork for the rest of the development process. I begin slowly to ensure I fully grasp the concepts of Svelte and Sveltekit, making numerous attempts to define the desired implementation and identify viable options.'
 		},
 		{
 			name: 'Main features',
-			date: '01/04/2026',
+			date: 'Apr 2026',
 			status: ONGOING,
 			description:
 				'All the main features of the website will then be implemented, including a functioning contact form, a search engine for the blog, fully translated content and a project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment.'
 		},
 		{
 			name: 'Fixed design',
-			date: '01/06/2026',
+			date: 'Jun 2026',
 			status: ONGOING,
 			description: 'The design should be almost complete, featuring a dynamic background and proper theme.'
 		},
 		{
 			name: 'Blog writing',
-			date: '02/06/2026',
+			date: 'Jun 2026',
 			status: ONGOING,
 			description:
 				'As most of the website is done. I should now work on its content by writing articles and working on other projects'
