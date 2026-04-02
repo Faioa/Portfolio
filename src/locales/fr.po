@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-09T11:53:07.579Z\n"
-"PO-Revision-Date: 2026-03-09T11:53:07.579Z\n"
+"POT-Creation-Date: 2026-04-02T19:47:58.834Z\n"
+"PO-Revision-Date: 2026-04-02T19:47:58.834Z\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: \n"
@@ -12,56 +12,121 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "MIME-Version: 1.0\n"
 
+#. placeholder {0}: new Date(metadata.created).toLocaleDateString()
+#: src/lib/components/ArticleTile.svelte
+msgid "Written on {0}"
+msgstr "Écrit le {0}"
+
+#: src/lib/components/ArticleTile.svelte
+#: src/routes/[[locale]]/+page.svelte
+#: src/routes/[[locale]]/+page.svelte
+#: src/routes/[[locale]]/projects/+page.svelte
+#: src/routes/[[locale]]/projects/+page.svelte
+msgid "Read More"
+msgstr "Lire la suite"
+
+#: src/lib/components/ArticlesList.svelte
+msgid "I'm sorry, but there's no available article yet. Please wait a few days for some content to be published!"
+msgstr "Je suis désolé, aucun article n'est encore disponible. Veuillez patienter quelques jours pour que du contenu soit publié !"
+
+#: src/lib/components/Footer.svelte
+msgid "<0/>LinkedIn"
+msgstr ""
+
+#: src/lib/components/Footer.svelte
+msgid "<0/>GitHub"
+msgstr ""
+
+#: src/lib/components/Footer.svelte
+msgid "<0/>Contact Me"
+msgstr "<0/>Me Contacter"
+
+#: src/lib/components/Footer.svelte
+msgid "<0/>Legal Notices<1/>"
+msgstr "<0/>Mentions Légales<1/>"
+
+#: src/lib/components/CodeBlock.svelte
+msgid "<0/> Copied!"
+msgstr "<0/> Copié !"
+
+#: src/lib/components/Header.svelte
+msgid "Matthieu"
+msgstr ""
+
+#: src/lib/components/Header.svelte
+msgid "Dartois"
+msgstr ""
+
+#: src/lib/components/Header.svelte
+msgid "Please activate Javascript to use the website as it depends heavily on animations and events."
+msgstr "Veuillez activer JavaScript pour utiliser le site pleinement, car il repose fortement sur les scripts."
+
+#: src/lib/components/LangChanger.svelte
+msgid "Tap to change language"
+msgstr "Appuyez pour changer de langue"
+
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 #: src/routes/[[locale]]/about/+page.svelte
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 #: src/routes/[[locale]]/articles/+page.svelte
 msgid "Articles"
-msgstr ""
+msgstr "Articles"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 msgid "Projects"
-msgstr ""
+msgstr "Projets"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
+
+#: src/lib/components/RoadMap.svelte
+msgid "Nothing to display yet."
+msgstr "Rien à afficher pour le moment."
+
+#: src/lib/components/WorkInProgress.svelte
+msgid "Work In Progress"
+msgstr "Travail en cours"
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "Scroll down or hover the strings..."
-msgstr ""
+msgstr "Faites défiler ou survolez les cordes..."
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "...to animate the guitar!<0>(Work in Progress)</0>"
-msgstr ""
+msgstr "...pour animer la guitare !<0>(En cours de développement)</0>"
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "Welcome!"
-msgstr ""
+msgstr "Bienvenue !"
 
 #: src/routes/[[locale]]/+page.svelte
 msgid ""
 "This platform is a mean for you to get information about my projects or myself, and a mean for me to keep a trace of\n"
 "my activities."
 msgstr ""
+"Cette plateforme est un moyen pour vous d'obtenir des informations sur mes projets ou sur moi-même, et un moyen pour moi de garder une trace\n"
+"de mes activités."
 
 #: src/routes/[[locale]]/+page.svelte
 msgid ""
 "I will not put to much information on this landing page to keep it minimalistic and clean. The different sections\n"
 "below will serve as an introduction to all the content available here."
 msgstr ""
+"Je ne mettrai pas trop d'informations sur cette page d'accueil pour qu'elle reste minimaliste et épurée. Les différentes sections\n"
+"ci-dessous serviront d'introduction à tout le contenu disponible ici."
 
 #: src/routes/[[locale]]/+page.svelte
 msgid ""
@@ -69,14 +134,17 @@ msgid ""
 "well as a contact form at the <1>bottom of each page</1>, if you want to inquire me\n"
 "about something."
 msgstr ""
+"Pour en savoir plus sur moi, vous pouvez consulter <0>cette page</0>. Vous trouverez également mes réseaux sociaux,\n"
+"ainsi qu'un formulaire de contact en <1>bas de chaque page</1>, si vous souhaitez me poser des\n"
+"questions."
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "I hope you enjoy visiting my website!"
-msgstr ""
+msgstr "J'espère que vous apprécierez votre visite sur mon site !"
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "Featured Projects"
-msgstr ""
+msgstr "Projets Principaux"
 
 #: src/lib/articles-types.ts
 #: src/lib/contact.ts
@@ -93,20 +161,15 @@ msgid ""
 "playing and learning music. My goals are ambitious, but I will do my best to see this project through\n"
 "nonetheless."
 msgstr ""
-
-#: src/lib/components/ArticleTile.svelte
-#: src/routes/[[locale]]/+page.svelte
-#: src/routes/[[locale]]/+page.svelte
-#: src/routes/[[locale]]/projects/+page.svelte
-#: src/routes/[[locale]]/projects/+page.svelte
-msgid "Read More"
-msgstr ""
+"Flux Studio est une future <0>station de travail audio numérique</0> (DAW) développée en <1>Rust</1>. Mon objectif est de créer un DAW de qualité utilisable pour\n"
+"jouer et apprendre la musique. Mes objectifs sont ambitieux, mais je ferai tout mon possible pour mener ce projet\n"
+"à bien malgré tout."
 
 #: src/routes/[[locale]]/+page.svelte
 #: src/routes/[[locale]]/projects/+page.svelte
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "This Website"
-msgstr ""
+msgstr "Ce Site Web"
 
 #: src/routes/[[locale]]/+page.svelte
 #: src/routes/[[locale]]/projects/+page.svelte
@@ -115,102 +178,17 @@ msgid ""
 "as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for\n"
 "me to experiment with web development."
 msgstr ""
+"Ce site est à la fois un portfolio et un blog développé avec <0>Svelte</0> et <1>SvelteKit</1>. J'y publierai des mises à jour sur mes projets et expériences, ainsi que\n"
+"tout ce que je trouve intéressant. C'est également un moyen pour vous de me contacter. Ce projet est pour moi l'occasion\n"
+"d'expérimenter le développement web."
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "Recent Articles"
-msgstr ""
+msgstr "Articles Récents"
 
 #: src/routes/[[locale]]/+page.svelte
 msgid "<0/>Browse More Articles"
-msgstr ""
-
-#: src/lib/components/Footer.svelte
-msgid "<0/>LinkedIn"
-msgstr ""
-
-#: src/lib/components/Footer.svelte
-msgid "<0/>GitHub"
-msgstr ""
-
-#: src/lib/components/Footer.svelte
-msgid "<0/>Contact Me"
-msgstr ""
-
-#: src/lib/components/Footer.svelte
-msgid "<0/>Legal Notices<1/>"
-msgstr ""
-
-#: src/lib/components/Header.svelte
-msgid "Matthieu"
-msgstr ""
-
-#: src/lib/components/Header.svelte
-msgid "Dartois"
-msgstr ""
-
-#: src/lib/components/Header.svelte
-msgid "Please activate Javascript to use the website as it depends heavily on animations and events."
-msgstr ""
-
-#: src/lib/components/ArticlesList.svelte
-msgid "I'm sorry, but there's no available article yet. Please wait a few days for some content to be published!"
-msgstr ""
-
-#~ msgid "Initialisation"
-#~ msgstr ""
-
-#~ msgid "Jan 2026"
-#~ msgstr ""
-
-#~ msgid "Setup du projet"
-#~ msgstr ""
-
-#~ msgid "Alpha"
-#~ msgstr ""
-
-#~ msgid "Fév 2026"
-#~ msgstr ""
-
-#~ msgid "Premiers retours"
-#~ msgstr ""
-
-#~ msgid "Bêta"
-#~ msgstr ""
-
-#~ msgid "Mar 2026"
-#~ msgstr ""
-
-#~ msgid "Tests de charge"
-#~ msgstr ""
-
-#~ msgid "Avril 2026"
-#~ msgstr ""
-
-#~ msgid "Lancement public"
-#~ msgstr ""
-
-#~ msgid "Futur"
-#~ msgstr ""
-
-#~ msgid "Expansion internationale"
-#~ msgstr ""
-
-#: src/lib/components/LangChanger.svelte
-msgid "Tap to change language"
-msgstr ""
-
-#. placeholder {0}: new Date(metadata.created).toLocaleDateString()
-#: src/lib/components/ArticleTile.svelte
-msgid "Written on {0}"
-msgstr ""
-
-#: src/lib/components/CodeBlock.svelte
-msgid "<0/> Copied!"
-msgstr ""
-
-#: src/lib/components/WorkInProgress.svelte
-msgid "Work In Progress"
-msgstr ""
+msgstr "<0/>Parcourir Plus d'Articles"
 
 #. placeholder {0}: age
 #: src/routes/[[locale]]/about/+page.svelte
@@ -220,6 +198,10 @@ msgid ""
 "included on this page or how it should be presented, but I'll do my best. Don't hesitate to contact me if you have\n"
 "any question."
 msgstr ""
+"Tout d'abord, je m'appelle Matthieu Dartois, j'ai {0} ans et je suis étudiant à Paris. L'objectif de cette\n"
+"page est de vous fournir quelques informations supplémentaires à mon sujet. Je ne sais pas encore exactement quoi\n"
+"inclure sur cette page ni comment présenter son contenu, mais je ferai de mon mieux. N'hésitez pas à me contacter si vous avez\n"
+"la moindre question."
 
 #: src/routes/[[locale]]/about/+page.svelte
 msgid "Me, Myself, and I"
@@ -240,11 +222,23 @@ msgid ""
 "encounter, and the knowledge I have acquired, hoping that you will learn something from them and/or get your\n"
 "feedback to help me learn more."
 msgstr ""
+"Je suppose que je devrais parler un peu de moi, puisque c'est le but de cette page. Cependant, je ne veux pas\n"
+"paraître prétentieux et je ne suis pas à l'aise avec l'idée de trop m'exposer. Je serai donc bref et j'irai droit\n"
+"au but. Je suis passionné par la musique et l'informatique, mais le manque de temps libre durant mon Master\n"
+"a fait que je ne pouvais plus pratiquer la musique ou faire quoi que ce soit d'autre. Cela a eu un impact négatif sur moi, et je me sentais un peu\n"
+"frustré, perdu et déprimé de ne rien accomplir. C'est pourquoi j'ai décidé de prendre une année de césure.\n"
+"J'ai rejoint une association musicale pour prendre des cours de violon, et j'étudie l'informatique durant le temps libre\n"
+"qu'il me reste. Mon premier objectif est de terminer ce site web/portfolio avant de passer au sujet principal : Flux Studio.\n"
+"Le nom est peut-être temporaire, mais il représente ce que je veux accomplir : un outil fluide et polyvalent pour jouer de la musique.\n"
+"C'est une façon pour moi de combiner ces deux mondes durant mon année de césure et d'explorer de nombreux outils et sujets\n"
+"que je ne rencontrerais pas dans mes cours. J'utiliserai les articles pour partager mes réussites, les problèmes rencontrés\n"
+"et les connaissances acquises, en espérant que vous y apprendrez quelque chose et/ou pour obtenir vos\n"
+"retours afin de m'aider à en apprendre davantage."
 
 #: src/lib/articles-types.ts
 #: src/routes/[[locale]]/about/+page.svelte
 msgid "Music"
-msgstr ""
+msgstr "Musique"
 
 #: src/routes/[[locale]]/about/+page.svelte
 msgid ""
@@ -259,10 +253,20 @@ msgid ""
 "with the tips and tricks that I learn or find, since there are already plenty of good online resources, and I\n"
 "don't want to create something substandard that might contain incorrect information."
 msgstr ""
+"Ma relation avec la musique est compliquée. Elle a toujours occupé une place importante dans ma vie, pourtant je ne m'y suis jamais pleinement\n"
+"consacré. J'étais motivé au lycée, mais la pandémie y a mis un coup d'arrêt brutal. Durant mes\n"
+"premières années d'université, je jouais occasionnellement de la guitare et j'ai soudainement eu envie d'acheter toutes sortes d'instruments\n"
+"de musique. À ce jour, je ne sais toujours pas jouer de la plupart d'entre eux... J'espère que les cours de solfège que je\n"
+"suis actuellement me donneront des bases qui me permettront de me sentir plus confiant avec n'importe lequel de ces instruments — au moins\n"
+"je ne serai pas complètement perdu. Je ne peux imaginer ma vie sans un instrument ou de la musique en fond. Avec Flux\n"
+"Studio, j'espère combiner ma passion avec mon travail en fournissant un outil permettant à chacun de jouer et d'apprendre la musique. Peut-être\n"
+"qu'un jour je pourrai aussi composer des morceaux ! J'hésite à ajouter une section de théorie musicale sur ce site\n"
+"avec les astuces que j'apprends ou découvre, car il existe déjà de nombreuses bonnes ressources en ligne, et je\n"
+"ne veux pas créer quelque chose de médiocre qui pourrait contenir des informations erronées."
 
 #: src/routes/[[locale]]/about/+page.svelte
 msgid "Computer Science"
-msgstr ""
+msgstr "Informatique"
 
 #: src/routes/[[locale]]/about/+page.svelte
 msgid ""
@@ -275,6 +279,14 @@ msgid ""
 "networks for my master's degree and successfully completed the first year. I cannot say which aspect interests me\n"
 "the most, but I find the whole field fascinating. I plan to make the most of my year off by studying <0>MIT open courses</0> and scientific papers in other fields, such as cybersecurity and artificial intelligence."
 msgstr ""
+"J'ai découvert la programmation lors de ma première année à l'université, en étudiant Python et C. J'ai trouvé le premier cours de Python\n"
+"terrible (dans le mauvais sens du terme), mais j'ai adoré celui de C. J'ai donc suivi le cursus informatique de mon université pour ma deuxième et\n"
+"troisième année de licence. J'ai effectué deux stages durant cette période qui ont élargi mes horizons,\n"
+"notamment le second qui s'est déroulé dans un laboratoire. J'écrirai un article à ce sujet plus tard, car c'était vraiment\n"
+"intéressant. Pour vous donner un bref aperçu, mon équipe devait rechercher des réseaux maillés (mesh) autonomes et dynamiques destinés aux\n"
+"pompiers dans des sinistres isolés, sans connexion Internet. Comme vous l'avez peut-être deviné, je me suis spécialisé en\n"
+"réseaux pour mon master et j'ai terminé avec succès la première année. Je ne saurais dire quel aspect m'intéresse\n"
+"le plus, mais je trouve tout le domaine fascinant. Je prévois de profiter de mon année de césure pour étudier les <0>cours en libre accès du MIT</0> et des articles scientifiques dans d'autres domaines, tels que la cybersécurité et l'intelligence artificielle."
 
 #: src/routes/[[locale]]/about/+page.svelte
 msgid ""
@@ -286,6 +298,13 @@ msgid ""
 "research when I hit a wall. The environmental impact in terms of energy and pollution should also be considered\n"
 "seriously, in my opinion. I also avoid using too much AI for this reason."
 msgstr ""
+"Au sujet de l'intelligence artificielle, j'avoue l'utiliser moi-même parfois. J'en ai une vision mitigée : elle\n"
+"peut être utile pour gagner du temps, mais elle est contre-productive dans un contexte d'apprentissage parce qu'on ne réfléchit pas\n"
+"suffisamment à son travail. C'est principalement pour cela que j'évite de trop l'utiliser. Sur ce site web, par exemple, j'ai rencontré\n"
+"quelques problèmes avec le comportement de SvelteKit lors du routage des pages, j'ai donc utilisé le chatbot Claude d'Anthropic pour obtenir un aperçu\n"
+"de la situation et je l'ai résolu moi-même. L'IA ne crée pas le projet, mais elle me fait certainement gagner du temps dans mes\n"
+"recherches lorsque je me heurte à un mur. L'impact environnemental en termes d'énergie et de pollution doit également être pris\n"
+"au sérieux, selon moi. J'évite surtout d'utiliser trop d'IA pour cette raison."
 
 #: src/lib/contact.ts
 #: src/routes/[[locale]]/about/+page.svelte
@@ -294,157 +313,167 @@ msgstr ""
 
 #: src/routes/[[locale]]/about/+page.svelte
 msgid "Open my CV"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Search..."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Search"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Filters"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Select the filters you want to use for your research."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Sort By"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Select a sorting order"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "You can choose how the results are sorted with this filter."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Featured"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "You can choose if you want to search for featured articles or not."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Posted After"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Pick a date"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "You can filter all articles posted after this date."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Posted Before"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "You can filter all articles posted before this date."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Categories"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Select the tags"
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "You can filter the resulting articles based on their tags (the articles will match all tags)."
-msgstr ""
-
-#: src/routes/[[locale]]/articles/+page.svelte
-msgid "Apply"
-msgstr ""
+msgstr "Ouvrir mon CV"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Contact Form"
-msgstr ""
+msgstr "Formulaire de Contact"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
 "with me directly. Please feel free to use it if you have any questions or if anything is unclear. <0/>Thank you!"
 msgstr ""
+"En plus des liens vers mes réseaux sociaux en bas de chaque page, vous pouvez utiliser ce formulaire pour me contacter\n"
+"directement. N'hésitez pas à l'utiliser si vous avez des questions ou si certains points ne sont pas clairs. <0/>Merci !"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "First Name"
-msgstr ""
+msgstr "Prénom"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "John"
-msgstr ""
+msgstr "Jean"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Last Name"
-msgstr ""
+msgstr "Nom"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Doe"
-msgstr ""
+msgstr "Dupont"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "This email address will only be used to reply to your message and will not be shared in any way."
-msgstr ""
+msgstr "Cette adresse email sera uniquement utilisée pour répondre à votre message et ne sera en aucun cas partagée."
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Select a category"
-msgstr ""
+msgstr "Sélectionnez une catégorie"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 #: src/lib/contact.ts
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Bug Report"
-msgstr ""
+msgstr "Rapport de Bug"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Undo"
-msgstr ""
+msgstr "Annuler"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Select a subject"
-msgstr ""
+msgstr "Sélectionnez un sujet"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Type your message here"
-msgstr ""
+msgstr "Tapez votre message ici"
 
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Submit<0/>"
-msgstr ""
+msgstr "Envoyer<0/>"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Search..."
+msgstr "Rechercher..."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Search"
+msgstr "Rechercher"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Filters"
+msgstr "Filtres"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Select the filters you want to use for your research."
+msgstr "Sélectionnez les filtres que vous souhaitez utiliser pour votre recherche."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Sort By"
+msgstr "Trier Par"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Select a sorting order"
+msgstr "Sélectionnez un ordre de tri"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "You can choose how the results are sorted with this filter."
+msgstr "Vous pouvez choisir comment les résultats sont triés avec ce filtre."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Featured"
+msgstr "Mis en Avant"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "You can choose if you want to search for featured articles or not."
+msgstr "Vous pouvez choisir si vous souhaitez rechercher les articles mis en avant ou non."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Posted After"
+msgstr "Publié après le"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Pick a date"
+msgstr "Choisissez une date"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "You can filter all articles posted after this date."
+msgstr "Vous pouvez filtrer tous les articles publiés après cette date."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Posted Before"
+msgstr "Publié avant le"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "You can filter all articles posted before this date."
+msgstr "Vous pouvez filtrer tous les articles publiés avant cette date."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Categories"
+msgstr "Catégories"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Select the tags"
+msgstr "Sélectionnez les tags"
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "You can filter the resulting articles based on their tags (the articles will match all tags)."
+msgstr "Vous pouvez filtrer les articles obtenus selon leurs tags (les articles correspondront à TOUS les tags sélectionnés)."
+
+#: src/routes/[[locale]]/articles/+page.svelte
+msgid "Apply"
+msgstr "Appliquer"
+
+#: src/routes/[[locale]]/legal-notices/+page.svelte
+msgid "This page is still a little confusing for me so I will work on it later when I finally figure out what I should write."
+msgstr "Cette page est encore un peu confuse pour moi, j'y travaillerai donc plus tard quand j'aurai une idée précise de ce que je devrais écrire."
+
+#: src/routes/[[locale]]/legal-notices/+page.svelte
+msgid "Thank you for your understanding."
+msgstr "Merci de votre compréhension."
 
 #: src/routes/[[locale]]/projects/+page.svelte
 msgid "My Projects"
-msgstr ""
+msgstr "Mes Projets"
 
 #: src/routes/[[locale]]/projects/+page.svelte
 msgid ""
@@ -453,64 +482,118 @@ msgid ""
 "as well as a roadmap of the features (<0>which is still a work in progress</0>).\n"
 "Please feel free to give me your feedback. Thank you!"
 msgstr ""
-
-#: src/routes/[[locale]]/legal-notices/+page.svelte
-msgid "This page is still a little confusing for me so I will work on it later when I finally figure out what I should write."
-msgstr ""
-
-#: src/routes/[[locale]]/legal-notices/+page.svelte
-msgid "Thank you for your understanding."
-msgstr ""
+"Cette page présente les projets dont je suis le plus fier. D'autres contenus seront ajoutés au fil du temps. Vous pouvez en apprendre davantage\n"
+"sur chaque projet sur leur page respective. Par exemple, vous y trouverez des informations sur mes motivations et mes objectifs,\n"
+"ainsi qu'une feuille de route des fonctionnalités (<0>qui est encore en cours de rédaction</0>).\n"
+"N'hésitez pas à me faire part de vos retours. Merci !"
 
 #: src/lib/components/ui/dialog/dialog-content.svelte
 #: src/lib/components/ui/sheet/sheet-content.svelte
 msgid "Close"
+msgstr "Fermer"
+
+#: src/lib/components/ui/carousel/carousel-next.svelte
+msgid "Next slide"
+msgstr "Diapositive suivante"
+
+#: src/lib/components/ui/carousel/carousel.svelte
+msgid "ArrowLeft"
 msgstr ""
+
+#: src/lib/components/ui/carousel/carousel.svelte
+msgid "ArrowRight"
+msgstr ""
+
+#: src/lib/components/ui/carousel/carousel-previous.svelte
+msgid "Previous slide"
+msgstr "Diapositive précédente"
 
 #: src/lib/components/ui/pagination/pagination-ellipsis.svelte
 msgid "More pages"
-msgstr ""
+msgstr "Plus de pages"
 
 #: src/lib/components/ui/pagination/pagination-next-button.svelte
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "Next"
-msgstr ""
+msgstr "Suite"
 
 #: src/lib/components/ui/pagination/pagination-next-button.svelte
 msgid "Go to next page"
-msgstr ""
+msgstr "Aller à la page suivante"
 
 #: src/lib/components/ui/pagination/pagination-prev-button.svelte
 msgid "Previous"
-msgstr ""
+msgstr "Précédent"
 
 #: src/lib/components/ui/pagination/pagination-prev-button.svelte
 msgid "Go to previous page"
-msgstr ""
+msgstr "Aller à la page précédente"
 
 #: src/lib/components/ui/sidebar/sidebar-rail.svelte
 #: src/lib/components/ui/sidebar/sidebar-rail.svelte
 #: src/lib/components/ui/sidebar/sidebar-trigger.svelte
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Activer la barre latérale"
 
 #: src/lib/components/ui/sidebar/sidebar.svelte
 msgid "Sidebar"
-msgstr ""
+msgstr "Barre latérale"
 
 #: src/lib/components/ui/sidebar/sidebar.svelte
 msgid "Displays the mobile sidebar."
-msgstr ""
+msgstr "Affiche la barre latérale mobile."
 
 #. placeholder {0}: new Date(module?.metadata.created).toLocaleDateString()
 #: src/routes/[[locale]]/articles/[article]/+page.svelte
 msgid "<0/>Written on {0}"
-msgstr ""
+msgstr "<0/>Écrit le {0}"
 
 #. placeholder {0}: new Date(module?.metadata.modified).toLocaleDateString()
 #: src/routes/[[locale]]/articles/[article]/+page.svelte
 msgid "<0/>Modified on {0}"
-msgstr ""
+msgstr "<0/>Modifié le {0}"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Project's Start"
+msgstr "Lancement du projet"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Apr 2026"
+msgstr "Avril 2026"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "The official start of the project is to learn Rust again and experiment with audio processing libraries."
+msgstr "Le début officiel du projet consiste à se refamiliariser avec Rust et à expérimenter avec des bibliothèques de traitement audio."
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "Architecture"
+msgstr "Architecture"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "May 2026"
+msgstr "Mai 2026"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "After a month of testing, I should have designed a suitable architecture for the project. It will certainly change, but this should provide a solid foundation."
+msgstr "Après un mois de tests, je devrais avoir conçu une architecture appropriée pour le projet. Elle changera certainement, mais cela devrait fournir une base solide."
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "Mid-May 2026"
+msgstr "Mi-mai 2026"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "Once the architecture and main objectives have been defined, I should be able to start working on the GUI. Which library should I use? What default styling should I apply?"
+msgstr "Une fois l'architecture et les principaux objectifs définis, je devrais pouvoir commencer à travailler sur l'interface graphique. Quelle bibliothèque utiliser ? Quel style par défaut appliquer ?"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "I will consider the next steps once I have reached the initial stages of this project."
+msgstr "Je réfléchirai aux étapes suivantes une fois que j'aurai atteint les phases initiales de ce projet."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid ""
@@ -519,6 +602,10 @@ msgid ""
 "my passion, and I want it to be a central element of my life, whether through playing music or developing this\n"
 "software."
 msgstr ""
+"Flux Studio est une <0>station de travail audio numérique</0> (DAW) bientôt développée en <1>Rust</1>. Mon objectif est de concevoir un DAW de qualité pour jouer et apprendre\n"
+"la musique. Mes ambitions sont élevées, mais je ferai de mon mieux pour mener ce projet à bien. Comme vous l'avez sans doute deviné, la musique est\n"
+"ma passion, et je veux qu'elle soit un élément central de ma vie, que ce soit en pratiquant ou en développant ce\n"
+"logiciel."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid ""
@@ -529,15 +616,21 @@ msgid ""
 "growing. There is even debate about whether this language should be included in the Linux Kernel. I will leave you to\n"
 "do your own research on this subject, as this is not the main topic of this page."
 msgstr ""
+"C'est aussi l'occasion pour moi d'apprendre le Rust, qui semble être un langage de programmation vraiment prometteur. Vous pouvez\n"
+"consulter directement <0>leur site web</0> pour plus de détails, mais il se pourrait bien\n"
+"qu'il devienne mon langage de prédilection pour presque tous les cas d'usage. Bien que la communauté Rust soit relativement récente,\n"
+"les « Rustaceans » (le nom de la communauté des développeurs Rust) sont très actifs et les ressources disponibles ne cessent de\n"
+"croître. Il y a même un débat sur l'intégration de ce langage dans le noyau Linux. Je vous laisse\n"
+"faire vos propres recherches à ce sujet, car ce n'est pas le thème principal de cette page."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "The content of this page is bound to change as the project progresses."
-msgstr ""
+msgstr "Le contenu de cette page est amené à évoluer au fur et à mesure que le projet progresse."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "Main goals"
-msgstr ""
+msgstr "Objectifs principaux"
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid ""
@@ -549,10 +642,17 @@ msgid ""
 "project. I have lots of ideas, but I don't yet know the intermediate steps, and I need to be realistic about which\n"
 "features I can actually implement."
 msgstr ""
+"Mon premier objectif est de réussir à traiter et générer des signaux audio en temps réel. Je veux pouvoir manipuler le gain\n"
+"et reconnaître ou décomposer les fréquences du signal. L'étape suivante sera d'ajouter une interface graphique\n"
+"(GUI) pour manipuler les signaux. Je pense que l'interface sera l'aspect le plus complexe de ce projet.\n"
+"Comme vous avez pu le constater sur ce site, le design UI/UX n'est pas mon fort. Cependant, je ne compte pas créer une\n"
+"interface médiocre, même s'il me faut beaucoup de temps pour la peaufiner. Je réfléchis encore aux étapes suivantes.\n"
+"J'ai beaucoup d'idées, mais je ne connais pas encore toutes les étapes intermédiaires, et je dois rester réaliste sur les\n"
+"fonctionnalités que je peux réellement implémenter."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "Expected difficulties"
-msgstr ""
+msgstr "Difficultés attendues"
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid ""
@@ -563,6 +663,12 @@ msgid ""
 "with their own particular features, but none of them are particularly notable. I need to do a lot of research for\n"
 "this, and I will probably publish an article about my findings."
 msgstr ""
+"N'ayant jamais utilisé Rust auparavant, il m'est difficile d'anticiper les problèmes que je vais rencontrer sur ce\n"
+"projet. Cependant, je pense que les principaux problèmes viendront de l'écosystème Rust, relativement récent, puisque beaucoup de ses\n"
+"« crates » ne sont pas encore matures. Par exemple, il n'y a pas de consensus sur la bibliothèque à utiliser pour créer des interfaces\n"
+"graphiques d'applications. De nombreux projets différents sont développés pour répondre aux besoins de la communauté, chacun\n"
+"avec ses particularités, mais aucun n'est vraiment incontournable. Je dois faire beaucoup de recherches à ce sujet,\n"
+"et je publierai probablement un article sur mes découvertes."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid ""
@@ -571,11 +677,64 @@ msgid ""
 "system. However, I am still anxious about the moment when I attempt to optimise the application. I have no\n"
 "experience of cross-platform development so far, so my worries may be unfounded."
 msgstr ""
+"Le second obstacle que je redoute le plus est le développement d'une application multiplateforme. Dès le départ, j'ai l'intention de\n"
+"développer Flux Studio avec un code modulaire pour simplifier la gestion des différentes crates nécessaires pour chaque système\n"
+"d'exploitation. Cependant, j'appréhende toujours le moment où je tenterai d'optimiser l'application. Je n'ai aucune\n"
+"expérience en développement multiplateforme jusqu'à présent, mes inquiétudes sont donc peut-être infondées."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "Roadmap"
-msgstr ""
+msgstr "Feuille de Route"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Oct 2025"
+msgstr "Oct 2025"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "This is the first commit of the project. This lays the groundwork for the rest of the development process. I begin slowly to ensure I fully grasp the concepts of Svelte and Sveltekit, making numerous attempts to define the desired implementation and identify viable options."
+msgstr "C'est le premier commit du projet. Il pose les bases pour le reste du processus de développement. Je commence doucement pour m'assurer de bien saisir les concepts de Svelte et SvelteKit, en faisant de nombreuses tentatives pour définir l'implémentation souhaitée et identifier les options viables."
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Main features"
+msgstr "Fonctionnalités principales"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "All the main features of the website will then be implemented, including a functioning contact form, a search engine for the blog, fully translated content and a project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
+msgstr "Toutes les fonctionnalités principales du site seront alors implémentées, y compris un formulaire de contact fonctionnel, un moteur de recherche pour le blog, un contenu entièrement traduit et une architecture de projet conçue pour l'évolutivité et la maintenance. Il devrait également y avoir un Dockerfile pour le déploiement."
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Fixed design"
+msgstr "Design finalisé"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Jun 2026"
+msgstr "Juin 2026"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "The design should be almost complete, featuring a dynamic background and proper theme."
+msgstr "Le design devrait être presque terminé, avec un arrière-plan dynamique et un thème approprié."
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Blog writing"
+msgstr "Rédaction du blog"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "As most of the website is done. I should now work on its content by writing articles and working on other projects"
+msgstr "L'essentiel du site étant terminé, je dois maintenant travailler sur son contenu en écrivant des articles et en avançant sur d'autres projets."
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Forever"
+msgstr "Éternellement"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "I will continue to work from time to time on this website, improving its design, fixing bugs and adding new features if necessary."
+msgstr "Je continuerai à travailler de temps en temps sur ce site, en améliorant son design, en corrigeant les bugs et en ajoutant de nouvelles fonctionnalités si nécessaire."
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid ""
@@ -586,10 +745,16 @@ msgid ""
 "for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time to promote\n"
 "myself and my projects."
 msgstr ""
+"Ce site est ma façon de justifier mon année de césure. Si vous ne voyez pas ce que je veux dire, vous pouvez en apprendre\n"
+"plus sur <0>cette page</0>. C'est aussi un moyen pour moi de garder une trace de mes\n"
+"activités, de mes projets et des objectifs associés. Je pense que cela peut être utile pour des partenaires ou des recruteurs qui souhaitent\n"
+"en savoir plus sur un candidat avant de faire une offre. Si vous êtes intéressé, je suis certainement la personne\n"
+"pour le poste — n'hésitez pas à me contacter ! Plus sérieusement, je développerai ce site sur mon temps libre pour me promouvoir,\n"
+"moi et mes projets."
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "Svelte and SvelteKit"
-msgstr ""
+msgstr "Svelte et SvelteKit"
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid ""
@@ -599,10 +764,15 @@ msgid ""
 "Javascript or HTML/CSS, they made it really easy to build something decent. I'll probably write an article about\n"
 "it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check <0>their website</0> for more details."
 msgstr ""
+"J'étais curieux d'apprendre à utiliser un framework de développement web, c'était donc l'occasion parfaite de\n"
+"réaliser quelque chose avec ceux que j'avais en tête : Svelte et SvelteKit. J'en avais entendu beaucoup de bien, j'ai donc voulu essayer,\n"
+"et je dois dire que j'ai été impressionné. Même sans grande expérience en\n"
+"Javascript ou HTML/CSS, ils ont rendu la création d'un site décent très facile. J'écrirai probablement un article à ce\n"
+"sujet plus tard, quand je serai un peu plus expérimenté pour expliquer les choses, mais je vous encourage à consulter <0>leur site web</0> pour plus de détails."
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "Main Milestones"
-msgstr ""
+msgstr "Étapes Clés"
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid ""
@@ -613,276 +783,76 @@ msgid ""
 "I envision the articles feature as interactive: the main point is to share my knowledge and experiences and\n"
 "showcase my hobbies, but most importantly, to learn from your feedback and constantly improve."
 msgstr ""
-
-#~ msgid "Flowbite Library v1.0.0"
-#~ msgstr ""
-
-#~ msgid "Released on December 2nd, 2021"
-#~ msgstr ""
-
-#~ msgid "Get started with dozens of web components and interactive elements."
-#~ msgstr ""
-
-#~ msgid "Flowbite Library v1.2.0"
-#~ msgstr ""
-
-#~ msgid "Released on December 23th, 2021"
-#~ msgstr ""
-
-#~ msgid "Flowbite Library v1.3.0"
-#~ msgstr ""
-
-#~ msgid "Released on January 5th, 2021"
-#~ msgstr ""
+"Mon premier objectif est de créer une application entièrement fonctionnelle comprenant toutes ses pages, la gestion des erreurs et une logique\n"
+"back-end efficace. Ensuite, j'essaierai de rendre toute l'application responsive. Enfin, j'ajouterai des fonctionnalités\n"
+"de confort comme le support de plusieurs langues et une interface plus performante. Une fois tout cela accompli, je\n"
+"mettrai à jour le style périodiquement (peut-être avec des thèmes saisonniers) et j'ajouterai du contenu sous forme d'articles et de projets.\n"
+"J'imagine la section des articles comme interactive : le but est de partager mes connaissances et mes expériences et\n"
+"de présenter mes loisirs, mais surtout d'apprendre de vos retours pour m'améliorer constamment."
 
 #: src/lib/articles-types.ts
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Divers"
 
 #: src/lib/articles-types.ts
 msgid "Lute Making"
-msgstr ""
+msgstr "Lutherie"
 
 #: src/lib/articles-types.ts
 msgid "Programming"
-msgstr ""
+msgstr "Programmation"
 
 #: src/lib/articles-types.ts
 msgid "Networks"
-msgstr ""
+msgstr "Réseaux"
 
 #: src/lib/articles-types.ts
 #: src/lib/contact.ts
 msgid "Website"
-msgstr ""
+msgstr "Site Web"
 
 #: src/lib/articles-types.ts
 msgid "Least Recently Created"
-msgstr ""
+msgstr "Le plus ancien"
 
 #: src/lib/articles-types.ts
 msgid "Most Recently Created"
-msgstr ""
+msgstr "Le plus récent"
 
 #: src/lib/articles-types.ts
 msgid "Least Recently Modified"
-msgstr ""
+msgstr "Modifié le plus anciennement"
 
 #: src/lib/articles-types.ts
 msgid "Most Recently Modified"
-msgstr ""
+msgstr "Modifié le plus récemment"
 
 #: src/lib/articles-types.ts
 msgid "Incorrect range with the selected dates. Check their order and retry."
-msgstr ""
+msgstr "Plage de dates incorrecte. Vérifiez l'ordre et réessayez."
 
 #: src/lib/contact.ts
 msgid "Job Opportunities"
-msgstr ""
+msgstr "Opportunités professionnelles"
 
 #: src/lib/contact.ts
 #: src/lib/contact.ts
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #: src/lib/contact.ts
 msgid "Suggestion"
-msgstr ""
+msgstr "Suggestion"
 
 #: src/lib/contact.ts
 msgid "Feedback"
-msgstr ""
+msgstr "Commentaires"
 
 #: src/lib/contact.ts
 msgid "Job Offer"
-msgstr ""
+msgstr "Offre d'emploi"
 
 #. placeholder {0}: params.article
 #: src/routes/[[locale]]/articles/[article]/+page.server.ts
 msgid "The article with id {0} doesn't exist."
-msgstr ""
-
-#: src/lib/components/ui/carousel/carousel.svelte
-msgid "ArrowLeft"
-msgstr ""
-
-#: src/lib/components/ui/carousel/carousel.svelte
-msgid "ArrowRight"
-msgstr ""
-
-#: src/lib/components/ui/carousel/carousel-next.svelte
-msgid "Next slide"
-msgstr ""
-
-#: src/lib/components/ui/carousel/carousel-previous.svelte
-msgid "Previous slide"
-msgstr ""
-
-#~ msgid "Test"
-#~ msgstr ""
-
-#~ msgid "test"
-#~ msgstr ""
-
-#~ msgid "item.name"
-#~ msgstr ""
-
-#~ msgid "ToDo : indicateurs pour du contenu non visible"
-#~ msgstr ""
-
-#~ msgid "Hover"
-#~ msgstr ""
-
-#~ msgid "Add to library"
-#~ msgstr ""
-
-#~ msgid "Alpha 2"
-#~ msgstr ""
-
-#~ msgid "Fév 2027"
-#~ msgstr ""
-
-#~ msgid "Premiers retours v2"
-#~ msgstr ""
-
-#~ msgid "Bêta 2"
-#~ msgstr ""
-
-#~ msgid "Mar 2027"
-#~ msgstr ""
-
-#~ msgid "Tests de charge v2"
-#~ msgstr ""
-
-#~ msgid "Avril 2027"
-#~ msgstr ""
-
-#~ msgid "Lancement public v2"
-#~ msgstr ""
-
-#~ msgid "Futur 2"
-#~ msgstr ""
-
-#~ msgid "Expansion mondiale"
-#~ msgstr ""
-
-#: src/lib/components/RoadMap.svelte
-msgid "Nothing to display yet."
-msgstr ""
-
-#~ msgid "Start of the project"
-#~ msgstr ""
-
-#~ msgid "The first commit of the project. It lays the groundwork for the rest of the development."
-#~ msgstr ""
-
-#~ msgid "First release"
-#~ msgstr ""
-
-#~ msgid "The first release of the project. It includes the basic structure and the first features."
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "Main features"
-msgstr ""
-
-#~ msgid "From there, all the main features of the website will be implemented."
-#~ msgstr ""
-
-#~ msgid "From there, all the main features of the website will be implemented : a working contact form (without bugs), a working search engine for the blog, fully translated content, and a fixed project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "Fixed design"
-msgstr ""
-
-#~ msgid "The design should be mostly finished, with a dynamic background and a proper theme."
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "All the main features of the website will then be implemented, including a functioning contact form, a search engine for the blog, fully translated content and a project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
-msgstr ""
-
-#~ msgid "This is the first commit of the project. This lays the groundwork for the rest of the development process. I am taking a slow start so that I can understand the concepts of Svelte and Sveltekit, through a lot of trial and error."
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "This is the first commit of the project. This lays the groundwork for the rest of the development process. I begin slowly to ensure I fully grasp the concepts of Svelte and Sveltekit, making numerous attempts to define the desired implementation and identify viable options."
-msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "The design should be almost complete, featuring a dynamic background and proper theme."
-msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "Blog writing"
-msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "As most of the website is done. I should now work on its content by writing articles and working on other projects"
-msgstr ""
-
-#~ msgid "Maintenance and Improvement"
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "Forever"
-msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "I will continue to work from time to time on this website, improving its design, fixing bugs and adding new features if necessary."
-msgstr ""
-
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "Maintenance"
-msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-#: src/routes/[[locale]]/projects/website/+page.svelte
-msgid "Project's Start"
-msgstr ""
-
-#~ msgid "Official start of the project : learning Rust again and experimenting with audio processing libraries."
-#~ msgstr ""
-
-#~ msgid "Defining Architecture"
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-msgid "Architecture"
-msgstr ""
-
-#~ msgid "After a month of testing, I should be able to design a good architecture for the project. It will change for sure, but this should be a good enough basis."
-#~ msgstr ""
-
-#~ msgid "Once the architecture and the main goals are defined, I should be able to start working on the GUI. Which library should I use? What is the DA"
-#~ msgstr ""
-
-#~ msgid "Once the architecture and the main goals are defined, I should be able to start working on the GUI. Which library should I use? What is the default styling I will try to apply? etc."
-#~ msgstr ""
-
-#~ msgid "To be defined"
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-msgid "Unknown"
-msgstr ""
-
-#~ msgid "I will think about the next steps once I reach the first stages of this project."
-#~ msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-msgid "I will consider the next steps once I have reached the initial stages of this project."
-msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-msgid "Once the architecture and main objectives have been defined, I should be able to start working on the GUI. Which library should I use? What default styling should I apply?"
-msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-msgid "After a month of testing, I should have designed a suitable architecture for the project. It will certainly change, but this should provide a solid foundation."
-msgstr ""
-
-#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
-msgid "The official start of the project is to learn Rust again and experiment with audio processing libraries."
-msgstr ""
+msgstr "L'article avec l'identifiant {0} n'existe pas."

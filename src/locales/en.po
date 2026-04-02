@@ -746,78 +746,6 @@ msgstr ""
 "playing and learning music. My goals are ambitious, but I will do my best to see this project through\n"
 "nonetheless."
 
-#~ msgid "test"
-#~ msgstr "test"
-
-#~ msgid "prop"
-#~ msgstr "prop"
-
-#~ msgid "<0/> test"
-#~ msgstr "<0/> test"
-
-#~ msgid "Initialisation"
-#~ msgstr "Initialisation"
-
-#~ msgid "Jan 2026"
-#~ msgstr "Jan 2026"
-
-#~ msgid "Setup du projet"
-#~ msgstr "Setup du projet"
-
-#~ msgid "Alpha"
-#~ msgstr "Alpha"
-
-#~ msgid "Fév 2026"
-#~ msgstr "Fév 2026"
-
-#~ msgid "Premiers retours"
-#~ msgstr "Premiers retours"
-
-#~ msgid "Bêta"
-#~ msgstr "Bêta"
-
-#~ msgid "Mar 2026"
-#~ msgstr "Mar 2026"
-
-#~ msgid "Tests de charge"
-#~ msgstr "Tests de charge"
-
-#~ msgid "Avril 2026"
-#~ msgstr "Avril 2026"
-
-#~ msgid "Lancement public"
-#~ msgstr "Lancement public"
-
-#~ msgid "Futur"
-#~ msgstr "Futur"
-
-#~ msgid "Expansion internationale"
-#~ msgstr "Expansion internationale"
-
-#~ msgid "Expansion internationale aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-#~ msgstr "Expansion internationale aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-
-#~ msgid "Flowbite Library v1.0.0"
-#~ msgstr "Flowbite Library v1.0.0"
-
-#~ msgid "Released on December 2nd, 2021"
-#~ msgstr "Released on December 2nd, 2021"
-
-#~ msgid "Get started with dozens of web components and interactive elements."
-#~ msgstr "Get started with dozens of web components and interactive elements."
-
-#~ msgid "Flowbite Library v1.2.0"
-#~ msgstr "Flowbite Library v1.2.0"
-
-#~ msgid "Released on December 23th, 2021"
-#~ msgstr "Released on December 23th, 2021"
-
-#~ msgid "Flowbite Library v1.3.0"
-#~ msgstr "Flowbite Library v1.3.0"
-
-#~ msgid "Released on January 5th, 2021"
-#~ msgstr "Released on January 5th, 2021"
-
 #: src/lib/components/ui/carousel/carousel-next.svelte
 msgid "Next slide"
 msgstr "Next slide"
@@ -834,90 +762,21 @@ msgstr "ArrowRight"
 msgid "Previous slide"
 msgstr "Previous slide"
 
-#~ msgid "Test"
-#~ msgstr "Test"
-
-#~ msgid "item.name"
-#~ msgstr "item.name"
-
-#~ msgid "ToDo : indicateurs pour du contenu non visible"
-#~ msgstr "ToDo : indicateurs pour du contenu non visible"
-
-#~ msgid "Hover"
-#~ msgstr "Hover"
-
-#~ msgid "Add to library"
-#~ msgstr "Add to library"
-
-#~ msgid "Alpha 2"
-#~ msgstr "Alpha 2"
-
-#~ msgid "Fév 2027"
-#~ msgstr "Fév 2027"
-
-#~ msgid "Premiers retours v2"
-#~ msgstr "Premiers retours v2"
-
-#~ msgid "Bêta 2"
-#~ msgstr "Bêta 2"
-
-#~ msgid "Mar 2027"
-#~ msgstr "Mar 2027"
-
-#~ msgid "Tests de charge v2"
-#~ msgstr "Tests de charge v2"
-
-#~ msgid "Avril 2027"
-#~ msgstr "Avril 2027"
-
-#~ msgid "Lancement public v2"
-#~ msgstr "Lancement public v2"
-
-#~ msgid "Futur 2"
-#~ msgstr "Futur 2"
-
-#~ msgid "Expansion mondiale"
-#~ msgstr "Expansion mondiale"
-
 #: src/lib/components/RoadMap.svelte
 msgid "Nothing to display yet."
 msgstr "Nothing to display yet."
-
-#~ msgid "Start of the project"
-#~ msgstr "Start of the project"
-
-#~ msgid "The first commit of the project. It lays the groundwork for the rest of the development."
-#~ msgstr "The first commit of the project. It lays the groundwork for the rest of the development."
-
-#~ msgid "First release"
-#~ msgstr "First release"
-
-#~ msgid "The first release of the project. It includes the basic structure and the first features."
-#~ msgstr "The first release of the project. It includes the basic structure and the first features."
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "Main features"
 msgstr "Main features"
 
-#~ msgid "From there, all the main features of the website will be implemented."
-#~ msgstr "From there, all the main features of the website will be implemented."
-
-#~ msgid "From there, all the main features of the website will be implemented : a working contact form (without bugs), a working search engine for the blog, fully translated content, and a fixed project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
-#~ msgstr "From there, all the main features of the website will be implemented : a working contact form (without bugs), a working search engine for the blog, fully translated content, and a fixed project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
-
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "Fixed design"
 msgstr "Fixed design"
 
-#~ msgid "The design should be mostly finished, with a dynamic background and a proper theme."
-#~ msgstr "The design should be mostly finished, with a dynamic background and a proper theme."
-
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "All the main features of the website will then be implemented, including a functioning contact form, a search engine for the blog, fully translated content and a project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
 msgstr "All the main features of the website will then be implemented, including a functioning contact form, a search engine for the blog, fully translated content and a project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment."
-
-#~ msgid "This is the first commit of the project. This lays the groundwork for the rest of the development process. I am taking a slow start so that I can understand the concepts of Svelte and Sveltekit, through a lot of trial and error."
-#~ msgstr "This is the first commit of the project. This lays the groundwork for the rest of the development process. I am taking a slow start so that I can understand the concepts of Svelte and Sveltekit, through a lot of trial and error."
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "This is the first commit of the project. This lays the groundwork for the rest of the development process. I begin slowly to ensure I fully grasp the concepts of Svelte and Sveltekit, making numerous attempts to define the desired implementation and identify viable options."
@@ -934,9 +793,6 @@ msgstr "Blog writing"
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "As most of the website is done. I should now work on its content by writing articles and working on other projects"
 msgstr "As most of the website is done. I should now work on its content by writing articles and working on other projects"
-
-#~ msgid "Maintenance and Improvement"
-#~ msgstr "Maintenance and Improvement"
 
 #: src/routes/[[locale]]/projects/website/+page.svelte
 msgid "Forever"
@@ -955,34 +811,13 @@ msgstr "Maintenance"
 msgid "Project's Start"
 msgstr "Project's Start"
 
-#~ msgid "Official start of the project : learning Rust again and experimenting with audio processing libraries."
-#~ msgstr "Official start of the project : learning Rust again and experimenting with audio processing libraries."
-
-#~ msgid "Defining Architecture"
-#~ msgstr "Defining Architecture"
-
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "Architecture"
 msgstr "Architecture"
 
-#~ msgid "After a month of testing, I should be able to design a good architecture for the project. It will change for sure, but this should be a good enough basis."
-#~ msgstr "After a month of testing, I should be able to design a good architecture for the project. It will change for sure, but this should be a good enough basis."
-
-#~ msgid "Once the architecture and the main goals are defined, I should be able to start working on the GUI. Which library should I use? What is the DA"
-#~ msgstr "Once the architecture and the main goals are defined, I should be able to start working on the GUI. Which library should I use? What is the DA"
-
-#~ msgid "Once the architecture and the main goals are defined, I should be able to start working on the GUI. Which library should I use? What is the default styling I will try to apply? etc."
-#~ msgstr "Once the architecture and the main goals are defined, I should be able to start working on the GUI. Which library should I use? What is the default styling I will try to apply? etc."
-
-#~ msgid "To be defined"
-#~ msgstr "To be defined"
-
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "Unknown"
 msgstr "Unknown"
-
-#~ msgid "I will think about the next steps once I reach the first stages of this project."
-#~ msgstr "I will think about the next steps once I reach the first stages of this project."
 
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "I will consider the next steps once I have reached the initial stages of this project."
@@ -999,3 +834,25 @@ msgstr "After a month of testing, I should have designed a suitable architecture
 #: src/routes/[[locale]]/projects/flux-studio/+page.svelte
 msgid "The official start of the project is to learn Rust again and experiment with audio processing libraries."
 msgstr "The official start of the project is to learn Rust again and experiment with audio processing libraries."
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Apr 2026"
+msgstr "Apr 2026"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "May 2026"
+msgstr "May 2026"
+
+#: src/routes/[[locale]]/projects/flux-studio/+page.svelte
+msgid "Mid-May 2026"
+msgstr "Mid-May 2026"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Oct 2025"
+msgstr "Oct 2025"
+
+#: src/routes/[[locale]]/projects/website/+page.svelte
+#: src/routes/[[locale]]/projects/website/+page.svelte
+msgid "Jun 2026"
+msgstr "Jun 2026"
