@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RoadMap, { CANCELLED, COMPLETED, ONGOING, type RoadmapItem } from '$lib/components/RoadMap.svelte';
+	import RoadMap, { ONGOING, type RoadmapItem } from '$lib/components/RoadMap.svelte';
 
 	const items: RoadmapItem[] = [
 		{
