@@ -158,7 +158,20 @@
     body { @apply bg-background text-foreground antialiased; }
 }
 
+/* Custom Properties */
 html {
+    scroll-behavior: smooth;
+    font-size: var(--text-sm);
+}
+
+.link:hover {
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
     scroll-behavior: smooth;
     font-size: var(--text-sm);
 }
@@ -188,6 +201,19 @@ html {
     font-weight: bold;
     font-size: var(--text-2xl);
     letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-weight: bold;
+    font-size: var(--text-xl);
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 @media (width >= 48rem) {
