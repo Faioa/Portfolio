@@ -25,6 +25,7 @@
 	import { browser } from '$app/environment';
 
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
+	import type { CarouselAPI } from '$lib/components/ui/carousel/context';
 	import * as Carousel from '$lib/components/ui/carousel/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
 
@@ -34,12 +35,34 @@
 
 	let { items = [] }: Props = $props();
 
+	// svelte-ignore state_referenced_locally
 	let itemsRef: HTMLElement[] = $state(Array.from({ length: items.length }, () => null!));
 
 	// Imported from Tailwind config for consistency
 	const md = defaultTheme.screens.md;
 
 	let isMd = $state(false);
+
+	let carouselApi = $state<CarouselAPI | undefined>();
+
+	function handleWheel(event: WheelEvent) {
+		if (!carouselApi) return;
+
+		const isHorizontal = event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY);
+
+		const delta = isHorizontal ? event.deltaX : event.deltaY;
+		const sensibilityThreshold = 10;
+
+		if (Math.abs(delta) < sensibilityThreshold) return;
+
+		if (delta > 0 && carouselApi.canScrollNext()) {
+			event.preventDefault();
+			carouselApi.scrollNext();
+		} else if (delta < 0 && carouselApi.canScrollPrev()) {
+			event.preventDefault();
+			carouselApi.scrollPrev();
+		}
+	}
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia('(min-width: ' + md + ')');
@@ -57,12 +80,16 @@
 	{#key isMd}
 		<Carousel.Root
 			orientation={isMd ? 'horizontal' : 'vertical'}
-			class="carousel my-10 md:my-0"
+			class="my-10 md:my-0"
+			onwheel={handleWheel}
 			opts={{
 				align: 'start',
+				axis: isMd ? 'x' : 'y',
 				slidesToScroll: 2,
-				skipSnaps: true
+				skipSnaps: true,
+				watchDrag: false
 			}}
+			setApi={(api) => (carouselApi = api)}
 		>
 			<Carousel.Content class="-ms-0 -mt-0 h-96 w-auto md:h-auto md:w-200">
 				{#if items.length === 0}
@@ -98,8 +125,8 @@
 							<!-- Center: Lines + Dot -->
 							<div class="flex h-full flex-col items-center md:flex-row">
 								<!-- Top/Left half-line (connects to previous item) -->
-								<div class="flex flex-1 items-center justify-center">
-									{#if i !== 0}
+								{#if i !== 0}
+									<div class="flex flex-1 items-center justify-center">
 										<div
 											class="h-full w-0.5 transition-colors md:h-0.5 md:w-full {item.status === COMPLETED
 												? 'bg-muted-foreground'
@@ -107,8 +134,8 @@
 													? 'bg-muted-foreground/40'
 													: 'bg-destructive'}"
 										></div>
-									{/if}
-								</div>
+									</div>
+								{/if}
 
 								<!-- Dot -->
 								<Popover.Root>
@@ -120,7 +147,8 @@
 											? 'border-muted-foreground bg-muted-foreground/30'
 											: item.status === ONGOING
 												? 'border-muted-foreground/40 bg-muted'
-												: 'border-destructive bg-destructive/30'}"
+												: 'border-destructive bg-destructive/30'}
+										{i === 0 ? (isMd ? 'ml-5' : 'mt-5') : i === items.length - 1 ? (isMd ? 'mr-5' : 'mb-5') : ''}"
 										openOnHover={true}
 										openDelay={500}
 									>
@@ -148,8 +176,8 @@
 								</Popover.Root>
 
 								<!-- Bottom/Right half-line (connects to next item) -->
-								<div class="flex flex-1 items-center justify-center">
-									{#if i !== items.length - 1}
+								{#if i !== items.length - 1}
+									<div class="flex flex-1 items-center justify-center">
 										<div
 											class="h-full w-0.5 transition-colors md:h-0.5 md:w-full {items[i + 1].status === COMPLETED
 												? 'bg-muted-foreground'
@@ -157,8 +185,8 @@
 													? 'bg-muted-foreground/40'
 													: 'bg-destructive'}"
 										></div>
-									{/if}
-								</div>
+									</div>
+								{/if}
 							</div>
 
 							<!-- Bottom/Right: Date/Name -->
@@ -180,16 +208,8 @@
 {/if}
 
 <style>
-	:global(.carousel:active) {
-		cursor: grabbing;
-	}
-
-	:global(.carousel) {
-		cursor: grab;
-	}
-
 	:global(.carousel-content-trigger:hover) {
-		opacity: 0.85;
+		opacity: 0.75;
 		cursor: help;
 	}
 </style>
