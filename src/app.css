@@ -192,8 +192,8 @@
 /* Custom Properties */
 html {
 	scroll-behavior: smooth;
-	font-size: var(--text-lg);
-	line-height: var(--tw-leading, var(--text-lg--line-height));
+	font-size: var(--text-sm);
+	line-height: var(--tw-leading, var(--text-sm--line-height));
 }
 
 .link:hover {
@@ -232,15 +232,14 @@ html {
 .title {
 	--tw-font-weight: var(--font-weight-bold);
 	font-weight: var(--font-weight-bold);
-	font-size: var(--text-3xl);
-	line-height: var(--tw-leading, var(--text-3xl--line-height));
+	font-size: var(--text-2xl);
+	line-height: var(--tw-leading, var(--text-xl--line-height));
 }
 
 .subtitle {
 	--tw-font-weight: var(--font-weight-bold);
 	font-weight: var(--font-weight-bold);
-	font-size: var(--text-2xl);
-	line-height: var(--tw-leading, var(--text-2xl--line-height));
+	font-size: var(--text-xl);
 }
 
 .no-select {
@@ -249,4 +248,22 @@ html {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+/* Style changes depending on screen size */
+@media (width >= 48rem) {
+	html {
+		font-size: var(--text-lg);
+		line-height: var(--tw-leading, var(--text-lg--line-height));
+	}
+
+	.title {
+		font-size: var(--text-3xl);
+		line-height: var(--tw-leading, var(--text-3xl--line-height));
+	}
+
+	.subtitle {
+		font-size: var(--text-2xl);
+		line-height: var(--tw-leading, var(--text-2xl--line-height));
+	}
 }
