@@ -16,7 +16,7 @@
 
 	async function updateModule() {
 		try {
-			module = await import(`$lib/articles/${lang}/${id}.svx`);
+			module = await import(`$lib/articles/${id}/${lang}.svx`);
 		} catch (err) {
 			console.error(`Failed to load article ${id} for locale ${lang}:`, err);
 			module = null;

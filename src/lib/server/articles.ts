@@ -17,9 +17,9 @@ Object.entries(
 	// Removing '.svx' extension
 	article[1] = article[1].replace('.svx', '');
 
-	// Verifying language of article based on its directory
-	if (!metadata.has(article[0])) metadata.set(article[0], new Map<string, Metadata>());
-	metadata.get(article[0])!.set(article[1], module.metadata);
+	// Verifying the language of an article based on its filename
+	if (!metadata.has(article[1])) metadata.set(article[1], new Map<string, Metadata>());
+	metadata.get(article[1])!.set(article[0], module.metadata);
 });
 
 /**
