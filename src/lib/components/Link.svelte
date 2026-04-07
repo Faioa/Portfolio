@@ -20,7 +20,7 @@
 	}
 
 	const {
-		href = '',
+		href = page.url.pathname,
 		args = {},
 		class: className = '',
 		preloadData = 'hover',

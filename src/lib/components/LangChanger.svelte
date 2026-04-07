@@ -8,9 +8,19 @@
 
 	import Link from '$lib/components/Link.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
-	import { defaultLocale } from '$lib/lang.js';
+	import { defaultLocale, locales } from '$lib/lang.js';
 
-	let currentLocale = $derived(page.params.locale ?? defaultLocale);
+	let currentLocale = $derived.by(() => {
+		if (page.params.locale) return page.params.locale;
+		// Additional check in case the URL is not correct (err 404)
+		const pathname = page.url.pathname;
+		if (pathname.length > 1 && pathname.startsWith('/')) {
+			const tmp = pathname.split('/')[1];
+			if (locales.includes(tmp)) return tmp;
+		}
+
+		return defaultLocale;
+	});
 	let args = $derived({ ...page.params, locale: currentLocale === 'en' ? 'fr' : 'en' });
 </script>
 

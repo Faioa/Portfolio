@@ -11,7 +11,7 @@
 	import GoTop from '$lib/components/GoTop.svelte';
 	import Header from '$lib/components/Header.svelte';
 
-	import '../../app.css';
+	import '../app.css';
 
 	let { children } = $props();
 
