@@ -46,37 +46,43 @@ export function getUrl(
 		hash?: string;
 	} = {}
 ): string {
-	// If link is external, nothing to do
+	// If a link is external, nothing to do
 	if (isExternal) return href;
 
 	let id = opts.id ?? '';
 	const search = opts.search ?? '';
 	const hash = opts.hash ?? '';
 	const params = opts.params ?? {};
-	let fullURL = '';
 
 	// href is absolute
 	if (href.startsWith('/')) {
-		// Default locale is used if not specified
-		const baseURL = params.locale && params.locale !== defaultLocale ? `/${params.locale}` : '';
-		fullURL = resolve(baseURL.concat(href), params);
+		// Removing current locale
+		let cleanedHref = href;
+		for (const locale of locales) {
+			if (href.startsWith(`/${locale}`)) {
+				cleanedHref = href.replace(`/${locale}`, '');
+				break;
+			}
+		}
+		return `${params.locale ? (params.locale === defaultLocale ? '' : `/${params.locale}`) : ''}`
+			.concat(cleanedHref.startsWith('/') ? '' : '/')
+			.concat(cleanedHref);
 	} else {
-		// If id is not valid, returns empty string
+		// If id is not valid, returns an empty string
 		if (id.length === 0) return '';
 
 		// Removing trailing / if necessary
 		if (id.length > 1 && id.endsWith('/')) id = id.slice(0, -1);
 
-		// Removing default locale from URL if necessary
+		// Removing the default locale from URL if necessary
 		if (!params.locale || params.locale === defaultLocale) id = id.replace('/[[locale]]', '/');
 
 		// Resolving the route with SvelteKit resolve function
 		try {
-			fullURL = resolve(id + search + hash, params);
+			return resolve(id + search + hash, params);
 		} catch (err) {
 			console.error('An issue occurred when computing an URL :\r\n' + err);
 			return '';
 		}
 	}
-	return fullURL;
 }
