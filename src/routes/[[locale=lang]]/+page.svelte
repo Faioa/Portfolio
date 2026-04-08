@@ -73,18 +73,5 @@
 	.welcome {
 		text-align: center;
 	}
-
-	.moveUpDown {
-		animation: MoveUpDown 2s linear infinite;
-	}
-
-	@keyframes MoveUpDown {
-		0%,
-		100% {
-			transform: translateY(-5px);
-		}
-		50% {
-			transform: translateY(5px);
-		}
 	}
 </style>
