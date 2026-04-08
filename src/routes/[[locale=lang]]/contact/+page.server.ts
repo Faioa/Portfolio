@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import { EMAIL, RESEND_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { fail } from '@sveltejs/kit';
 import { Resend } from 'resend';
 
@@ -13,7 +13,7 @@ import type { Actions } from './$types';
 
 export const prerender = false;
 
-const resend = new Resend(RESEND_API_KEY);
+let apiKey: Resend | null = null;
 
 export const actions = {
 	default: async (event) => {
@@ -21,20 +21,22 @@ export const actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		if (!EMAIL || !RESEND_API_KEY)
+		if (!env.EMAIL || !env.RESEND_API_KEY)
 			return fail(501, {
 				form,
 				message: 'This service was not configured correctly. Please wait try again later.'
 			});
+
+		if (apiKey === null) apiKey = new Resend(env.RESEND_API_KEY);
 
 		const htmlContent = form.data.content
 			.split('\n\n')
 			.map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
 			.join('');
 
-		const { error } = await resend.emails.send({
-			from: EMAIL,
-			to: [EMAIL],
+		const { error } = await apiKey.emails.send({
+			from: env.EMAIL,
+			to: [env.EMAIL],
 			subject: `${form.data.firstName} ${form.data.lastName} : ${getCategoryLabel(form.data.category)} - ${getSubjectLabel(form.data.subject)}`,
 			html: `
 			<p><strong>Sender</strong> : ${form.data.firstName} - ${form.data.lastName}</p>
