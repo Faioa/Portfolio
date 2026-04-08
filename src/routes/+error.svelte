@@ -28,10 +28,16 @@
 	};
 </script>
 
-<div class="flex-col items-center justify-center text-center">
-	<div>
-		{page.status} - {messages[page.status]?.error}
+<div class="flex flex-col items-center justify-center gap-10 text-center">
+	<div class="flex flex-col items-center justify-center gap-2">
+		<span class="text-5xl font-bold">{page.status}</span>
+		<span class="text-3xl">{messages[page.status]?.error}</span>
 	</div>
-
-	<div>{messages[page.status]?.message}</div>
+	<span class="text-lg">{messages[page.status]?.message}</span>
+	<div class="flex justify-center items-center gap-10">
+		<Link href='/' class="bg-secondary py-2 px-5 rounded-2xl text-lg shadow shadow-primary hover:opacity-70">Home</Link>
+		{#if page.route.id?.startsWith('/[[locale=lang]]/articles/[article]')}
+			<Link href='/articles' class="bg-secondary p-2 rounded text-lg border-primary border-1 shadow shadow-primary hover:opacity-70">Articles</Link>
+		{/if}
+	</div>
 </div>
