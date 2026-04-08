@@ -4,7 +4,7 @@
 	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 
-	import { getUrl, urlIsExternal } from '$lib/lang';
+	import { defaultLocale, getUrl, locales, urlIsExternal } from '$lib/lang';
 
 	interface LinkProps {
 		href?: string;
@@ -57,9 +57,21 @@
 		return attrs;
 	});
 
+	let locale = $derived.by(() => {
+		if (!browser) return defaultLocale;
+		if (page.params.locale) return page.params.locale;
+		// Additional check in case the URL is not correct (err 404)
+		const pathname = page.url.pathname;
+		if (pathname.length > 1 && pathname.startsWith('/')) {
+			const tmp = pathname.split('/')[1];
+			if (locales.includes(tmp)) return tmp;
+		}
+		return defaultLocale;
+	});
+
 	let isExternal = $derived(urlIsExternal(href, page.url.origin));
 
-	let params = $derived({ ...page.params, ...args });
+	let params = $derived({ ...page.params, locale, ...args });
 
 	let search = $derived(href.length !== 0 ? (args.search ?? '') : browser ? page.url.search : '');
 	let hash = $derived(href.length !== 0 ? (args.hash ?? '') : browser ? page.url.hash : '');

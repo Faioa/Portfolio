@@ -1,6 +1,4 @@
 <script lang="ts">
-	import InfoIcon from '@lucide/svelte/icons/info';
-
 	import Fr from 'svelte-flag-icons/Fr.svelte';
 	import Gb from 'svelte-flag-icons/Gb.svelte';
 
@@ -9,8 +7,10 @@
 	import Link from '$lib/components/Link.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { defaultLocale, locales } from '$lib/lang.js';
+	import { browser } from '$app/environment';
 
 	let currentLocale = $derived.by(() => {
+		if (!browser) return defaultLocale;
 		if (page.params.locale) return page.params.locale;
 		// Additional check in case the URL is not correct (err 404)
 		const pathname = page.url.pathname;
@@ -18,10 +18,9 @@
 			const tmp = pathname.split('/')[1];
 			if (locales.includes(tmp)) return tmp;
 		}
-
 		return defaultLocale;
 	});
-	let args = $derived({ ...page.params, locale: currentLocale === 'en' ? 'fr' : 'en' });
+	let args = $derived({ locale: currentLocale === 'en' ? 'fr' : 'en' });
 </script>
 
 <Tooltip.Provider delayDuration={200}>

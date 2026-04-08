@@ -53,6 +53,7 @@ export function getUrl(
 	const search = opts.search ?? '';
 	const hash = opts.hash ?? '';
 	const params = opts.params ?? {};
+	let fullURL = '';
 
 	// href is absolute
 	if (href.startsWith('/')) {
@@ -64,9 +65,11 @@ export function getUrl(
 				break;
 			}
 		}
-		return `${params.locale ? (params.locale === defaultLocale ? '' : `/${params.locale}`) : ''}`
+		fullURL = `${params.locale ? (params.locale === defaultLocale ? '' : `/${params.locale}`) : ''}`
 			.concat(cleanedHref.startsWith('/') ? '' : '/')
-			.concat(cleanedHref);
+			.concat(cleanedHref)
+			.concat(search)
+			.concat(hash);
 	} else {
 		// If id is not valid, returns an empty string
 		if (id.length === 0) return '';
@@ -77,12 +80,14 @@ export function getUrl(
 		// Removing the default locale from URL if necessary
 		if (!params.locale || params.locale === defaultLocale) id = id.replace('/[[locale]]', '/');
 
-		// Resolving the route with SvelteKit resolve function
-		try {
-			return resolve(id + search + hash, params);
-		} catch (err) {
-			console.error('An issue occurred when computing an URL :\r\n' + err);
-			return '';
-		}
+		fullURL = id.concat(search).concat(hash);
+	}
+
+	// Resolving the route with SvelteKit resolve function
+	try {
+		return resolve(fullURL, params);
+	} catch (err) {
+		console.error('An issue occurred when computing an URL :\r\n' + err);
+		return '';
 	}
 }
