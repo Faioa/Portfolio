@@ -31,16 +31,6 @@ msgstr "Read More"
 
 #: src/routes/[[locale=lang]]/+page.svelte
 #: src/routes/[[locale]]/+page.svelte
-msgid "Scroll down or hover the strings..."
-msgstr "Scroll down or hover the strings..."
-
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale]]/+page.svelte
-msgid "...to animate the guitar!<0>(Work in Progress)</0>"
-msgstr "...to animate the guitar!<0>(Work in Progress)</0>"
-
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale]]/+page.svelte
 msgid "Welcome!"
 msgstr "Welcome!"
 
@@ -105,14 +95,6 @@ msgid "<0/>Legal Notices<1/>"
 msgstr "<0/>Legal Notices<1/>"
 
 #: src/lib/components/Header.svelte
-msgid "Matthieu"
-msgstr "Matthieu"
-
-#: src/lib/components/Header.svelte
-msgid "Dartois"
-msgstr "Dartois"
-
-#: src/lib/components/Header.svelte
 msgid "Please activate Javascript to use the website as it depends heavily on animations and events."
 msgstr "Please activate Javascript to use the website as it depends heavily on animations and events."
 
@@ -152,11 +134,13 @@ msgstr "Open my CV"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
+#: src/routes/+error.svelte
 msgid "Home"
 msgstr "Home"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
+#: src/routes/+error.svelte
 #: src/routes/[[locale=lang]]/articles/+page.svelte
 #: src/routes/[[locale]]/articles/+page.svelte
 msgid "Articles"
@@ -1029,7 +1013,3 @@ msgstr "Internal Server Error"
 #: src/routes/[[locale]]/+error.svelte
 msgid "Something went wrong. Please wait a few minutes and try again."
 msgstr "Something went wrong. Please wait a few minutes and try again."
-
-#: src/routes/[[locale]]/+error.svelte
-msgid "TEST"
-msgstr "TEST"

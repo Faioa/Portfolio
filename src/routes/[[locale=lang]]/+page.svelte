@@ -1,9 +1,7 @@
 <script lang="ts">
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import Search from '@lucide/svelte/icons/search';
 
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
-	import Guitar from '$lib/components/Guitar.svelte';
 	import Link from '$lib/components/Link.svelte';
 
 	import type { PageProps } from './$types';
@@ -13,24 +11,6 @@
 	const articles = $derived(data.articles.ids);
 	const metadata = $derived(data.metadata);
 </script>
-
-<div class="relative flex items-start gap-5">
-	<div class="moveUpDown absolute top-[40%] left-[-75%] flex items-center gap-2 whitespace-nowrap">
-		<ChevronDown class="icon" />
-		<p class="flex">Scroll down or hover the strings...</p>
-		<ChevronDown class="icon" />
-	</div>
-
-	<Guitar />
-
-	<div class="moveUpDown absolute top-[60%] left-[100%] flex items-center gap-2 whitespace-nowrap">
-		<ChevronDown class="icon" />
-		<p class="inline-flex gap-1">
-			...to animate the guitar!<span class="text-destructive"> (Work in Progress)</span>
-		</p>
-		<ChevronDown class="icon" />
-	</div>
-</div>
 
 <div class="welcome container">
 	<p class="title">Welcome!</p>

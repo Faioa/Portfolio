@@ -8,16 +8,7 @@
 	const height = 75;
 </script>
 
-<header style="--height: {height}px;">
-	<Link href="/" class="flex h-full gap-5">
-		<Guitar size="{height}px" animate={false} classes="rotate-25" />
-
-		<div class="flex flex-col justify-center text-2xl font-bold">
-			<h1>Matthieu</h1>
-			<h1>Dartois</h1>
-		</div>
-	</Link>
-
+<header style="--height: {height}px;" class="border-b-2 border-b-secondary flex flex-row-reverse">
 	<noscript>
 		<span class="text-center text-destructive">
 			Please activate Javascript to use the website as it depends heavily on animations and events.

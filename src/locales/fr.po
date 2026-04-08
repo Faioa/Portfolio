@@ -54,14 +54,6 @@ msgid "<0/> Copied!"
 msgstr "<0/> Copié !"
 
 #: src/lib/components/Header.svelte
-msgid "Matthieu"
-msgstr ""
-
-#: src/lib/components/Header.svelte
-msgid "Dartois"
-msgstr ""
-
-#: src/lib/components/Header.svelte
 msgid "Please activate Javascript to use the website as it depends heavily on animations and events."
 msgstr "Veuillez activer JavaScript pour utiliser le site pleinement, car il repose fortement sur les scripts."
 
@@ -71,6 +63,7 @@ msgstr "Appuyez pour changer de langue"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
+#: src/routes/+error.svelte
 msgid "Home"
 msgstr "Accueil"
 
@@ -83,6 +76,7 @@ msgstr "À propos"
 
 #: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
+#: src/routes/+error.svelte
 #: src/routes/[[locale=lang]]/articles/+page.svelte
 #: src/routes/[[locale]]/articles/+page.svelte
 msgid "Articles"
@@ -105,16 +99,6 @@ msgstr "Rien à afficher pour le moment."
 #: src/lib/components/WorkInProgress.svelte
 msgid "Work In Progress"
 msgstr "Travail en cours"
-
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale]]/+page.svelte
-msgid "Scroll down or hover the strings..."
-msgstr "Faites défiler ou survolez les cordes..."
-
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale]]/+page.svelte
-msgid "...to animate the guitar!<0>(Work in Progress)</0>"
-msgstr "...pour animer la guitare !<0>(En cours de développement)</0>"
 
 #: src/routes/[[locale=lang]]/+page.svelte
 #: src/routes/[[locale]]/+page.svelte
