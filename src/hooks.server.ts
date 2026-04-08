@@ -1,4 +1,4 @@
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import parser from 'accept-language-parser';
 import { loadLocales, runWithLocale } from 'wuchale/load-utils/server';
 
