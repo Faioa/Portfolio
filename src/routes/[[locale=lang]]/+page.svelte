@@ -73,5 +73,4 @@
 	.welcome {
 		text-align: center;
 	}
-	}
 </style>
