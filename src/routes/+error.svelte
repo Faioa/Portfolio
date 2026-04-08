@@ -37,7 +37,7 @@
 	<div class="flex justify-center items-center gap-10">
 		<Link href='/' class="bg-secondary py-2 px-5 rounded-2xl text-lg shadow shadow-primary hover:opacity-70">Home</Link>
 		{#if page.route.id?.startsWith('/[[locale=lang]]/articles/[article]')}
-			<Link href='/articles' class="bg-secondary p-2 rounded text-lg border-primary border-1 shadow shadow-primary hover:opacity-70">Articles</Link>
+			<Link href='/articles' class="bg-secondary py-2 px-5 rounded-2xl text-lg shadow shadow-primary hover:opacity-70">Articles</Link>
 		{/if}
 	</div>
 </div>
