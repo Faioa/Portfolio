@@ -6,12 +6,14 @@ export const categoriesSubjects = {
 	website: ['bug-report', 'suggestion', 'feedback', 'other'],
 	other: []
 } as const;
+
 export type Category = keyof typeof categoriesSubjects;
 export type Subject =
 	| (typeof categoriesSubjects)['flux-studio'][number]
 	| (typeof categoriesSubjects)['job'][number]
 	| (typeof categoriesSubjects)['website'][number];
-export const categoriesValues = Object.keys(categoriesSubjects) as Category[];
+
+export const categories: Category[] = Object.keys(categoriesSubjects) as Category[];
 
 // Utility function to include labels' translation with Wuchale
 export function getCategoryLabel(value: Category): string {
@@ -38,7 +40,7 @@ export const contactSchema = z.object({
 	firstName: z.string().trim().min(2).max(50),
 	lastName: z.string().trim().min(2).max(50),
 	email: z.email().trim().max(254),
-	category: z.enum(Object.keys(categoriesSubjects) as [Category]),
+	category: z.enum(categories),
 	subject: z.string().trim().min(5).max(100),
 	content: z.string().trim().min(minContent).max(maxContent)
 });

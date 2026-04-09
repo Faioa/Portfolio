@@ -17,7 +17,7 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import {
 		categoriesSubjects,
-		categoriesValues,
+		categories,
 		contactSchema,
 		getCategoryLabel,
 		getSubjectLabel,
@@ -35,11 +35,11 @@
 		$formData.category in categoriesSubjects ? categoriesSubjects[$formData.category] : []
 	);
 
-	let otherSubject: boolean = $state(!browser);
+	let other: boolean = $state(!browser || $formData.subject === 'other' || $formData.category === 'other');
 
 	function resetSubject() {
 		if (!($formData.subject in relatedSubjects)) $formData.subject = '';
-		if ($formData.category !== 'other') otherSubject = false;
+		if ($formData.category !== 'other') other = false;
 	}
 </script>
 
@@ -48,7 +48,6 @@
 	<p class="text-center">
 		In addition to the social media links at the bottom of every page, you can use this contact form to get in touch
 		with me directly. Please feel free to use it if you have any questions or if anything is unclear.
-		<br />Thank you!
 	</p>
 </div>
 
@@ -119,10 +118,10 @@
 							onValueChange={(value) => {
 								if (value === 'other') {
 									$formData.subject = '';
-									otherSubject = true;
+									other = true;
 								} else {
 									$formData.subject = '';
-									otherSubject = false;
+									other = false;
 								}
 							}}
 						>
@@ -130,7 +129,7 @@
 								{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
 							</Select.Trigger>
 							<Select.Content>
-								{#each categoriesValues as value, i (i)}
+								{#each categories as value, i (i)}
 									<Select.Item {value}>{getCategoryLabel(value)}</Select.Item>
 								{/each}
 							</Select.Content>
@@ -144,7 +143,7 @@
 				<Form.Control>
 					{#snippet children({ props })}
 						<Form.Label class="fieldName">Subject</Form.Label>
-						{#if otherSubject}
+						{#if other}
 							<InputGroup.Root class="rounded-2xl">
 								<InputGroup.Input {...props} bind:value={$formData.subject} placeholder="Bug Report" />
 								<InputGroup.Addon align="inline-end">
@@ -166,7 +165,7 @@
 								onValueChange={(value) => {
 									if (value === 'other') {
 										$formData.subject = '';
-										otherSubject = true;
+										other = true;
 									}
 								}}
 							>
@@ -174,8 +173,8 @@
 									{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
 								</Select.Trigger>
 								<Select.Content>
-									{#each Object.entries(relatedSubjects) as [value, label], i (i)}
-										<Select.Item {value}>{label}</Select.Item>
+									{#each relatedSubjects as value, i (i)}
+										<Select.Item {value}>{getSubjectLabel(value)}</Select.Item>
 									{/each}
 								</Select.Content>
 							</Select.Root>
