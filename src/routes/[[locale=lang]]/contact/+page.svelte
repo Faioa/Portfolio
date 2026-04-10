@@ -51,30 +51,28 @@
 	</p>
 </div>
 
-<div class="container grid grid-cols-2 gap-y-4">
-	<form method="POST" use:enhance class="w-150">
+<div class="container">
+	<form method="POST" use:enhance class="grid grid-cols-2 gap-3">
 		<!-- Fields for firstName and lastName -->
-		<div class="col-span-2 grid grid-cols-2 gap-5">
-			<Form.Field {form} name="firstName">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class="fieldName">First Name</Form.Label>
-						<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
+		<Form.Field {form} name="firstName" class="col-span-2 md:col-span-1">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label class="fieldName">First Name</Form.Label>
+					<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-			<Form.Field {form} name="lastName">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class="fieldName">Last Name</Form.Label>
-						<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
-		</div>
+		<Form.Field {form} name="lastName" class="col-span-2 md:col-span-1">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label class="fieldName">Last Name</Form.Label>
+					<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
 		<!-- Field for email -->
 		<Form.Field {form} name="email" class="col-span-2">
@@ -94,7 +92,7 @@
 										{/snippet}
 									</Tooltip.Trigger>
 									<Tooltip.Content class="w-50 rounded-2xl text-center"
-										>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
+									>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
 									>
 								</Tooltip.Root>
 							</Tooltip.Provider>
@@ -116,14 +114,14 @@
 							name="category"
 							bind:value={$formData.category}
 							onValueChange={(value) => {
-								if (value === 'other') {
-									$formData.subject = '';
-									other = true;
-								} else {
-									$formData.subject = '';
-									other = false;
-								}
-							}}
+							if (value === 'other') {
+								$formData.subject = '';
+								other = true;
+							} else {
+								$formData.subject = '';
+								other = false;
+							}
+						}}
 						>
 							<Select.Trigger {...props} class="w-full rounded-2xl">
 								{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
@@ -153,7 +151,7 @@
 										size="icon-xs"
 										class="rounded-full"
 										onclick={resetSubject}
-										><XIcon class="icon" />
+									><XIcon class="icon" />
 									</InputGroup.Button>
 								</InputGroup.Addon>
 							</InputGroup.Root>
@@ -163,11 +161,11 @@
 								name="subject"
 								bind:value={$formData.subject}
 								onValueChange={(value) => {
-									if (value === 'other') {
-										$formData.subject = '';
-										other = true;
-									}
-								}}
+								if (value === 'other') {
+									$formData.subject = '';
+									other = true;
+								}
+							}}
 							>
 								<Select.Trigger {...props} class="w-full rounded-2xl">
 									{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
@@ -191,29 +189,34 @@
 				{#snippet children({ props })}
 					<Form.Label class="fieldName">Content</Form.Label>
 					<div class="flex flex-col gap-1">
-						<Textarea
-							class="h-40 resize-none rounded-2xl"
-							{...props}
-							bind:value={$formData.content}
-							placeholder="Type your message here"
-						/>
+					<Textarea
+						class="h-40 resize-none rounded-2xl"
+						{...props}
+						bind:value={$formData.content}
+						placeholder="Type your message here"
+					/>
 					</div>
 				{/snippet}
 			</Form.Control>
 			<div class="mr-2 flex items-center justify-between self-end">
 				<Form.FieldErrors />
 				<p class="text-sm">
-					<span
-						class={$formData.content.length >= minContent && $formData.content.length <= maxContent
-							? ''
-							: 'text-destructive'}>{$formData.content.length}</span
-					>
+				<span
+					class={$formData.content.length >= minContent && $formData.content.length <= maxContent
+						? ''
+						: 'text-destructive'}>{$formData.content.length}</span
+				>
 					/ {maxContent}
 				</p>
 			</div>
 		</Form.Field>
 
-		<Button type="submit">Submit<SendIcon class="icon" /></Button>
+		<div class="-col-end-1 flex justify-end">
+			<div>
+
+			</div>
+			<Button type="submit" variant="secondary" class="w-min">Submit<SendIcon class="icon" /></Button>
+		</div>
 	</form>
 </div>
 

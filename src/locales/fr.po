@@ -340,14 +340,13 @@ msgstr "Ouvrir mon CV"
 msgid "Contact Form"
 msgstr "Formulaire de Contact"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
-"with me directly. Please feel free to use it if you have any questions or if anything is unclear. <0/>Thank you!"
+"with me directly. Please feel free to use it if you have any questions or if anything is unclear."
 msgstr ""
 "En plus des liens vers mes réseaux sociaux en bas de chaque page, vous pouvez utiliser ce formulaire pour me contacter\n"
-"directement. N'hésitez pas à l'utiliser si vous avez des questions ou si certains points ne sont pas clairs. <0/>Merci !"
+"directement. N'hésitez pas à l'utiliser si vous avez des questions ou si certains points ne sont pas clairs."
 
 #: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte

@@ -668,14 +668,13 @@ msgstr ""
 "as well as a roadmap of the features (<0>which is still a work in progress</0>).\n"
 "Please feel free to give me your feedback. Thank you!"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
-"with me directly. Please feel free to use it if you have any questions or if anything is unclear. <0/>Thank you!"
+"with me directly. Please feel free to use it if you have any questions or if anything is unclear."
 msgstr ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
-"with me directly. Please feel free to use it if you have any questions or if anything is unclear. <0/>Thank you!"
+"with me directly. Please feel free to use it if you have any questions or if anything is unclear."
 
 #: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
