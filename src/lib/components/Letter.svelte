@@ -11,7 +11,7 @@
 	}
 
 	let {
-		backColor = 'fill-muted-foreground/15',
+		backColor = 'fill-secondary',
 		frontColor = 'fill-background',
 		class: className = '',
 		children
