@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { expoOut } from 'svelte/easing';
+	import { expoInOut } from 'svelte/easing';
 	import { type FlyParams, type TransitionConfig, fly, scale } from 'svelte/transition';
 
 	import { cn } from '$lib/utils';
@@ -36,7 +36,7 @@
 			};
 		}
 
-		return fly(node, { duration: 1000, easing: expoOut, y: 100, ...params });
+		return fly(node, { duration: 1000, easing: expoInOut, y: 200, ...params });
 	}
 
 	$effect(() => {
@@ -46,13 +46,15 @@
 			return () => clearTimeout(timer);
 		} else {
 			closed = false
-			const timer = setTimeout(() => { fold = false; }, 500);
+			const timer = setTimeout(() => { fold = false; }, 250);
 			return () => clearTimeout(timer);
 		}
 	});
 </script>
 
-<div class={cn('relative h-[21.299999mm] w-[27.828751mm] overflow-hidden', className)}>
+<div
+	class={cn('relative h-[21.299999mm] w-[27.828751mm] overflow-hidden', className)}
+>
 	{#if fold}
 		<svg
 			transition:customFly
@@ -72,13 +74,17 @@
 	{/if}
 
 	{#if animate && closed}
-		<div transition:scale={{delay: 250, duration: 250}} class="absolute top-[10%] z-50 text-center font-bold">
+		<div transition:scale={{delay: closed ? 250 : 0, duration: 500}} class="absolute top-[10%] z-50 text-center font-bold">
 			{closedMessage}
 		</div>
 	{/if}
 
-	<div class="relative z-0 overflow-hidden p-5 transition-all duration-1000 {animate && fold ? 'h-100 md:h-auto' : 'h-auto'}">
-		<div class="h-full w-full duration-1000 {animate && fold ? 'translate-y-2/5 delay-250' : ''}">
+	<div
+		class="relative z-0 overflow-hidden p-5 {animate && fold ? 'duration-250 scale-y-45 md:scale-y-100' : ' duration-1000 delay-500'}"
+	>
+		<div
+			class="h-full w-full duration-1000 {animate && fold ? '-translate-y-1/6 md:translate-y-2/5 delay-250' : 'delay-400'}"
+		>
 			{@render children?.()}
 		</div>
 	</div>
