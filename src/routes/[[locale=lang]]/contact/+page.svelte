@@ -42,6 +42,8 @@
 		if (!($formData.subject in relatedSubjects)) $formData.subject = '';
 		if ($formData.category !== 'other') other = false;
 	}
+
+	let start = $state(false);
 </script>
 
 <div class="container">
@@ -52,10 +54,12 @@
 	</p>
 </div>
 
+<Button variant="outline" onclick={() => (start = !start)}>Animate</Button>
+
 <div class="container">
 	<!-- Un composant commun avec toutes les erreurs + taille fixe qui ne bouge pas en fonction des inputs-->
 	<!-- Letter container for the send animation -->
-	<Letter class="relative col-span-2 h-auto w-auto">
+	<Letter class="relative col-span-2 h-auto w-auto" bind:start animate={true}>
 		<form method="POST" use:enhance class="relative grid grid-cols-2 gap-3">
 			<!-- Fields for firstName and lastName -->
 			<Form.Field {form} name="firstName" class="col-span-2 md:col-span-1">
