@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { fly, type FlyParams, type TransitionConfig } from 'svelte/transition';
-	import {expoOut} from 'svelte/easing';
 	import type { Snippet } from 'svelte';
+	import { expoOut } from 'svelte/easing';
+	import { type FlyParams, type TransitionConfig, fly, scale } from 'svelte/transition';
 
 	import { cn } from '$lib/utils';
 
 	interface Props {
 		animate?: boolean;
-		start?: boolean;
+		close?: boolean;
+		closedMessage?: string;
 		backColor?: string;
 		frontColor?: string;
 		class?: string;
@@ -16,14 +17,16 @@
 
 	let {
 		animate = false,
-		start = $bindable(false),
+		close = $bindable(false),
+		closedMessage = '',
 		backColor = 'fill-secondary',
 		frontColor = 'fill-background',
 		class: className = '',
 		children
 	}: Props = $props();
 
-	let rotate: boolean = $state(false);
+	let closed: boolean = $state(false);
+	let fold: boolean = $state(false);
 
 	function customFly(node: Element, params: FlyParams = {}): TransitionConfig {
 		if (!animate) {
@@ -33,13 +36,26 @@
 			};
 		}
 
-		return fly(node, {...params, duration: 1000, easing: expoOut, y: 100});
+		return fly(node, { duration: 1000, easing: expoOut, y: 100, ...params });
 	}
+
+	$effect(() => {
+		if (close) {
+			fold = true
+			const timer = setTimeout(() => { closed = true; }, 1000);
+			return () => clearTimeout(timer);
+		} else {
+			closed = false
+			const timer = setTimeout(() => { fold = false; }, 500);
+			return () => clearTimeout(timer);
+		}
+	});
 </script>
 
 <div class={cn('relative h-[21.299999mm] w-[27.828751mm] overflow-hidden', className)}>
-	{#if start}
-		<svg transition:customFly
+	{#if fold}
+		<svg
+			transition:customFly
 			viewBox="0 0 21.299999 27.828751"
 			xmlns="http://www.w3.org/2000/svg"
 			preserveAspectRatio="none"
@@ -55,16 +71,25 @@
 		</svg>
 	{/if}
 
-	<div transition:fly={{y: "50%", duration: 1000}} class="relative z-0 overflow-hidden p-5">
-		{@render children?.()}
+	{#if animate && closed}
+		<div transition:scale={{delay: 250, duration: 250}} class="absolute top-[10%] z-50 text-center font-bold">
+			{closedMessage}
+		</div>
+	{/if}
+
+	<div class="relative z-0 overflow-hidden p-5 transition-all duration-1000 {animate && fold ? 'h-100 md:h-auto' : 'h-auto'}">
+		<div class="h-full w-full duration-1000 {animate && fold ? 'translate-y-2/5 delay-250' : ''}">
+			{@render children?.()}
+		</div>
 	</div>
 
-	{#if start}
-		<svg transition:customFly
+	{#if fold}
+		<svg
+			transition:customFly
 			viewBox="0 0 21.299999 27.828751"
 			xmlns="http://www.w3.org/2000/svg"
 			preserveAspectRatio="none"
-			class="absolute inset-0 z-20 h-full max-h-100 w-full md:max-h-max"
+			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max z-20"
 		>
 			<path
 				id="letter-front"
@@ -75,19 +100,20 @@
 			/>
 		</svg>
 
-		<svg transition:customFly
+		<svg
+			transition:customFly
 			viewBox="0 0 21.299999 27.828751"
 			xmlns="http://www.w3.org/2000/svg"
 			preserveAspectRatio="none"
-			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max {rotate ? 'z-20' : '-z-10'}"
-		>
-			<g transform="translate(-94.350003,-129.3227)">
+			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max {closed ? 'z-20' : '-z-10'}">
+			<g class="duration-500"
+				 style="transform-origin: 10.6px 10.77px; transform: rotateX({closed ? 180 : 0}deg);">
 				<path
 					id="letter-cover"
 					class="inline {frontColor} stroke-current"
 					style="stroke-width:0.297191;stroke-linejoin:bevel;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
 					d="m 95.349308,140.05792 9.690902,-10.58333 9.6909,10.58333 Z"
-					transform="translate(0,0.05119014)"
+					transform="translate(-94.350003,-129.3227)"
 				/>
 			</g>
 		</svg>
