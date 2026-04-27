@@ -25,6 +25,9 @@
 	)}
 	{...restProps}
 >
-	{@render children?.()}
+	<div class="truncate">
+		{@render children?.()}
+	</div>
+
 	<ChevronDownIcon class="size-4 opacity-50" />
 </SelectPrimitive.Trigger>
