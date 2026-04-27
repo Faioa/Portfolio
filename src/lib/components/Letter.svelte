@@ -52,29 +52,32 @@
 	 * @param {FlyParams} params - Additional parameters for the fly effect to override the default values.
 	 */
 	function customFly(node: Element, params: FlyParams = {}): TransitionConfig {
-		if (!animate) {
-			return {
-				duration: 0,
-				css: () => ''
-			};
-		}
-
-		return fly(node, { duration: 1000, easing: expoInOut, y: 200, ...params });
+		return fly(node, { duration: animate ? 1000 : 0, easing: expoInOut, y: 200, ...params });
 	}
 
 	$effect(() => {
 		if (close) {
 			fold = true;
-			const timer = setTimeout(() => {
+
+			if (animate) {
+				const timer = setTimeout(() => {
+					closed = true;
+				}, 1000);
+				return () => clearTimeout(timer);
+			} else {
 				closed = true;
-			}, 1000);
-			return () => clearTimeout(timer);
+			}
 		} else {
 			closed = false;
-			const timer = setTimeout(() => {
+
+			if (animate) {
+				const timer = setTimeout(() => {
+					fold = false;
+				}, 250);
+				return () => clearTimeout(timer);
+			} else {
 				fold = false;
-			}, 250);
-			return () => clearTimeout(timer);
+			}
 		}
 	});
 </script>
@@ -98,9 +101,9 @@
 		</svg>
 	{/if}
 
-	{#if animate && closed}
+	{#if closed}
 		<div
-			transition:scale={{ delay: closed ? 250 : 0, duration: 500 }}
+			transition:scale={{ delay: animate ? (closed ? 250 : 0) : 0, duration: animate ? 500 : 0 }}
 			class="absolute top-[10%] z-50 text-center font-bold"
 		>
 			{closedMessage}
@@ -108,14 +111,18 @@
 	{/if}
 
 	<div
-		class="relative z-0 overflow-hidden {animate && fold
-			? 'scale-y-45 duration-250 md:scale-y-100'
-			: ' delay-500 duration-1000'}"
+		class="relative z-0 overflow-hidden {fold
+			? `scale-y-45 md:scale-y-100 ${animate ? 'duration-250' : 'duration-0'}`
+			: animate
+				? 'delay-500 duration-1000'
+				: 'delay-0 duration-0'}"
 	>
 		<div
-			class="rounded {pageColor ?? ''} h-full w-full p-5 duration-1000 {animate && fold
-				? '-translate-y-1/6 delay-250 md:translate-y-2/5'
-				: 'delay-400'}"
+			class="rounded {pageColor ?? ''} h-full w-full p-5 {animate ? 'duration-1000' : 'duration-0'} {fold
+				? `-translate-y-1/6 md:translate-y-2/5 ${animate ? 'delay-250' : 'delay-0'}`
+				: animate
+					? 'delay-400'
+					: 'delay-0'}"
 		>
 			{@render children?.()}
 		</div>
@@ -145,7 +152,10 @@
 			preserveAspectRatio="none"
 			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max {closed ? 'z-20' : '-z-10'}"
 		>
-			<g class="duration-500" style="transform-origin: 10.6px 10.77px; transform: rotateX({closed ? 180 : 0}deg);">
+			<g
+				class={animate ? 'duration-500' : 'duration-0'}
+				style="transform-origin: 10.6px 10.77px; transform: rotateX({closed ? 180 : 0}deg);"
+			>
 				<path
 					id="letter-cover"
 					class="inline {frontColor} stroke-current"
