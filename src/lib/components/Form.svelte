@@ -1,4 +1,18 @@
 <script lang="ts">
+	import InfoIcon from '@lucide/svelte/icons/info';
+	import SendIcon from '@lucide/svelte/icons/send';
+	import XIcon from '@lucide/svelte/icons/x';
+	import type { FsSuperForm } from 'formsnap';
+
+	import { browser } from '$app/environment';
+
+	import { Button } from '$lib/components/ui/button';
+	import * as Form from '$lib/components/ui/form';
+	import { Input } from '$lib/components/ui/input';
+	import * as InputGroup from '$lib/components/ui/input-group';
+	import * as Select from '$lib/components/ui/select';
+	import { Textarea } from '$lib/components/ui/textarea';
+	import * as Tooltip from '$lib/components/ui/tooltip';
 	import {
 		categories,
 		categoriesSubjects,
@@ -7,20 +21,6 @@
 		maxContent,
 		minContent
 	} from '$lib/contact';
-	import XIcon from '@lucide/svelte/icons/x';
-	import InfoIcon from '@lucide/svelte/icons/info';
-	import { Input } from '$lib/components/ui/input';
-	import { Textarea } from '$lib/components/ui/textarea';
-	import SendIcon from '@lucide/svelte/icons/send';
-	import { Button } from '$lib/components/ui/button';
-
-	import { browser } from '$app/environment';
-
-	import * as Form from '$lib/components/ui/form';
-	import * as InputGroup from '$lib/components/ui/input-group';
-	import * as Select from '$lib/components/ui/select';
-	import * as Tooltip from '$lib/components/ui/tooltip';
-	import type { FsSuperForm } from 'formsnap';
 	import { cn } from '$lib/utils';
 
 	/**
@@ -32,14 +32,17 @@
 	 * @property {string} [class] - An optional CSS class name to style the component.
 	 */
 	interface Props {
-		form:  FsSuperForm<{
-			firstName: string
-			lastName: string
-			email: string
-			category: ('other' | 'flux-studio' | 'job' | 'website')
-			subject: string
-			content: string
-		}, unknown>;
+		form: FsSuperForm<
+			{
+				firstName: string;
+				lastName: string;
+				email: string;
+				category: 'other' | 'flux-studio' | 'job' | 'website';
+				subject: string;
+				content: string;
+			},
+			unknown
+		>;
 		class?: string;
 	}
 
@@ -59,10 +62,7 @@
 	}
 </script>
 
-
 <form method="POST" use:enhance class={cn(className, 'relative grid grid-cols-2 gap-3')}>
-	<!-- Un composant commun avec toutes les erreurs + taille fixe qui ne bouge pas en fonction des inputs-->
-
 	<!-- Fields for firstName and lastName -->
 	<Form.Field {form} name="firstName" class="col-span-1">
 		<Form.Control>
@@ -71,7 +71,7 @@
 				<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors />
+		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 	</Form.Field>
 
 	<Form.Field {form} name="lastName" class="col-span-1">
@@ -81,7 +81,7 @@
 				<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors />
+		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 	</Form.Field>
 
 	<!-- Field for email -->
@@ -102,7 +102,7 @@
 									{/snippet}
 								</Tooltip.Trigger>
 								<Tooltip.Content class="w-50 rounded-2xl text-center"
-								>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
+									>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
 								>
 							</Tooltip.Root>
 						</Tooltip.Provider>
@@ -110,7 +110,7 @@
 				</InputGroup.Root>
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors />
+		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 	</Form.Field>
 
 	<!-- Fields for category and subject -->
@@ -124,14 +124,14 @@
 						name="category"
 						bind:value={$formData.category}
 						onValueChange={(value) => {
-									if (value === 'other') {
-										$formData.subject = '';
-										other = true;
-									} else {
-										$formData.subject = '';
-										other = false;
-									}
-								}}
+							if (value === 'other') {
+								$formData.subject = '';
+								other = true;
+							} else {
+								$formData.subject = '';
+								other = false;
+							}
+						}}
 					>
 						<Select.Trigger {...props} class="w-full rounded-2xl">
 							{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
@@ -144,7 +144,7 @@
 					</Select.Root>
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors />
+			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 		</Form.Field>
 
 		<Form.Field {form} name="subject">
@@ -161,7 +161,7 @@
 									size="icon-xs"
 									class="rounded-full"
 									onclick={resetSubject}
-								><XIcon class="icon" />
+									><XIcon class="icon" />
 								</InputGroup.Button>
 							</InputGroup.Addon>
 						</InputGroup.Root>
@@ -171,11 +171,11 @@
 							name="subject"
 							bind:value={$formData.subject}
 							onValueChange={(value) => {
-										if (value === 'other') {
-											$formData.subject = '';
-											other = true;
-										}
-									}}
+								if (value === 'other') {
+									$formData.subject = '';
+									other = true;
+								}
+							}}
 						>
 							<Select.Trigger {...props} class="w-full rounded-2xl">
 								{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
@@ -189,7 +189,7 @@
 					{/if}
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors />
+			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 		</Form.Field>
 	</div>
 
@@ -199,36 +199,38 @@
 			{#snippet children({ props })}
 				<Form.Label class="fieldName">Content</Form.Label>
 				<div class="flex flex-col gap-1">
-							<Textarea
-								class="h-40 resize-none rounded-2xl"
-								{...props}
-								bind:value={$formData.content}
-								placeholder="Type your message here"
-							/>
+					<Textarea
+						class="h-40 resize-none rounded-2xl"
+						{...props}
+						bind:value={$formData.content}
+						placeholder="Type your message here"
+					/>
 				</div>
 			{/snippet}
 		</Form.Control>
-		<div class="mr-2 flex items-center justify-between self-end">
-			<Form.FieldErrors />
+
+		<div class="mr-2 flex items-center justify-between">
+			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 			<p class="text-sm">
-						<span
-							class={$formData.content.length >= minContent && $formData.content.length <= maxContent
-								? ''
-								: 'text-destructive'}>{$formData.content.length}</span
-						>
+				<span
+					class={$formData.content.length >= minContent && $formData.content.length <= maxContent
+						? ''
+						: 'text-destructive'}>{$formData.content.length}</span
+				>
 				/ {maxContent}
 			</p>
 		</div>
 	</Form.Field>
 
 	<!-- Submit button -->
-	<div class="-col-end-1 flex justify-end">
+	<div class="col-span-2 flex w-full items-center justify-between">
+		<div class="text-xs font-bold text-muted-foreground italic md:text-sm">All fields are mandatory</div>
 		<Button type="submit" variant="secondary" class="w-min">Submit<SendIcon class="icon" /></Button>
 	</div>
 </form>
 
 <style>
-    form :global(.fieldName) {
-        font-weight: bold;
-    }
+	form :global(.fieldName) {
+		font-weight: bold;
+	}
 </style>
