@@ -15,6 +15,7 @@
 
 	let form = $derived(
 		superForm(data.form, {
+			invalidateAll: false,
 			validators: zod4Client(contactSchema),
 			onUpdated({ form }) {
 				if (form.valid) {
@@ -41,7 +42,7 @@
 
 	<!-- Letter container for the send animation -->
 	<Letter
-		class="relative h-auto w-full md:w-125"
+		class="relative min-h-100 h-full w-full md:w-125"
 		bind:close={closeLetter}
 		animate={true}
 		closedMessage="Thank you for your message! I will get back to you as soon as possible."
