@@ -5,12 +5,27 @@
 
 	import { cn } from '$lib/utils';
 
+	/**
+	 * An interface representing properties for the Letter component.
+	 *
+	 * @interface Props
+	 *
+	 * @property {boolean} [animate=false] - Determines if the component should have animations enabled.
+	 * @property {boolean} [close=false] - Indicates whether the component should close. **Bindable**.
+	 * @property {string} [closedMessage=''] - A message to display when the component is closed.
+	 * @property {string} [backColor='fill-secondary'] - CSS class used to specify the color for the component's back.
+	 * @property {string} [frontColor='fill-background'] - CSS class used to specify the color for the component's front, including the cover.
+	 * @property {string} [pageColor='bg-background'] - CSS class used to specify the page color for the content of the letter. There will be no background if this property is not set or invalid.
+	 * @property {string} [class=''] - Additional CSS class to style the component.
+	 * @property {Snippet} [children=undefined] - Represents child elements within the component.
+	 */
 	interface Props {
 		animate?: boolean;
 		close?: boolean;
 		closedMessage?: string;
 		backColor?: string;
 		frontColor?: string;
+		pageColor?: string;
 		class?: string;
 		children?: Snippet;
 	}
@@ -21,6 +36,7 @@
 		closedMessage = '',
 		backColor = 'fill-secondary',
 		frontColor = 'fill-background',
+		pageColor = 'bg-background',
 		class: className = '',
 		children
 	}: Props = $props();
@@ -28,6 +44,13 @@
 	let closed: boolean = $state(false);
 	let fold: boolean = $state(false);
 
+	/**
+	 *
+	 * Custom transition for the fly effect with default values used in this component.
+	 *
+	 * @param {Element} node - The DOM element to transition.
+	 * @param {FlyParams} params - Additional parameters for the fly effect to override the default values.
+	 */
 	function customFly(node: Element, params: FlyParams = {}): TransitionConfig {
 		if (!animate) {
 			return {
@@ -41,20 +64,22 @@
 
 	$effect(() => {
 		if (close) {
-			fold = true
-			const timer = setTimeout(() => { closed = true; }, 1000);
+			fold = true;
+			const timer = setTimeout(() => {
+				closed = true;
+			}, 1000);
 			return () => clearTimeout(timer);
 		} else {
-			closed = false
-			const timer = setTimeout(() => { fold = false; }, 250);
+			closed = false;
+			const timer = setTimeout(() => {
+				fold = false;
+			}, 250);
 			return () => clearTimeout(timer);
 		}
 	});
 </script>
 
-<div
-	class={cn('relative h-[21.299999mm] w-[27.828751mm] overflow-hidden', className)}
->
+<div class={cn('relative h-[21.299999mm] w-[27.828751mm] overflow-hidden', className)}>
 	{#if fold}
 		<svg
 			transition:customFly
@@ -74,16 +99,23 @@
 	{/if}
 
 	{#if animate && closed}
-		<div transition:scale={{delay: closed ? 250 : 0, duration: 500}} class="absolute top-[10%] z-50 text-center font-bold">
+		<div
+			transition:scale={{ delay: closed ? 250 : 0, duration: 500 }}
+			class="absolute top-[10%] z-50 text-center font-bold"
+		>
 			{closedMessage}
 		</div>
 	{/if}
 
 	<div
-		class="relative z-0 overflow-hidden p-5 {animate && fold ? 'duration-250 scale-y-45 md:scale-y-100' : ' duration-1000 delay-500'}"
+		class="relative z-0 overflow-hidden {animate && fold
+			? 'scale-y-45 duration-250 md:scale-y-100'
+			: ' delay-500 duration-1000'}"
 	>
 		<div
-			class="h-full w-full duration-1000 {animate && fold ? '-translate-y-1/6 md:translate-y-2/5 delay-250' : 'delay-400'}"
+			class="rounded {pageColor ?? ''} h-full w-full p-5 duration-1000 {animate && fold
+				? '-translate-y-1/6 delay-250 md:translate-y-2/5'
+				: 'delay-400'}"
 		>
 			{@render children?.()}
 		</div>
@@ -95,7 +127,7 @@
 			viewBox="0 0 21.299999 27.828751"
 			xmlns="http://www.w3.org/2000/svg"
 			preserveAspectRatio="none"
-			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max z-20"
+			class="absolute inset-0 z-20 h-full max-h-100 w-full md:max-h-max"
 		>
 			<path
 				id="letter-front"
@@ -111,9 +143,9 @@
 			viewBox="0 0 21.299999 27.828751"
 			xmlns="http://www.w3.org/2000/svg"
 			preserveAspectRatio="none"
-			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max {closed ? 'z-20' : '-z-10'}">
-			<g class="duration-500"
-				 style="transform-origin: 10.6px 10.77px; transform: rotateX({closed ? 180 : 0}deg);">
+			class="absolute inset-0 h-full max-h-100 w-full md:max-h-max {closed ? 'z-20' : '-z-10'}"
+		>
+			<g class="duration-500" style="transform-origin: 10.6px 10.77px; transform: rotateX({closed ? 180 : 0}deg);">
 				<path
 					id="letter-cover"
 					class="inline {frontColor} stroke-current"
