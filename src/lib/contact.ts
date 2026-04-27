@@ -37,10 +37,22 @@ export function getSubjectLabel(value: Subject | string): string {
 export const minContent = 50;
 export const maxContent = 3000;
 export const contactSchema = z.object({
-	firstName: z.string().trim().min(2).max(50),
-	lastName: z.string().trim().min(2).max(50),
-	email: z.email().trim().max(254),
-	category: z.enum(categories),
-	subject: z.string().trim().min(5).max(100),
-	content: z.string().trim().min(minContent).max(maxContent)
+	firstName: z
+		.string()
+		.trim()
+		.min(1, /* @wc-include */ 'Should not be empty')
+		.max(100, /* @wc-include */ 'Max 100 chars'),
+	lastName: z
+		.string()
+		.trim()
+		.min(1, /* @wc-include */ 'Should not be empty')
+		.max(200, /* @wc-include */ 'Max 255 chars'),
+	email: z.email(/* @wc-include */ 'Invalid email address format').trim().max(254, /* @wc-include */ 'Max 254 chars'),
+	category: z.enum(categories, /* @wc-include */ 'Invalid category'),
+	subject: z.string().trim().min(3, /* @wc-include */ 'Min 3 chars').max(100, /* @wc-include */ 'Max 100 chars'),
+	content: z
+		.string()
+		.trim()
+		.min(minContent, /* @wc-include */ `Min ${minContent} chars`)
+		.max(maxContent, /* @wc-include */ `Max ${maxContent} chars`)
 });
