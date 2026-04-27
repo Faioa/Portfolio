@@ -1,235 +1,32 @@
 <script lang="ts">
-	import InfoIcon from '@lucide/svelte/icons/info';
-	import SendIcon from '@lucide/svelte/icons/send';
-	import XIcon from '@lucide/svelte/icons/x';
-
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 
-	import { browser } from '$app/environment';
-
+	import Form from '$lib/components/Form.svelte';
 	import Letter from '$lib/components/Letter.svelte';
-	import { Button } from '$lib/components/ui/button';
-	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
-	import * as InputGroup from '$lib/components/ui/input-group';
-	import * as Select from '$lib/components/ui/select';
-	import { Textarea } from '$lib/components/ui/textarea';
-	import * as Tooltip from '$lib/components/ui/tooltip';
-	import {
-		categories,
-		categoriesSubjects,
-		contactSchema,
-		getCategoryLabel,
-		getSubjectLabel,
-		maxContent,
-		minContent
-	} from '$lib/contact';
+	import { contactSchema } from '$lib/contact';
 
 	const { data } = $props();
 
 	let form = $derived(superForm(data.form, { validators: zod4Client(contactSchema) }));
-
-	let { form: formData, enhance } = $derived(form);
-
-	let relatedSubjects = $derived(
-		$formData.category in categoriesSubjects ? categoriesSubjects[$formData.category] : []
-	);
-
-	let other: boolean = $state(!browser || $formData.subject === 'other' || $formData.category === 'other');
-
-	function resetSubject() {
-		if (!($formData.subject in relatedSubjects)) $formData.subject = '';
-		if ($formData.category !== 'other') other = false;
-	}
-
-	let close = $state(false);
 </script>
 
 <div class="container">
 	<h1 class="title">Contact Form</h1>
+
 	<p class="text-center">
 		In addition to the social media links at the bottom of every page, you can use this contact form to get in touch
 		with me directly. Please feel free to use it if you have any questions or if anything is unclear.
 	</p>
-</div>
-
-<Button variant="outline" onclick={() => (close = !close)}>Animate</Button>
-
-<div class="container">
-	<!-- Un composant commun avec toutes les erreurs + taille fixe qui ne bouge pas en fonction des inputs-->
 
 	<!-- Letter container for the send animation -->
-	<Letter class="relative col-span-2 h-auto w-auto" bind:close animate={true} closedMessage="Thank you for your message! I will get back to you as soon as possible.">
-		<form method="POST" use:enhance class="relative grid grid-cols-2 gap-3">
-			<!-- Fields for firstName and lastName -->
-			<Form.Field {form} name="firstName" class="col-span-1">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class="fieldName">First Name</Form.Label>
-						<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
-
-			<Form.Field {form} name="lastName" class="col-span-1">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class="fieldName">Last Name</Form.Label>
-						<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
-
-			<!-- Field for email -->
-			<Form.Field {form} name="email" class="col-span-2">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class="fieldName">Email</Form.Label>
-						<InputGroup.Root class="rounded-2xl">
-							<InputGroup.Input {...props} bind:value={$formData.email} placeholder="example@email.com" />
-							<InputGroup.Addon align="inline-end">
-								<Tooltip.Provider delayDuration={200}>
-									<Tooltip.Root>
-										<Tooltip.Trigger>
-											{#snippet child({ props })}
-												<InputGroup.Button {...props} class="rounded-full" size="icon-xs">
-													<InfoIcon />
-												</InputGroup.Button>
-											{/snippet}
-										</Tooltip.Trigger>
-										<Tooltip.Content class="w-50 rounded-2xl text-center"
-											>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
-										>
-									</Tooltip.Root>
-								</Tooltip.Provider>
-							</InputGroup.Addon>
-						</InputGroup.Root>
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
-
-			<!-- Fields for category and subject -->
-			<div class="col-span-2 grid grid-cols-2 gap-5">
-				<Form.Field {form} name="category">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class="fieldName">Category</Form.Label>
-							<Select.Root
-								type="single"
-								name="category"
-								bind:value={$formData.category}
-								onValueChange={(value) => {
-									if (value === 'other') {
-										$formData.subject = '';
-										other = true;
-									} else {
-										$formData.subject = '';
-										other = false;
-									}
-								}}
-							>
-								<Select.Trigger {...props} class="w-full rounded-2xl">
-									{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
-								</Select.Trigger>
-								<Select.Content>
-									{#each categories as value, i (i)}
-										<Select.Item {value}>{getCategoryLabel(value)}</Select.Item>
-									{/each}
-								</Select.Content>
-							</Select.Root>
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors />
-				</Form.Field>
-
-				<Form.Field {form} name="subject">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class="fieldName">Subject</Form.Label>
-							{#if other}
-								<InputGroup.Root class="rounded-2xl">
-									<InputGroup.Input {...props} bind:value={$formData.subject} placeholder="Bug Report" />
-									<InputGroup.Addon align="inline-end">
-										<InputGroup.Button
-											aria-label="Undo"
-											title="Undo"
-											size="icon-xs"
-											class="rounded-full"
-											onclick={resetSubject}
-											><XIcon class="icon" />
-										</InputGroup.Button>
-									</InputGroup.Addon>
-								</InputGroup.Root>
-							{:else}
-								<Select.Root
-									type="single"
-									name="subject"
-									bind:value={$formData.subject}
-									onValueChange={(value) => {
-										if (value === 'other') {
-											$formData.subject = '';
-											other = true;
-										}
-									}}
-								>
-									<Select.Trigger {...props} class="w-full rounded-2xl">
-										{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
-									</Select.Trigger>
-									<Select.Content>
-										{#each relatedSubjects as value, i (i)}
-											<Select.Item {value}>{getSubjectLabel(value)}</Select.Item>
-										{/each}
-									</Select.Content>
-								</Select.Root>
-							{/if}
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors />
-				</Form.Field>
-			</div>
-
-			<!-- Content -->
-			<Form.Field {form} name="content" class="col-span-2">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class="fieldName">Content</Form.Label>
-						<div class="flex flex-col gap-1">
-							<Textarea
-								class="h-40 resize-none rounded-2xl"
-								{...props}
-								bind:value={$formData.content}
-								placeholder="Type your message here"
-							/>
-						</div>
-					{/snippet}
-				</Form.Control>
-				<div class="mr-2 flex items-center justify-between self-end">
-					<Form.FieldErrors />
-					<p class="text-sm">
-						<span
-							class={$formData.content.length >= minContent && $formData.content.length <= maxContent
-								? ''
-								: 'text-destructive'}>{$formData.content.length}</span
-						>
-						/ {maxContent}
-					</p>
-				</div>
-			</Form.Field>
-
-			<!-- Submit button -->
-			<div class="-col-end-1 flex justify-end">
-				<Button type="submit" variant="secondary" class="w-min">Submit<SendIcon class="icon" /></Button>
-			</div>
-		</form>
+	<Letter
+		class="relative h-auto w-full md:w-125"
+		close={false}
+		animate={true}
+		closedMessage="Thank you for your message! I will get back to you as soon as possible."
+	>
+		<!-- Contact form-->
+		<Form {form} />
 	</Letter>
 </div>
-
-<style>
-	form :global(.fieldName) {
-		font-weight: bold;
-	}
-</style>

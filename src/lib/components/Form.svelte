@@ -1,0 +1,234 @@
+<script lang="ts">
+	import {
+		categories,
+		categoriesSubjects,
+		getCategoryLabel,
+		getSubjectLabel,
+		maxContent,
+		minContent
+	} from '$lib/contact';
+	import XIcon from '@lucide/svelte/icons/x';
+	import InfoIcon from '@lucide/svelte/icons/info';
+	import { Input } from '$lib/components/ui/input';
+	import { Textarea } from '$lib/components/ui/textarea';
+	import SendIcon from '@lucide/svelte/icons/send';
+	import { Button } from '$lib/components/ui/button';
+
+	import { browser } from '$app/environment';
+
+	import * as Form from '$lib/components/ui/form';
+	import * as InputGroup from '$lib/components/ui/input-group';
+	import * as Select from '$lib/components/ui/select';
+	import * as Tooltip from '$lib/components/ui/tooltip';
+	import type { FsSuperForm } from 'formsnap';
+	import { cn } from '$lib/utils';
+
+	/**
+	 * The Props interface defines the structure for the properties used in the Form component.
+	 *
+	 * @interface Props
+	 *
+	 * @property {FsSuperForm<{ firstName: string, lastName: string, email: string, category: ('other' | 'flux-studio' | 'job' | 'website'), subject: string, content: string }, unknown>} form - Represents a superform object, managing the structure and data for the specified fields of the form. It follows a zod schema exported in $lib/contact.ts.
+	 * @property {string} [class] - An optional CSS class name to style the component.
+	 */
+	interface Props {
+		form:  FsSuperForm<{
+			firstName: string
+			lastName: string
+			email: string
+			category: ('other' | 'flux-studio' | 'job' | 'website')
+			subject: string
+			content: string
+		}, unknown>;
+		class?: string;
+	}
+
+	const { form, class: className }: Props = $props();
+
+	let { form: formData, enhance } = $derived(form);
+
+	let relatedSubjects = $derived(
+		$formData.category in categoriesSubjects ? categoriesSubjects[$formData.category] : []
+	);
+
+	let other: boolean = $state(!browser || $formData.subject === 'other' || $formData.category === 'other');
+
+	function resetSubject() {
+		if (!($formData.subject in relatedSubjects)) $formData.subject = '';
+		if ($formData.category !== 'other') other = false;
+	}
+</script>
+
+
+<form method="POST" use:enhance class={cn(className, 'relative grid grid-cols-2 gap-3')}>
+	<!-- Un composant commun avec toutes les erreurs + taille fixe qui ne bouge pas en fonction des inputs-->
+
+	<!-- Fields for firstName and lastName -->
+	<Form.Field {form} name="firstName" class="col-span-1">
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label class="fieldName">First Name</Form.Label>
+				<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
+			{/snippet}
+		</Form.Control>
+		<Form.FieldErrors />
+	</Form.Field>
+
+	<Form.Field {form} name="lastName" class="col-span-1">
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label class="fieldName">Last Name</Form.Label>
+				<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
+			{/snippet}
+		</Form.Control>
+		<Form.FieldErrors />
+	</Form.Field>
+
+	<!-- Field for email -->
+	<Form.Field {form} name="email" class="col-span-2">
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label class="fieldName">Email</Form.Label>
+				<InputGroup.Root class="rounded-2xl">
+					<InputGroup.Input {...props} bind:value={$formData.email} placeholder="example@email.com" />
+					<InputGroup.Addon align="inline-end">
+						<Tooltip.Provider delayDuration={200}>
+							<Tooltip.Root>
+								<Tooltip.Trigger>
+									{#snippet child({ props })}
+										<InputGroup.Button {...props} class="rounded-full" size="icon-xs">
+											<InfoIcon />
+										</InputGroup.Button>
+									{/snippet}
+								</Tooltip.Trigger>
+								<Tooltip.Content class="w-50 rounded-2xl text-center"
+								>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
+								>
+							</Tooltip.Root>
+						</Tooltip.Provider>
+					</InputGroup.Addon>
+				</InputGroup.Root>
+			{/snippet}
+		</Form.Control>
+		<Form.FieldErrors />
+	</Form.Field>
+
+	<!-- Fields for category and subject -->
+	<div class="col-span-2 grid grid-cols-2 gap-5">
+		<Form.Field {form} name="category">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label class="fieldName">Category</Form.Label>
+					<Select.Root
+						type="single"
+						name="category"
+						bind:value={$formData.category}
+						onValueChange={(value) => {
+									if (value === 'other') {
+										$formData.subject = '';
+										other = true;
+									} else {
+										$formData.subject = '';
+										other = false;
+									}
+								}}
+					>
+						<Select.Trigger {...props} class="w-full rounded-2xl">
+							{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
+						</Select.Trigger>
+						<Select.Content>
+							{#each categories as value, i (i)}
+								<Select.Item {value}>{getCategoryLabel(value)}</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
+
+		<Form.Field {form} name="subject">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label class="fieldName">Subject</Form.Label>
+					{#if other}
+						<InputGroup.Root class="rounded-2xl">
+							<InputGroup.Input {...props} bind:value={$formData.subject} placeholder="Bug Report" />
+							<InputGroup.Addon align="inline-end">
+								<InputGroup.Button
+									aria-label="Undo"
+									title="Undo"
+									size="icon-xs"
+									class="rounded-full"
+									onclick={resetSubject}
+								><XIcon class="icon" />
+								</InputGroup.Button>
+							</InputGroup.Addon>
+						</InputGroup.Root>
+					{:else}
+						<Select.Root
+							type="single"
+							name="subject"
+							bind:value={$formData.subject}
+							onValueChange={(value) => {
+										if (value === 'other') {
+											$formData.subject = '';
+											other = true;
+										}
+									}}
+						>
+							<Select.Trigger {...props} class="w-full rounded-2xl">
+								{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
+							</Select.Trigger>
+							<Select.Content>
+								{#each relatedSubjects as value, i (i)}
+									<Select.Item {value}>{getSubjectLabel(value)}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					{/if}
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
+	</div>
+
+	<!-- Content -->
+	<Form.Field {form} name="content" class="col-span-2">
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label class="fieldName">Content</Form.Label>
+				<div class="flex flex-col gap-1">
+							<Textarea
+								class="h-40 resize-none rounded-2xl"
+								{...props}
+								bind:value={$formData.content}
+								placeholder="Type your message here"
+							/>
+				</div>
+			{/snippet}
+		</Form.Control>
+		<div class="mr-2 flex items-center justify-between self-end">
+			<Form.FieldErrors />
+			<p class="text-sm">
+						<span
+							class={$formData.content.length >= minContent && $formData.content.length <= maxContent
+								? ''
+								: 'text-destructive'}>{$formData.content.length}</span
+						>
+				/ {maxContent}
+			</p>
+		</div>
+	</Form.Field>
+
+	<!-- Submit button -->
+	<div class="-col-end-1 flex justify-end">
+		<Button type="submit" variant="secondary" class="w-min">Submit<SendIcon class="icon" /></Button>
+	</div>
+</form>
+
+<style>
+    form :global(.fieldName) {
+        font-weight: bold;
+    }
+</style>
