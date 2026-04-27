@@ -168,17 +168,40 @@
 		scroll-behavior: smooth;
 		font-size: var(--text-sm);
 	}
-
-	.link:hover {
-		opacity: 80%;
-		cursor: pointer;
+	.title {
+		font-weight: bold;
+		font-size: var(--text-2xl);
+		letter-spacing: -0.02em;
 	}
 
+	.subtitle {
+		font-weight: bold;
+		font-size: var(--text-xl);
+	}
 	.icon {
 		width: 1em;
 		height: 1em;
 		scroll-behavior: smooth;
 		font-size: var(--text-sm);
+	}
+
+	@media (width >= 48rem) {
+		* {
+			font-size: var(--text-base);
+		}
+		.title {
+			font-size: var(--text-3xl);
+		}
+		.subtitle {
+			font-size: var(--text-2xl);
+		}
+	}
+}
+
+@layer components {
+	.link:hover {
+		opacity: 80%;
+		cursor: pointer;
 	}
 
 	.container {
@@ -202,34 +225,11 @@
 		padding: calc(var(--spacing) * 6);
 	}
 
-	.title {
-		font-weight: bold;
-		font-size: var(--text-2xl);
-		letter-spacing: -0.02em;
-	}
-
-	.subtitle {
-		font-weight: bold;
-		font-size: var(--text-xl);
-	}
-
 	.no-select {
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
-	}
-}
-
-@media (width >= 48rem) {
-	* {
-		font-size: var(--text-base);
-	}
-	.title {
-		font-size: var(--text-3xl);
-	}
-	.subtitle {
-		font-size: var(--text-2xl);
 	}
 }
