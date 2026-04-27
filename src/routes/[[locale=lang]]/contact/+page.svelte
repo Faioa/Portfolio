@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Loader from '@lucide/svelte/icons/loader';
+
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 
@@ -8,7 +10,25 @@
 
 	const { data } = $props();
 
-	let form = $derived(superForm(data.form, { validators: zod4Client(contactSchema) }));
+	let closeLetter = $state(false);
+	let processing = $state(false);
+
+	let form = $derived(
+		superForm(data.form, {
+			validators: zod4Client(contactSchema),
+			onUpdated({ form }) {
+				if (form.valid) {
+					closeLetter = true;
+				}
+			},
+			onSubmit() {
+				processing = true;
+			},
+			onResult() {
+				processing = false;
+			}
+		})
+	);
 </script>
 
 <div class="container">
@@ -22,11 +42,18 @@
 	<!-- Letter container for the send animation -->
 	<Letter
 		class="relative h-auto w-full md:w-125"
-		close={false}
+		bind:close={closeLetter}
 		animate={true}
 		closedMessage="Thank you for your message! I will get back to you as soon as possible."
 	>
 		<!-- Contact form-->
-		<Form {form} />
+		<Form {form} class={processing ? 'pointer-events-none opacity-40' : ''} />
+
+		<!-- Loader -->
+		<Loader
+			class="absolute top-1/2 left-1/2 z-20 size-8 -translate-x-1/2 -translate-y-1/2 animate-spin {processing
+				? ''
+				: 'hidden'}"
+		/>
 	</Letter>
 </div>
