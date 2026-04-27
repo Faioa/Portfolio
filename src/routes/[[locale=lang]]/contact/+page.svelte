@@ -58,11 +58,12 @@
 
 <div class="container">
 	<!-- Un composant commun avec toutes les erreurs + taille fixe qui ne bouge pas en fonction des inputs-->
+
 	<!-- Letter container for the send animation -->
 	<Letter class="relative col-span-2 h-auto w-auto" bind:close animate={true} closedMessage="Thank you for your message! I will get back to you as soon as possible.">
 		<form method="POST" use:enhance class="relative grid grid-cols-2 gap-3">
 			<!-- Fields for firstName and lastName -->
-			<Form.Field {form} name="firstName" class="col-span-2 md:col-span-1">
+			<Form.Field {form} name="firstName" class="col-span-1">
 				<Form.Control>
 					{#snippet children({ props })}
 						<Form.Label class="fieldName">First Name</Form.Label>
@@ -72,7 +73,7 @@
 				<Form.FieldErrors />
 			</Form.Field>
 
-			<Form.Field {form} name="lastName" class="col-span-2 md:col-span-1">
+			<Form.Field {form} name="lastName" class="col-span-1">
 				<Form.Control>
 					{#snippet children({ props })}
 						<Form.Label class="fieldName">Last Name</Form.Label>

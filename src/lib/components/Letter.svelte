@@ -112,14 +112,14 @@
 
 	<div
 		class="relative z-0 overflow-hidden {fold
-			? `scale-y-45 md:scale-y-100 ${animate ? 'duration-250' : 'duration-0'}`
+			? `scale-y-40 md:scale-y-100 ${animate ? 'duration-250' : 'duration-0'}`
 			: animate
 				? 'delay-500 duration-1000'
 				: 'delay-0 duration-0'}"
 	>
 		<div
 			class="rounded {pageColor ?? ''} h-full w-full p-5 {animate ? 'duration-1000' : 'duration-0'} {fold
-				? `-translate-y-1/6 md:translate-y-2/5 ${animate ? 'delay-250' : 'delay-0'}`
+				? `md:translate-y-2/5 ${animate ? 'delay-250' : 'delay-0'}`
 				: animate
 					? 'delay-400'
 					: 'delay-0'}"
