@@ -264,75 +264,73 @@ msgstr "Next"
 msgid "Contact Form"
 msgstr "Contact Form"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "First Name"
 msgstr "First Name"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "John"
 msgstr "John"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Last Name"
 msgstr "Last Name"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Doe"
 msgstr "Doe"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Email"
 msgstr "Email"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Category"
 msgstr "Category"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Select a category"
 msgstr "Select a category"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Subject"
 msgstr "Subject"
 
+#: src/lib/components/Form.svelte
 #: src/lib/contact.ts
-#: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Bug Report"
 msgstr "Bug Report"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
-#: src/routes/[[locale=lang]]/contact/+page.svelte
-#: src/routes/[[locale]]/contact/+page.svelte
-#: src/routes/[[locale]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
+#: src/lib/components/Form.svelte
 msgid "Undo"
 msgstr "Undo"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Select a subject"
 msgstr "Select a subject"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Content"
 msgstr "Content"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Type your message here"
 msgstr "Type your message here"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Submit<0/>"
 msgstr "Submit<0/>"
@@ -668,6 +666,7 @@ msgstr ""
 "as well as a roadmap of the features (<0>which is still a work in progress</0>).\n"
 "Please feel free to give me your feedback. Thank you!"
 
+#: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
@@ -676,7 +675,7 @@ msgstr ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
 "with me directly. Please feel free to use it if you have any questions or if anything is unclear."
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "This email address will only be used to reply to your message and will not be shared in any way."
 msgstr "This email address will only be used to reply to your message and will not be shared in any way."
@@ -1012,3 +1011,44 @@ msgstr "Internal Server Error"
 #: src/routes/[[locale]]/+error.svelte
 msgid "Something went wrong. Please wait a few minutes and try again."
 msgstr "Something went wrong. Please wait a few minutes and try again."
+
+#: src/routes/[[locale=lang]]/contact/+page.svelte
+msgid "Thank you for your message! I will get back to you as soon as possible."
+msgstr "Thank you for your message! I will get back to you as soon as possible."
+
+#: src/lib/components/Form.svelte
+msgid "All fields are mandatory"
+msgstr "All fields are mandatory"
+
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+msgid "Should not be empty"
+msgstr "Should not be empty"
+
+#: src/lib/contact.ts
+msgid "Invalid email address format"
+msgstr "Invalid email address format"
+
+#: src/lib/contact.ts
+msgid "Invalid category"
+msgstr "Invalid category"
+
+#. placeholder {0}: 100
+#. placeholder {0}: 100
+#. placeholder {0}: 254
+#. placeholder {0}: 100
+#. placeholder {0}: maxContent
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+msgid "Maximum {0} chars"
+msgstr "Maximum {0} chars"
+
+#. placeholder {0}: 2
+#. placeholder {0}: minContent
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+msgid "Minimum {0} chars"
+msgstr "Minimum {0} chars"

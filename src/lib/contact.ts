@@ -40,19 +40,26 @@ export const contactSchema = z.object({
 	firstName: z
 		.string()
 		.trim()
-		.min(1, /* @wc-include */ 'Should not be empty')
-		.max(100, /* @wc-include */ 'Max 100 chars'),
+		.min(1, { error: () => 'Should not be empty' })
+		.max(100, { error: () => `Maximum ${100} chars` }),
 	lastName: z
 		.string()
 		.trim()
-		.min(1, /* @wc-include */ 'Should not be empty')
-		.max(200, /* @wc-include */ 'Max 255 chars'),
-	email: z.email(/* @wc-include */ 'Invalid email address format').trim().max(254, /* @wc-include */ 'Max 254 chars'),
-	category: z.enum(categories, /* @wc-include */ 'Invalid category'),
-	subject: z.string().trim().min(3, /* @wc-include */ 'Min 3 chars').max(100, /* @wc-include */ 'Max 100 chars'),
+		.min(1, { error: () => 'Should not be empty' })
+		.max(100, { error: () => `Maximum ${100} chars` }),
+	email: z
+		.email({ error: () => 'Invalid email address format' })
+		.trim()
+		.max(254, { error: () => `Maximum ${254} chars` }),
+	category: z.enum(categories, { error: () => 'Invalid category' }),
+	subject: z
+		.string()
+		.trim()
+		.min(2, { error: () => `Minimum ${2} chars` })
+		.max(100, { error: () => `Maximum ${100} chars` }),
 	content: z
 		.string()
 		.trim()
-		.min(minContent, /* @wc-include */ `Min ${minContent} chars`)
-		.max(maxContent, /* @wc-include */ `Max ${maxContent} chars`)
+		.min(minContent, { error: () => `Minimum ${minContent} chars` })
+		.max(maxContent, { error: () => `Maximum ${maxContent} chars` })
 });

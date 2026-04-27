@@ -340,6 +340,7 @@ msgstr "Ouvrir mon CV"
 msgid "Contact Form"
 msgstr "Formulaire de Contact"
 
+#: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
@@ -348,80 +349,78 @@ msgstr ""
 "En plus des liens vers mes réseaux sociaux en bas de chaque page, vous pouvez utiliser ce formulaire pour me contacter\n"
 "directement. N'hésitez pas à l'utiliser si vous avez des questions ou si certains points ne sont pas clairs."
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "First Name"
 msgstr "Prénom"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "John"
 msgstr "Jean"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Last Name"
 msgstr "Nom"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Doe"
 msgstr "Dupont"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Email"
 msgstr "Email"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "This email address will only be used to reply to your message and will not be shared in any way."
 msgstr "Cette adresse email sera uniquement utilisée pour répondre à votre message et ne sera en aucun cas partagée."
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Category"
 msgstr "Catégorie"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Select a category"
 msgstr "Sélectionnez une catégorie"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Subject"
 msgstr "Sujet"
 
+#: src/lib/components/Form.svelte
 #: src/lib/contact.ts
-#: src/routes/[[locale=lang]]/contact/+page.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Bug Report"
 msgstr "Rapport de Bug"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
-#: src/routes/[[locale=lang]]/contact/+page.svelte
-#: src/routes/[[locale]]/contact/+page.svelte
-#: src/routes/[[locale]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
+#: src/lib/components/Form.svelte
 msgid "Undo"
 msgstr "Annuler"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Select a subject"
 msgstr "Sélectionnez un sujet"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Content"
 msgstr "Contenu"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Type your message here"
 msgstr "Tapez votre message ici"
 
-#: src/routes/[[locale=lang]]/contact/+page.svelte
+#: src/lib/components/Form.svelte
 #: src/routes/[[locale]]/contact/+page.svelte
 msgid "Submit<0/>"
 msgstr "Envoyer<0/>"
@@ -1012,3 +1011,44 @@ msgstr ""
 #: src/routes/[[locale]]/+error.svelte
 msgid "Something went wrong. Please wait a few minutes and try again."
 msgstr "Une erreur s'est produite. Veuillez patienter quelques minutes, puis réessayer."
+
+#: src/routes/[[locale=lang]]/contact/+page.svelte
+msgid "Thank you for your message! I will get back to you as soon as possible."
+msgstr "Je vous remercie pour votre message ! Je vous répondrai le plus rapidement possible."
+
+#: src/lib/components/Form.svelte
+msgid "All fields are mandatory"
+msgstr "Tous les champs sont nécessaires"
+
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+msgid "Should not be empty"
+msgstr "Ne devrait pas être vide"
+
+#: src/lib/contact.ts
+msgid "Invalid email address format"
+msgstr "Format d'adresse e-mail invalide"
+
+#: src/lib/contact.ts
+msgid "Invalid category"
+msgstr "Catégorie invalide"
+
+#. placeholder {0}: 100
+#. placeholder {0}: 100
+#. placeholder {0}: 254
+#. placeholder {0}: 100
+#. placeholder {0}: maxContent
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+msgid "Maximum {0} chars"
+msgstr "Maximum {0} caractères"
+
+#. placeholder {0}: 2
+#. placeholder {0}: minContent
+#: src/lib/contact.ts
+#: src/lib/contact.ts
+msgid "Minimum {0} chars"
+msgstr "Minimum {0} caractères"
