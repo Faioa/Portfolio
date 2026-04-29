@@ -4,7 +4,7 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 
-	import Form from '$lib/components/Form.svelte';
+	import ContactForm from '$lib/components/ContactForm.svelte';
 	import Letter from '$lib/components/Letter.svelte';
 	import { contactSchema } from '$lib/contact';
 
@@ -48,7 +48,7 @@
 		closedMessage="Thank you for your message! I will get back to you as soon as possible."
 	>
 		<!-- Contact form-->
-		<Form {form} class={processing ? 'pointer-events-none opacity-40' : ''} />
+		<ContactForm {form} class={processing ? 'pointer-events-none opacity-40' : ''} />
 
 		<!-- Loader -->
 		<Loader

@@ -221,61 +221,61 @@ msgstr "Next"
 msgid "Contact Form"
 msgstr "Contact Form"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "First Name"
 msgstr "First Name"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "John"
 msgstr "John"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Last Name"
 msgstr "Last Name"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Doe"
 msgstr "Doe"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Email"
 msgstr "Email"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Category"
 msgstr "Category"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Select a category"
 msgstr "Select a category"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Subject"
 msgstr "Subject"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 #: src/lib/contact.ts
 msgid "Bug Report"
 msgstr "Bug Report"
 
-#: src/lib/components/Form.svelte
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Undo"
 msgstr "Undo"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Select a subject"
 msgstr "Select a subject"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Content"
 msgstr "Content"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Type your message here"
 msgstr "Type your message here"
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "Submit<0/>"
 msgstr "Submit<0/>"
 
@@ -593,7 +593,7 @@ msgstr ""
 "In addition to the social media links at the bottom of every page, you can use this contact form to get in touch\n"
 "with me directly. Please feel free to use it if you have any questions or if anything is unclear."
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "This email address will only be used to reply to your message and will not be shared in any way."
 msgstr "This email address will only be used to reply to your message and will not be shared in any way."
 
@@ -887,7 +887,7 @@ msgstr "Something went wrong. Please wait a few minutes and try again."
 msgid "Thank you for your message! I will get back to you as soon as possible."
 msgstr "Thank you for your message! I will get back to you as soon as possible."
 
-#: src/lib/components/Form.svelte
+#: src/lib/components/ContactForm.svelte
 msgid "All fields are mandatory"
 msgstr "All fields are mandatory"
 

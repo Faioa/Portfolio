@@ -24,7 +24,7 @@
 	import { cn } from '$lib/utils';
 
 	/**
-	 * The Props interface defines the structure for the properties used in the Form component.
+	 * The Props interface defines the structure for the properties used in the ContactForm component.
 	 *
 	 * @interface Props
 	 *
