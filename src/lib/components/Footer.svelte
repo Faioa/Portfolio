@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Github from '@lucide/svelte/icons/github';
-	import Linkedin from '@lucide/svelte/icons/linkedin';
+	import GitHub from "$lib/components/icons/GitHub.svelte";
+	import LinkedIn from '$lib/components/icons/LinkedIn.svelte';
 	import Mail from '@lucide/svelte/icons/mail';
 	import Scale from '@lucide/svelte/icons/scale';
 
@@ -12,13 +12,13 @@
 <footer id="footer" style="--height: {height}px;">
 	<div class="grid grid-cols-2 gap-x-5 gap-y-2 text-base">
 		<Link href="https://www.linkedin.com/in/matthieu-dartois/" class="contact">
-			<Linkedin class="icon" />LinkedIn
+			<LinkedIn class="size-5 rounded"/>LinkedIn
 		</Link>
 		<Link href="https://github.com/Faioa" class="contact">
-			<Github class="icon" />GitHub
+			<GitHub class="size-5" />GitHub
 		</Link>
 		<Link href="/contact" class="contact col-span-2">
-			<Mail class="icon" />Contact Me
+			<Mail class="size-5" />Contact Me
 		</Link>
 		<Link href="/legal-notices" class="contact col-span-2 text-sm underline underline-offset-2">
 			<Scale class="icon" />Legal Notices<Scale class="icon" />
