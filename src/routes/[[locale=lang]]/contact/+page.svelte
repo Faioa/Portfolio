@@ -8,28 +8,29 @@
 	import Letter from '$lib/components/Letter.svelte';
 	import { contactSchema } from '$lib/contact';
 
-	const { data } = $props();
+	import { type PageProps } from './$types';
+
+	const { data }: PageProps = $props();
 
 	let closeLetter = $state(false);
 	let processing = $state(false);
 
-	let form = $derived(
-		superForm(data.form, {
-			invalidateAll: false,
-			validators: zod4Client(contactSchema),
-			onUpdated({ form }) {
-				if (form.valid) {
-					closeLetter = true;
-				}
-			},
-			onSubmit() {
-				processing = true;
-			},
-			onResult() {
-				processing = false;
+	/* svelte-ignore state_referenced_locally */
+	let form = superForm(data.form, {
+		invalidateAll: false,
+		validators: zod4Client(contactSchema),
+		onUpdated({ form }) {
+			if (form.valid) {
+				closeLetter = true;
 			}
-		})
-	);
+		},
+		onSubmit() {
+			processing = true;
+		},
+		onResult() {
+			processing = false;
+		}
+	});
 </script>
 
 <div class="container">
@@ -42,7 +43,7 @@
 
 	<!-- Letter container for the send animation -->
 	<Letter
-		class="relative min-h-100 h-full w-full md:w-125"
+		class="relative h-full min-h-100 w-full md:w-125"
 		bind:close={closeLetter}
 		animate={true}
 		closedMessage="Thank you for your message! I will get back to you as soon as possible."

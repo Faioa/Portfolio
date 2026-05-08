@@ -4,7 +4,7 @@
 
 	import { page } from '$app/state';
 
-	import { type ArticleModule, getCategoryLabel } from '$lib/articles-types';
+	import { type ArticleModule, getTagLabel } from '$lib/articles-types';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Separator } from '$lib/components/ui/separator';
 	import { defaultLocale } from '$lib/lang';
@@ -55,7 +55,7 @@
 		{#if module?.metadata?.categories}
 			<div class="flex flex-wrap items-center gap-2">
 				{#each module?.metadata?.categories as category (category)}
-					<Badge variant="secondary">{getCategoryLabel(category)}</Badge>
+					<Badge variant="secondary">{getTagLabel(category)}</Badge>
 				{/each}
 			</div>
 		{/if}

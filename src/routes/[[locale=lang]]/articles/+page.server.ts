@@ -1,3 +1,4 @@
+import { getLocalTimeZone } from '@internationalized/date';
 import { error } from '@sveltejs/kit';
 
 import { superValidate } from 'sveltekit-superforms';
@@ -5,7 +6,7 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 
 import type { Metadata } from '$lib/articles-types';
 import { filtersSchema } from '$lib/articles-types';
-import { numberPerPage } from '$lib/articles-types';
+import { defaultPerPage } from '$lib/articles-types';
 import { type Locale, defaultLocale } from '$lib/lang';
 import { getIds, getMetadata } from '$lib/server/articles';
 
@@ -24,7 +25,6 @@ export const load: PageServerLoad = async ({ url, params }) => {
 	}
 
 	const lang = (params.locale as Locale) ?? defaultLocale;
-	const page = url.searchParams?.get('page') ? parseInt(url.searchParams.get('page')!) : 1;
 
 	articles = getIds({
 		lang,
@@ -37,16 +37,15 @@ export const load: PageServerLoad = async ({ url, params }) => {
 		filter: (metadata: Metadata) => {
 			if (form.data.featured && !metadata.featured) return false;
 
-			if (form.data.fromDate && new Date(form.data.fromDate).valueOf() - new Date(metadata.created).valueOf() > 0)
-				return false;
+			if (form.data.dateStart) return new Date(form.data.dateStart) <= new Date(metadata.created);
 
-			if (form.data.toDate && new Date(form.data.toDate).valueOf() - new Date(metadata.created).valueOf() < 0)
-				return false;
+			if (form.data.dateEnd) return new Date(form.data.dateEnd) >= new Date(metadata.created);
 
 			if (
-				form.data.categories.length > 0 &&
 				metadata.categories &&
-				!form.data.categories.every((value) => metadata.categories!.includes(value))
+				form.data.tags &&
+				form.data.tags.length > 0 &&
+				!form.data.tags.every((value) => metadata.categories!.includes(value))
 			)
 				return false;
 
@@ -62,8 +61,8 @@ export const load: PageServerLoad = async ({ url, params }) => {
 
 			return true;
 		},
-		limit: numberPerPage,
-		start: numberPerPage * (page - 1)
+		limit: defaultPerPage,
+		start: defaultPerPage * (form.data.page - 1)
 	});
 
 	metadata = articles['ids'].map((article) => {
@@ -73,7 +72,5 @@ export const load: PageServerLoad = async ({ url, params }) => {
 		return metadata;
 	});
 
-	const maxPages = Math.ceil(articles.total / numberPerPage);
-	if (maxPages < form.data.page) form.data.page = maxPages;
 	return { form, articles, metadata };
 };
