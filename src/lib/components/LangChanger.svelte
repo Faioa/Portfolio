@@ -2,12 +2,12 @@
 	import Fr from 'svelte-flag-icons/Fr.svelte';
 	import Gb from 'svelte-flag-icons/Gb.svelte';
 
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 
 	import Link from '$lib/components/Link.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { defaultLocale, locales } from '$lib/lang.js';
-	import { browser } from '$app/environment';
 
 	let currentLocale = $derived.by(() => {
 		if (!browser) return defaultLocale;

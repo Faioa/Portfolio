@@ -20,7 +20,7 @@
 	}
 
 	const {
-		href = page.url.pathname,
+		href,
 		args = {},
 		class: className = '',
 		preloadData = 'hover',
@@ -69,15 +69,15 @@
 		return defaultLocale;
 	});
 
-	let isExternal = $derived(urlIsExternal(href, page.url.origin));
+	let isExternal = $derived(urlIsExternal(href ?? page.url.pathname, page.url.origin));
 
 	let params = $derived({ ...page.params, locale, ...args });
 
-	let search = $derived(href.length !== 0 ? (args.search ?? '') : browser ? page.url.search : '');
-	let hash = $derived(href.length !== 0 ? (args.hash ?? '') : browser ? page.url.hash : '');
+	let search = $derived(href && href.length !== 0 ? (args.search ?? '') : browser ? page.url.search : '');
+	let hash = $derived(href && href.length !== 0 ? (args.hash ?? '') : browser ? page.url.hash : '');
 
 	// page.route.id is used instead of page.url.pathname because it leaves the possibility to override the route params
-	let url = $derived(getUrl(href, isExternal, { id: page.route.id, params, search, hash }));
+	let url = $derived(getUrl(href ?? page.url.pathname, isExternal, { id: page.route.id, params, search, hash }));
 </script>
 
 <a {...dataAttributes} class="link {className}" target={isExternal ? '_blank' : '_self'} href={url}>
