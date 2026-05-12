@@ -6,8 +6,9 @@
 	import SearchIcon from '@lucide/svelte/icons/search';
 	import type { FsSuperForm } from 'formsnap';
 
-	import type { Snippet } from 'svelte';
+	import { type Snippet, tick } from 'svelte';
 
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 
 	import {
@@ -67,6 +68,96 @@
 		children
 	}: Props = $props();
 
+	let formRef: HTMLFormElement | null | undefined = $state(null);
+
+	let snapshot = $state({
+		dateStart,
+		dateEnd,
+		featured,
+		pageNumber,
+		perPage,
+		research,
+		sortBy,
+		tags
+	});
+
+	const modified = $derived(
+		!(
+			dateStart === snapshot.dateStart &&
+			dateEnd === snapshot.dateEnd &&
+			featured === snapshot.featured &&
+			perPage === snapshot.perPage &&
+			research === snapshot.research &&
+			sortBy === snapshot.sortBy &&
+			arrayCompare(tags, snapshot.tags)
+		)
+	);
+
+	function arrayCompare(
+		a: unknown[] | undefined | null,
+		b?: unknown[] | undefined | null,
+		ignoreOrder: boolean = false
+	) {
+		if (a === b) return true;
+
+		if (!a || !b) return false;
+
+		if (a.length !== b.length) return false;
+
+		if (ignoreOrder) {
+			return a.every((item, i) => item === b[i]);
+		}
+
+		// Uses copies so that the original arrays are not modified
+		const sortedA = [...a].sort();
+		const sortedB = [...b].sort();
+		return sortedA.every((item, i) => item === sortedB[i]);
+	}
+
+	/*
+	 * This function is used to submit the form programmatically. It updates the snapshot to keep the data consistent between two submits.
+	 */
+	function saveForm(force: boolean = false) {
+		if (modified || force) {
+			snapshot.dateStart = dateStart;
+			snapshot.dateEnd = dateEnd;
+			snapshot.featured = featured;
+			snapshot.perPage = perPage;
+			snapshot.research = research;
+			snapshot.sortBy = sortBy;
+			snapshot.tags = tags;
+		}
+		snapshot.pageNumber = pageNumber;
+	}
+
+	function resetPage() {
+		if (modified) {
+			pageNumber = 1;
+		} else {
+			pageNumber = snapshot.pageNumber;
+		}
+	}
+
+	/*
+	 * This function is used to reset any modification that occurred on fields other than pageNumber to change the page related to the Pagination component.
+	 */
+	async function changePage() {
+		if (modified) {
+			dateStart = snapshot.dateStart;
+			dateEnd = snapshot.dateEnd;
+			featured = snapshot.featured;
+			perPage = snapshot.perPage;
+			research = snapshot.research;
+			sortBy = snapshot.sortBy;
+			tags = snapshot.tags;
+		}
+
+		await tick();
+
+		saveForm();
+		formRef?.requestSubmit();
+	}
+
 	const perPageOptions: number[] = [...new Set([defaultPerPage, 6, 3, 9, 12, 15])].sort((a, b) => a - b);
 
 	const dateFormatter = new DateFormatter(page.params.locale ?? defaultLocale, {
@@ -76,17 +167,28 @@
 	const localTimeZone = getLocalTimeZone();
 	const todayDate = today(localTimeZone);
 	const calendarMinDate = new CalendarDate(2025, 1, 1);
+
+	afterNavigate(() => saveForm(true));
 </script>
 
 <div class={cn('flex flex-col gap-5', className)}>
+	{pageNumber}
+	{snapshot.pageNumber}
+	{modified}
 	<!-- Form -->
-	<form method="GET" class="relative grid grid-cols-6 gap-x-3 gap-y-5 md:grid-cols-8">
+	<form
+		bind:this={formRef}
+		method="GET"
+		class="relative grid grid-cols-6 gap-x-3 gap-y-5 md:grid-cols-8"
+		onsubmit={() => saveForm()}
+	>
 		<!-- Research -->
 		<Form.Field {form} name={research && research !== '' ? 'research' : ''} class="col-span-4 md:col-span-7">
 			<Form.Control>
 				{#snippet children({ props })}
 					<div class="form-field-item">
-						<Input class="rounded-2xl" placeholder="Search..." {...props} bind:value={research}></Input>
+						<Input class="rounded-2xl" placeholder="Search..." {...props} bind:value={research} onchange={resetPage}
+						></Input>
 					</div>
 				{/snippet}
 			</Form.Control>
@@ -108,6 +210,7 @@
 							<Form.Label class="font-bold text-nowrap">Sort By</Form.Label>
 							<NativeSelect.Root
 								bind:value={sortBy}
+								onchange={resetPage}
 								{...props}
 								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!"
 							>
@@ -126,7 +229,7 @@
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- Hidden input because the date picker is inside a popover -->
-						<input class="absolute hidden" {...props} bind:value={dateStart} />
+						<input class="absolute hidden" {...props} bind:value={dateStart} onchange={resetPage} />
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">After</Form.Label>
 							<Popover.Root>
@@ -184,7 +287,7 @@
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- Hidden input because the date picker is inside a popover -->
-						<input class="absolute hidden" {...props} bind:value={dateEnd} />
+						<input class="absolute hidden" {...props} bind:value={dateEnd} onchange={resetPage} />
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Before</Form.Label>
 							<Popover.Root>
@@ -243,7 +346,7 @@
 					{#snippet children({ props })}
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Tags</Form.Label>
-							<Select.Root type="multiple" {...props} bind:value={tags}>
+							<Select.Root type="multiple" {...props} bind:value={tags} onValueChange={resetPage}>
 								<Select.Trigger class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!">Options</Select.Trigger>
 								<Select.Content class="[&_*]:text-xs! md:[&_*]:text-sm!">
 									{#each tagsValues.toSorted((a, b) => getTagLabel(a).localeCompare(getTagLabel(b))) as value (value)}
@@ -263,7 +366,7 @@
 					{#snippet children({ props })}
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Featured</Form.Label>
-							<Switch {...props} bind:checked={featured} />
+							<Switch {...props} bind:checked={featured} onCheckedChange={resetPage} />
 						</div>
 					{/snippet}
 				</Form.Control>
@@ -278,6 +381,7 @@
 							<Form.Label class="font-bold text-nowrap">Per Page</Form.Label>
 							<NativeSelect.Root
 								bind:value={perPage}
+								onchange={resetPage}
 								{...props}
 								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!"
 								aria-sort="ascending"
@@ -294,7 +398,12 @@
 		</div>
 
 		<!-- Hidden field for page number, controlled by the pagination component -->
-		<input name={pageNumber && pageNumber !== 1 ? 'page' : ''} bind:value={pageNumber} class="absolute hidden" />
+		<input
+			name={pageNumber && pageNumber !== 1 ? 'page' : ''}
+			bind:value={pageNumber}
+			class="absolute hidden"
+			onchange={resetPage}
+		/>
 
 		<!-- Displaying the tags in the remaining columns -->
 		<div class="col-span-6 flex flex-wrap items-center justify-center gap-5 md:col-span-8">
@@ -311,15 +420,7 @@
 	</div>
 
 	{#if itemsCount > 0 && itemsCount / perPage > 1}
-		<Pagination.Root
-			count={itemsCount}
-			{perPage}
-			bind:page={pageNumber}
-			onPageChange={() => {
-				form.submit();
-				// Problem si page updated avec le formulaire ? Si oui, déplacer la logique sur des events sur les boutons/links
-			}}
-		>
+		<Pagination.Root count={itemsCount} {perPage} bind:page={pageNumber} onPageChange={changePage}>
 			{#snippet children({ pages, currentPage })}
 				<Pagination.Content>
 					<Pagination.Item>

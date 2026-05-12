@@ -61,8 +61,8 @@ export const load: PageServerLoad = async ({ url, params }) => {
 
 			return true;
 		},
-		limit: defaultPerPage,
-		start: defaultPerPage * (form.data.page - 1)
+		limit: form.data.perPage,
+		start: form.data.perPage * (form.data.page - 1)
 	});
 
 	metadata = articles['ids'].map((article) => {
