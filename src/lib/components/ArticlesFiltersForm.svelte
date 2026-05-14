@@ -1,19 +1,26 @@
 <script lang="ts">
-	import { CalendarDate, DateFormatter, getLocalTimeZone, parseDate, today } from '@internationalized/date';
+	import {
+		CalendarDate,
+		DateFormatter,
+		type DateValue,
+		getLocalTimeZone,
+		parseDate,
+		today
+	} from '@internationalized/date';
 	import CalendarIcon from '@lucide/svelte/icons/calendar';
 	import ChevronLeftIcon from '@lucide/svelte/icons/chevron-left';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 	import SearchIcon from '@lucide/svelte/icons/search';
-	import type { FsSuperForm } from 'formsnap';
 
 	import { type Snippet, tick } from 'svelte';
+	import { type Infer, type SuperValidated, superForm } from 'sveltekit-superforms';
+	import { zod4Client } from 'sveltekit-superforms/adapters';
 
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 
 	import {
-		type SortBy,
-		type Tag,
+		type FiltersSchema,
 		defaultPerPage,
 		defaultSortBy,
 		getSortByLabel,
@@ -21,6 +28,7 @@
 		sortByValues,
 		tagsValues
 	} from '$lib/articles-types';
+	import { filtersSchema } from '$lib/articles-types';
 	import { defaultFeatured } from '$lib/articles-types.js';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
@@ -37,62 +45,84 @@
 	import { cn } from '$lib/utils';
 
 	interface Props {
-		dateStart?: string;
-		dateEnd?: string;
-		featured?: boolean;
+		formProp: SuperValidated<Infer<FiltersSchema>>;
 		itemsCount?: number;
-		page?: number;
-		perPage?: number;
-		research?: string;
-		sortBy?: SortBy;
-		tags?: Tag[];
-		form: FsSuperForm<Record<string, unknown>, unknown>;
 		class?: string;
 		childrenClass?: string;
 		children?: Snippet;
 	}
 
 	let {
+		formProp = $bindable(),
 		itemsCount = $bindable(0),
-		dateStart = $bindable(),
-		dateEnd = $bindable(),
-		featured = $bindable(false),
-		page: pageNumber = $bindable(1),
-		perPage = $bindable(defaultPerPage),
-		research = $bindable(),
-		sortBy = $bindable(defaultSortBy),
-		tags = $bindable(),
-		form = $bindable(),
 		class: className = '',
 		childrenClass = '',
 		children
 	}: Props = $props();
 
+	const form = superForm(formProp, {
+		invalidateAll: false,
+		resetForm: false,
+		validators: zod4Client(filtersSchema)
+	});
+
+	const { form: formData } = form;
+
 	let formRef: HTMLFormElement | null | undefined = $state(null);
 
+	let dateStartValue = $state($formData.dateStart ? parseDate($formData.dateStart) : undefined);
+	let dateEndValue = $state($formData.dateEnd ? parseDate($formData.dateEnd) : undefined);
+
+	function updateDateStart(value?: DateValue) {
+		dateStartValue = value as CalendarDate | undefined;
+		$formData.dateStart = value?.toString();
+
+		if (dateEndValue && value && dateEndValue.compare(value) < 0) {
+			$formData.dateEnd = undefined;
+			dateEndValue = undefined;
+		}
+
+		resetPage();
+	}
+
+	function updateDateEnd(value?: DateValue) {
+		dateEndValue = value as CalendarDate | undefined;
+		$formData.dateEnd = value?.toString();
+
+		if (dateStartValue && value && dateStartValue.compare(value) < 0) {
+			$formData.dateStart = undefined;
+			dateStartValue = undefined;
+		}
+
+		resetPage();
+	}
+
 	let snapshot = $state({
-		dateStart,
-		dateEnd,
-		featured,
-		pageNumber,
-		perPage,
-		research,
-		sortBy,
-		tags
+		dateStart: $formData.dateStart,
+		dateEnd: $formData.dateEnd,
+		featured: $formData.featured,
+		pageNumber: $formData.page,
+		perPage: $formData.perPage,
+		research: $formData.research,
+		sortBy: $formData.sortBy,
+		tags: $formData.tags
 	});
 
 	const modified = $derived(
 		!(
-			dateStart === snapshot.dateStart &&
-			dateEnd === snapshot.dateEnd &&
-			featured === snapshot.featured &&
-			perPage === snapshot.perPage &&
-			research === snapshot.research &&
-			sortBy === snapshot.sortBy &&
-			arrayCompare(tags, snapshot.tags)
+			$formData.dateStart === snapshot.dateStart &&
+			$formData.dateEnd === snapshot.dateEnd &&
+			$formData.featured === snapshot.featured &&
+			$formData.perPage === snapshot.perPage &&
+			$formData.research === snapshot.research &&
+			$formData.sortBy === snapshot.sortBy &&
+			arrayCompare($formData.tags, snapshot.tags)
 		)
 	);
 
+	/*
+	 * Utility functions to compare arrays.
+	 */
 	function arrayCompare(
 		a: unknown[] | undefined | null,
 		b?: unknown[] | undefined | null,
@@ -115,26 +145,28 @@
 	}
 
 	/*
-	 * This function is used to submit the form programmatically. It updates the snapshot to keep the data consistent between two submits.
+	 * This function is used to handle the submitting of the form. It updates the snapshot to keep the data consistent between two submits.
 	 */
 	function saveForm(force: boolean = false) {
 		if (modified || force) {
-			snapshot.dateStart = dateStart;
-			snapshot.dateEnd = dateEnd;
-			snapshot.featured = featured;
-			snapshot.perPage = perPage;
-			snapshot.research = research;
-			snapshot.sortBy = sortBy;
-			snapshot.tags = tags;
+			snapshot.dateStart = $formData.dateStart;
+			dateStartValue = $formData.dateStart ? parseDate($formData.dateStart) : undefined;
+			snapshot.dateEnd = $formData.dateEnd;
+			dateEndValue = $formData.dateEnd ? parseDate($formData.dateEnd) : undefined;
+			snapshot.featured = $formData.featured;
+			snapshot.perPage = $formData.perPage;
+			snapshot.research = $formData.research;
+			snapshot.sortBy = $formData.sortBy;
+			snapshot.tags = $formData.tags;
 		}
-		snapshot.pageNumber = pageNumber;
+		snapshot.pageNumber = $formData.page;
 	}
 
 	function resetPage() {
 		if (modified) {
-			pageNumber = 1;
+			$formData.page = 1;
 		} else {
-			pageNumber = snapshot.pageNumber;
+			$formData.page = snapshot.pageNumber;
 		}
 	}
 
@@ -143,13 +175,15 @@
 	 */
 	async function changePage() {
 		if (modified) {
-			dateStart = snapshot.dateStart;
-			dateEnd = snapshot.dateEnd;
-			featured = snapshot.featured;
-			perPage = snapshot.perPage;
-			research = snapshot.research;
-			sortBy = snapshot.sortBy;
-			tags = snapshot.tags;
+			$formData.dateStart = snapshot.dateStart;
+			dateStartValue = snapshot.dateStart ? parseDate(snapshot.dateStart) : undefined;
+			$formData.dateEnd = snapshot.dateEnd;
+			dateEndValue = snapshot.dateEnd ? parseDate(snapshot.dateEnd) : undefined;
+			$formData.featured = snapshot.featured;
+			$formData.perPage = snapshot.perPage;
+			$formData.research = snapshot.research;
+			$formData.sortBy = snapshot.sortBy;
+			$formData.tags = snapshot.tags;
 		}
 
 		await tick();
@@ -168,13 +202,11 @@
 	const todayDate = today(localTimeZone);
 	const calendarMinDate = new CalendarDate(2025, 1, 1);
 
+	// Reset the snapshot when the page changes
 	afterNavigate(() => saveForm(true));
 </script>
 
 <div class={cn('flex flex-col gap-5', className)}>
-	{pageNumber}
-	{snapshot.pageNumber}
-	{modified}
 	<!-- Form -->
 	<form
 		bind:this={formRef}
@@ -183,11 +215,19 @@
 		onsubmit={() => saveForm()}
 	>
 		<!-- Research -->
-		<Form.Field {form} name={research && research !== '' ? 'research' : ''} class="col-span-4 md:col-span-7">
+		<Form.Field {form} name="research" class="col-span-4 md:col-span-7">
 			<Form.Control>
 				{#snippet children({ props })}
+					<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+					{@const { name: _, ...rest } = props}
 					<div class="form-field-item">
-						<Input class="rounded-2xl" placeholder="Search..." {...props} bind:value={research} onchange={resetPage}
+						<Input
+							name={$formData.research && $formData.research !== '' ? 'research' : ''}
+							class="rounded-2xl"
+							placeholder="Search..."
+							{...rest}
+							bind:value={$formData.research}
+							onchange={resetPage}
 						></Input>
 					</div>
 				{/snippet}
@@ -203,15 +243,18 @@
 
 		<div class="col-span-6 flex flex-wrap items-center justify-evenly gap-5 md:col-span-8 md:flex-nowrap">
 			<!-- Sort By -->
-			<Form.Field {form} name={sortBy && sortBy !== defaultSortBy ? 'sortBy' : ''}>
+			<Form.Field {form} name="sortBy">
 				<Form.Control>
 					{#snippet children({ props })}
+						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+						{@const { name: _, ...rest } = props}
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Sort By</Form.Label>
 							<NativeSelect.Root
-								bind:value={sortBy}
+								name={$formData.sortBy && $formData.sortBy !== defaultSortBy ? 'sortBy' : ''}
+								bind:value={$formData.sortBy}
 								onchange={resetPage}
-								{...props}
+								{...rest}
 								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!"
 							>
 								{#each sortByValues.toSorted( (a, b) => getSortByLabel(a).localeCompare(getSortByLabel(b)) ) as value (value)}
@@ -221,27 +264,33 @@
 						</div>
 					{/snippet}
 				</Form.Control>
-				<Form.FieldErrors />
 			</Form.Field>
 
 			<!-- Date Start -->
-			<Form.Field {form} name={dateStart ? 'dateStart' : ''}>
+			<Form.Field {form} name="dateStart">
 				<Form.Control>
 					{#snippet children({ props })}
+						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+						{@const { name: _, ...rest } = props}
 						<!-- Hidden input because the date picker is inside a popover -->
-						<input class="absolute hidden" {...props} bind:value={dateStart} onchange={resetPage} />
+						<input
+							class="absolute hidden"
+							name={$formData.dateStart ? 'dateStart' : ''}
+							{...rest}
+							bind:value={$formData.dateStart}
+						/>
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">After</Form.Label>
 							<Popover.Root>
 								<Popover.Trigger
 									{...props}
-									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! {dateStart
+									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! {$formData.dateStart
 										? 'text-muted-foreground'
 										: ''}"
 								>
 									<CalendarIcon class="icon opacity-50" />
 									<span class="truncate">
-										{dateStart ? dateFormatter.format(parseDate(dateStart).toDate(localTimeZone)) : 'Pick a date'}
+										{dateStartValue ? dateFormatter.format(dateStartValue.toDate(localTimeZone)) : 'Pick a date'}
 									</span>
 								</Popover.Trigger>
 								<Popover.Content class="w-auto p-0" side="bottom" align="center">
@@ -253,7 +302,7 @@
 													size="sm"
 													variant="outline"
 													onclick={() => {
-														if (!dateEnd || todayDate <= parseDate(dateEnd)) dateStart = todayDate.toString();
+														updateDateStart(todayDate);
 													}}>Today</Button
 												>
 											</Card.Action>
@@ -263,14 +312,11 @@
 												captionLayout="dropdown"
 												locale={page.params.locale ?? defaultLocale}
 												minValue={calendarMinDate}
-												maxValue={dateEnd ? parseDate(dateEnd) : todayDate}
+												maxValue={dateEndValue ?? todayDate}
 												placeholder={todayDate}
 												type="single"
-												value={dateStart ? parseDate(dateStart) : undefined}
-												onValueChange={(value) => {
-													dateStart = value?.toString();
-													if (dateEnd && value && parseDate(dateEnd) < value) dateEnd = undefined;
-												}}
+												bind:value={dateStartValue}
+												onValueChange={updateDateStart}
 											/>
 										</Card.Content>
 									</Card.Root>
@@ -279,27 +325,33 @@
 						</div>
 					{/snippet}
 				</Form.Control>
-				<Form.FieldErrors />
 			</Form.Field>
 
 			<!-- Date End -->
-			<Form.Field {form} name={dateEnd ? 'dateEnd' : ''}>
+			<Form.Field {form} name="dateEnd">
 				<Form.Control>
 					{#snippet children({ props })}
+						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+						{@const { name: _, ...rest } = props}
 						<!-- Hidden input because the date picker is inside a popover -->
-						<input class="absolute hidden" {...props} bind:value={dateEnd} onchange={resetPage} />
+						<input
+							class="absolute hidden"
+							name={$formData.dateEnd ? 'dateEnd' : ''}
+							{...rest}
+							bind:value={$formData.dateEnd}
+						/>
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Before</Form.Label>
 							<Popover.Root>
 								<Popover.Trigger
 									{...props}
-									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! {dateEnd
+									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! {$formData.dateEnd
 										? 'text-muted-foreground'
 										: ''}"
 								>
 									<CalendarIcon class="icon opacity-50" />
 									<span class="truncate">
-										{dateEnd ? dateFormatter.format(parseDate(dateEnd).toDate(localTimeZone)) : 'Pick a date'}
+										{dateEndValue ? dateFormatter.format(dateEndValue.toDate(localTimeZone)) : 'Pick a date'}
 									</span>
 								</Popover.Trigger>
 								<Popover.Content class="w-auto p-0" side="bottom" align="center">
@@ -311,7 +363,7 @@
 													size="sm"
 													variant="outline"
 													onclick={() => {
-														dateEnd = today(getLocalTimeZone()).toString();
+														updateDateEnd(todayDate);
 													}}>Today</Button
 												>
 											</Card.Action>
@@ -320,15 +372,12 @@
 											<Calendar
 												captionLayout="dropdown"
 												locale={page.params.locale ?? defaultLocale}
-												minValue={dateStart ? parseDate(dateStart) : calendarMinDate}
+												minValue={$formData.dateStart ? parseDate($formData.dateStart) : calendarMinDate}
 												maxValue={todayDate}
 												placeholder={todayDate}
 												type="single"
-												value={dateEnd ? parseDate(dateEnd) : undefined}
-												onValueChange={(value) => {
-													dateEnd = value?.toString();
-													if (dateStart && value && value < parseDate(dateStart)) dateStart = undefined;
-												}}
+												bind:value={dateEndValue}
+												onValueChange={updateDateEnd}
 											/>
 										</Card.Content>
 									</Card.Root>
@@ -337,16 +386,27 @@
 						</div>
 					{/snippet}
 				</Form.Control>
-				<Form.FieldErrors />
 			</Form.Field>
 
 			<!-- Tags -->
-			<Form.Field {form} name={tags && tags.length > 0 && !(tags.length === 1 && tags[0] === undefined) ? 'tags' : ''}>
+			<Form.Field {form} name="tags">
 				<Form.Control>
 					{#snippet children({ props })}
+						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+						{@const { name: _, ...rest } = props}
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Tags</Form.Label>
-							<Select.Root type="multiple" {...props} bind:value={tags} onValueChange={resetPage}>
+							<Select.Root
+								name={$formData.tags &&
+								$formData.tags.length > 0 &&
+								!($formData.tags.length === 1 && $formData.tags[0] === undefined)
+									? 'tags'
+									: ''}
+								type="multiple"
+								{...rest}
+								bind:value={$formData.tags}
+								onValueChange={resetPage}
+							>
 								<Select.Trigger class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!">Options</Select.Trigger>
 								<Select.Content class="[&_*]:text-xs! md:[&_*]:text-sm!">
 									{#each tagsValues.toSorted((a, b) => getTagLabel(a).localeCompare(getTagLabel(b))) as value (value)}
@@ -357,32 +417,40 @@
 						</div>
 					{/snippet}
 				</Form.Control>
-				<Form.FieldErrors />
 			</Form.Field>
 
 			<!-- Featured -->
-			<Form.Field {form} name={featured && featured !== defaultFeatured ? 'featured' : ''}>
+			<Form.Field {form} name="featured">
 				<Form.Control>
 					{#snippet children({ props })}
+						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+						{@const { name: _, ...rest } = props}
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Featured</Form.Label>
-							<Switch {...props} bind:checked={featured} onCheckedChange={resetPage} />
+							<Switch
+								name={$formData.featured && $formData.featured !== defaultFeatured ? 'featured' : ''}
+								{...rest}
+								bind:checked={$formData.featured}
+								onCheckedChange={resetPage}
+							/>
 						</div>
 					{/snippet}
 				</Form.Control>
-				<Form.FieldErrors />
 			</Form.Field>
 
 			<!-- Per Page -->
-			<Form.Field {form} name={perPage && perPage !== defaultPerPage ? 'perPage' : ''}>
+			<Form.Field {form} name="perPage">
 				<Form.Control>
 					{#snippet children({ props })}
+						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+						{@const { name: _, ...rest } = props}
 						<div class="form-field-item flex-col md:flex-row">
 							<Form.Label class="font-bold text-nowrap">Per Page</Form.Label>
 							<NativeSelect.Root
-								bind:value={perPage}
+								name={$formData.perPage && $formData.perPage !== defaultPerPage ? 'perPage' : ''}
+								bind:value={$formData.perPage}
 								onchange={resetPage}
-								{...props}
+								{...rest}
 								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!"
 								aria-sort="ascending"
 							>
@@ -393,22 +461,20 @@
 						</div>
 					{/snippet}
 				</Form.Control>
-				<Form.FieldErrors />
 			</Form.Field>
 		</div>
 
 		<!-- Hidden field for page number, controlled by the pagination component -->
 		<input
-			name={pageNumber && pageNumber !== 1 ? 'page' : ''}
-			bind:value={pageNumber}
+			name={$formData.page && $formData.page !== 1 ? 'page' : ''}
+			bind:value={$formData.page}
 			class="absolute hidden"
-			onchange={resetPage}
 		/>
 
 		<!-- Displaying the tags in the remaining columns -->
 		<div class="col-span-6 flex flex-wrap items-center justify-center gap-5 md:col-span-8">
-			{#if tags && tags.length > 0}
-				{#each tags as tag, i (i)}
+			{#if $formData.tags && $formData.tags.length > 0}
+				{#each $formData.tags as tag, i (i)}
 					<Badge variant="secondary" class="w-min truncate text-xs! md:text-sm!">{getTagLabel(tag)}</Badge>
 				{/each}
 			{/if}
@@ -419,8 +485,13 @@
 		{@render children?.()}
 	</div>
 
-	{#if itemsCount > 0 && itemsCount / perPage > 1}
-		<Pagination.Root count={itemsCount} {perPage} bind:page={pageNumber} onPageChange={changePage}>
+	{#if itemsCount > 0 && itemsCount / $formData.perPage > 1}
+		<Pagination.Root
+			count={itemsCount}
+			perPage={$formData.perPage}
+			bind:page={$formData.page}
+			onPageChange={changePage}
+		>
 			{#snippet children({ pages, currentPage })}
 				<Pagination.Content>
 					<Pagination.Item>

@@ -1,4 +1,3 @@
-import { getLocalTimeZone } from '@internationalized/date';
 import { error } from '@sveltejs/kit';
 
 import { superValidate } from 'sveltekit-superforms';
@@ -6,7 +5,6 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 
 import type { Metadata } from '$lib/articles-types';
 import { filtersSchema } from '$lib/articles-types';
-import { defaultPerPage } from '$lib/articles-types';
 import { type Locale, defaultLocale } from '$lib/lang';
 import { getIds, getMetadata } from '$lib/server/articles';
 

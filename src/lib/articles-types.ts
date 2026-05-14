@@ -104,3 +104,5 @@ export const filtersSchema = z
 		},
 		{ error: () => 'Field dateStart should be earlier than dateEnd.', path: ['dateEnd'] }
 	);
+
+export type FiltersSchema = typeof filtersSchema;
