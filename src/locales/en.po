@@ -138,75 +138,22 @@ msgstr "Projects"
 msgid "Work In Progress"
 msgstr "Work In Progress"
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Search..."
 msgstr "Search..."
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Search"
-msgstr "Search"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Filters"
-msgstr "Filters"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Select the filters you want to use for your research."
-msgstr "Select the filters you want to use for your research."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Sort By"
 msgstr "Sort By"
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Select a sorting order"
-msgstr "Select a sorting order"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can choose how the results are sorted with this filter."
-msgstr "You can choose how the results are sorted with this filter."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Featured"
 msgstr "Featured"
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can choose if you want to search for featured articles or not."
-msgstr "You can choose if you want to search for featured articles or not."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Posted After"
-msgstr "Posted After"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Pick a date"
 msgstr "Pick a date"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can filter all articles posted after this date."
-msgstr "You can filter all articles posted after this date."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Posted Before"
-msgstr "Posted Before"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can filter all articles posted before this date."
-msgstr "You can filter all articles posted before this date."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Categories"
-msgstr "Categories"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Select the tags"
-msgstr "Select the tags"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Apply"
-msgstr "Apply"
 
 #: src/lib/components/ui/pagination/pagination-prev-button.svelte
 msgid "Previous"
@@ -355,10 +302,6 @@ msgid "Displays the mobile sidebar."
 msgstr "Displays the mobile sidebar."
 
 #: src/lib/articles-types.ts
-msgid "Incorrect range with the selected dates. Check their order and retry."
-msgstr "Incorrect range with the selected dates. Check their order and retry."
-
-#: src/lib/articles-types.ts
 msgid "Miscellaneous"
 msgstr "Miscellaneous"
 
@@ -378,22 +321,6 @@ msgstr "Networks"
 #: src/lib/contact.ts
 msgid "Website"
 msgstr "Website"
-
-#: src/lib/articles-types.ts
-msgid "Least Recently Created"
-msgstr "Least Recently Created"
-
-#: src/lib/articles-types.ts
-msgid "Most Recently Created"
-msgstr "Most Recently Created"
-
-#: src/lib/articles-types.ts
-msgid "Least Recently Modified"
-msgstr "Least Recently Modified"
-
-#: src/lib/articles-types.ts
-msgid "Most Recently Modified"
-msgstr "Most Recently Modified"
 
 #: src/lib/contact.ts
 msgid "Job Opportunities"
@@ -596,10 +523,6 @@ msgstr ""
 #: src/lib/components/ContactForm.svelte
 msgid "This email address will only be used to reply to your message and will not be shared in any way."
 msgstr "This email address will only be used to reply to your message and will not be shared in any way."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can filter the resulting articles based on their tags (the articles will match all tags)."
-msgstr "You can filter the resulting articles based on their tags (the articles will match all tags)."
 
 #: src/routes/[[locale=lang]]/projects/website/+page.svelte
 msgid ""
@@ -923,3 +846,103 @@ msgstr "Maximum {0} chars"
 #: src/lib/contact.ts
 msgid "Minimum {0} chars"
 msgstr "Minimum {0} chars"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Apply<0/>"
+msgstr "Apply<0/>"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Today"
+msgstr "Today"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Tags"
+msgstr "Tags"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Per Page"
+msgstr "Per Page"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Options"
+msgstr "Options"
+
+#: src/lib/articles-types.ts
+#: src/lib/articles-types.ts
+msgid "Invalid ISO date format: YYYY-MM-DD."
+msgstr "Invalid ISO date format: YYYY-MM-DD."
+
+#: src/lib/articles-types.ts
+msgid "Invalid page number. Should be an integer."
+msgstr "Invalid page number. Should be an integer."
+
+#: src/lib/articles-types.ts
+msgid "Should be at least 1 page."
+msgstr "Should be at least 1 page."
+
+#: src/lib/articles-types.ts
+msgid "Invalid item number per page. Should be an integer."
+msgstr "Invalid item number per page. Should be an integer."
+
+#: src/lib/articles-types.ts
+msgid "Should be a boolean: true or false."
+msgstr "Should be a boolean: true or false."
+
+#: src/lib/articles-types.ts
+msgid "Should be at least 1 item per page."
+msgstr "Should be at least 1 item per page."
+
+#. placeholder {0}: sortByValues
+#: src/lib/articles-types.ts
+msgid "Invalid sort method. Should be one of: {0}."
+msgstr "Invalid sort method. Should be one of: {0}."
+
+#: src/lib/articles-types.ts
+msgid "Field dateStart should be earlier than dateEnd."
+msgstr "Field dateStart should be earlier than dateEnd."
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "After"
+msgstr "After"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Search for articles published after this date."
+msgstr "Search for articles published after this date."
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Before"
+msgstr "Before"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Search for articles published before this date."
+msgstr "Search for articles published before this date."
+
+#. placeholder {0}: tagsValues
+#: src/lib/articles-types.ts
+msgid "Invalid tags. Should be at least one of: {0}."
+msgstr "Invalid tags. Should be at least one of: {0}."
+
+#: src/lib/articles-types.ts
+msgid "Field page should be a number."
+msgstr "Field page should be a number."
+
+#: src/lib/articles-types.ts
+msgid "Field perPage should be a number."
+msgstr "Field perPage should be a number."
+
+#: src/lib/articles-types.ts
+msgid "Created ➚"
+msgstr "Created ➚"
+
+#: src/lib/articles-types.ts
+msgid "Created ➘"
+msgstr "Created ➘"
+
+#: src/lib/articles-types.ts
+msgid "Modified ➘"
+msgstr "Modified ➘"
+
+#: src/lib/articles-types.ts
+msgid "Modified ➚"
+msgstr "Modified ➚"
