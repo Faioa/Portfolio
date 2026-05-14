@@ -296,7 +296,7 @@
 								<Popover.Content class="w-auto p-0" side="bottom" align="center">
 									<Card.Root>
 										<Card.Header>
-											<Card.Description>Search for articles published after this date.</Card.Description>
+											<Card.Description class="pr-5">Search for articles published after this date.</Card.Description>
 											<Card.Action>
 												<Button
 													size="sm"
@@ -357,7 +357,7 @@
 								<Popover.Content class="w-auto p-0" side="bottom" align="center">
 									<Card.Root>
 										<Card.Header>
-											<Card.Description>Search for articles published before this date.</Card.Description>
+											<Card.Description class="pr-5">Search for articles published before this date.</Card.Description>
 											<Card.Action>
 												<Button
 													size="sm"
