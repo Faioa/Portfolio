@@ -5,6 +5,7 @@
 	import Link from '$lib/components/Link.svelte';
 
 	import type { PageProps } from './$types';
+	import EyeIcon from '@lucide/svelte/icons/eye';
 
 	const { data }: PageProps = $props();
 
@@ -34,27 +35,41 @@
 
 <div class="container">
 	<h2 class="title">Featured Projects</h2>
-	<div class="grid grid-cols-2 gap-10">
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 		<div class="card">
-			<h2 class="subtitle">Flux Studio</h2>
-			<p>
-				Flux studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span>
-				using <span class="font-bold italic">Rust</span>. My aim is to create a top-notch DAW that can be used for
-				playing and learning music. My goals are ambitious, but I will do my best to see this project through
-				nonetheless.
-			</p>
-			<Link href="/projects/flux-studio" class="mt-1 self-end justify-self-end text-sm">Read More</Link>
+			<h3 class="subtitle w-full font-bold text-wrap">Flux Studio</h3>
+
+			<div class="max-h-20 min-h-20 md:max-h-35">
+				<p class="line-clamp-4! md:line-clamp-6! truncate text-wrap wrap-break-word">
+					Flux studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span>
+					using <span class="font-bold italic">Rust</span>. My aim is to create a top-notch DAW that can be used for
+					playing and learning music. My goals are ambitious, but I will do my best to see this project through
+					nonetheless.
+				</p>
+			</div>
+
+			<div class="flex items-center gap-1 self-end justify-self-end">
+				<Link href="/projects/flux-studio" class="text-sm! md:text-base!">Read More</Link>
+				<EyeIcon class="icon" />
+			</div>
 		</div>
 
-		<div class="card flex flex-col gap-2">
-			<h2 class="subtitle">This Website</h2>
-			<p>
-				This website is both a portfolio and a blog developed with <span class="font-bold italic">Svelte</span>
-				and <span class="font-bold italic">SvelteKit</span>. I will post updates on my projects and experiences, as well
-				as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for
-				me to experiment with web development.
-			</p>
-			<Link href="/projects/website" class="mt-1 self-end justify-self-end text-sm">Read More</Link>
+		<div class="card">
+			<h3 class="subtitle w-full font-bold text-wrap">This Website</h3>
+
+			<div class="max-h-20 min-h-20 md:max-h-35">
+				<p class="line-clamp-4! md:line-clamp-6! truncate text-wrap wrap-break-word">
+					This website is both a portfolio and a blog developed with <span class="font-bold italic">Svelte</span>
+					and <span class="font-bold italic">SvelteKit</span>. I will post updates on my projects and experiences, as well
+					as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for
+					me to experiment with web development.
+				</p>
+			</div>
+
+			<div class="flex items-center gap-1 self-end justify-self-end">
+				<Link href="/projects/website" class="text-sm! md:text-base!">Read More</Link>
+				<EyeIcon class="icon" />
+			</div>
 		</div>
 	</div>
 </div>

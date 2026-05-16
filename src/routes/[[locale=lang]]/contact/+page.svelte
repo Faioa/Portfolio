@@ -8,28 +8,29 @@
 	import Letter from '$lib/components/Letter.svelte';
 	import { contactSchema } from '$lib/contact';
 
-	const { data } = $props();
+	import { type PageProps } from './$types';
+
+	const { data }: PageProps = $props();
 
 	let closeLetter = $state(false);
 	let processing = $state(false);
 
-	let form = $derived(
-		superForm(data.form, {
-			invalidateAll: false,
-			validators: zod4Client(contactSchema),
-			onUpdated({ form }) {
-				if (form.valid) {
-					closeLetter = true;
-				}
-			},
-			onSubmit() {
-				processing = true;
-			},
-			onResult() {
-				processing = false;
+	/* svelte-ignore state_referenced_locally */
+	let form = superForm(data.form, {
+		invalidateAll: false,
+		validators: zod4Client(contactSchema),
+		onUpdated({ form }) {
+			if (form.valid) {
+				closeLetter = true;
 			}
-		})
-	);
+		},
+		onSubmit() {
+			processing = true;
+		},
+		onResult() {
+			processing = false;
+		}
+	});
 </script>
 
 <div class="container">

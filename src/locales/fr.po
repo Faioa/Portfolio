@@ -375,79 +375,22 @@ msgstr "Tapez votre message ici"
 msgid "Submit<0/>"
 msgstr "Envoyer<0/>"
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Search..."
 msgstr "Rechercher..."
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Search"
-msgstr "Rechercher"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Filters"
-msgstr "Filtres"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Select the filters you want to use for your research."
-msgstr "Sélectionnez les filtres que vous souhaitez utiliser pour votre recherche."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Sort By"
 msgstr "Trier Par"
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Select a sorting order"
-msgstr "Sélectionnez un ordre de tri"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can choose how the results are sorted with this filter."
-msgstr "Vous pouvez choisir comment les résultats sont triés avec ce filtre."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Featured"
 msgstr "Mis en Avant"
 
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can choose if you want to search for featured articles or not."
-msgstr "Vous pouvez choisir si vous souhaitez rechercher les articles mis en avant ou non."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Posted After"
-msgstr "Publié après le"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-#: src/routes/[[locale=lang]]/articles/+page.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
 msgid "Pick a date"
-msgstr "Choisissez une date"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can filter all articles posted after this date."
-msgstr "Vous pouvez filtrer tous les articles publiés après cette date."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Posted Before"
-msgstr "Publié avant le"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can filter all articles posted before this date."
-msgstr "Vous pouvez filtrer tous les articles publiés avant cette date."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Categories"
-msgstr "Catégories"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Select the tags"
-msgstr "Sélectionnez les tags"
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "You can filter the resulting articles based on their tags (the articles will match all tags)."
-msgstr "Vous pouvez filtrer les articles obtenus selon leurs tags (les articles correspondront à TOUS les tags sélectionnés)."
-
-#: src/routes/[[locale=lang]]/articles/+page.svelte
-msgid "Apply"
-msgstr "Appliquer"
+msgstr "Choisir une date"
 
 #: src/routes/[[locale=lang]]/legal-notices/+page.svelte
 msgid "This page is still a little confusing for me so I will work on it later when I finally figure out what I should write."
@@ -797,26 +740,6 @@ msgstr "Réseaux"
 msgid "Website"
 msgstr "Site Web"
 
-#: src/lib/articles-types.ts
-msgid "Least Recently Created"
-msgstr "Le plus ancien"
-
-#: src/lib/articles-types.ts
-msgid "Most Recently Created"
-msgstr "Le plus récent"
-
-#: src/lib/articles-types.ts
-msgid "Least Recently Modified"
-msgstr "Modifié le plus anciennement"
-
-#: src/lib/articles-types.ts
-msgid "Most Recently Modified"
-msgstr "Modifié le plus récemment"
-
-#: src/lib/articles-types.ts
-msgid "Incorrect range with the selected dates. Check their order and retry."
-msgstr "Plage de dates incorrecte. Vérifiez l'ordre et réessayez."
-
 #: src/lib/contact.ts
 msgid "Job Opportunities"
 msgstr "Opportunités professionnelles"
@@ -923,3 +846,103 @@ msgstr "Maximum {0} caractères"
 #: src/lib/contact.ts
 msgid "Minimum {0} chars"
 msgstr "Minimum {0} caractères"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Apply<0/>"
+msgstr "Appliquer<0/>"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Tags"
+msgstr "Catégories"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Per Page"
+msgstr "Par Page"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Options"
+msgstr ""
+
+#: src/lib/articles-types.ts
+#: src/lib/articles-types.ts
+msgid "Invalid ISO date format: YYYY-MM-DD."
+msgstr "Format de date ISO invalide : YYYY-MM-DD."
+
+#: src/lib/articles-types.ts
+msgid "Invalid page number. Should be an integer."
+msgstr "Nombre de pages invalide. Doit être un entier positif."
+
+#: src/lib/articles-types.ts
+msgid "Should be at least 1 page."
+msgstr "Il doit y avoir au moins une page."
+
+#: src/lib/articles-types.ts
+msgid "Invalid item number per page. Should be an integer."
+msgstr "Nombre d'objets par page invalide. Doit être un entier positif."
+
+#: src/lib/articles-types.ts
+msgid "Should be a boolean: true or false."
+msgstr "Doit être un booléen : true ou false."
+
+#: src/lib/articles-types.ts
+msgid "Should be at least 1 item per page."
+msgstr "Il doit y avoir au moins un objet par page"
+
+#. placeholder {0}: sortByValues
+#: src/lib/articles-types.ts
+msgid "Invalid sort method. Should be one of: {0}."
+msgstr "Méthode de tri invalide. Doit être l'une des valeurs suivantes : {0}."
+
+#: src/lib/articles-types.ts
+msgid "Field dateStart should be earlier than dateEnd."
+msgstr "Le champ dateStart doit être une date antérieure à dateEnd."
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "After"
+msgstr "Après"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Search for articles published after this date."
+msgstr "Recherchez les articles publiés après cette date."
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Before"
+msgstr "Avant"
+
+#: src/lib/components/ArticlesFiltersForm.svelte
+msgid "Search for articles published before this date."
+msgstr "Recherchez les articles publiés avant cette date."
+
+#. placeholder {0}: tagsValues
+#: src/lib/articles-types.ts
+msgid "Invalid tags. Should be at least one of: {0}."
+msgstr "Catégories invalides. Doit contenir au moins une des valeurs suivantes : {0}."
+
+#: src/lib/articles-types.ts
+msgid "Field page should be a number."
+msgstr "Le champ page doit être un nombre."
+
+#: src/lib/articles-types.ts
+msgid "Field perPage should be a number."
+msgstr "Le champ perPage dois être un nombre."
+
+#: src/lib/articles-types.ts
+msgid "Created ➚"
+msgstr "Publié ➚"
+
+#: src/lib/articles-types.ts
+msgid "Created ➘"
+msgstr "Publié ➘"
+
+#: src/lib/articles-types.ts
+msgid "Modified ➘"
+msgstr "Modifié ➘"
+
+#: src/lib/articles-types.ts
+msgid "Modified ➚"
+msgstr "Modifié ➚"

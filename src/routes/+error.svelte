@@ -30,14 +30,14 @@
 
 <div class="flex flex-col items-center justify-center gap-10 text-center">
 	<div class="flex flex-col items-center justify-center gap-2">
-		<span class="text-5xl font-bold">{page.status}</span>
-		<span class="text-3xl">{messages[page.status]?.error}</span>
+		<span class="!text-4xl md:!text-5xl font-bold">{page.status}</span>
+		<span class="!text-2xl md:!text-3xl">{messages[page.status]?.error}</span>
 	</div>
-	<span class="text-lg">{messages[page.status]?.message}</span>
+	<span class="!text-lg">{messages[page.status]?.message}</span>
 	<div class="flex items-center justify-center gap-10">
-		<Link href="/" class="rounded-2xl bg-secondary px-5 py-2 text-lg shadow shadow-primary hover:opacity-70">Home</Link>
+		<Link href="/" class="rounded-2xl bg-secondary px-5 py-2 !text-lg shadow shadow-primary hover:opacity-70">Home</Link>
 		{#if page.route.id?.startsWith('/[[locale=lang]]/articles/[article]')}
-			<Link href="/articles" class="rounded-2xl bg-secondary px-5 py-2 text-lg shadow shadow-primary hover:opacity-70"
+			<Link href="/articles" class="rounded-2xl bg-secondary px-5 py-2 !text-lg shadow shadow-primary hover:opacity-70"
 				>Articles</Link
 			>
 		{/if}

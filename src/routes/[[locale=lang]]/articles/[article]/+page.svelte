@@ -4,7 +4,7 @@
 
 	import { page } from '$app/state';
 
-	import { type ArticleModule, getCategoryLabel } from '$lib/articles-types';
+	import { type ArticleModule, getTagLabel } from '$lib/articles-types';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Separator } from '$lib/components/ui/separator';
 	import { defaultLocale } from '$lib/lang';
@@ -30,7 +30,7 @@
 </script>
 
 <div class="container">
-	<div class="flex w-full flex-col justify-center gap-3 text-justify">
+	<div class="flex w-full flex-col justify-center gap-3">
 		<div class="flex w-full justify-between">
 			<h1 class="title">{module?.metadata?.title}</h1>
 
@@ -55,7 +55,7 @@
 		{#if module?.metadata?.categories}
 			<div class="flex flex-wrap items-center gap-2">
 				{#each module?.metadata?.categories as category (category)}
-					<Badge variant="secondary">{getCategoryLabel(category)}</Badge>
+					<Badge variant="secondary">{getTagLabel(category)}</Badge>
 				{/each}
 			</div>
 		{/if}
@@ -64,13 +64,13 @@
 
 <Separator class="container" />
 
-<article class="container">
+<article class="container text-justify">
 	{@render module?.default?.()}
 </article>
 
 <style>
 	article {
-		gap: calc(var(--spacing) * 10);
+		gap: calc(var(--spacing) * 10) !important;
 	}
 
 	article :global(h1) {

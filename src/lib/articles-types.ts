@@ -2,77 +2,13 @@ import { z } from 'zod';
 
 import type { Snippet } from 'svelte';
 
-export const categoriesValues = [
-	'miscellaneous',
-	'music',
-	'lute-making',
-	'programming',
-	'networks',
-	'flux-studio',
-	'website'
-] as const;
-export type Category = (typeof categoriesValues)[number];
-
-// Utility function to include labels' translation with Wuchale
-export function getCategoryLabel(value: Category) {
-	if (value === 'miscellaneous') return 'Miscellaneous';
-	if (value === 'music') return 'Music';
-	if (value === 'lute-making') return 'Lute Making';
-	if (value === 'programming') return 'Programming';
-	if (value === 'networks') return 'Networks';
-	if (value === 'flux-studio') return 'Flux Studio';
-	else return 'Website';
-}
-
-export const sortByValues = ['created+', 'created-', 'modified+', 'modified-'] as const;
-export type SortBy = (typeof sortByValues)[number];
-export const defaultSortBy: SortBy = 'created-';
-
-// Utility function to include labels' translation with Wuchale
-export function getSortByLabel(value: SortBy): string {
-	if (value === 'created+') return 'Least Recently Created';
-	if (value === 'created-') return 'Most Recently Created';
-	if (value === 'modified+') return 'Least Recently Modified';
-	else return 'Most Recently Modified';
-}
-
-/* Schema for the filters' form */
-export const filtersSchema = z
-	.object({
-		sortBy: z.enum(sortByValues).default(defaultSortBy),
-		featured: z.boolean().default(false),
-		fromDate: z.nullish(z.iso.date()),
-		toDate: z.nullish(z.iso.date()),
-		categories: z.array(z.enum(categoriesValues)).default([]),
-		research: z.nullish(z.string().min(1).trim()),
-		page: z.int().min(1).default(1)
-	})
-	.superRefine((data, ctx) => {
-		if (data.fromDate && data.toDate) {
-			try {
-				const fromDate = new Date(data.fromDate);
-				const toDate = new Date(data.toDate);
-				if (fromDate > toDate)
-					ctx.addIssue({
-						code: 'invalid_value',
-						origin: 'date',
-						message: 'Incorrect range with the selected dates. Check their order and retry.',
-						path: ['fromDate'],
-						values: [data.fromDate, data.toDate]
-					});
-			} catch {
-				/* fallback to individual validation */
-			}
-		}
-	});
-
-/* Created and modified properties follow the javascript string datetime format */
+/* Created and modified properties follow the JavaScript string datetime format */
 export interface Metadata {
 	title: string;
 	created: string;
 	modified: string;
 	tags?: string[];
-	categories?: Category[];
+	categories?: Tag[];
 	featured: boolean;
 	excerpt?: string;
 }
@@ -85,4 +21,88 @@ export interface ArticleModule {
 	metadata: Metadata;
 }
 
-export const numberPerPage = 3;
+export const tagsValues = [
+	'miscellaneous',
+	'music',
+	'lute-making',
+	'programming',
+	'networks',
+	'flux-studio',
+	'website'
+] as const;
+export type Tag = (typeof tagsValues)[number];
+
+// Utility function to include labels' translation with Wuchale
+export function getTagLabel(value: Tag) {
+	if (value === 'miscellaneous') return 'Miscellaneous';
+	if (value === 'music') return 'Music';
+	if (value === 'lute-making') return 'Lute Making';
+	if (value === 'programming') return 'Programming';
+	if (value === 'networks') return 'Networks';
+	if (value === 'flux-studio') return 'Flux Studio';
+	else return 'Website';
+}
+
+export const sortByValues = ['created+', 'created-', 'modified+', 'modified-'] as const;
+export type SortBy = (typeof sortByValues)[number];
+
+// Utility function to include labels' translation with Wuchale
+export function getSortByLabel(value: SortBy): string {
+	if (value === 'created+') return 'Created ➘';
+	if (value === 'created-') return 'Created ➚';
+	if (value === 'modified+') return 'Modified ➘';
+	else return 'Modified ➚';
+}
+
+export const defaultFeatured: boolean | undefined = false;
+export const defaultPage: number = 1;
+export const defaultPerPage: number = 6;
+export const defaultSortBy: SortBy | undefined = 'created-';
+
+/*
+ * Schema for the filters' form
+ */
+export const filtersSchema = z
+	.object({
+		dateStart: z.iso.date({ error: () => 'Invalid ISO date format: YYYY-MM-DD.' }).optional(),
+		dateEnd: z.iso.date({ error: () => 'Invalid ISO date format: YYYY-MM-DD.' }).optional(),
+		featured: z.coerce
+			.boolean({ error: () => 'Should be a boolean: true or false.' })
+			.optional()
+			.default(defaultFeatured),
+		page: z.coerce
+			.number({ error: () => 'Field page should be a number.' })
+			.int({ error: () => 'Invalid page number. Should be an integer.' })
+			.min(1, { error: () => 'Should be at least 1 page.' })
+			.optional()
+			.default(defaultPage),
+		perPage: z.coerce
+			.number({ error: () => 'Field perPage should be a number.' })
+			.int({ error: () => 'Invalid item number per page. Should be an integer.' })
+			.min(1, { error: () => 'Should be at least 1 item per page.' })
+			.optional()
+			.default(defaultPerPage),
+		research: z
+			.string()
+			.trim()
+			.transform((v) => (v.length > 0 ? v : undefined))
+			.optional(),
+		sortBy: z
+			.literal(sortByValues, { error: () => `Invalid sort method. Should be one of: ${sortByValues}.` })
+			.optional()
+			.default(defaultSortBy),
+		tags: z
+			.array(z.enum(tagsValues, { error: () => `Invalid tags. Should be at least one of: ${tagsValues}.` }))
+			.optional()
+	})
+	.refine(
+		(data) => {
+			if (data.dateStart && data.dateEnd) {
+				return new Date(data.dateStart) <= new Date(data.dateEnd);
+			}
+			return true;
+		},
+		{ error: () => 'Field dateStart should be earlier than dateEnd.', path: ['dateEnd'] }
+	);
+
+export type FiltersSchema = typeof filtersSchema;
