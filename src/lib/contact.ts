@@ -63,3 +63,5 @@ export const contactSchema = z.object({
 		.min(minContent, { error: () => `Minimum ${minContent} chars` })
 		.max(maxContent, { error: () => `Maximum ${maxContent} chars` })
 });
+
+export type ContactSchema = typeof contactSchema;

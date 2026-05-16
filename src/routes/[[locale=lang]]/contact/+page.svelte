@@ -1,12 +1,8 @@
 <script lang="ts">
 	import Loader from '@lucide/svelte/icons/loader';
 
-	import { superForm } from 'sveltekit-superforms';
-	import { zod4Client } from 'sveltekit-superforms/adapters';
-
 	import ContactForm from '$lib/components/ContactForm.svelte';
 	import Letter from '$lib/components/Letter.svelte';
-	import { contactSchema } from '$lib/contact';
 
 	import { type PageProps } from './$types';
 
@@ -14,23 +10,6 @@
 
 	let closeLetter = $state(false);
 	let processing = $state(false);
-
-	/* svelte-ignore state_referenced_locally */
-	let form = superForm(data.form, {
-		invalidateAll: false,
-		validators: zod4Client(contactSchema),
-		onUpdated({ form }) {
-			if (form.valid) {
-				closeLetter = true;
-			}
-		},
-		onSubmit() {
-			processing = true;
-		},
-		onResult() {
-			processing = false;
-		}
-	});
 </script>
 
 <div class="container">
@@ -49,7 +28,14 @@
 		closedMessage="Thank you for your message! I will get back to you as soon as possible."
 	>
 		<!-- Contact form-->
-		<ContactForm {form} class={processing ? 'pointer-events-none opacity-40' : ''} />
+		<ContactForm
+			formProp={data.form}
+			bind:processing
+			onUpdated={(form) => {
+				if (form?.valid) closeLetter = true;
+			}}
+			class={processing ? 'pointer-events-none opacity-40' : ''}
+		/>
 
 		<!-- Loader -->
 		<Loader

@@ -2,7 +2,9 @@
 	import InfoIcon from '@lucide/svelte/icons/info';
 	import SendIcon from '@lucide/svelte/icons/send';
 	import XIcon from '@lucide/svelte/icons/x';
-	import type { FsSuperForm } from 'formsnap';
+
+	import { type Infer, type SuperValidated, superForm } from 'sveltekit-superforms';
+	import { zod4Client } from 'sveltekit-superforms/adapters';
 
 	import { browser } from '$app/environment';
 
@@ -10,12 +12,14 @@
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
 	import * as InputGroup from '$lib/components/ui/input-group';
+	import * as Popover from '$lib/components/ui/popover';
 	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea';
-	import * as Tooltip from '$lib/components/ui/tooltip';
 	import {
+		type ContactSchema,
 		categories,
 		categoriesSubjects,
+		contactSchema,
 		getCategoryLabel,
 		getSubjectLabel,
 		maxContent,
@@ -28,27 +32,40 @@
 	 *
 	 * @interface Props
 	 *
-	 * @property {FsSuperForm<{ firstName: string, lastName: string, email: string, category: ('other' | 'flux-studio' | 'job' | 'website'), subject: string, content: string }, unknown>} form - Represents a superform object, managing the structure and data for the specified fields of the form. It follows a zod schema exported in $lib/contact.ts.
+	 * @property {SuperValidated<Infer<ContactSchema>>} form - Represents a superform object, managing the structure and data for the specified fields of the form. It follows a zod schema exported in $lib/contact.ts.
+	 * @property {boolean} [processing=false] - A boolean value indicating whether the form is currently being processed.
+	 * @property {(form?: SuperValidated<Infer<ContactSchema>>) => void} [onUpdated=() => {}] - A callback function that is triggered when the form is updated. It receives the updated form as an argument, if any.
 	 * @property {string} [class] - An optional CSS class name to style the component.
 	 */
 	interface Props {
-		form: FsSuperForm<
-			{
-				firstName: string;
-				lastName: string;
-				email: string;
-				category: 'other' | 'flux-studio' | 'job' | 'website';
-				subject: string;
-				content: string;
-			},
-			unknown
-		>;
+		formProp: SuperValidated<Infer<ContactSchema>>;
+		processing?: boolean;
+		onUpdated?: (form?: SuperValidated<Infer<ContactSchema>>) => void;
 		class?: string;
 	}
 
-	const { form, class: className }: Props = $props();
+	let {
+		formProp = $bindable(),
+		processing = $bindable(false),
+		onUpdated = $bindable(() => {}),
+		class: className
+	}: Props = $props();
 
-	let { form: formData, enhance } = $derived(form);
+	const form = superForm(formProp, {
+		invalidateAll: false,
+		validators: zod4Client(contactSchema),
+		onUpdated({ form }) {
+			onUpdated(form);
+		},
+		onSubmit() {
+			processing = true;
+		},
+		onResult() {
+			processing = false;
+		}
+	});
+
+	let { form: formData, enhance } = form;
 
 	let relatedSubjects = $derived(
 		$formData.category in categoriesSubjects ? categoriesSubjects[$formData.category] : []
@@ -71,7 +88,7 @@
 				<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
+		<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
 	</Form.Field>
 
 	<Form.Field {form} name="lastName" class="col-span-1">
@@ -81,7 +98,7 @@
 				<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
+		<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
 	</Form.Field>
 
 	<!-- Field for email -->
@@ -92,25 +109,23 @@
 				<InputGroup.Root class="rounded-2xl">
 					<InputGroup.Input {...props} bind:value={$formData.email} placeholder="example@email.com" />
 					<InputGroup.Addon align="inline-end">
-						<Tooltip.Provider delayDuration={200}>
-							<Tooltip.Root>
-								<Tooltip.Trigger>
-									{#snippet child({ props })}
-										<InputGroup.Button {...props} class="rounded-full" size="icon-xs">
-											<InfoIcon />
-										</InputGroup.Button>
-									{/snippet}
-								</Tooltip.Trigger>
-								<Tooltip.Content class="w-50 rounded-2xl text-center"
-									>This email address will only be used to reply to your message and will not be shared in any way.</Tooltip.Content
-								>
-							</Tooltip.Root>
-						</Tooltip.Provider>
+						<Popover.Root>
+							<Popover.Trigger openOnHover={true} openDelay={200}>
+								{#snippet child({ props })}
+									<InputGroup.Button {...props} class="rounded-full" size="icon-xs">
+										<InfoIcon />
+									</InputGroup.Button>
+								{/snippet}
+							</Popover.Trigger>
+							<Popover.Content class="max-w-50 rounded-2xl text-center text-xs! md:text-sm!">
+								This email address will only be used to reply to your message and will not be shared in any way.
+							</Popover.Content>
+						</Popover.Root>
 					</InputGroup.Addon>
 				</InputGroup.Root>
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
+		<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
 	</Form.Field>
 
 	<!-- Fields for category and subject -->
@@ -144,7 +159,7 @@
 					</Select.Root>
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
+			<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
 		</Form.Field>
 
 		<Form.Field {form} name="subject">
@@ -189,7 +204,7 @@
 					{/if}
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
+			<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
 		</Form.Field>
 	</div>
 
@@ -210,7 +225,7 @@
 		</Form.Control>
 
 		<div class="mr-2 flex items-center justify-between">
-			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
+			<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
 			<p class="text-sm">
 				<span
 					class={$formData.content.length >= minContent && $formData.content.length <= maxContent
@@ -224,7 +239,7 @@
 
 	<!-- Submit button -->
 	<div class="col-span-2 flex w-full items-center justify-between">
-		<div class="text-xs font-bold text-muted-foreground italic md:text-sm">All fields are mandatory</div>
+		<div class="text-xs! font-bold text-muted-foreground italic md:text-sm!">All fields are mandatory</div>
 		<Button type="submit" variant="secondary" class="w-min">Submit<SendIcon class="icon" /></Button>
 	</div>
 </form>
