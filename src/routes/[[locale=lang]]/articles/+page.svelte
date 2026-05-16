@@ -18,7 +18,7 @@
 	<ArticlesFiltersForm formProp={data.form} bind:itemsCount>
 		<div class="flex flex-col gap-5">
 			<Separator />
-			<div class="container my-10">
+			<div class="my-10">
 				<ArticlesList {articles} {metadata} />
 			</div>
 		</div>

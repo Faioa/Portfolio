@@ -30,7 +30,7 @@
 </script>
 
 <div class="container">
-	<div class="flex w-full flex-col justify-center gap-3 text-justify">
+	<div class="flex w-full flex-col justify-center gap-3">
 		<div class="flex w-full justify-between">
 			<h1 class="title">{module?.metadata?.title}</h1>
 
@@ -64,13 +64,13 @@
 
 <Separator class="container" />
 
-<article class="container">
+<article class="container text-justify">
 	{@render module?.default?.()}
 </article>
 
 <style>
 	article {
-		gap: calc(var(--spacing) * 10);
+		gap: calc(var(--spacing) * 10) !important;
 	}
 
 	article :global(h1) {

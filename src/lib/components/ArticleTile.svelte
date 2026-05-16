@@ -1,23 +1,36 @@
 <script lang="ts">
+	import EyeIcon from '@lucide/svelte/icons/eye';
+
 	import type { Metadata } from '$lib/articles-types';
 	import Link from '$lib/components/Link.svelte';
+	import { cn } from '$lib/utils';
 
-	const data = $props();
+	interface Props {
+		article: string;
+		metadata: Metadata;
+		class?: string;
+	}
 
-	const article: string = $derived(data.article);
-	const metadata: Metadata = $derived(data.metadata);
+	const { article, metadata, class: className = '' }: Props = $props();
 </script>
 
-<div class="card {data.class ? data.class : ''}">
-	<div class="flex items-center justify-between gap-5">
-		<h3 class="text-lg font-bold">{metadata.title}</h3>
-		<p class="text-xs italic">
-			Written on {new Date(metadata.created).toLocaleDateString()}
-		</p>
-	</div>
-	<p>{metadata.excerpt}</p>
-	<Link href="/articles/[article]" args={{ article }} class="mt-1 self-end justify-self-end text-sm">Read More</Link>
-</div>
+<div class={cn('card', className)}>
+	<h3 class="w-full text-base! font-bold text-wrap md:text-lg!">{metadata.title}</h3>
 
-<style>
-</style>
+	<div class="max-h-20 min-h-20 md:max-h-35 md:max-w-70">
+		<span class="line-clamp-4! md:line-clamp-6! truncate text-wrap wrap-break-word">
+			{metadata.excerpt}
+		</span>
+	</div>
+
+	<div class="flex items-center justify-between gap-5">
+		<span class="col-span-2 text-sm! text-wrap italic">
+			Written on {new Date(metadata.created).toLocaleDateString()}
+		</span>
+
+		<div class="flex items-center gap-1">
+			<Link href="/articles/[article]" args={{ article }} class="text-sm! md:text-base!">Read More</Link>
+			<EyeIcon class="icon" />
+		</div>
+	</div>
+</div>

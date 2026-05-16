@@ -5,25 +5,10 @@
 	const { articles = $bindable(), metadata = $bindable() } = $props<{ articles: string[]; metadata: Metadata[] }>();
 </script>
 
-<div class="articles">
+<div class="grid flex-wrap truncate grid-cols-1 md:grid-cols-3 w-full gap-10">
 	{#each articles as article, i (article)}
-		<ArticleTile {article} metadata={metadata[i]} class="article" />
+		<ArticleTile {article} metadata={metadata[i]} class="col-span-1" />
 	{:else}
-		<p>I'm sorry, but there's no available article yet. Please wait a few days for some content to be published!</p>
+		<p class="text-destructive text-center">I'm sorry, but there's no available article yet. Please wait a few days for some content to be published!</p>
 	{/each}
 </div>
-
-<style>
-	.articles {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		gap: calc(var(--spacing) * 10);
-	}
-
-	.articles :global(.article) {
-		max-width: calc(33.333% - var(--spacing) * 10);
-	}
-</style>

@@ -241,14 +241,14 @@
 			>
 		</div>
 
-		<div class="col-span-6 flex flex-wrap items-center justify-evenly gap-5 md:col-span-8 md:flex-nowrap">
+		<div class="col-span-6 flex flex-wrap items-center justify-evenly gap-5 md:col-span-8">
 			<!-- Sort By -->
-			<Form.Field {form} name="sortBy">
+			<Form.Field {form} name="sortBy" class="order-first">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 						{@const { name: _, ...rest } = props}
-						<div class="form-field-item flex-col md:flex-row">
+						<div class="form-field-item flex-col">
 							<Form.Label class="font-bold text-nowrap">Sort By</Form.Label>
 							<NativeSelect.Root
 								name={$formData.sortBy && $formData.sortBy !== defaultSortBy ? 'sortBy' : ''}
@@ -267,7 +267,7 @@
 			</Form.Field>
 
 			<!-- Date Start -->
-			<Form.Field {form} name="dateStart">
+			<Form.Field {form} name="dateStart" class="md:order-2 order-4">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
@@ -279,7 +279,7 @@
 							{...rest}
 							bind:value={$formData.dateStart}
 						/>
-						<div class="form-field-item flex-col md:flex-row">
+						<div class="form-field-item flex-col">
 							<Form.Label class="font-bold text-nowrap">After</Form.Label>
 							<Popover.Root>
 								<Popover.Trigger
@@ -328,7 +328,7 @@
 			</Form.Field>
 
 			<!-- Date End -->
-			<Form.Field {form} name="dateEnd">
+			<Form.Field {form} name="dateEnd" class="md:order-3 order-5">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
@@ -340,7 +340,7 @@
 							{...rest}
 							bind:value={$formData.dateEnd}
 						/>
-						<div class="form-field-item flex-col md:flex-row">
+						<div class="form-field-item flex-col">
 							<Form.Label class="font-bold text-nowrap">Before</Form.Label>
 							<Popover.Root>
 								<Popover.Trigger
@@ -389,12 +389,12 @@
 			</Form.Field>
 
 			<!-- Tags -->
-			<Form.Field {form} name="tags">
+			<Form.Field {form} name="tags" class="md:order-4 order-2">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 						{@const { name: _, ...rest } = props}
-						<div class="form-field-item flex-col md:flex-row">
+						<div class="form-field-item flex-col">
 							<Form.Label class="font-bold text-nowrap">Tags</Form.Label>
 							<Select.Root
 								name={$formData.tags &&
@@ -420,12 +420,12 @@
 			</Form.Field>
 
 			<!-- Featured -->
-			<Form.Field {form} name="featured">
+			<Form.Field {form} name="featured" class="order-3 md:order-5">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 						{@const { name: _, ...rest } = props}
-						<div class="form-field-item flex-col md:flex-row">
+						<div class="form-field-item flex-col">
 							<Form.Label class="font-bold text-nowrap">Featured</Form.Label>
 							<Switch
 								name={$formData.featured && $formData.featured !== defaultFeatured ? 'featured' : ''}
@@ -439,12 +439,12 @@
 			</Form.Field>
 
 			<!-- Per Page -->
-			<Form.Field {form} name="perPage">
+			<Form.Field {form} name="perPage" class="order-6">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 						{@const { name: _, ...rest } = props}
-						<div class="form-field-item flex-col md:flex-row">
+						<div class="form-field-item flex-col">
 							<Form.Label class="font-bold text-nowrap">Per Page</Form.Label>
 							<NativeSelect.Root
 								name={$formData.perPage && $formData.perPage !== defaultPerPage ? 'perPage' : ''}
