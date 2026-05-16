@@ -1,10 +1,10 @@
 <script lang="ts">
-	import GitHub from "$lib/components/icons/GitHub.svelte";
-	import LinkedIn from '$lib/components/icons/LinkedIn.svelte';
 	import Mail from '@lucide/svelte/icons/mail';
 	import Scale from '@lucide/svelte/icons/scale';
 
 	import Link from '$lib/components/Link.svelte';
+	import GitHub from '$lib/components/icons/GitHub.svelte';
+	import LinkedIn from '$lib/components/icons/LinkedIn.svelte';
 
 	const height = 100;
 </script>
@@ -12,7 +12,7 @@
 <footer id="footer" style="--height: {height}px;">
 	<div class="grid grid-cols-2 gap-x-5 gap-y-2 text-base">
 		<Link href="https://www.linkedin.com/in/matthieu-dartois/" class="contact">
-			<LinkedIn class="size-5 rounded"/>LinkedIn
+			<LinkedIn class="size-5 rounded" />LinkedIn
 		</Link>
 		<Link href="https://github.com/Faioa" class="contact">
 			<GitHub class="size-5" />GitHub

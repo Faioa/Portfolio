@@ -8,7 +8,7 @@
 	const height = 75;
 </script>
 
-<header style="--height: {height}px;" class="border-b-2 border-b-secondary flex flex-row-reverse">
+<header style="--height: {height}px;" class="flex flex-row-reverse border-b-2 border-b-secondary">
 	<noscript>
 		<span class="text-center text-destructive">
 			Please activate Javascript to use the website as it depends heavily on animations and events.

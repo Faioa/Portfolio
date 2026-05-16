@@ -34,10 +34,12 @@
 		<span class="text-3xl">{messages[page.status]?.error}</span>
 	</div>
 	<span class="text-lg">{messages[page.status]?.message}</span>
-	<div class="flex justify-center items-center gap-10">
-		<Link href='/' class="bg-secondary py-2 px-5 rounded-2xl text-lg shadow shadow-primary hover:opacity-70">Home</Link>
+	<div class="flex items-center justify-center gap-10">
+		<Link href="/" class="rounded-2xl bg-secondary px-5 py-2 text-lg shadow shadow-primary hover:opacity-70">Home</Link>
 		{#if page.route.id?.startsWith('/[[locale=lang]]/articles/[article]')}
-			<Link href='/articles' class="bg-secondary py-2 px-5 rounded-2xl text-lg shadow shadow-primary hover:opacity-70">Articles</Link>
+			<Link href="/articles" class="rounded-2xl bg-secondary px-5 py-2 text-lg shadow shadow-primary hover:opacity-70"
+				>Articles</Link
+			>
 		{/if}
 	</div>
 </div>
