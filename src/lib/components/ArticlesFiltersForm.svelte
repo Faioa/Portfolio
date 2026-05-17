@@ -223,7 +223,7 @@
 					<div class="form-field-item">
 						<Input
 							name={$formData.research && $formData.research !== '' ? 'research' : ''}
-							class="rounded-2xl"
+							class="rounded-2xl hover:[&_*]:cursor-text hover:opacity-75"
 							placeholder="Search..."
 							{...rest}
 							bind:value={$formData.research}
@@ -236,7 +236,7 @@
 
 		<!-- Submit -->
 		<div class="form-field-item col-span-2 md:col-span-1">
-			<Button type="submit" variant="secondary" class="w-min self-end rounded-2xl"
+			<Button type="submit" variant="secondary" class="w-min self-end rounded-2xl hover:cursor-pointer"
 				>Apply<SearchIcon class="icon" /></Button
 			>
 		</div>
@@ -255,7 +255,7 @@
 								bind:value={$formData.sortBy}
 								onchange={resetPage}
 								{...rest}
-								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!"
+								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm! hover:[&_*]:cursor-pointer hover:opacity-75"
 							>
 								{#each sortByValues.toSorted( (a, b) => getSortByLabel(a).localeCompare(getSortByLabel(b)) ) as value (value)}
 									<NativeSelect.Option {value}>{getSortByLabel(value)}</NativeSelect.Option>
@@ -284,7 +284,7 @@
 							<Popover.Root>
 								<Popover.Trigger
 									{...props}
-									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! {$formData.dateStart
+									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! hover:cursor-pointer hover:opacity-75 {$formData.dateStart
 										? 'text-muted-foreground'
 										: ''}"
 								>
@@ -345,7 +345,7 @@
 							<Popover.Root>
 								<Popover.Trigger
 									{...props}
-									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! {$formData.dateEnd
+									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! hover:cursor-pointer hover:opacity-75 {$formData.dateEnd
 										? 'text-muted-foreground'
 										: ''}"
 								>
@@ -407,10 +407,10 @@
 								bind:value={$formData.tags}
 								onValueChange={resetPage}
 							>
-								<Select.Trigger class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!">Options</Select.Trigger>
+								<Select.Trigger class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm! hover:cursor-pointer hover:opacity-75">Options</Select.Trigger>
 								<Select.Content class="[&_*]:text-xs! md:[&_*]:text-sm!">
 									{#each tagsValues.toSorted((a, b) => getTagLabel(a).localeCompare(getTagLabel(b))) as value (value)}
-										<Select.Item {value}>{getTagLabel(value)}</Select.Item>
+										<Select.Item {value} class="hover:cursor-pointer">{getTagLabel(value)}</Select.Item>
 									{/each}
 								</Select.Content>
 							</Select.Root>
@@ -430,6 +430,7 @@
 							<Switch
 								name={$formData.featured && $formData.featured !== defaultFeatured ? 'featured' : ''}
 								{...rest}
+								class="hover:cursor-pointer hover:opacity-75"
 								bind:checked={$formData.featured}
 								onCheckedChange={resetPage}
 							/>
@@ -451,7 +452,7 @@
 								bind:value={$formData.perPage}
 								onchange={resetPage}
 								{...rest}
-								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm!"
+								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm! hover:[&_*]:cursor-pointer hover:opacity-75"
 								aria-sort="ascending"
 							>
 								{#each perPageOptions as value (value)}
@@ -530,10 +531,5 @@
 		justify-content: center;
 		gap: calc(var(--spacing) * 3);
 		height: 100%;
-	}
-
-	.form-field-item :global(*):hover {
-			opacity: 0.75;
-			cursor: pointer;
 	}
 </style>
