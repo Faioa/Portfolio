@@ -112,7 +112,7 @@
 						<Popover.Root>
 							<Popover.Trigger openOnHover={true} openDelay={200}>
 								{#snippet child({ props })}
-									<InputGroup.Button {...props} class="rounded-full" size="icon-xs">
+									<InputGroup.Button {...props} class="rounded-full hover:cursor-help" size="icon-xs">
 										<InfoIcon />
 									</InputGroup.Button>
 								{/snippet}
