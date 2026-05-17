@@ -531,4 +531,9 @@
 		gap: calc(var(--spacing) * 3);
 		height: 100%;
 	}
+
+	.form-field-item :global(*):hover {
+			opacity: 0.75;
+			cursor: pointer;
+	}
 </style>
