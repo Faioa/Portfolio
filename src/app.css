@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Croissant+One&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Rubik+Doodle+Shadow&family=Savate:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Savate:ital,wght@0,200..900;1,200..900&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -67,7 +67,7 @@
 	--shiki-foreground: var(--foreground);
 
     --font-family-sans: 'Nunito', 'Google Sans Flex', sans-serif;
-    --font-family-serif: "Rubik Doodle Shadow", "Bagel Fat One", "Savate", "Croissant One" ,"Playfair", serif;
+    --font-family-serif: "Croissant One" ,"Savate", "Playfair", serif;
 }
 
 .dark {
