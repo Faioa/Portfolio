@@ -43,16 +43,9 @@
 	--sidebar-border: oklch(0.88 0.02 85);
 	--sidebar-ring: oklch(0.65 0.07 65);
 
-	--font-sans: Libre Baskerville, serif;
-	--font-serif: Lora, serif;
-	--font-mono: IBM Plex Mono, monospace;
 	--radius: 0.5rem;
-
 	--shadow-color: oklch(0.28 0.02 85 / 0.1);
 	--shadow-md: 0 8px 12px -2px var(--shadow-color);
-
-	--spacing: 0.25rem;
-	--tracking-normal: 0em;
 
 	--shiki-added: oklch(0.96 0.03 150);
 	--shiki-removed: oklch(0.96 0.03 25);
@@ -65,9 +58,6 @@
 	--shiki-base-code: var(--foreground);
 	--shiki-background: transparent;
 	--shiki-foreground: var(--foreground);
-
-    --font-family-sans: 'Nunito', 'Google Sans Flex', sans-serif;
-    --font-family-serif: "Croissant One" ,"Savate", "Playfair", serif;
 }
 
 .dark {
@@ -108,6 +98,8 @@
 	--sidebar-border: oklch(0.28 0.03 250);
 	--sidebar-ring: oklch(0.78 0.05 90);
 
+	--shadow-color: oklch(0.1 0.02 250 / 0.5);
+
 	--shiki-added: oklch(0.3 0.06 150 / 0.4);
 	--shiki-removed: oklch(0.3 0.06 25 / 0.4);
 	--shiki-comment: oklch(0.6 0.02 250 / 0.7);
@@ -116,8 +108,6 @@
 	--shiki-constant: oklch(0.8 0.08 300);
 	--shiki-function: oklch(0.82 0.06 250);
 	--shiki-type: oklch(0.85 0.04 180);
-
-	--shadow-color: oklch(0.1 0.02 250 / 0.5);
 }
 
 @theme inline {
@@ -149,12 +139,14 @@
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
 
-	--font-sans: var(--font-sans);
-	--font-mono: var(--font-mono);
-	--font-serif: var(--font-serif);
-
 	--radius-lg: var(--radius);
 	--shadow-md: var(--shadow-md);
+}
+
+@theme {
+	--font-sans: 'Nunito', 'Google Sans Flex', sans-serif;
+	--font-serif: 'Croissant One', 'Savate', 'Playfair', serif;
+	--font-mono: IBM Plex Mono, monospace;
 }
 
 @layer base {
@@ -162,94 +154,71 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground antialiased;
+		@apply bg-background font-sans text-sm text-foreground antialiased md:text-base;
+		scroll-behavior: smooth;
 	}
 }
 
 /* Custom Properties */
-body * {
-	scroll-behavior: smooth;
-	font-size: var(--text-sm) !important;
-    font-family: var(--font-family-sans);
-	font-optical-sizing: auto;
-}
-
 .title {
-	font-weight: bold;
-	font-size: var(--text-2xl) !important;
+	@apply font-serif text-2xl font-extrabold md:text-3xl;
 	letter-spacing: -0.02em;
-    font-family: var(--font-family-serif);
 }
 
 .subtitle {
-	font-weight: bold;
-	font-size: var(--text-xl) !important;
-    font-family: var(--font-family-serif);
+	@apply font-serif text-xl font-bold md:text-2xl;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-serif);
+h1,
+h2 {
+	@apply font-serif text-2xl font-bold md:text-3xl;
 }
 
-.container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: calc(var(--spacing) * 8);
-	width: 85%;
-	max-width: 85%;
-	margin-inline: auto;
-}
-
-.icon {
-	width: 1em;
-	height: 1em;
-	scroll-behavior: smooth;
-	font-size: var(--text-sm) !important;
-}
-
-@media (width >= 48rem) {
-	body * {
-		font-size: var(--text-base) !important;
-	}
-
-	.title {
-		font-size: var(--text-3xl) !important;
-	}
-
-	.subtitle {
-		font-size: var(--text-2xl) !important;
-	}
-
-	.container {
-		max-width: 70%;
-		width: 70%;
-	}
+h3,
+h4,
+h5,
+h6 {
+	@apply font-serif text-xl font-bold md:text-2xl;
 }
 
 @layer components {
-	.link:hover {
-		opacity: 80%;
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: --spacing(8);
+		width: 85%;
+		max-width: 85%;
+		margin-inline: auto;
+	}
+
+	.icon {
+		width: 1em;
+		height: 1em;
+	}
+
+	.clickable:hover,
+	.clickable:hover * {
+		opacity: 75%;
 		cursor: pointer;
 	}
 
 	.card {
 		display: flex;
 		flex-direction: column;
-		gap: calc(var(--spacing) * 5);
+		gap: --spacing(5);
 		border-radius: var(--radius-2xl);
 		background-color: var(--card);
 		border: 1px solid var(--border);
 		box-shadow: var(--shadow-md);
-		padding: calc(var(--spacing) * 3);
+		padding: --spacing(3);
 		overflow: hidden;
 	}
 
-	.no-select {
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
+	@media (width >= 48rem) {
+		.container {
+			max-width: 70%;
+			width: 70%;
+		}
 	}
 }

@@ -114,9 +114,9 @@
 							class="grid h-full w-full grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid-cols-1 md:grid-rows-[1fr_auto_1fr]"
 						>
 							<!-- Top/Left: Name/Date -->
-							<div class="no-select truncate text-right md:text-center">
+							<div class="truncate text-right select-none md:text-center">
 								{#if i % 2 === 0}
-									<span class="text-xl font-semibold">{item.name}</span>
+									<span class="font-semibold">{item.name}</span>
 								{:else}
 									<span class="text-muted-foreground">{item.date}</span>
 								{/if}
@@ -166,12 +166,12 @@
 									</Popover.Trigger>
 
 									<Popover.Content
-										class="max-h-25 max-w-100 overflow-auto text-center text-sm {isMd ? '' : 'translate-y-[100%]'}"
+										class="max-h-25 max-w-100 overflow-auto {isMd ? '' : 'translate-y-[100%]'}"
 										customAnchor={isMd ? null : itemsRef[i]}
 										side={isMd ? (i % 2 === 0 ? 'bottom' : 'top') : 'top'}
 										align="center"
 									>
-										<p>{item.description}</p>
+										<p class="text-center text-xs! md:text-sm!">{item.description}</p>
 									</Popover.Content>
 								</Popover.Root>
 
@@ -190,9 +190,9 @@
 							</div>
 
 							<!-- Bottom/Right: Date/Name -->
-							<div class="no-select truncate text-left md:text-center">
+							<div class="truncate text-left select-none md:text-center">
 								{#if i % 2 === 1}
-									<span class="text-xl font-semibold">{item.name}</span>
+									<span class="font-semibold">{item.name}</span>
 								{:else}
 									<span class="text-muted-foreground">{item.date}</span>
 								{/if}
@@ -201,8 +201,8 @@
 					</Carousel.Item>
 				{/each}
 			</Carousel.Content>
-			<Carousel.Previous />
-			<Carousel.Next />
+			<Carousel.Previous class="clickable" />
+			<Carousel.Next class="clickable" />
 		</Carousel.Root>
 	{/key}
 {/if}

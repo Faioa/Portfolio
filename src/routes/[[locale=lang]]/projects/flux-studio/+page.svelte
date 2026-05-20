@@ -43,9 +43,9 @@
 	</p>
 	<p>
 		This is also an opportunity for me to learn Rust, which seems like a really promising programming language. You can
-		find out more at <a href="https://rust-lang.org/" class="link">their website</a> directly for more details, but it might
-		just become my go-to language for almost every use cases. Despite the fact that the Rust community is relatively new,
-		the Rustaceans (the name of the Rust developers' community) are very active, and the available resources are constantly
+		find out more at <a href="https://rust-lang.org/" class="clickable">their website</a> directly for more details, but it
+		might just become my go-to language for almost every use cases. Despite the fact that the Rust community is relatively
+		new, the Rustaceans (the name of the Rust developers' community) are very active, and the available resources are constantly
 		growing. There is even debate about whether this language should be included in the Linux Kernel. I will leave you to
 		do your own research on this subject, as this is not the main topic of this page.
 	</p>
@@ -97,7 +97,7 @@
 		margin-top: 30px;
 	}
 
-	.link {
+	.clickable {
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}

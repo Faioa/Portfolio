@@ -223,7 +223,7 @@
 					<div class="form-field-item">
 						<Input
 							name={$formData.research && $formData.research !== '' ? 'research' : ''}
-							class="rounded-2xl hover:[&_*]:cursor-text hover:opacity-75"
+							class="rounded-2xl"
 							placeholder="Search..."
 							{...rest}
 							bind:value={$formData.research}
@@ -236,7 +236,7 @@
 
 		<!-- Submit -->
 		<div class="form-field-item col-span-2 md:col-span-1">
-			<Button type="submit" variant="secondary" class="w-min self-end rounded-2xl hover:cursor-pointer"
+			<Button type="submit" variant="secondary" class="clickable w-min self-end rounded-2xl"
 				>Apply<SearchIcon class="icon" /></Button
 			>
 		</div>
@@ -255,7 +255,7 @@
 								bind:value={$formData.sortBy}
 								onchange={resetPage}
 								{...rest}
-								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm! hover:[&_*]:cursor-pointer hover:opacity-75"
+								class="clickable truncate rounded-2xl [&_*]:text-xs md:[&_*]:text-sm"
 							>
 								{#each sortByValues.toSorted( (a, b) => getSortByLabel(a).localeCompare(getSortByLabel(b)) ) as value (value)}
 									<NativeSelect.Option {value}>{getSortByLabel(value)}</NativeSelect.Option>
@@ -267,7 +267,7 @@
 			</Form.Field>
 
 			<!-- Date Start -->
-			<Form.Field {form} name="dateStart" class="md:order-2 order-4">
+			<Form.Field {form} name="dateStart" class="order-4 md:order-2">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
@@ -284,7 +284,7 @@
 							<Popover.Root>
 								<Popover.Trigger
 									{...props}
-									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! hover:cursor-pointer hover:opacity-75 {$formData.dateStart
+									class="clickable flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs md:[&_*]:text-sm {$formData.dateStart
 										? 'text-muted-foreground'
 										: ''}"
 								>
@@ -328,7 +328,7 @@
 			</Form.Field>
 
 			<!-- Date End -->
-			<Form.Field {form} name="dateEnd" class="md:order-3 order-5">
+			<Form.Field {form} name="dateEnd" class="order-5 md:order-3">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
@@ -345,7 +345,7 @@
 							<Popover.Root>
 								<Popover.Trigger
 									{...props}
-									class="flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs! md:[&_*]:text-sm! hover:cursor-pointer hover:opacity-75 {$formData.dateEnd
+									class="clickable flex items-center justify-center gap-2 truncate rounded-2xl border-1 px-2 py-1 [&_*]:text-xs md:[&_*]:text-sm {$formData.dateEnd
 										? 'text-muted-foreground'
 										: ''}"
 								>
@@ -389,7 +389,7 @@
 			</Form.Field>
 
 			<!-- Tags -->
-			<Form.Field {form} name="tags" class="md:order-4 order-2">
+			<Form.Field {form} name="tags" class="order-2 md:order-4">
 				<Form.Control>
 					{#snippet children({ props })}
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
@@ -407,8 +407,10 @@
 								bind:value={$formData.tags}
 								onValueChange={resetPage}
 							>
-								<Select.Trigger class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm! hover:cursor-pointer hover:opacity-75">Options</Select.Trigger>
-								<Select.Content class="[&_*]:text-xs! md:[&_*]:text-sm!">
+								<Select.Trigger class="clickable truncate rounded-2xl [&_*]:text-xs md:[&_*]:text-sm"
+									>Options</Select.Trigger
+								>
+								<Select.Content class="[&_*]:text-xs md:[&_*]:text-sm">
 									{#each tagsValues.toSorted((a, b) => getTagLabel(a).localeCompare(getTagLabel(b))) as value (value)}
 										<Select.Item {value} class="hover:cursor-pointer">{getTagLabel(value)}</Select.Item>
 									{/each}
@@ -430,7 +432,7 @@
 							<Switch
 								name={$formData.featured && $formData.featured !== defaultFeatured ? 'featured' : ''}
 								{...rest}
-								class="hover:cursor-pointer hover:opacity-75"
+								class="clickable"
 								bind:checked={$formData.featured}
 								onCheckedChange={resetPage}
 							/>
@@ -452,7 +454,7 @@
 								bind:value={$formData.perPage}
 								onchange={resetPage}
 								{...rest}
-								class="truncate rounded-2xl [&_*]:text-xs! md:[&_*]:text-sm! hover:[&_*]:cursor-pointer hover:opacity-75"
+								class="clickable truncate rounded-2xl [&_*]:text-xs md:[&_*]:text-sm"
 								aria-sort="ascending"
 							>
 								{#each perPageOptions as value (value)}
@@ -473,10 +475,10 @@
 		/>
 
 		<!-- Displaying the tags in the remaining columns -->
-		<div class="col-span-6 flex flex-wrap items-center justify-center gap-5 md:col-span-8">
+		<div class="col-span-6 flex flex-wrap items-center justify-center gap-5 select-none md:col-span-8">
 			{#if $formData.tags && $formData.tags.length > 0}
 				{#each $formData.tags as tag, i (i)}
-					<Badge variant="secondary" class="w-min truncate text-xs! md:text-sm!">{getTagLabel(tag)}</Badge>
+					<Badge variant="secondary" class="w-min truncate text-xs md:text-sm">{getTagLabel(tag)}</Badge>
 				{/each}
 			{/if}
 		</div>
@@ -486,7 +488,7 @@
 		{@render children?.()}
 	</div>
 
-	{#if itemsCount > 0 && itemsCount / $formData.perPage > 1}
+	{#if itemsCount > 0 && itemsCount / $formData.perPage > 0}
 		<Pagination.Root
 			count={itemsCount}
 			perPage={$formData.perPage}
@@ -496,7 +498,7 @@
 			{#snippet children({ pages, currentPage })}
 				<Pagination.Content>
 					<Pagination.Item>
-						<Pagination.PrevButton>
+						<Pagination.PrevButton class="clickable disabled:cursor-auto">
 							<ChevronLeftIcon class="icon" />
 						</Pagination.PrevButton>
 					</Pagination.Item>
@@ -507,14 +509,14 @@
 							</Pagination.Item>
 						{:else}
 							<Pagination.Item>
-								<Pagination.Link {page} isActive={currentPage === page.value}>
+								<Pagination.Link class="clickable" {page} isActive={currentPage === page.value}>
 									{page.value}
 								</Pagination.Link>
 							</Pagination.Item>
 						{/if}
 					{/each}
 					<Pagination.Item>
-						<Pagination.NextButton>
+						<Pagination.NextButton class="clickable disabled:cursor-auto">
 							<ChevronRightIcon class="icon" />
 						</Pagination.NextButton>
 					</Pagination.Item>

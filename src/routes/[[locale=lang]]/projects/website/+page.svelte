@@ -45,7 +45,7 @@
 	<h1 class="title">This Website</h1>
 	<p>
 		This website is my way of justifying taking a year off from university. If you're not sure what I mean, you can find
-		out more on <a href={resolve('/about')} class="link">this page</a>. It is also a way for me to keep track of my
+		out more on <a href={resolve('/about')} class="clickable">this page</a>. It is also a way for me to keep track of my
 		activities, projects, and associated goals. I think it could be useful for business partners or recruiters who want
 		to find out more about a candidate before making an offer. If you are interested in this, I am definitely the person
 		for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time to promote
@@ -62,7 +62,7 @@
 			Javascript or HTML/CSS, they made it really easy to build something decent. I'll probably write an article about
 			it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check <a
 				href="https://svelte.dev"
-				class="link">their website</a
+				class="clickable">their website</a
 			> for more details.
 		</p>
 	</section>
@@ -94,7 +94,7 @@
 		margin-top: 30px;
 	}
 
-	.link {
+	.clickable {
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}

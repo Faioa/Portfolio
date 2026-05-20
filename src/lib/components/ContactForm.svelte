@@ -88,7 +88,7 @@
 				<Input class="rounded-2xl" {...props} bind:value={$formData.firstName} placeholder="John" />
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
+		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 	</Form.Field>
 
 	<Form.Field {form} name="lastName" class="col-span-1">
@@ -98,7 +98,7 @@
 				<Input class="rounded-2xl" {...props} bind:value={$formData.lastName} placeholder="Doe" />
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
+		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 	</Form.Field>
 
 	<!-- Field for email -->
@@ -117,7 +117,7 @@
 									</InputGroup.Button>
 								{/snippet}
 							</Popover.Trigger>
-							<Popover.Content class="max-w-50 rounded-2xl text-center text-xs! md:text-sm!">
+							<Popover.Content class="max-w-50 rounded-2xl text-center text-xs md:text-sm">
 								This email address will only be used to reply to your message and will not be shared in any way.
 							</Popover.Content>
 						</Popover.Root>
@@ -125,7 +125,7 @@
 				</InputGroup.Root>
 			{/snippet}
 		</Form.Control>
-		<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
+		<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 	</Form.Field>
 
 	<!-- Fields for category and subject -->
@@ -148,7 +148,7 @@
 							}
 						}}
 					>
-						<Select.Trigger {...props} class="w-full rounded-2xl">
+						<Select.Trigger {...props} class="clickable w-full rounded-2xl">
 							{$formData.category ? getCategoryLabel($formData.category) : 'Select a category'}
 						</Select.Trigger>
 						<Select.Content>
@@ -159,7 +159,7 @@
 					</Select.Root>
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
+			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 		</Form.Field>
 
 		<Form.Field {form} name="subject">
@@ -192,7 +192,7 @@
 								}
 							}}
 						>
-							<Select.Trigger {...props} class="w-full rounded-2xl">
+							<Select.Trigger {...props} class="clickable w-full rounded-2xl">
 								{$formData.subject ? getSubjectLabel($formData.subject) : 'Select a subject'}
 							</Select.Trigger>
 							<Select.Content>
@@ -204,7 +204,7 @@
 					{/if}
 				{/snippet}
 			</Form.Control>
-			<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
+			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 		</Form.Field>
 	</div>
 
@@ -225,7 +225,7 @@
 		</Form.Control>
 
 		<div class="mr-2 flex items-center justify-between">
-			<Form.FieldErrors errorClasses="text-xs! md:text-sm! truncate" />
+			<Form.FieldErrors errorClasses="text-xs md:text-sm truncate" />
 			<p class="text-sm">
 				<span
 					class={$formData.content.length >= minContent && $formData.content.length <= maxContent
@@ -239,8 +239,8 @@
 
 	<!-- Submit button -->
 	<div class="col-span-2 flex w-full items-center justify-between">
-		<div class="text-xs! font-bold text-muted-foreground italic md:text-sm!">All fields are mandatory</div>
-		<Button type="submit" variant="secondary" class="w-min">Submit<SendIcon class="icon" /></Button>
+		<div class="text-xs font-bold text-muted-foreground italic md:text-sm">All fields are mandatory</div>
+		<Button type="submit" variant="secondary" class="clickable w-min">Submit<SendIcon class="icon" /></Button>
 	</div>
 </form>
 

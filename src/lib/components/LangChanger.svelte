@@ -25,7 +25,7 @@
 
 <Tooltip.Provider delayDuration={200}>
 	<Tooltip.Root>
-		<Tooltip.Trigger>
+		<Tooltip.Trigger class="clickable">
 			<Link preloadData="tap" {args}>
 				{#if currentLocale === 'en'}
 					<Gb />

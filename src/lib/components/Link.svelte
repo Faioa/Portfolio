@@ -80,7 +80,7 @@
 	let url = $derived(getUrl(href ?? page.url.pathname, isExternal, { id: page.route.id, params, search, hash }));
 </script>
 
-<a {...dataAttributes} class="link {className}" target={isExternal ? '_blank' : '_self'} href={url}>
+<a {...dataAttributes} class="clickable {className}" target={isExternal ? '_blank' : '_self'} href={url}>
 	{@render children?.()}
 </a>
 

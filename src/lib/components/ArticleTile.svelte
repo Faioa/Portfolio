@@ -18,7 +18,7 @@
 	<h3 class="w-full text-base! font-bold text-wrap md:text-lg!">{metadata.title}</h3>
 
 	<div class="max-h-20 min-h-20 md:max-h-35 md:max-w-70">
-		<span class="line-clamp-4! md:line-clamp-6! truncate text-wrap wrap-break-word">
+		<span class="line-clamp-4! truncate text-wrap wrap-break-word md:line-clamp-6!">
 			{metadata.excerpt}
 		</span>
 	</div>

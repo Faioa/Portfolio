@@ -17,8 +17,8 @@
 
 <svelte:window bind:scrollY />
 <CircleArrowUp
-	class="link fixed right-10 bottom-10 z-10 size-9 duration-200 {scrollY > minHeight
+	class="clickable fixed right-10 bottom-10 z-10 size-9 duration-200 {scrollY > minHeight
 		? 'pointer-events-auto opacity-100'
-		: 'pointer-events-none opacity-0'} cursor-pointer"
+		: 'pointer-events-none opacity-0'}"
 	onclick={toTop}
 />

@@ -64,7 +64,7 @@
 			networks for my master's degree and successfully completed the first year. I cannot say which aspect interests me
 			the most, but I find the whole field fascinating. I plan to make the most of my year off by studying <a
 				href="https://ocw.mit.edu/"
-				class="link">MIT open courses</a
+				class="clickable">MIT open courses</a
 			> and scientific papers in other fields, such as cybersecurity and artificial intelligence.
 		</p>
 		<p>
@@ -95,7 +95,7 @@
 		margin-top: 30px;
 	}
 
-	.link {
+	.clickable {
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}
