@@ -154,68 +154,69 @@
 }
 
 @layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground antialiased;
-    }
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground antialiased;
+	}
 }
 
 /* Custom Properties */
 body * {
-    scroll-behavior: smooth;
-    font-size: var(--text-sm) !important;
+	scroll-behavior: smooth;
+	font-size: var(--text-sm) !important;
 }
 
 .title {
-    font-weight: bold;
-    font-size: var(--text-2xl) !important;
-    letter-spacing: -0.02em;
+	font-weight: bold;
+	font-size: var(--text-2xl) !important;
+	letter-spacing: -0.02em;
 }
 
 .subtitle {
-    font-weight: bold;
-    font-size: var(--text-xl) !important;
+	font-weight: bold;
+	font-size: var(--text-xl) !important;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(var(--spacing) * 8);
-    width: 85%;
-    max-width: 85%;
-    margin-inline: auto;
-}
-
-.icon {
-    width: 1em;
-    height: 1em;
-    scroll-behavior: smooth;
-    font-size: var(--text-sm) !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: calc(var(--spacing) * 8);
+	width: 85%;
+	max-width: 85%;
+	margin-inline: auto;
 }
 
 @media (width >= 48rem) {
-    body * {
-        font-size: var(--text-base) !important;
-    }
+	body * {
+		font-size: var(--text-base) !important;
+	}
 
-    .title {
-        font-size: var(--text-3xl) !important;
-    }
+	.title {
+		font-size: var(--text-3xl) !important;
+	}
 
-    .subtitle {
-        font-size: var(--text-2xl) !important;
-    }
+	.subtitle {
+		font-size: var(--text-2xl) !important;
+	}
 
-    .container {
-        max-width: 70%;
-        width: 70%;
-    }
+	.container {
+		max-width: 70%;
+		width: 70%;
+	}
 }
 
 @layer components {
+	.icon {
+		display: inline-block;
+		aspect-ratio: auto;
+		height: 1em;
+		width: auto;
+		vertical-align: middle;
+	}
+
 	.link:hover {
 		opacity: 80%;
 		cursor: pointer;
@@ -230,7 +231,7 @@ body * {
 		border: 1px solid var(--border);
 		box-shadow: var(--shadow-md);
 		padding: calc(var(--spacing) * 3);
-        overflow: hidden;
+		overflow: hidden;
 	}
 
 	.no-select {
