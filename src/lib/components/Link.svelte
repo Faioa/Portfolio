@@ -5,6 +5,7 @@
 	import { page } from '$app/state';
 
 	import { defaultLocale, getUrl, locales, urlIsExternal } from '$lib/lang';
+	import { cn } from '$lib/utils';
 
 	interface LinkProps {
 		href?: string;
@@ -80,7 +81,7 @@
 	let url = $derived(getUrl(href ?? page.url.pathname, isExternal, { id: page.route.id, params, search, hash }));
 </script>
 
-<a {...dataAttributes} class="clickable {className}" target={isExternal ? '_blank' : '_self'} href={url}>
+<a {...dataAttributes} class={cn('clickable', className)} target={isExternal ? '_blank' : '_self'} href={url}>
 	{@render children?.()}
 </a>
 
