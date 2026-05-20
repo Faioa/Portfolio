@@ -1,38 +1,77 @@
 <script lang="ts">
-	import Guitar from '$lib/components/Guitar.svelte';
+	import ListMusicIcon from '@lucide/svelte/icons/list-music';
+
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+
+	import { browser } from '$app/environment';
+
 	import LangChanger from '$lib/components/LangChanger.svelte';
 	import Link from '$lib/components/Link.svelte';
 	import ModeToggle from '$lib/components/ModeToggle.svelte';
 	import NavMenu from '$lib/components/NavMenu.svelte';
+	import Logo from '$lib/components/icons/Logo.svelte';
+	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import { Separator } from '$lib/components/ui/separator';
+	import { IsMobile } from '$lib/hooks/is-mobile.svelte';
+	import { cn } from '$lib/utils';
 
-	const height = 75;
+	interface Props {
+		class?: string;
+	}
+
+	const { class: className }: Props = $props();
+
+	let isMobile = new IsMobile();
+	let mounted = $state(false);
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<header style="--height: {height}px;" class="flex flex-row-reverse border-b-2 border-b-secondary">
-	<noscript>
-		<span class="text-center text-destructive">
-			Please activate Javascript to use the website as it depends heavily on animations and events.
-		</span>
-	</noscript>
+{#if mounted}
+	<header transition:fade={{ duration: 500 }} class={cn('h-[75px] max-h-[75px] w-full px-5 md:px-10', className)}>
+		<div class="flex h-full w-full flex-col items-center justify-center gap-3">
+			<!-- No JS warning -->
+			<noscript class="w-full text-center text-xs text-destructive md:text-sm">
+				Please activate Javascript to fully use this website.
+			</noscript>
 
-	<div class="flex h-full items-center gap-3">
-		<NavMenu />
-		<LangChanger />
-		<ModeToggle />
-	</div>
-</header>
+			<div class="relative grid h-full w-full grid-cols-3 items-center">
+				<div class="col-span-1 flex items-center justify-start">
+					<Link href="/"><Logo class="icon size-10 md:size-15" /></Link>
+				</div>
 
-<style>
-	header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		line-height: 1;
-		height: var(--height);
-		width: 100%;
-		z-index: 10;
-		padding-left: calc(var(--spacing) * 5);
-		padding-right: calc(var(--spacing) * 5);
-		margin-bottom: calc(var(--spacing) * 10);
-	}
-</style>
+				<div class="col-span-1 flex items-center justify-center">
+					{#if browser && mounted && !isMobile.current}
+						<NavMenu />
+					{:else}
+						<!-- Empty div to keep grid layout -->
+						<div></div>
+					{/if}
+				</div>
+
+				<div class="col-span-1 flex items-center justify-end gap-3">
+					<Dialog.Root>
+						<Dialog.Trigger type="button" class="aspect-square rounded-full md:pointer-events-none md:hidden">
+							<ListMusicIcon class="icon size-8" />
+						</Dialog.Trigger>
+						<Dialog.Content
+							showCloseButton={false}
+							class="flex h-1/2 w-3/5 flex-col items-center justify-center text-center"
+						>
+							<Dialog.Description
+								>You can use this menu to navigate to the main pages of the website.</Dialog.Description
+							>
+							<NavMenu orientation="vertical" />
+						</Dialog.Content>
+					</Dialog.Root>
+					<LangChanger />
+					<ModeToggle />
+				</div>
+			</div>
+		</div>
+		<Separator class="w-full" />
+	</header>
+{/if}

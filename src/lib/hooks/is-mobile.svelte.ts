@@ -1,9 +1,12 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 import { MediaQuery } from 'svelte/reactivity';
 
-const DEFAULT_MOBILE_BREAKPOINT = 768;
+// Imported from Tailwind config for consistency, '768px' by default
+const DEFAULT_MOBILE_BREAKPOINT = defaultTheme.screens.md;
 
 export class IsMobile extends MediaQuery {
-	constructor(breakpoint: number = DEFAULT_MOBILE_BREAKPOINT) {
-		super(`max-width: ${breakpoint - 1}px`);
+	constructor(breakpoint: string = DEFAULT_MOBILE_BREAKPOINT) {
+		super(`not all and (min-width: ${breakpoint})`);
 	}
 }

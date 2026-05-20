@@ -1,97 +1,59 @@
 <script lang="ts">
-	import ChevronUp from '@lucide/svelte/icons/chevron-up';
-	import ListMusic from '@lucide/svelte/icons/list-music';
-
-	import { slide } from 'svelte/transition';
-
-	import { browser } from '$app/environment';
-
 	import Link from '$lib/components/Link.svelte';
-	import { Button } from '$lib/components/ui/button/index';
+	import { buttonVariants } from '$lib/components/ui/button';
+	import * as NavigationMenu from '$lib/components/ui/navigation-menu';
+	import { cn } from '$lib/utils';
 
-	const { height = '100%' } = $props();
+	interface Props {
+		orientation?: 'horizontal' | 'vertical';
+		class?: string;
+	}
 
-	let visible = $state(false);
+	const { orientation = 'horizontal', class: className }: Props = $props();
 </script>
 
-<nav
-	class="relative z-10 inline-block h-full"
-	onmouseenter={() => (visible = true)}
-	onmouseleave={() => (visible = false)}
->
-	<ListMusic size={height} class="p-4" />
+<div class={cn('', className)}>
+	<NavigationMenu.Root class="relative h-full w-full" {orientation}>
+		<NavigationMenu.List class={orientation === 'horizontal' ? '' : 'flex-col gap-5'}>
+			<NavigationMenu.Item>
+				<NavigationMenu.Link>
+					{#snippet child()}
+						<Link href="/" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Home</Link>
+					{/snippet}
+				</NavigationMenu.Link>
+			</NavigationMenu.Item>
 
-	{#if visible}
-		<div class="content" transition:slide={{ duration: 250 }}>
-			<ChevronUp class="icon relative left-[50%] translate-x-[-50%]" />
-			<div class="flex flex-col gap-2 text-center">
-				<Link href="/">
-					<Button variant="ghost">Home</Button>
-				</Link>
-				<hr />
-				<Link href="/about">
-					<Button variant="ghost">About</Button>
-				</Link>
-				<hr />
-				<Link href="/articles">
-					<Button variant="ghost">Articles</Button>
-				</Link>
-				<hr />
-				<Link href="/projects">
-					<Button variant="ghost">Projects</Button>
-				</Link>
-				<hr />
-				<Link href="/contact">
-					<Button variant="ghost">Contact</Button>
-				</Link>
-			</div>
-		</div>
-	{/if}
+			<NavigationMenu.Item>
+				<NavigationMenu.Link>
+					{#snippet child()}
+						<Link href="/articles" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Articles</Link>
+					{/snippet}
+				</NavigationMenu.Link>
+			</NavigationMenu.Item>
 
-	{#if !browser}
-		<!-- Fallback JS disabled -->
-		<noscript>
-			<div class="content">
-				<ChevronUp class="icon relative left-[50%] translate-x-[-50%]" />
-				<div class="flex flex-col gap-2 text-center">
-					<Link href="/">
-						<Button variant="ghost">Home</Button>
-					</Link>
-					<hr />
-					<Link href="/about">
-						<Button variant="ghost">About</Button>
-					</Link>
-					<hr />
-					<Link href="/articles">
-						<Button variant="ghost">Articles</Button>
-					</Link>
-					<hr />
-					<Link href="/projects">
-						<Button variant="ghost">Projects</Button>
-					</Link>
-					<hr />
-					<Link href="/contact">
-						<Button variant="ghost">Contact</Button>
-					</Link>
-				</div>
-			</div>
-		</noscript>
-	{/if}
-</nav>
+			<NavigationMenu.Item>
+				<NavigationMenu.Link>
+					{#snippet child()}
+						<Link href="/projects" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Projects</Link>
+					{/snippet}
+				</NavigationMenu.Link>
+			</NavigationMenu.Item>
 
-<style>
-	.content {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%) translateY(100%);
-	}
+			<NavigationMenu.Item>
+				<NavigationMenu.Link>
+					{#snippet child()}
+						<Link href="/contact" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Contact</Link>
+					{/snippet}
+				</NavigationMenu.Link>
+			</NavigationMenu.Item>
 
-	nav noscript {
-		display: none;
-	}
-
-	nav:hover noscript {
-		display: block;
-	}
-</style>
+			<NavigationMenu.Item>
+				<NavigationMenu.Link>
+					{#snippet child()}
+						<Link href="/about" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>About</Link>
+					{/snippet}
+				</NavigationMenu.Link>
+			</NavigationMenu.Item>
+		</NavigationMenu.List>
+	</NavigationMenu.Root>
+</div>
