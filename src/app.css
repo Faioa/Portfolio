@@ -192,13 +192,13 @@
 		margin-inline: auto;
 	}
 
-    .icon {
-        display: inline-block;
-        aspect-ratio: auto;
-        height: 1em;
-        width: auto;
-        vertical-align: middle;
-    }
+	.icon {
+		display: inline-block;
+		aspect-ratio: auto;
+		height: 1em;
+		width: auto;
+		vertical-align: middle;
+	}
 
 	.clickable:hover,
 	.clickable:hover * {
