@@ -160,28 +160,28 @@
 }
 
 /* Custom Properties */
-.title {
-	@apply font-serif text-2xl font-extrabold md:text-3xl;
-	letter-spacing: -0.02em;
-}
-
-.subtitle {
-	@apply font-serif text-xl font-bold md:text-2xl;
-}
-
-h1,
-h2 {
-	@apply font-serif text-2xl font-bold md:text-3xl;
-}
-
-h3,
-h4,
-h5,
-h6 {
-	@apply font-serif text-xl font-bold md:text-2xl;
-}
-
 @layer components {
+	.title {
+		@apply font-serif text-2xl font-extrabold md:text-3xl;
+		letter-spacing: -0.02em;
+	}
+
+	.subtitle {
+		@apply font-serif text-xl font-bold md:text-2xl;
+	}
+
+	h1,
+	h2 {
+		@apply font-serif text-2xl font-bold md:text-3xl;
+	}
+
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-serif text-xl font-bold md:text-2xl;
+	}
+
 	.container {
 		display: flex;
 		flex-direction: column;

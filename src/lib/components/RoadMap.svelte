@@ -171,7 +171,7 @@
 										side={isMd ? (i % 2 === 0 ? 'bottom' : 'top') : 'top'}
 										align="center"
 									>
-										<p class="text-center text-xs! md:text-sm!">{item.description}</p>
+										<p class="text-center text-xs md:text-sm">{item.description}</p>
 									</Popover.Content>
 								</Popover.Root>
 
