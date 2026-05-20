@@ -30,11 +30,11 @@
 	});
 </script>
 
-{#if mounted}
+{#if mounted || !browser}
 	<header transition:fade={{ duration: 500 }} class={cn('h-[75px] max-h-[75px] w-full px-5 md:px-10', className)}>
-		<div class="flex h-full w-full flex-col items-center justify-center gap-3">
+		<div class="relative flex h-full w-full flex-col items-center justify-center gap-3">
 			<!-- No JS warning -->
-			<noscript class="w-full text-center text-xs text-destructive md:text-sm">
+			<noscript class="absolute top-0 w-full text-center text-xs text-destructive md:text-sm">
 				Please activate Javascript to fully use this website.
 			</noscript>
 
@@ -44,7 +44,7 @@
 				</div>
 
 				<div class="col-span-1 flex items-center justify-center">
-					{#if browser && mounted && !isMobile.current}
+					{#if mounted && !isMobile.current}
 						<NavMenu />
 					{:else}
 						<!-- Empty div to keep grid layout -->
