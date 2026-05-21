@@ -2,7 +2,7 @@
 	import Fr from 'svelte-flag-icons/Fr.svelte';
 	import Gb from 'svelte-flag-icons/Gb.svelte';
 
-	import { browser } from '$app/environment';
+	import { browser, building } from '$app/environment';
 	import { page } from '$app/state';
 
 	import Link from '$lib/components/Link.svelte';
@@ -10,7 +10,7 @@
 	import { defaultLocale, locales } from '$lib/lang.js';
 
 	let currentLocale = $derived.by(() => {
-		if (!browser) return defaultLocale;
+		if (!browser && !building) return defaultLocale;
 		if (page.params.locale) return page.params.locale;
 		// Additional check in case the URL is not correct (err 404)
 		const pathname = page.url.pathname;
@@ -27,7 +27,7 @@
 	<Tooltip.Root>
 		<Tooltip.Trigger class="clickable">
 			<Link preloadData="tap" {args}>
-				{#if currentLocale === 'en'}
+				{#if currentLocale !== 'en'}
 					<Gb />
 				{:else}
 					<Fr />

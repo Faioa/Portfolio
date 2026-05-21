@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	import { browser } from '$app/environment';
+	import { browser, building } from '$app/environment';
 	import { page } from '$app/state';
 
 	import { defaultLocale, getUrl, locales, urlIsExternal } from '$lib/lang';
 	import { cn } from '$lib/utils';
 
-	interface LinkProps {
+	interface LinkProps extends svelteHTML.HTMLAttributes<HTMLAnchorElement> {
 		href?: string;
 		args?: Record<string, string>;
 		class?: string;
@@ -30,7 +30,8 @@
 		replaceState = false,
 		keepFocus = false,
 		noScroll = false,
-		children
+		children,
+		...restProps
 	}: LinkProps = $props();
 
 	let dataAttributes = $derived.by(() => {
@@ -59,29 +60,31 @@
 	});
 
 	let locale = $derived.by(() => {
-		if (!browser) return defaultLocale;
-		if (page.params.locale) return page.params.locale;
-		// Additional check in case the URL is not correct (err 404)
-		const pathname = page.url.pathname;
-		if (pathname.length > 1 && pathname.startsWith('/')) {
-			const tmp = pathname.split('/')[1];
-			if (locales.includes(tmp)) return tmp;
+		let l = browser || building ? page.params.locale : defaultLocale;
+		if (browser || building) {
+			const pathname = page.url.pathname;
+			if (pathname.length > 1 && pathname.startsWith('/')) {
+				const tmp = pathname.split('/')[1];
+				if (locales.includes(tmp)) l = tmp;
+			}
 		}
-		return defaultLocale;
+		return l;
 	});
 
 	let isExternal = $derived(urlIsExternal(href ?? page.url.pathname, page.url.origin));
-
 	let params = $derived({ ...page.params, locale, ...args });
-
-	let search = $derived(href && href.length !== 0 ? (args.search ?? '') : browser ? page.url.search : '');
-	let hash = $derived(href && href.length !== 0 ? (args.hash ?? '') : browser ? page.url.hash : '');
-
-	// page.route.id is used instead of page.url.pathname because it leaves the possibility to override the route params
-	let url = $derived(getUrl(href ?? page.url.pathname, isExternal, { id: page.route.id, params, search, hash }));
+	let search = $derived(browser && !href ? page.url.search : '');
+	let hash = $derived(browser && !href ? window.location.hash : '');
+	let url = $derived(getUrl(href ?? '', isExternal, { id: page.route.id, params, search, hash }));
 </script>
 
-<a {...dataAttributes} class={cn('clickable', className)} target={isExternal ? '_blank' : '_self'} href={url}>
+<a
+	href={url}
+	target={isExternal ? '_blank' : undefined}
+	class={cn('clickable', className)}
+	{...dataAttributes}
+	{...restProps}
+>
 	{@render children?.()}
 </a>
 

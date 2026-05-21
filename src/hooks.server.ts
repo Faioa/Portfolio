@@ -15,18 +15,23 @@ loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ event, resolve }) => {
-	/* Getting wanted language for the request, or redirect to client's default language if not specified */
-	const isLocale = event.params.locale === null || locales.includes(event.params.locale);
-	const routeLocale = isLocale ? (event.params.locale ?? defaultLocale) : defaultLocale;
+	const pathname = event.url.pathname;
+	let urlHasLocale = false;
 
-	let locale: string | null | undefined = event.cookies.get('locale');
+	const pathSegments = pathname.split('/');
+	if (pathSegments.length > 0) urlHasLocale = locales.includes(pathSegments[1]);
 
-	// Is first visit AND no locale specified AND not building (prerendering)
-	if (!locale && (event.params.locale === null || !isLocale) && !building) {
+	/* Getting wanted language for the request, or redirect to the client's default language if not specified */
+	const routeLocale = urlHasLocale ? pathSegments[1] : defaultLocale;
+	let locale = event.cookies.get('locale');
+
+	// Is first visit AND no locale specified
+	if (!locale && !urlHasLocale) {
 		locale = parser.pick(locales, event.request.headers.get('accept-language') ?? '') ?? defaultLocale;
-		event.cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
 
-		// In this if block, it is certain that the routeLocale is the default one. Redirect the client if the chosen locale is not the default one.
+		if (!building) event.cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
+
+		// Redirect the client if the chosen locale is not the default one.
 		if (locale !== defaultLocale) {
 			const newRoute = getUrl(event.url.pathname, false, {
 				params: { ...event.params, locale },
@@ -36,8 +41,12 @@ export const handle = async ({ event, resolve }) => {
 			redirect(307, `${newRoute}`);
 		}
 	} else {
-		locale = isLocale ? routeLocale : defaultLocale;
-		event.cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
+		// The locale specified in the URL takes priority over the one specified in the cookie.
+		// Updating the cookie if the client's locale is different from the one specified in the URL.
+		if (!building && routeLocale !== locale) {
+			event.cookies.set('locale', routeLocale, { path: '/', maxAge: 60 * 60 * 24 * 7, secure: true }); // maxAge = 7 days
+		}
+		locale = routeLocale;
 	}
 
 	return await runWithLocale(locale, () =>

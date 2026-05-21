@@ -1,6 +1,6 @@
 import { loadLocale } from 'wuchale/load-utils';
 
-import { browser } from '$app/environment';
+import { browser, building } from '$app/environment';
 
 import { defaultLocale } from '$lib/lang';
 
@@ -12,7 +12,7 @@ export const prerender = true;
 
 /** @type {import('../../.svelte-kit/types/src/routes').LayoutLoad} */
 export const load = async ({ url, params }) => {
-	if (browser) {
+	if (browser || building) {
 		if (params.locale && locales.includes(params.locale)) {
 			await loadLocale(params.locale);
 			return;

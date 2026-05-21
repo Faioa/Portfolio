@@ -49,45 +49,46 @@ export function getUrl(
 	// If a link is external, nothing to do
 	if (isExternal) return href;
 
-	let id = opts.id ?? '';
 	const search = opts.search ?? '';
 	const hash = opts.hash ?? '';
 	const params = opts.params ?? {};
-	let fullURL = '';
+	const locale = params.locale ?? defaultLocale;
 
-	// href is absolute
+	let targetedRoute = '';
+
+	// Cleaning the URL of the locale
 	if (href.startsWith('/')) {
-		// Removing current locale
 		let cleanedHref = href;
-		for (const locale of locales) {
-			if (href.startsWith(`/${locale}`)) {
-				cleanedHref = href.replace(`/${locale}`, '');
+		for (const l of locales) {
+			if (href.startsWith(`/${l}`) || href === `/${locale}`) {
+				cleanedHref = href.replace(`/${l}`, '');
 				break;
 			}
 		}
-		fullURL = `${params.locale ? (params.locale === defaultLocale ? '' : `/${params.locale}`) : ''}`
-			.concat(cleanedHref.startsWith('/') ? '' : '/')
-			.concat(cleanedHref)
-			.concat(search)
-			.concat(hash);
+		targetedRoute = '/[[locale=lang]]' + cleanedHref;
 	} else {
-		// If id is not valid, returns an empty string
-		if (id.length === 0) return '';
-
-		// Removing trailing / if necessary
-		if (id.length > 1 && id.endsWith('/')) id = id.slice(0, -1);
-
-		// Removing the default locale from URL if necessary
-		if (!params.locale || params.locale === defaultLocale) id = id.replace('/[[locale]]', '/');
-
-		fullURL = id.concat(search).concat(hash);
+		// Returning an empty string if no id is specified, because it is not possible to resolve a relative URL without it.
+		if (!opts.id) return '';
+		targetedRoute = opts.id;
 	}
 
-	// Resolving the route with SvelteKit resolve function
+	// Removing potential trailing slash
+	if (targetedRoute.length > 1 && targetedRoute.endsWith('/')) {
+		targetedRoute = targetedRoute.slice(0, -1);
+	}
+
+	// Resolving the wanted route
 	try {
-		return resolve(fullURL, params);
-	} catch (err) {
-		console.error('An issue occurred when computing an URL :\r\n' + err);
+		let resolvedRoute = resolve(targetedRoute, params);
+
+		// Removing default locale
+		if (resolvedRoute.startsWith(`/${defaultLocale}`)) resolvedRoute = resolvedRoute.replace(`/${defaultLocale}`, '');
+		if (resolvedRoute.length === 0) resolvedRoute = '/';
+
+		// Patching the URL together and returning it.
+		return `${resolvedRoute}${search}${hash}`;
+	} catch (e) {
+		console.error('An issue occurred when computing an URL :\r\n' + e + ' ' + href);
 		return '';
 	}
 }

@@ -17,40 +17,44 @@
 		<NavigationMenu.List class={orientation === 'horizontal' ? '' : 'flex-col gap-5'}>
 			<NavigationMenu.Item>
 				<NavigationMenu.Link>
-					{#snippet child()}
-						<Link href="/" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Home</Link>
+					{#snippet child({ props })}
+						<Link href="/" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')} {...props}>Home</Link>
 					{/snippet}
 				</NavigationMenu.Link>
 			</NavigationMenu.Item>
 
 			<NavigationMenu.Item>
 				<NavigationMenu.Link>
-					{#snippet child()}
-						<Link href="/articles" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Articles</Link>
+					{#snippet child({ props })}
+						<Link href="/articles" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')} {...props}
+							>Articles</Link
+						>
 					{/snippet}
 				</NavigationMenu.Link>
 			</NavigationMenu.Item>
 
 			<NavigationMenu.Item>
 				<NavigationMenu.Link>
-					{#snippet child()}
-						<Link href="/projects" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Projects</Link>
+					{#snippet child({ props })}
+						<Link href="/projects" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')} {...props}
+							>Projects</Link
+						>
 					{/snippet}
 				</NavigationMenu.Link>
 			</NavigationMenu.Item>
 
 			<NavigationMenu.Item>
 				<NavigationMenu.Link>
-					{#snippet child()}
-						<Link href="/contact" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>Contact</Link>
+					{#snippet child({ props })}
+						<Link href="/contact" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')} {...props}>Contact</Link>
 					{/snippet}
 				</NavigationMenu.Link>
 			</NavigationMenu.Item>
 
 			<NavigationMenu.Item>
 				<NavigationMenu.Link>
-					{#snippet child()}
-						<Link href="/about" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')}>About</Link>
+					{#snippet child({ props })}
+						<Link href="/about" class={cn(buttonVariants({ variant: 'ghost' }), 'text-xl!')} {...props}>About</Link>
 					{/snippet}
 				</NavigationMenu.Link>
 			</NavigationMenu.Item>
