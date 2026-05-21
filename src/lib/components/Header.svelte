@@ -25,6 +25,8 @@
 	let isMobile = new IsMobile();
 	let mounted = $state(false);
 
+	let isOpen = $state(false);
+
 	onMount(() => {
 		mounted = true;
 	});
@@ -53,7 +55,7 @@
 				</div>
 
 				<div class="col-span-1 flex items-center justify-end gap-3">
-					<Dialog.Root>
+					<Dialog.Root bind:open={isOpen}>
 						<Dialog.Trigger type="button" class="aspect-square rounded-full md:pointer-events-none md:hidden">
 							<ListMusicIcon class="icon size-8" />
 						</Dialog.Trigger>
@@ -64,7 +66,7 @@
 							<Dialog.Description
 								>You can use this menu to navigate to the main pages of the website.</Dialog.Description
 							>
-							<NavMenu orientation="vertical" />
+							<NavMenu orientation="vertical" onSelect={() => (isOpen = false)} />
 						</Dialog.Content>
 					</Dialog.Root>
 					<LangChanger />
