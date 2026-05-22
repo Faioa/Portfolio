@@ -71,11 +71,11 @@
 		return l;
 	});
 
-	let isExternal = $derived(urlIsExternal(href ?? page.url.pathname, page.url.origin));
+	let isExternal = $derived(urlIsExternal(href?.trim() ?? page.url.pathname, page.url.origin));
 	let params = $derived({ ...page.params, locale, ...args });
-	let search = $derived(browser && !href ? page.url.search : '');
 	let hash = $derived(browser && !href ? window.location.hash : '');
-	let url = $derived(getUrl(href ?? '', isExternal, { id: page.route.id, params, search, hash }));
+	let search = $derived(browser && !href ? page.url.search : '');
+	let url = $derived(getUrl(href?.trim() ?? '', isExternal, { id: page.route.id, params, search, hash }));
 </script>
 
 <a

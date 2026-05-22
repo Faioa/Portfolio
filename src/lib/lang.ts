@@ -26,9 +26,9 @@ export function urlIsExternal(href: string, origin: string): boolean {
  * Else, it will try to find the absolute path of the destination while using the specified locale (if it is not the
  * default one). If there is an issue with the parameters, the default return value is an empty string.
  * @param href **String** representing the destination's URL.
- * @param isExternal **Boolean** describing if the URL is external or not. Please refer to ***urlIsExternal*** helper
+ * @param isExternal **Boolean** describing if the URL is external or not. Please refer to the *** urlIsExternal *** helper
  * function.
- * @param opts **Object** containing the different options used in this function :
+ * @param opts **Object** containing the different options used in this function:
  * - *id* should be SvelteKit's corresponding route id. Its default value is an empty string. It is necessary when the
  * URL is relative;
  * - *params* should contain the different options used by **resolve** (especially *locale*);
@@ -69,7 +69,7 @@ export function getUrl(
 	} else {
 		// Returning an empty string if no id is specified, because it is not possible to resolve a relative URL without it.
 		if (!opts.id) return '';
-		targetedRoute = opts.id;
+		targetedRoute = opts.id + (href.startsWith('?') || href.startsWith('#') ? '' : '/') + href;
 	}
 
 	// Removing potential trailing slash
