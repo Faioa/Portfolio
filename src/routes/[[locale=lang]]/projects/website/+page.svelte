@@ -14,7 +14,7 @@
 		{
 			name: 'Main features',
 			date: 'Apr 2026',
-			status: ONGOING,
+			status: COMPLETED,
 			description:
 				'All the main features of the website will then be implemented, including a functioning contact form, a search engine for the blog, fully translated content and a project architecture designed for scalability and maintainability. There should also be a Dockerfile for deployment.'
 		},
