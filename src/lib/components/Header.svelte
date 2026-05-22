@@ -2,9 +2,9 @@
 	import ListMusicIcon from '@lucide/svelte/icons/list-music';
 
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
 
 	import { browser } from '$app/environment';
+	import { afterNavigate } from '$app/navigation';
 
 	import LangChanger from '$lib/components/LangChanger.svelte';
 	import Link from '$lib/components/Link.svelte';
@@ -30,10 +30,17 @@
 	onMount(() => {
 		mounted = true;
 	});
+
+	// Dialog closes after navigating to another page
+	afterNavigate((navigation) => {
+		if (!navigation.from || !navigation.to || navigation.from.url.href !== navigation.to.url.href) isOpen = false;
+	});
+
+	let ref = $state<HTMLElement | null>(null);
 </script>
 
 {#if mounted || !browser}
-	<header transition:fade={{ duration: 500 }} class={cn('h-[75px] max-h-[75px] w-full px-5 md:px-10', className)}>
+	<header class={cn('h-[75px] max-h-[75px] w-full px-5 md:px-10', className)}>
 		<div class="relative flex h-full w-full flex-col items-center justify-center gap-3">
 			<!-- No JS warning -->
 			<noscript class="absolute top-0 w-full text-center text-xs text-destructive md:text-sm">
@@ -60,13 +67,19 @@
 							<ListMusicIcon class="icon size-8" />
 						</Dialog.Trigger>
 						<Dialog.Content
+							bind:ref
 							showCloseButton={false}
+							onOpenAutoFocus={(e) => {
+								e.preventDefault();
+								const el: HTMLElement | undefined | null = ref?.querySelector('[data-active]');
+								el?.focus();
+							}}
 							class="flex h-1/2 w-3/5 flex-col items-center justify-center text-center"
 						>
 							<Dialog.Description
 								>You can use this menu to navigate to the main pages of the website.</Dialog.Description
 							>
-							<NavMenu orientation="vertical" onSelect={() => (isOpen = false)} />
+							<NavMenu orientation="vertical" />
 						</Dialog.Content>
 					</Dialog.Root>
 					<LangChanger />
