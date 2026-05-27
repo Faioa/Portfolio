@@ -151,7 +151,7 @@
 
 @layer base {
 	* {
-		@apply border-border outline-ring/50 scroll-smooth;
+		@apply scroll-smooth border-border outline-ring/50;
 	}
 	body {
 		@apply bg-background font-sans text-sm text-foreground antialiased md:text-base;
@@ -200,13 +200,19 @@
 		vertical-align: middle;
 	}
 
+	.link {
+		font-style: italic;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
 	.clickable:hover,
 	.clickable:hover * {
 		opacity: 75%;
 		cursor: pointer;
 	}
 
-	.card {
+	.tile {
 		display: flex;
 		flex-direction: column;
 		gap: --spacing(5);

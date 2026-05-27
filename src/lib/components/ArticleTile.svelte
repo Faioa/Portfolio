@@ -14,17 +14,15 @@
 	const { article, metadata, class: className = '' }: Props = $props();
 </script>
 
-<div class={cn('card', className)}>
+<div class={cn('tile', className)}>
 	<h3 class="w-full text-base font-bold text-wrap md:text-lg">{metadata.title}</h3>
 
-	<div class="max-h-20 min-h-20 md:max-h-35 md:max-w-70">
-		<span class="line-clamp-4 truncate text-wrap wrap-break-word md:line-clamp-6">
-			{metadata.excerpt}
-		</span>
+	<div class="line-clamp-4 w-full truncate text-wrap wrap-break-word md:line-clamp-6">
+		{metadata.excerpt}
 	</div>
 
 	<div class="flex items-center justify-between gap-5">
-		<span class="col-span-2 text-sm text-wrap italic">
+		<span class="text-sm text-wrap italic">
 			Written on {new Date(metadata.created).toLocaleDateString()}
 		</span>
 

@@ -1,9 +1,10 @@
 <script lang="ts">
-	import EyeIcon from '@lucide/svelte/icons/eye';
 	import Search from '@lucide/svelte/icons/search';
 
 	import ArticlesList from '$lib/components/ArticlesList.svelte';
+	import FluxStudioTile from '$lib/components/FluxStudioTile.svelte';
 	import Link from '$lib/components/Link.svelte';
+	import WebsiteTile from '$lib/components/WebsiteTile.svelte';
 
 	import type { PageProps } from './$types';
 
@@ -25,10 +26,9 @@
 	</p>
 	<p>
 		To learn more about me, you can check
-		<Link href="/about" class="underline underline-offset-3">this page</Link>. You can also find my social media, as
-		well as a contact form at the
-		<Link href="#footer" class="underline underline-offset-3">bottom of each page</Link>, if you want to inquire me
-		about something.
+		<Link href="/about" class="link">this page</Link>. You can also find my social media, as well as a contact form at
+		the
+		<Link href="#footer" class="link">bottom of each page</Link>, if you want to inquire me about something.
 	</p>
 	<p>I hope you enjoy visiting my website!</p>
 </div>
@@ -36,41 +36,8 @@
 <div class="container">
 	<h2 class="title">Featured Projects</h2>
 	<div class="grid grid-cols-1 gap-10 md:grid-cols-2">
-		<div class="card">
-			<h3 class="subtitle w-full font-bold text-wrap">Flux Studio</h3>
-
-			<div class="max-h-20 min-h-20 md:max-h-35">
-				<p class="line-clamp-4! truncate text-wrap wrap-break-word md:line-clamp-6!">
-					Flux studio is a soon-to-be developed <span class="font-bold">Digital Audio Workstation</span>
-					using <span class="font-bold italic">Rust</span>. My aim is to create a top-notch DAW that can be used for
-					playing and learning music. My goals are ambitious, but I will do my best to see this project through
-					nonetheless.
-				</p>
-			</div>
-
-			<div class="flex items-center gap-1 self-end justify-self-end">
-				<Link href="/projects/flux-studio" class="text-sm! md:text-base!">Read More</Link>
-				<EyeIcon class="icon" />
-			</div>
-		</div>
-
-		<div class="card">
-			<h3 class="subtitle w-full font-bold text-wrap">This Website</h3>
-
-			<div class="max-h-20 min-h-20 md:max-h-35">
-				<p class="line-clamp-4! truncate text-wrap wrap-break-word md:line-clamp-6!">
-					This website is both a portfolio and a blog developed with <span class="font-bold italic">Svelte</span>
-					and <span class="font-bold italic">SvelteKit</span>. I will post updates on my projects and experiences, as
-					well as anything else I find interesting. It is also a way for you to contact me. This project is an
-					opportunity for me to experiment with web development.
-				</p>
-			</div>
-
-			<div class="flex items-center gap-1 self-end justify-self-end">
-				<Link href="/projects/website" class="text-sm! md:text-base!">Read More</Link>
-				<EyeIcon class="icon" />
-			</div>
-		</div>
+		<FluxStudioTile class="col-span-1" />
+		<WebsiteTile class="col-span-1" />
 	</div>
 </div>
 

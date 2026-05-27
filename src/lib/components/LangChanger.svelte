@@ -34,7 +34,7 @@
 				{/if}
 			</Link>
 		</Tooltip.Trigger>
-		<Tooltip.Content side="bottom" class="rounded-2xl bg-muted-foreground text-center">
+		<Tooltip.Content side="bottom" class="z-100 rounded-2xl bg-muted-foreground text-center">
 			Tap to change language
 		</Tooltip.Content>
 	</Tooltip.Root>

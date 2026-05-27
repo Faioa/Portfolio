@@ -39,7 +39,7 @@
 <GoTop />
 
 <div class="relative flex min-h-screen w-full flex-col items-center overflow-hidden">
-	<Header class="fixed bg-white/30 backdrop-blur-sm z-100" />
+	<Header class="fixed z-100 bg-white/30 backdrop-blur-sm" />
 
 	<main class="relative mt-30 flex w-full grow flex-col items-center justify-center gap-10">
 		{@render children?.()}
