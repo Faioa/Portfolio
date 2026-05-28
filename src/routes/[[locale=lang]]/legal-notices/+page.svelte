@@ -4,7 +4,5 @@
 
 <WorkInProgress />
 
-<p>
-	This page is still a little confusing for me so I will work on it later when I finally figure out what I should write.
-</p>
+<p>I don't think this page is necessary for this type of website. I'll update it when it is clearer for me.</p>
 <p>Thank you for your understanding.</p>
