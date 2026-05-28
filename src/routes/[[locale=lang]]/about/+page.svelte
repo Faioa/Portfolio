@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Link from '$lib/components/Link.svelte';
 	import { Button } from '$lib/components/ui/button';
 
 	const { data } = $props<{ cv: string | null }>();
@@ -12,69 +13,53 @@
 <article class="container text-justify">
 	<h1 class="title">About</h1>
 	<p>
-		First of all, my name is Matthieu Dartois and I am a {age}-year-old French student in Paris. The purpose of this
-		page is to provide you with some additional information about me. I'm not quite sure what information should be
-		included on this page or how it should be presented, but I'll do my best. Don't hesitate to contact me if you have
-		any question.
+		I welcome you on my website! My name is Matthieu Dartois and I am a {age}-year-old French student in Paris. The
+		purpose of this page is to provide you with some information about me.
 	</p>
 
 	<section>
 		<h2 class="subtitle">Me, Myself, and I</h2>
 		<p>
-			I suppose I should talk about myself a bit, since that's kind of the goal of this page. However, I don't want to
-			seem pretentious, and I'm not comfortable with exposing too much of myself. So, I'll be brief and get straight to
-			the point. I am passionate about music and computer science, but a lack of free time during my Master's degree
-			meant that I couldn't play music or do anything else. This had a negative impact on me, and I felt a little
-			regretful, lost and depressed about not achieving anything. That is why I decided to take a year off from
-			university. I joined a music organisation to take violin lessons, and I study computer science in my remaining
-			free time. My first goal is to complete this website/portfolio before moving on to the main topic: Flux Studio.
-			The name may be temporary, but it represents what I want to achieve: a smooth, versatile tool for playing music.
-			This is a way for me to combine both worlds during my year off and explore lots of different tools and subjects
-			that I wouldn't encounter in my classes. I will use the articles to share my achievements, the problems I
-			encounter, and the knowledge I have acquired, hoping that you will learn something from them and/or get your
-			feedback to help me learn more.
+			I discovered computer science in my first year of university with a Python introduction course. I have since
+			obtained a degree in computer science and am currently pursuing a master's degree with a specialization in
+			networks. I am passionate about computer science and music. I started playing the guitar on my own in my first
+			year of high school. I stopped when I started college because I needed to focus on my studies. Before finishing my
+			degree, I had the opportunity to take a year off before continuing the curriculum in September 2026. I took this
+			opportunity to take a music theory course and start learning the violin with a professor. I fell in love with this
+			incredible instrument. My self-taught guitar skills had given me a lot of bad habits, but I managed to correct
+			most of them. The violin is still difficult to play, so I need to continue putting in effort before posting
+			anything! I also took an introductory lute-making course to build a guitar. The course is supposed to last two
+			years, and some people from previous courses have already finished their guitars. I must say, it's pretty
+			motivating to see their results! I will post <Link href="/articles?tags=lute-making" class="link">articles</Link>
+			about my progress in the future.
 		</p>
 	</section>
 
 	<section>
-		<h2 class="subtitle">Music</h2>
+		<h2 class="subtitle">Goals</h2>
 		<p>
-			My relationship with music is complicated. It has always been an important part of my life, yet I have never fully
-			committed to playing it. I was motivated during high school, but the pandemic put a sudden stop to that. During my
-			first years at university, I played the guitar occasionally and suddenly felt the urge to buy all kinds of musical
-			instruments. To this day, I still don't know how to play most of them. I hope that the music theory lessons I am
-			taking now will provide me with a foundation that will make me feel more confident with any instrument — at least
-			I won't be completely lost. I cannot imagine my life without an instrument or music in the background. With Flux
-			Studio, I hope to combine my hobby with my work by providing a tool for anyone to play and learn music. Perhaps
-			one day I will be able to compose pieces too! I'm not sure whether to add a music theory section to this website
-			with the tips and tricks that I learn or find, since there are already plenty of good online resources, and I
-			don't want to create something substandard that might contain incorrect information.
+			My goals are simple. I want to learn more about music and computer science and potentially combine the two in
+			projects. You can learn more about this website on <Link href="/projects/website" class="link">this page</Link>. I
+			will post articles on a variety of subjects, such as lute-making and autonomous mesh networks, as long as I am
+			qualified to share information on them. I also want to interact with people who point out errors in my work, are
+			interested in my projects, or want to share knowledge with me.
 		</p>
 	</section>
 
 	<section>
-		<h2 class="subtitle">Computer Science</h2>
+		<h2 class="subtitle">Next</h2>
 		<p>
-			I discovered programming in my first year at university, studying Python and C. I found the first Python course
-			terrible, but loved the C one. I therefore took the computer science course at my university for my second and
-			third years of my bachelor's degree. I completed two internships during this time, which broadened my horizons,
-			particularly the second one, which was in a laboratory. I will write an article about it later, as it was really
-			interesting. To give you a brief overview, my team needed to create autonomous, dynamic mesh networks for use by
-			firefighters in isolated areas without an Internet connection. As you might have guessed, I specialised in
-			networks for my master's degree and successfully completed the first year. I cannot say which aspect interests me
-			the most, but I find the whole field fascinating. I plan to make the most of my year off by studying <a
-				href="https://ocw.mit.edu/"
-				class="clickable">MIT open courses</a
-			> and scientific papers in other fields, such as cybersecurity and artificial intelligence.
+			I plan to finish my degree before looking for a job. I am not quite sure what type of position to apply for, but I
+			still have some time before making a decision. In the meantime, I will continue to research and learn about
+			various subjects because, given the current ecological, geographical, and political crises, it is important that I
+			broaden my knowledge and become more engaged.
 		</p>
+	</section>
+
+	<section>
 		<p>
-			On the subject of artificial intelligence, I admit that I use it myself sometimes. I have a mixed view of it: it
-			might be useful for saving time, but it is counterproductive in a learning context because you don't put much
-			thought into your work. That is mainly why I avoid using it too much. On this website, for instance, I encountered
-			some issues with SvelteKit's behaviour when routing pages, so I used Anthropic's Claude chatbot to gain insight
-			into the situation and resolved it myself. AI doesn't create the project, but it certainly saves me time on
-			research when I hit a wall. The environmental impact in terms of energy and pollution should also be considered
-			seriously, in my opinion. I also avoid using too much AI for this reason.
+			Thank you for reading this far! If you are interested, you can review my CV using the button below. In any case, I
+			wish you a good day!
 		</p>
 	</section>
 
@@ -93,10 +78,5 @@
 		align-items: center;
 		gap: calc(var(--spacing) * 5);
 		margin-top: 30px;
-	}
-
-	.clickable {
-		text-decoration: underline;
-		text-underline-offset: 3px;
 	}
 </style>
