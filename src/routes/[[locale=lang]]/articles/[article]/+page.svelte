@@ -104,6 +104,7 @@
 
 	article :global(a) {
 		text-decoration: underline;
-		text-underline-offset: 1px;
+		text-underline-offset: 3px;
+		font-style: italic;
 	}
 </style>
