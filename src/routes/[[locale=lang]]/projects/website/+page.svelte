@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
+	import Link from '$lib/components/Link.svelte';
 	import RoadMap, { COMPLETED, ONGOING, type RoadmapItem } from '$lib/components/RoadMap.svelte';
 
 	const items: RoadmapItem[] = [
@@ -44,14 +45,11 @@
 <article class="container text-justify">
 	<h1 class="title">This Website</h1>
 	<p>
-		This website is my way of justifying taking a year off from university. If you're not sure what I mean, you can find
-		out more on <a href={resolve('/about')} class="clickable">this page</a>. It is also a way for me to keep track of my
-		activities, projects, and associated goals. I think it could be useful for business partners or recruiters who want
-		to find out more about a candidate before making an offer. If you are interested in this, I am definitely the person
-		for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time to promote
-		myself and my projects.
+		This website is a way for me to keep track of my activities and my projects. I also think it could be useful for
+		business partners or recruiters who want to find out more about a candidate. If you are interested, I am definitely
+		the person for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time
+		to promote myself and my projects.
 	</p>
-	<p class="w-full">The content of this page is bound to change as the project progresses.</p>
 
 	<section>
 		<h2 class="subtitle">Svelte and SvelteKit</h2>
@@ -60,10 +58,8 @@
 			make something with the ones I had in mind: Svelte and SvelteKit. I've heard a lot of good things about them, so I
 			thought I'd give them a try, and I have to say, I was impressed. Even though I didn't have much experience with
 			Javascript or HTML/CSS, they made it really easy to build something decent. I'll probably write an article about
-			it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check <a
-				href="https://svelte.dev"
-				class="clickable">their website</a
-			> for more details.
+			it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check
+			<Link href="https://svelte.dev" class="link">their website</Link> for more details.
 		</p>
 	</section>
 
@@ -92,10 +88,5 @@
 		align-items: center;
 		gap: calc(var(--spacing) * 5);
 		margin-top: 30px;
-	}
-
-	.clickable {
-		text-decoration: underline;
-		text-underline-offset: 3px;
 	}
 </style>
