@@ -36,7 +36,7 @@
 <div class="container">
 	<h2 class="title">Featured Projects</h2>
 	<div class="grid grid-cols-1 gap-10 md:grid-cols-2">
-		<FluxStudioTile class="col-span-1" />
+		<!-- <FluxStudioTile class="col-span-1" /> -->
 		<WebsiteTile class="col-span-1" />
 	</div>
 </div>

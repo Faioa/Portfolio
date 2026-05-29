@@ -11,7 +11,7 @@
 		a roadmap of the features. Please feel free to give me your feedback. Thank you!
 	</p>
 	<div class="my-10 grid grid-cols-1 gap-10 md:grid-cols-2">
-		<FluxStudioTile />
+		<!-- <FluxStudioTile /> -->
 		<WebsiteTile />
 	</div>
 </div>
