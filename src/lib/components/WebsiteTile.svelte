@@ -22,9 +22,8 @@
 	</p>
 
 	<div class="flex flex-row-reverse items-center">
-		<div class="flex items-center gap-1 self-end justify-self-end">
-			<Link href="/projects/website" class="text-sm! md:text-base!">Read More</Link>
-			<EyeIcon class="icon" />
-		</div>
+		<Link href="/projects/website" class="text-sm! md:text-base!">
+			Read More <EyeIcon class="icon" />
+		</Link>
 	</div>
 </div>

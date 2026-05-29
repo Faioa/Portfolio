@@ -26,9 +26,8 @@
 			Written on {new Date(metadata.created).toLocaleDateString()}
 		</span>
 
-		<div class="flex items-center gap-1">
-			<Link href="/articles/[article]" args={{ article }} class="text-sm md:text-base">Read More</Link>
-			<EyeIcon class="icon" />
-		</div>
+		<Link href="/articles/[article]" args={{ article }} class="text-sm md:text-base">
+			Read More <EyeIcon class="icon" />
+		</Link>
 	</div>
 </div>
