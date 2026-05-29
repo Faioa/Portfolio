@@ -47,31 +47,32 @@
 	<p>
 		This website is a way for me to keep track of my activities and my projects. I also think it could be useful for
 		business partners or recruiters who want to find out more about a candidate. If you are interested, I am definitely
-		the person for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time
-		to promote myself and my projects.
+		the person for the job - don't hesitate to contact me!
 	</p>
 
 	<section>
 		<h2 class="subtitle">Svelte and SvelteKit</h2>
 		<p>
-			I was curious about learning how to use a web development framework, so this is also the perfect opportunity to
-			make something with the ones I had in mind: Svelte and SvelteKit. I've heard a lot of good things about them, so I
-			thought I'd give them a try, and I have to say, I was impressed. Even though I didn't have much experience with
-			Javascript or HTML/CSS, they made it really easy to build something decent. I'll probably write an article about
-			it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check
-			<Link href="https://svelte.dev" class="link">their website</Link> for more details.
+			I heard about Svelte and SvelteKit during the last year of my bachelor's degree, and I was really intrigued by
+			them. The development using Svelte components seemed idiomatic and easy to use, and I was eager to try it out.
+			Moreover, the more complex concepts like reactivity or transitions were introduced really well. I used SvelteKit
+			to build this website because it is made by the same development team, and their ecosystem seemed complete. As a
+			matter of fact, it is so complete that I freely host my website on
+			<Link href="https://vercel.com" class="link">Vercel</Link>, which is also made by the same team!
+			<Link href="https://svelte.dev" class="link">Their documentation</Link> is also very clear and easy to understand, with
+			examples and exercises on each chapter. Even though I didn't have much experience with Javascript/Typescript or HTML/CSS,
+			they made it really easy to build something decent.
 		</p>
 	</section>
 
 	<section>
-		<h2 class="subtitle">Main Milestones</h2>
+		<h2 class="subtitle">Goals</h2>
 		<p>
-			My first goal is to create a fully functional application comprising all its pages, error handling and efficient
-			back-end logic. Then, I will try to make the entire application responsive. Finally, I will add quality-of-life
-			features such as multiple language support and a more efficient UI. Once all of this has been achieved, I will
-			update the style periodically (perhaps with seasonal themes) and add content in the form of articles and projects.
-			I envision the articles feature as interactive: the main point is to share my knowledge and experiences and
-			showcase my hobbies, but most importantly, to learn from your feedback and constantly improve.
+			I don't want to be a full-stack developer, but I want to be able to understand the concepts behind this framework,
+			and behind web development in general. I also wanted to broaden my knowledge and skills with this project, and I
+			think it is a good opportunity to showcase my work, be it by building a website or by publishing
+			<Link href="/articles" class="link">articles</Link> on my <Link href="/projects" class="link">projects</Link>. I
+			will try to update this website's content as often as possible, so you can see it as a kind of a more complete CV.
 		</p>
 	</section>
 
