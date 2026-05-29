@@ -70,7 +70,7 @@
 		<p>
 			I don't want to be a full-stack developer, but I want to be able to understand the concepts behind this framework,
 			and behind web development in general. I also wanted to broaden my knowledge and skills with this project, and I
-			think it is a good opportunity to showcase my work, be it by building a website or by publishing
+			think it is a good opportunity to showcase my work, be it by building this website or by publishing
 			<Link href="/articles" class="link">articles</Link> on my <Link href="/projects" class="link">projects</Link>. I
 			will try to update this website's content as often as possible, so you can see it as a kind of a more complete CV.
 		</p>

@@ -17,14 +17,6 @@ msgstr ""
 msgid "Written on {0}"
 msgstr "Written on {0}"
 
-#: src/lib/components/ArticleTile.svelte
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale=lang]]/projects/+page.svelte
-#: src/routes/[[locale=lang]]/projects/+page.svelte
-msgid "Read More"
-msgstr "Read More"
-
 #: src/routes/[[locale=lang]]/+page.svelte
 msgid "Welcome!"
 msgstr "Welcome!"
@@ -38,15 +30,13 @@ msgid "Featured Projects"
 msgstr "Featured Projects"
 
 #: src/lib/articles-types.ts
+#: src/lib/components/FluxStudioTile.svelte
 #: src/lib/contact.ts
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale=lang]]/projects/+page.svelte
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Flux Studio"
 msgstr "Flux Studio"
 
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale=lang]]/projects/+page.svelte
+#: src/lib/components/WebsiteTile.svelte
 #: src/routes/[[locale=lang]]/projects/website/+page.svelte
 msgid "This Website"
 msgstr "This Website"
@@ -79,11 +69,6 @@ msgstr "<0/>Contact Me"
 msgid "<0/>Legal Notices<1/>"
 msgstr "<0/>Legal Notices<1/>"
 
-#: src/lib/components/Header.svelte
-msgid "Please activate Javascript to use the website as it depends heavily on animations and events."
-msgstr "Please activate Javascript to use the website as it depends heavily on animations and events."
-
-#: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 #: src/routes/[[locale=lang]]/about/+page.svelte
 msgid "About"
@@ -94,13 +79,8 @@ msgid "Me, Myself, and I"
 msgstr "Me, Myself, and I"
 
 #: src/lib/articles-types.ts
-#: src/routes/[[locale=lang]]/about/+page.svelte
 msgid "Music"
 msgstr "Music"
-
-#: src/routes/[[locale=lang]]/about/+page.svelte
-msgid "Computer Science"
-msgstr "Computer Science"
 
 #: src/lib/contact.ts
 #: src/routes/[[locale=lang]]/about/+page.svelte
@@ -112,12 +92,10 @@ msgid "Open my CV"
 msgstr "Open my CV"
 
 #: src/lib/components/NavMenu.svelte
-#: src/lib/components/NavMenu.svelte
 #: src/routes/+error.svelte
 msgid "Home"
 msgstr "Home"
 
-#: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 #: src/routes/+error.svelte
 #: src/routes/[[locale=lang]]/articles/+page.svelte
@@ -125,11 +103,9 @@ msgid "Articles"
 msgstr "Articles"
 
 #: src/lib/components/NavMenu.svelte
-#: src/lib/components/NavMenu.svelte
 msgid "Contact"
 msgstr "Contact"
 
-#: src/lib/components/NavMenu.svelte
 #: src/lib/components/NavMenu.svelte
 msgid "Projects"
 msgstr "Projects"
@@ -160,7 +136,8 @@ msgid "Previous"
 msgstr "Previous"
 
 #: src/lib/components/ui/pagination/pagination-next-button.svelte
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/about/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Next"
 msgstr "Next"
 
@@ -234,20 +211,15 @@ msgstr "Thank you for your understanding."
 msgid "My Projects"
 msgstr "My Projects"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
-#: src/routes/[[locale=lang]]/projects/website/+page.svelte
-msgid "The content of this page is bound to change as the project progresses."
-msgstr "The content of this page is bound to change as the project progresses."
-
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Main goals"
 msgstr "Main goals"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Expected difficulties"
 msgstr "Expected difficulties"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 #: src/routes/[[locale=lang]]/projects/website/+page.svelte
 msgid "Roadmap"
 msgstr "Roadmap"
@@ -255,10 +227,6 @@ msgstr "Roadmap"
 #: src/routes/[[locale=lang]]/projects/website/+page.svelte
 msgid "Svelte and SvelteKit"
 msgstr "Svelte and SvelteKit"
-
-#: src/routes/[[locale=lang]]/projects/website/+page.svelte
-msgid "Main Milestones"
-msgstr "Main Milestones"
 
 #. placeholder {0}: new Date(module?.metadata.created).toLocaleDateString()
 #: src/routes/[[locale=lang]]/articles/[article]/+page.svelte
@@ -368,149 +336,9 @@ msgstr ""
 "I will not put to much information on this landing page to keep it minimalistic and clean. The different sections\n"
 "below will serve as an introduction to all the content available here."
 
-#: src/routes/[[locale=lang]]/+page.svelte
-msgid ""
-"To learn more about me, you can check <0>this page</0>. You can also find my social media, as\n"
-"well as a contact form at the <1>bottom of each page</1>, if you want to inquire me\n"
-"about something."
-msgstr ""
-"To learn more about me, you can check <0>this page</0>. You can also find my social media, as\n"
-"well as a contact form at the <1>bottom of each page</1>, if you want to inquire me\n"
-"about something."
-
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale=lang]]/projects/+page.svelte
-msgid ""
-"This website is both a portfolio and a blog developed with <0>Svelte</0> and <1>SvelteKit</1>. I will post updates on my projects and experiences, as well\n"
-"as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for\n"
-"me to experiment with web development."
-msgstr ""
-"This website is both a portfolio and a blog developed with <0>Svelte</0> and <1>SvelteKit</1>. I will post updates on my projects and experiences, as well\n"
-"as anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for\n"
-"me to experiment with web development."
-
 #: src/lib/components/ArticlesList.svelte
 msgid "I'm sorry, but there's no available article yet. Please wait a few days for some content to be published!"
 msgstr "I'm sorry, but there's no available article yet. Please wait a few days for some content to be published!"
-
-#. placeholder {0}: age
-#: src/routes/[[locale=lang]]/about/+page.svelte
-msgid ""
-"First of all, my name is Matthieu Dartois and I am a {0}-year-old French student in Paris. The purpose of this\n"
-"page is to provide you with some additional information about me. I'm not quite sure what information should be\n"
-"included on this page or how it should be presented, but I'll do my best. Don't hesitate to contact me if you have\n"
-"any question."
-msgstr ""
-"First of all, my name is Matthieu Dartois and I am a {0}-year-old French student in Paris. The purpose of this\n"
-"page is to provide you with some additional information about me. I'm not quite sure what information should be\n"
-"included on this page or how it should be presented, but I'll do my best. Don't hesitate to contact me if you have\n"
-"any question."
-
-#: src/routes/[[locale=lang]]/about/+page.svelte
-msgid ""
-"I suppose I should talk about myself a bit, since that's kind of the goal of this page. However, I don't want to\n"
-"seem pretentious, and I'm not comfortable with exposing too much of myself. So, I'll be brief and get straight to\n"
-"the point. I am passionate about music and computer science, but a lack of free time during my Master's degree\n"
-"meant that I couldn't play music or do anything else. This had a negative impact on me, and I felt a little\n"
-"regretful, lost and depressed about not achieving anything. That is why I decided to take a year off from\n"
-"university. I joined a music organisation to take violin lessons, and I study computer science in my remaining\n"
-"free time. My first goal is to complete this website/portfolio before moving on to the main topic: Flux Studio.\n"
-"The name may be temporary, but it represents what I want to achieve: a smooth, versatile tool for playing music.\n"
-"This is a way for me to combine both worlds during my year off and explore lots of different tools and subjects\n"
-"that I wouldn't encounter in my classes. I will use the articles to share my achievements, the problems I\n"
-"encounter, and the knowledge I have acquired, hoping that you will learn something from them and/or get your\n"
-"feedback to help me learn more."
-msgstr ""
-"I suppose I should talk about myself a bit, since that's kind of the goal of this page. However, I don't want to\n"
-"seem pretentious, and I'm not comfortable with exposing too much of myself. So, I'll be brief and get straight to\n"
-"the point. I am passionate about music and computer science, but a lack of free time during my Master's degree\n"
-"meant that I couldn't play music or do anything else. This had a negative impact on me, and I felt a little\n"
-"regretful, lost and depressed about not achieving anything. That is why I decided to take a year off from\n"
-"university. I joined a music organisation to take violin lessons, and I study computer science in my remaining\n"
-"free time. My first goal is to complete this website/portfolio before moving on to the main topic: Flux Studio.\n"
-"The name may be temporary, but it represents what I want to achieve: a smooth, versatile tool for playing music.\n"
-"This is a way for me to combine both worlds during my year off and explore lots of different tools and subjects\n"
-"that I wouldn't encounter in my classes. I will use the articles to share my achievements, the problems I\n"
-"encounter, and the knowledge I have acquired, hoping that you will learn something from them and/or get your\n"
-"feedback to help me learn more."
-
-#: src/routes/[[locale=lang]]/about/+page.svelte
-msgid ""
-"My relationship with music is complicated. It has always been an important part of my life, yet I have never fully\n"
-"committed to playing it. I was motivated during high school, but the pandemic put a sudden stop to that. During my\n"
-"first years at university, I played the guitar occasionally and suddenly felt the urge to buy all kinds of musical\n"
-"instruments. To this day, I still don't know how to play most of them. I hope that the music theory lessons I am\n"
-"taking now will provide me with a foundation that will make me feel more confident with any instrument — at least\n"
-"I won't be completely lost. I cannot imagine my life without an instrument or music in the background. With Flux\n"
-"Studio, I hope to combine my hobby with my work by providing a tool for anyone to play and learn music. Perhaps\n"
-"one day I will be able to compose pieces too! I'm not sure whether to add a music theory section to this website\n"
-"with the tips and tricks that I learn or find, since there are already plenty of good online resources, and I\n"
-"don't want to create something substandard that might contain incorrect information."
-msgstr ""
-"My relationship with music is complicated. It has always been an important part of my life, yet I have never fully\n"
-"committed to playing it. I was motivated during high school, but the pandemic put a sudden stop to that. During my\n"
-"first years at university, I played the guitar occasionally and suddenly felt the urge to buy all kinds of musical\n"
-"instruments. To this day, I still don't know how to play most of them. I hope that the music theory lessons I am\n"
-"taking now will provide me with a foundation that will make me feel more confident with any instrument — at least\n"
-"I won't be completely lost. I cannot imagine my life without an instrument or music in the background. With Flux\n"
-"Studio, I hope to combine my hobby with my work by providing a tool for anyone to play and learn music. Perhaps\n"
-"one day I will be able to compose pieces too! I'm not sure whether to add a music theory section to this website\n"
-"with the tips and tricks that I learn or find, since there are already plenty of good online resources, and I\n"
-"don't want to create something substandard that might contain incorrect information."
-
-#: src/routes/[[locale=lang]]/about/+page.svelte
-msgid ""
-"I discovered programming in my first year at university, studying Python and C. I found the first Python course\n"
-"terrible, but loved the C one. I therefore took the computer science course at my university for my second and\n"
-"third years of my bachelor's degree. I completed two internships during this time, which broadened my horizons,\n"
-"particularly the second one, which was in a laboratory. I will write an article about it later, as it was really\n"
-"interesting. To give you a brief overview, my team needed to create autonomous, dynamic mesh networks for use by\n"
-"firefighters in isolated areas without an Internet connection. As you might have guessed, I specialised in\n"
-"networks for my master's degree and successfully completed the first year. I cannot say which aspect interests me\n"
-"the most, but I find the whole field fascinating. I plan to make the most of my year off by studying <0>MIT open courses</0> and scientific papers in other fields, such as cybersecurity and artificial intelligence."
-msgstr ""
-"I discovered programming in my first year at university, studying Python and C. I found the first Python course\n"
-"terrible, but loved the C one. I therefore took the computer science course at my university for my second and\n"
-"third years of my bachelor's degree. I completed two internships during this time, which broadened my horizons,\n"
-"particularly the second one, which was in a laboratory. I will write an article about it later, as it was really\n"
-"interesting. To give you a brief overview, my team needed to create autonomous, dynamic mesh networks for use by\n"
-"firefighters in isolated areas without an Internet connection. As you might have guessed, I specialised in\n"
-"networks for my master's degree and successfully completed the first year. I cannot say which aspect interests me\n"
-"the most, but I find the whole field fascinating. I plan to make the most of my year off by studying <0>MIT open courses</0> and scientific papers in other fields, such as cybersecurity and artificial intelligence."
-
-#: src/routes/[[locale=lang]]/about/+page.svelte
-msgid ""
-"On the subject of artificial intelligence, I admit that I use it myself sometimes. I have a mixed view of it: it\n"
-"might be useful for saving time, but it is counterproductive in a learning context because you don't put much\n"
-"thought into your work. That is mainly why I avoid using it too much. On this website, for instance, I encountered\n"
-"some issues with SvelteKit's behaviour when routing pages, so I used Anthropic's Claude chatbot to gain insight\n"
-"into the situation and resolved it myself. AI doesn't create the project, but it certainly saves me time on\n"
-"research when I hit a wall. The environmental impact in terms of energy and pollution should also be considered\n"
-"seriously, in my opinion. I also avoid using too much AI for this reason."
-msgstr ""
-"On the subject of artificial intelligence, I admit that I use it myself sometimes. I have a mixed view of it: it\n"
-"might be useful for saving time, but it is counterproductive in a learning context because you don't put much\n"
-"thought into your work. That is mainly why I avoid using it too much. On this website, for instance, I encountered\n"
-"some issues with SvelteKit's behaviour when routing pages, so I used Anthropic's Claude chatbot to gain insight\n"
-"into the situation and resolved it myself. AI doesn't create the project, but it certainly saves me time on\n"
-"research when I hit a wall. The environmental impact in terms of energy and pollution should also be considered\n"
-"seriously, in my opinion. I also avoid using too much AI for this reason."
-
-#: src/routes/[[locale=lang]]/legal-notices/+page.svelte
-msgid "This page is still a little confusing for me so I will work on it later when I finally figure out what I should write."
-msgstr "This page is still a little confusing for me so I will work on it later when I finally figure out what I should write."
-
-#: src/routes/[[locale=lang]]/projects/+page.svelte
-msgid ""
-"This page showcases the projects I'm most proud of. More content will be added over time. You can find out more\n"
-"about each project on their respective page. For instance, you will find information about my motivations and goals,\n"
-"as well as a roadmap of the features (<0>which is still a work in progress</0>).\n"
-"Please feel free to give me your feedback. Thank you!"
-msgstr ""
-"This page showcases the projects I'm most proud of. More content will be added over time. You can find out more\n"
-"about each project on their respective page. For instance, you will find information about my motivations and goals,\n"
-"as well as a roadmap of the features (<0>which is still a work in progress</0>).\n"
-"Please feel free to give me your feedback. Thank you!"
 
 #: src/routes/[[locale=lang]]/contact/+page.svelte
 msgid ""
@@ -523,137 +351,6 @@ msgstr ""
 #: src/lib/components/ContactForm.svelte
 msgid "This email address will only be used to reply to your message and will not be shared in any way."
 msgstr "This email address will only be used to reply to your message and will not be shared in any way."
-
-#: src/routes/[[locale=lang]]/projects/website/+page.svelte
-msgid ""
-"This website is my way of justifying taking a year off from university. If you're not sure what I mean, you can find\n"
-"out more on <0>this page</0>. It is also a way for me to keep track of my\n"
-"activities, projects, and associated goals. I think it could be useful for business partners or recruiters who want\n"
-"to find out more about a candidate before making an offer. If you are interested in this, I am definitely the person\n"
-"for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time to promote\n"
-"myself and my projects."
-msgstr ""
-"This website is my way of justifying taking a year off from university. If you're not sure what I mean, you can find\n"
-"out more on <0>this page</0>. It is also a way for me to keep track of my\n"
-"activities, projects, and associated goals. I think it could be useful for business partners or recruiters who want\n"
-"to find out more about a candidate before making an offer. If you are interested in this, I am definitely the person\n"
-"for the job - don't hesitate to contact me! More seriously, I will develop this website in my free time to promote\n"
-"myself and my projects."
-
-#: src/routes/[[locale=lang]]/projects/website/+page.svelte
-msgid ""
-"I was curious about learning how to use a web development framework, so this is also the perfect opportunity to\n"
-"make something with the ones I had in mind: Svelte and SvelteKit. I've heard a lot of good things about them, so I\n"
-"thought I'd give them a try, and I have to say, I was impressed. Even though I didn't have much experience with\n"
-"Javascript or HTML/CSS, they made it really easy to build something decent. I'll probably write an article about\n"
-"it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check <0>their website</0> for more details."
-msgstr ""
-"I was curious about learning how to use a web development framework, so this is also the perfect opportunity to\n"
-"make something with the ones I had in mind: Svelte and SvelteKit. I've heard a lot of good things about them, so I\n"
-"thought I'd give them a try, and I have to say, I was impressed. Even though I didn't have much experience with\n"
-"Javascript or HTML/CSS, they made it really easy to build something decent. I'll probably write an article about\n"
-"it later, when I'm a bit more experienced and confident in explaining things, but I encourage you to check <0>their website</0> for more details."
-
-#: src/routes/[[locale=lang]]/projects/website/+page.svelte
-msgid ""
-"My first goal is to create a fully functional application comprising all its pages, error handling and efficient\n"
-"back-end logic. Then, I will try to make the entire application responsive. Finally, I will add quality-of-life\n"
-"features such as multiple language support and a more efficient UI. Once all of this has been achieved, I will\n"
-"update the style periodically (perhaps with seasonal themes) and add content in the form of articles and projects.\n"
-"I envision the articles feature as interactive: the main point is to share my knowledge and experiences and\n"
-"showcase my hobbies, but most importantly, to learn from your feedback and constantly improve."
-msgstr ""
-"My first goal is to create a fully functional application comprising all its pages, error handling and efficient\n"
-"back-end logic. Then, I will try to make the entire application responsive. Finally, I will add quality-of-life\n"
-"features such as multiple language support and a more efficient UI. Once all of this has been achieved, I will\n"
-"update the style periodically (perhaps with seasonal themes) and add content in the form of articles and projects.\n"
-"I envision the articles feature as interactive: the main point is to share my knowledge and experiences and\n"
-"showcase my hobbies, but most importantly, to learn from your feedback and constantly improve."
-
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
-msgid ""
-"Flux Studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My goal is to develop a first-class DAW for playing and learning\n"
-"music. My goals are ambitious, but I will do my best to see this project through. As you may have guessed, music is\n"
-"my passion, and I want it to be a central element of my life, whether through playing music or developing this\n"
-"software."
-msgstr ""
-"Flux Studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My goal is to develop a first-class DAW for playing and learning\n"
-"music. My goals are ambitious, but I will do my best to see this project through. As you may have guessed, music is\n"
-"my passion, and I want it to be a central element of my life, whether through playing music or developing this\n"
-"software."
-
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
-msgid ""
-"This is also an opportunity for me to learn Rust, which seems like a really promising programming language. You can\n"
-"find out more at <0>their website</0> directly for more details, but it might\n"
-"just become my go-to language for almost every use cases. Despite the fact that the Rust community is relatively new,\n"
-"the Rustaceans (the name of the Rust developers' community) are very active, and the available resources are constantly\n"
-"growing. There is even debate about whether this language should be included in the Linux Kernel. I will leave you to\n"
-"do your own research on this subject, as this is not the main topic of this page."
-msgstr ""
-"This is also an opportunity for me to learn Rust, which seems like a really promising programming language. You can\n"
-"find out more at <0>their website</0> directly for more details, but it might\n"
-"just become my go-to language for almost every use cases. Despite the fact that the Rust community is relatively new,\n"
-"the Rustaceans (the name of the Rust developers' community) are very active, and the available resources are constantly\n"
-"growing. There is even debate about whether this language should be included in the Linux Kernel. I will leave you to\n"
-"do your own research on this subject, as this is not the main topic of this page."
-
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
-msgid ""
-"My first goal is to successfully process and generate live audio signals. I want to be able to manipulate the gain\n"
-"and recognise or decompose the frequencies within the signal. The next step would be to add a graphical user\n"
-"interface (GUI) for manipulating the signals. I think the GUI will be the most challenging aspect of this project.\n"
-"As you may have gathered from this website, UI/UX design is not my forte. However, I don't plan on creating a\n"
-"substandard GUI, even if it takes me a long time to refine it. I am still thinking about the next steps in this\n"
-"project. I have lots of ideas, but I don't yet know the intermediate steps, and I need to be realistic about which\n"
-"features I can actually implement."
-msgstr ""
-"My first goal is to successfully process and generate live audio signals. I want to be able to manipulate the gain\n"
-"and recognise or decompose the frequencies within the signal. The next step would be to add a graphical user\n"
-"interface (GUI) for manipulating the signals. I think the GUI will be the most challenging aspect of this project.\n"
-"As you may have gathered from this website, UI/UX design is not my forte. However, I don't plan on creating a\n"
-"substandard GUI, even if it takes me a long time to refine it. I am still thinking about the next steps in this\n"
-"project. I have lots of ideas, but I don't yet know the intermediate steps, and I need to be realistic about which\n"
-"features I can actually implement."
-
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
-msgid ""
-"As I have never used Rust before, it is difficult for me to anticipate the issues I will encounter on this\n"
-"project. However, I think the main issues will stem from the relatively new Rust ecosystem, since many of its\n"
-"crates are not yet mature. For example, there is no consensus on which crate to use for creating graphical\n"
-"interfaces for applications. Many different projects are being developed to meet the needs of the community, each\n"
-"with their own particular features, but none of them are particularly notable. I need to do a lot of research for\n"
-"this, and I will probably publish an article about my findings."
-msgstr ""
-"As I have never used Rust before, it is difficult for me to anticipate the issues I will encounter on this\n"
-"project. However, I think the main issues will stem from the relatively new Rust ecosystem, since many of its\n"
-"crates are not yet mature. For example, there is no consensus on which crate to use for creating graphical\n"
-"interfaces for applications. Many different projects are being developed to meet the needs of the community, each\n"
-"with their own particular features, but none of them are particularly notable. I need to do a lot of research for\n"
-"this, and I will probably publish an article about my findings."
-
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
-msgid ""
-"The second obstacle that I fear the most is developing a cross-platform application. From the outset, I intend to\n"
-"develop Flux Studio with modular code to simplify the management of the various crates required for each operating\n"
-"system. However, I am still anxious about the moment when I attempt to optimise the application. I have no\n"
-"experience of cross-platform development so far, so my worries may be unfounded."
-msgstr ""
-"The second obstacle that I fear the most is developing a cross-platform application. From the outset, I intend to\n"
-"develop Flux Studio with modular code to simplify the management of the various crates required for each operating\n"
-"system. However, I am still anxious about the moment when I attempt to optimise the application. I have no\n"
-"experience of cross-platform development so far, so my worries may be unfounded."
-
-#: src/routes/[[locale=lang]]/+page.svelte
-#: src/routes/[[locale=lang]]/projects/+page.svelte
-msgid ""
-"Flux studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My aim is to create a top-notch DAW that can be used for\n"
-"playing and learning music. My goals are ambitious, but I will do my best to see this project through\n"
-"nonetheless."
-msgstr ""
-"Flux studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My aim is to create a top-notch DAW that can be used for\n"
-"playing and learning music. My goals are ambitious, but I will do my best to see this project through\n"
-"nonetheless."
 
 #: src/lib/components/ui/carousel/carousel-next.svelte
 msgid "Next slide"
@@ -715,45 +412,45 @@ msgstr "I will continue to work from time to time on this website, improving its
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 #: src/routes/[[locale=lang]]/projects/website/+page.svelte
 msgid "Project's Start"
 msgstr "Project's Start"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Architecture"
 msgstr "Architecture"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Unknown"
 msgstr "Unknown"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "I will consider the next steps once I have reached the initial stages of this project."
 msgstr "I will consider the next steps once I have reached the initial stages of this project."
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Once the architecture and main objectives have been defined, I should be able to start working on the GUI. Which library should I use? What default styling should I apply?"
 msgstr "Once the architecture and main objectives have been defined, I should be able to start working on the GUI. Which library should I use? What default styling should I apply?"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "After a month of testing, I should have designed a suitable architecture for the project. It will certainly change, but this should provide a solid foundation."
 msgstr "After a month of testing, I should have designed a suitable architecture for the project. It will certainly change, but this should provide a solid foundation."
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "The official start of the project is to learn Rust again and experiment with audio processing libraries."
 msgstr "The official start of the project is to learn Rust again and experiment with audio processing libraries."
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 #: src/routes/[[locale=lang]]/projects/website/+page.svelte
 msgid "Apr 2026"
 msgstr "Apr 2026"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "May 2026"
 msgstr "May 2026"
 
-#: src/routes/[[locale=lang]]/projects/flux-studio/+page.svelte
+#: src/routes/[[locale=lang]]/projects/flux-studio/page.svelte
 msgid "Mid-May 2026"
 msgstr "Mid-May 2026"
 
@@ -946,3 +643,171 @@ msgstr "Modified ➘"
 #: src/lib/articles-types.ts
 msgid "Modified ➚"
 msgstr "Modified ➚"
+
+#. placeholder {0}: age
+#: src/routes/[[locale=lang]]/about/+page.svelte
+msgid ""
+"I welcome you on my website! My name is Matthieu Dartois and I am a {0}-year-old French student in Paris. The\n"
+"purpose of this page is to provide you with some information about me."
+msgstr ""
+"I welcome you on my website! My name is Matthieu Dartois and I am a {0}-year-old French student in Paris. The\n"
+"purpose of this page is to provide you with some information about me."
+
+#: src/routes/[[locale=lang]]/about/+page.svelte
+msgid ""
+"I discovered computer science in my first year of university with a Python introduction course. I have since\n"
+"obtained a degree in computer science and am currently pursuing a master's degree with a specialization in\n"
+"networks. I am passionate about computer science and music. I started playing the guitar on my own in my first\n"
+"year of high school. I stopped when I started college because I needed to focus on my studies. Before finishing my\n"
+"degree, I had the opportunity to take a year off before continuing the curriculum in September 2026. I took this\n"
+"opportunity to take a music theory course and start learning the violin with a professor. I fell in love with this\n"
+"incredible instrument. My self-taught guitar skills had given me a lot of bad habits, but I managed to correct\n"
+"most of them. The violin is still difficult to play, so I need to continue putting in effort before posting\n"
+"anything! I also took an introductory lute-making course to build a guitar. The course is supposed to last two\n"
+"years, and some people from previous courses have already finished their guitars. I must say, it's pretty\n"
+"motivating to see their results! I will post <0>articles</0> about my progress in the future."
+msgstr ""
+"I discovered computer science in my first year of university with a Python introduction course. I have since\n"
+"obtained a degree in computer science and am currently pursuing a master's degree with a specialization in\n"
+"networks. I am passionate about computer science and music. I started playing the guitar on my own in my first\n"
+"year of high school. I stopped when I started college because I needed to focus on my studies. Before finishing my\n"
+"degree, I had the opportunity to take a year off before continuing the curriculum in September 2026. I took this\n"
+"opportunity to take a music theory course and start learning the violin with a professor. I fell in love with this\n"
+"incredible instrument. My self-taught guitar skills had given me a lot of bad habits, but I managed to correct\n"
+"most of them. The violin is still difficult to play, so I need to continue putting in effort before posting\n"
+"anything! I also took an introductory lute-making course to build a guitar. The course is supposed to last two\n"
+"years, and some people from previous courses have already finished their guitars. I must say, it's pretty\n"
+"motivating to see their results! I will post <0>articles</0> about my progress in the future."
+
+#: src/routes/[[locale=lang]]/about/+page.svelte
+#: src/routes/[[locale=lang]]/projects/website/+page.svelte
+msgid "Goals"
+msgstr "Goals"
+
+#: src/routes/[[locale=lang]]/about/+page.svelte
+msgid ""
+"My goals are simple. I want to learn more about music and computer science and potentially combine the two in\n"
+"projects. You can learn more about this website on <0>this page</0>. I\n"
+"will post articles on a variety of subjects, such as lute-making and autonomous mesh networks, as long as I am\n"
+"qualified to share information on them. I also want to interact with people who point out errors in my work, are\n"
+"interested in my projects, or want to share knowledge with me."
+msgstr ""
+"My goals are simple. I want to learn more about music and computer science and potentially combine the two in\n"
+"projects. You can learn more about this website on <0>this page</0>. I\n"
+"will post articles on a variety of subjects, such as lute-making and autonomous mesh networks, as long as I am\n"
+"qualified to share information on them. I also want to interact with people who point out errors in my work, are\n"
+"interested in my projects, or want to share knowledge with me."
+
+#: src/routes/[[locale=lang]]/about/+page.svelte
+msgid ""
+"I plan to finish my degree before looking for a job. I am not quite sure what type of position to apply for, but I\n"
+"still have some time before making a decision. In the meantime, I will continue to research and learn about\n"
+"various subjects because, given the current ecological, geographical, and political crises, it is important that I\n"
+"broaden my knowledge and become more engaged."
+msgstr ""
+"I plan to finish my degree before looking for a job. I am not quite sure what type of position to apply for, but I\n"
+"still have some time before making a decision. In the meantime, I will continue to research and learn about\n"
+"various subjects because, given the current ecological, geographical, and political crises, it is important that I\n"
+"broaden my knowledge and become more engaged."
+
+#: src/routes/[[locale=lang]]/about/+page.svelte
+msgid ""
+"Thank you for reading this far! If you are interested, you can review my CV using the button below. In any case, I\n"
+"wish you a good day!"
+msgstr ""
+"Thank you for reading this far! If you are interested, you can review my CV using the button below. In any case, I\n"
+"wish you a good day!"
+
+#: src/routes/[[locale=lang]]/+page.svelte
+msgid ""
+"To learn more about me, you can check <0>this page</0>. You can also find my social media, as well as a contact form at\n"
+"the <1>bottom of each page</1>, if you want to inquire me about something."
+msgstr ""
+"To learn more about me, you can check <0>this page</0>. You can also find my social media, as well as a contact form at\n"
+"the <1>bottom of each page</1>, if you want to inquire me about something."
+
+#: src/routes/[[locale=lang]]/projects/+page.svelte
+msgid ""
+"This page showcases some of my projects. More content will be added over time. You can find out more about each\n"
+"project on their respective page. For instance, you will find information about my motivations and goals, as well as\n"
+"a roadmap of the features. Please feel free to give me your feedback. Thank you!"
+msgstr ""
+"This page showcases some of my projects. More content will be added over time. You can find out more about each\n"
+"project on their respective page. For instance, you will find information about my motivations and goals, as well as\n"
+"a roadmap of the features. Please feel free to give me your feedback. Thank you!"
+
+#: src/lib/components/FluxStudioTile.svelte
+msgid ""
+"Flux studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My aim is to create a top-notch DAW that can be used for playing\n"
+"and learning music. My goals are ambitious, but I will do my best to see this project through nonetheless."
+msgstr ""
+"Flux studio is a soon-to-be developed <0>Digital Audio Workstation</0> using <1>Rust</1>. My aim is to create a top-notch DAW that can be used for playing\n"
+"and learning music. My goals are ambitious, but I will do my best to see this project through nonetheless."
+
+#: src/lib/components/Header.svelte
+msgid "Please activate Javascript to fully use this website."
+msgstr "Please activate Javascript to fully use this website."
+
+#: src/lib/components/Header.svelte
+msgid "You can use this menu to navigate to the main pages of the website."
+msgstr "You can use this menu to navigate to the main pages of the website."
+
+#: src/lib/components/WebsiteTile.svelte
+msgid ""
+"This website is both a portfolio and a blog developed with <0>Svelte</0> and <1>SvelteKit</1>. I will post updates on my projects and experiences, as well as\n"
+"anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for me to\n"
+"experiment with web development."
+msgstr ""
+"This website is both a portfolio and a blog developed with <0>Svelte</0> and <1>SvelteKit</1>. I will post updates on my projects and experiences, as well as\n"
+"anything else I find interesting. It is also a way for you to contact me. This project is an opportunity for me to\n"
+"experiment with web development."
+
+#: src/routes/[[locale=lang]]/legal-notices/+page.svelte
+msgid "I don't think this page is necessary for this type of website. I'll update it when it is clearer for me."
+msgstr "I don't think this page is necessary for this type of website. I'll update it when it is clearer for me."
+
+#: src/routes/[[locale=lang]]/projects/website/+page.svelte
+msgid ""
+"This website is a way for me to keep track of my activities and my projects. I also think it could be useful for\n"
+"business partners or recruiters who want to find out more about a candidate. If you are interested, I am definitely\n"
+"the person for the job - don't hesitate to contact me!"
+msgstr ""
+"This website is a way for me to keep track of my activities and my projects. I also think it could be useful for\n"
+"business partners or recruiters who want to find out more about a candidate. If you are interested, I am definitely\n"
+"the person for the job - don't hesitate to contact me!"
+
+#: src/routes/[[locale=lang]]/projects/website/+page.svelte
+msgid ""
+"I don't want to be a full-stack developer, but I want to be able to understand the concepts behind this framework,\n"
+"and behind web development in general. I also wanted to broaden my knowledge and skills with this project, and I\n"
+"think it is a good opportunity to showcase my work, be it by building this website or by publishing <0>articles</0> on my <1>projects</1>. I\n"
+"will try to update this website's content as often as possible, so you can see it as a kind of a more complete CV."
+msgstr ""
+"I don't want to be a full-stack developer, but I want to be able to understand the concepts behind this framework,\n"
+"and behind web development in general. I also wanted to broaden my knowledge and skills with this project, and I\n"
+"think it is a good opportunity to showcase my work, be it by building this website or by publishing <0>articles</0> on my <1>projects</1>. I\n"
+"will try to update this website's content as often as possible, so you can see it as a kind of a more complete CV."
+
+#: src/routes/[[locale=lang]]/projects/website/+page.svelte
+msgid ""
+"I heard about Svelte and SvelteKit during the last year of my bachelor's degree, and I was really intrigued by\n"
+"them. The development using Svelte components seemed idiomatic and easy to use, and I was eager to try it out.\n"
+"Moreover, the more complex concepts like reactivity or transitions were introduced really well. I used SvelteKit\n"
+"to build this website because it is made by the same development team, and their ecosystem seemed complete. As a\n"
+"matter of fact, it is so complete that I freely host my website on <0>Vercel</0>, which is also made by the same team! <1>Their documentation</1> is also very clear and easy to understand, with\n"
+"examples and exercises on each chapter. Even though I didn't have much experience with Javascript/Typescript or HTML/CSS,\n"
+"they made it really easy to build something decent."
+msgstr ""
+"I heard about Svelte and SvelteKit during the last year of my bachelor's degree, and I was really intrigued by\n"
+"them. The development using Svelte components seemed idiomatic and easy to use, and I was eager to try it out.\n"
+"Moreover, the more complex concepts like reactivity or transitions were introduced really well. I used SvelteKit\n"
+"to build this website because it is made by the same development team, and their ecosystem seemed complete. As a\n"
+"matter of fact, it is so complete that I freely host my website on <0>Vercel</0>, which is also made by the same team! <1>Their documentation</1> is also very clear and easy to understand, with\n"
+"examples and exercises on each chapter. Even though I didn't have much experience with Javascript/Typescript or HTML/CSS,\n"
+"they made it really easy to build something decent."
+
+#: src/lib/components/ArticleTile.svelte
+#: src/lib/components/FluxStudioTile.svelte
+#: src/lib/components/WebsiteTile.svelte
+msgid "Read More <0/>"
+msgstr "Read More <0/>"
